@@ -1,0 +1,19 @@
+{
+  "name": "ecommerce_client_cms",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/icanq/ecommerce_client_cms.git"
+  },
+  "author": "Ichsan Natawijaya",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/icanq/ecommerce_client_cms/issues"
+  },
+  "homepage": "https://github.com/icanq/ecommerce_client_cms#readme"
+}
