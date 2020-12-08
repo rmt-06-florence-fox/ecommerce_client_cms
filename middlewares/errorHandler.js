@@ -1,4 +1,5 @@
 module.exports = function(err, req, res, next) {
+console.log("🚀 ~ file: errorHandler.js ~ line 2 ~ err", err)
     let message = "Internal Server Error!"
   
     switch(err.name) {
@@ -15,10 +16,10 @@ module.exports = function(err, req, res, next) {
         message = 'ForeignKey error!' 
         break;
       case "SequelizeDatabaseError":
-        statusCode = 400
-        message = 'CategoryId cannot be empty'
-        break;
       case "BadRequestError":
+        statusCode = 400
+        message = 'email or password is incorrect'
+        break;
       case "ProxyAuthenticationRequiredError":
       case "NotFoundError":
       case "UnauthorizedError":
