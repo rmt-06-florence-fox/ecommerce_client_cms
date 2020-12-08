@@ -1,7 +1,7 @@
 <template>
   <div class="d-flex justify-content-center w-100 h-100" id="main">
     <div class="d-flex flex-column justify-content-center">
-      <h3 class="mb-3">This is login page for admin</h3>
+      <h3 class="mb-3 text-white">This is login page for admin</h3>
       <div id="form" class="p-sm-3 text-white font-weight-bolder">
         <b-form>
         <b-form-group label = "Email" label-for = "email">
@@ -22,10 +22,10 @@
           ></b-form-input>
         </b-form-group>
 
-        <b-button type = "submit" variant = "primary"> Login </b-button>
+        <b-button type = "submit" variant="success"> Login </b-button>
       </b-form>
-      <div class="mt-3 text-dark">
-        <p>Note : </p>
+      <div class="mt-3 text-white">
+        <p class="mb-1">Note : </p>
         <p>Only admins are able to login via this page</p>
       </div>
       </div>
@@ -46,11 +46,16 @@ export default {
 <style scoped>
 
 #form {
-  background: rgba(60, 60, 60, 0.4);
+  background: rgba(60, 60, 60, 0.8);
+}
+
+button {
+  font-weight: bold;
 }
 
 #main {
-  background :url(https://mcdn.wallpapersafari.com/medium/60/57/zD8SoR.jpg);
+  background :url(https://cdn.wallpapersafari.com/88/32/DxfPUY.jpg) ;
+  
 }
 
 </style>
