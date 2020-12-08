@@ -23,6 +23,26 @@ class Auth {
       next(error) 
     }
   }
+
+  static async authorizationProduct(req, res, next) {
+    const id = +req.params.id
+    try {
+      if (id) {
+        const product = await Product.findByPk(id)
+  
+        if (req.loggedInUser.role !== 'admin') {
+          throw createError(401, 'You are not authorized')
+        } else if (!product) throw createError(404, 'product not found!')
+         else next()
+      } else {
+        if (req.loggedInUser.role !== 'admin') {
+          throw createError(401, 'You are not authorized')
+        } else next()
+      }
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = Auth

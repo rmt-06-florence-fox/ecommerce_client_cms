@@ -1,60 +1,101 @@
-const request = require('supertest')
 const app = require('../app')
+const request = require('supertest')
+const {User, sequelize} = require('../models')
+const {queryInterface} = sequelize
 
-describe('Test Endpoint POST /login Admin', () => {
-  it('login success', done => {
-    request(app)
-    .post('/login/admin')
-    .send({email: 'admin@mail.com', password: '1234'})
-    .then((result) => {
-      const {body, status} = result
-      expect(status).toBe(201)
-      expect(body).toHaveProperty('access_token', expect.any(String))
-      done()
-    }).catch((err) => {
-      done(err)
-    });
-  })
+describe('User Routes Test', () => {
+  const userData = {
+    email: 'admin@mail.com',
+    password: '1234'
+  }
 
-  it('login failed wrong input password', done => {
-    request(app)
-    .post('/login/admin')
-    .send({email: 'admin@mail.com', password: '1111'})
-    .then((result) => {
-      const {body, status} = result
-      expect(status).toBe(400)
-      expect(body).toHaveProperty('message', 'email or password is incorrect')
-      done()
-    }).catch((err) => {
-      done(err)
-    });
-  })
+  const userData2 = {
+    email: 'adminfake@mail.com',
+    password: '1234'
+  }
+  
+  const userData3 = {
+    email: 'admin@mail.com',
+    password: '1234fake'
+  }
+  
+  const userData4 = {
+    email: '',
+    password: ''
+  }
+  
+  describe('POST /login/admin - admin authentication process', () => {
+    beforeAll(done => {
+      User.create(userData)
+      .then(_ => {
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
 
-  it('login failed wrong input email', done => {
-    request(app)
-    .post('/login/admin')
-    .send({email: 'notadmin@mail.com', password: '1234'})
-    .then((result) => {
-      const {body, status} = result
-      expect(status).toBe(400)
-      expect(body).toHaveProperty('message', 'email or password is incorrect')
-      done()
-    }).catch((err) => {
-      done(err)
-    });
-  })
+    afterAll(done => {
+      queryInterface
+        .bulkDelete('Users', {})
+        .then(() => done())
+        .catch(err => done(err))
+    })
 
-  it('login failed not input email and password', done => {
-    request(app)
-    .post('/login/admin')
-    .send({email: '', password: ''})
-    .then((result) => {
-      const {body, status} = result
-      expect(status).toBe(400)
-      expect(body).toHaveProperty('message', 'email or password is incorrect')
-      done()
-    }).catch((err) => {
-      done(err)
-    });
+    test('200 Success login - should return access_token', done => {
+      request(app)
+      .post('/login/admin')
+      .send(userData)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(200)
+        expect(body).toHaveProperty('access_token', expect.any(String))
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed login - should return access_token', done => {
+      request(app)
+      .post('/login/admin')
+      .send(userData2)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'email or password is incorrect')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed login - should return access_token', done => {
+      request(app)
+      .post('/login/admin')
+      .send(userData3)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'email or password is incorrect')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed login - should return access_token', done => {
+      request(app)
+      .post('/login/admin')
+      .send(userData4)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'complete all forms')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
   })
 })

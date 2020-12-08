@@ -7,6 +7,7 @@ class UserController {
   static async loginAdmin (req, res, next) {
     try {
 			const {email, password} = req.body
+			if (!email || !password) throw ({statusCode: 400, message: 'complete all forms'})
 
 			const user = await User.findOne({where: {email}})
 			if (!user || !comparePassword(password, user.password)) {
@@ -14,7 +15,7 @@ class UserController {
 			} else {
 				const payload = {id: user.id, email: user.email}
 				const token = signToken(payload)
-				res.status(201).json({access_token: token})
+				res.status(200).json({access_token: token})
 			}
 		} catch (error) {
 			next(error)

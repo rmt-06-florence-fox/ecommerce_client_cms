@@ -1,4 +1,5 @@
 'use strict';
+console.log('enter in model user');
 const {hashPassword} = require('../helpers/bcrypt')
 const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
@@ -16,9 +17,6 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           msg: 'Field email is required'
-        },
-        notEmpty: {
-          msg: 'Field email cannot be empty'
         }
         },
         unique: {
@@ -53,3 +51,4 @@ module.exports = (sequelize, DataTypes) => {
   
   return User;
 };
+console.log('exit modal in user');

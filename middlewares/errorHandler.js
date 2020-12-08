@@ -1,6 +1,7 @@
 module.exports = function(err, req, res, next) {
 console.log("🚀 ~ file: errorHandler.js ~ line 2 ~ err", err)
-    let message = "Internal Server Error!"
+    let statusCode = err.statusCode || 500
+    let message = err.message || "Internal Server Error!"
   
     switch(err.name) {
       case "SequelizeValidationError":
@@ -15,7 +16,6 @@ console.log("🚀 ~ file: errorHandler.js ~ line 2 ~ err", err)
         statusCode = 400
         message = 'ForeignKey error!' 
         break;
-      case "SequelizeDatabaseError":
       case "BadRequestError":
         statusCode = 400
         message = 'email or password is incorrect'
