@@ -4,6 +4,8 @@ import Home from '../views/Home.vue'
 import Dashboard from '../views/Dashboard.vue'
 import LoginPage from '../views/LoginPage.vue'
 import ListProduct from '../views/ListProduct.vue'
+import AddProduct from '../views/AddProduct.vue'
+import DetailProduct from '../views/DetailProduct.vue'
 import ListCategory from '../views/ListCategory.vue'
 import ListBanner from '../views/ListBanner.vue'
 import NotFound from '../views/NotFound.vue'
@@ -34,6 +36,16 @@ const routes = [
         path: 'products',
         name: 'ListProduct',
         component: ListProduct
+      },
+      {
+        path: 'products/add',
+        name: 'AddProduct',
+        component: AddProduct
+      },
+      {
+        path: 'products/:id',
+        name: 'DetailProduct',
+        component: DetailProduct
       },
       {
         path: 'categories',
