@@ -17,6 +17,18 @@ export default {
   name: 'Home',
   components: {
     Navbar
+  },
+  methods: {
+    fetchAllProduct () {
+      this.$store.dispatch('fetchAllProduct')
+    },
+    fetchAllCategory () {
+      this.$store.dispatch('fetchAllCategory')
+    }
+  },
+  created () {
+    this.fetchAllProduct()
+    this.fetchAllCategory()
   }
 }
 </script>

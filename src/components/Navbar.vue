@@ -1,16 +1,46 @@
 <template>
   <b-nav tabs align="center" class="bg-secondary m-0">
+    <!-- Dashboard -->
     <b-nav-item to="/dashboard" :active='$route.name =="Dashboard"'>Dashboard
     </b-nav-item>
-    <b-nav-item to="/products" :active='$route.name =="ListProduct"'>Products
-    </b-nav-item>
-    <b-nav-item to="/categories" :active='$route.name =="ListCategory"'>Categories
-    </b-nav-item>
-    <b-nav-item to="/banners" :active='$route.name =="ListBanner"'>Banners
-    </b-nav-item>
+    <!-- Products -->
+    <b-nav-item-dropdown
+      :toggle-class="$route.name === 'ListProduct' || $route.name === 'AddProduct' || $route.name === 'DetailProduct' ? 'active' : ''"
+      text="Product"
+      right
+    >
+      <b-dropdown-item
+      to="/products"
+      :active='$route.name == "ListProduct"'>
+      List Product
+      </b-dropdown-item>
+      <b-dropdown-item
+      to="/products/add"
+      :active='$route.name == "AddProduct"'
+      >Add Product
+      </b-dropdown-item>
+    </b-nav-item-dropdown>
+    <!-- Categories -->
+    <b-nav-item-dropdown
+      :toggle-class="$route.name === 'ListCategory' || $route.name === 'AddCategory' ? 'active' : ''"
+      text="Category"
+      right
+    >
+      <b-dropdown-item to="/categories" :active='$route.name == "ListCategory"'>List Category</b-dropdown-item>
+      <b-dropdown-item>Add Category</b-dropdown-item>
+    </b-nav-item-dropdown>
+    <!-- Banners -->
+    <b-nav-item-dropdown
+      :toggle-class="$route.name === 'ListBanner' || $route.name === 'AddBanner' ? 'active' : ''"
+      text="Banner"
+      right
+    >
+      <b-dropdown-item to="/banners" :active='$route.name == "ListBanner"'>List Banner</b-dropdown-item>
+      <b-dropdown-item>Add Banner</b-dropdown-item>
+    </b-nav-item-dropdown>
+    <!-- Logout -->
     <b-nav-item-dropdown
       text="User"
-      toggle-class="nav-link-custom"
       right
     >
       <b-dropdown-item @click.prevent="logout">Logout</b-dropdown-item>
