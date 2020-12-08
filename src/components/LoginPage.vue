@@ -7,11 +7,11 @@
           <form action="#" @submit.prevent="login">
           <div class="form-group font-weight-bold">
             <label for="email">Email address</label>
-            <input type="email" v-model="loginPayload.email" class="form-control" id="login-email" placeholder="Enter email">
+            <input type="email" v-model="loginEmail" class="form-control" id="login-email" placeholder="Enter email">
           </div>
           <div class="form-group font-weight-bold">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" v-model="loginPayload.password" class="form-control" id="login-password" placeholder="Password">
+            <input type="password" v-model="loginPassword" class="form-control" id="login-password" placeholder="Password">
           </div>
             <button type="submit" class="btn btn-warning">Login</button>
           </form>
@@ -21,23 +21,33 @@
 </template>
 
 <script>
+import axios from '../config/axiosInstance'
 export default {
   name: 'LoginPage',
   data () {
     return {
-      loginPayload: {
-        email: '',
-        password: ''
-      }
+      card: 'login',
+      loginEmail: '',
+      loginPassword: ''
     }
   },
   methods: {
     login () {
-      const { email, password } = this.loginPayload
-      this.$store
-        .dispatch('login', { email, password })
-        .then((result) => {
+      axios({
+        method: 'POST',
+        url: '/adminLogin',
+        data: {
+          email: this.loginEmail,
+          password: this.loginPassword
+        }
+      })
+        .then(result => {
           console.log(result)
+          localStorage.setItem('token', result.token)
+          this.$emit('toLogin', true)
+        })
+        .catch(err => {
+          console.log(err, 'kesini yaa')
         })
     }
   }
