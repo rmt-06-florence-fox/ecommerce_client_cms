@@ -5,7 +5,7 @@ class ProductController {
     try {
       const {name, image_url, price, stock} = req.body
       const product = await Product.create({name, image_url, price, stock})
-      res.status(201).json({product})
+      res.status(201).json(product)
     } catch (error) {
       next(error)
     }

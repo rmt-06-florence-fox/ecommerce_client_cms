@@ -16,6 +16,7 @@ class Auth {
           throw createError(407, 'Authentication required')
         } else {
           req.loggedInUser = decoded
+          console.log("🚀 ~ file: auth_admin.js ~ line 34 ~ Auth ~ authorizationProduct ~ req.loggedInUser.role", req.loggedInUser)
           next()
         }
       }

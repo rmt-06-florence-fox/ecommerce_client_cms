@@ -1,5 +1,4 @@
 'use strict';
-console.log('enter in model user');
 const {hashPassword} = require('../helpers/bcrypt')
 const {Model} = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
@@ -51,4 +50,3 @@ module.exports = (sequelize, DataTypes) => {
   
   return User;
 };
-console.log('exit modal in user');
