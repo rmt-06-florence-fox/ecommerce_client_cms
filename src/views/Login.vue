@@ -10,13 +10,19 @@ import LoginPage from '@/components/LoginPage.vue'
 
 export default {
   name: 'Login',
+  data () {
+    return {
+    }
+  },
+  methods: {
+  },
   components: {
     LoginPage
   }
 }
 </script>
 
-<style>
+<style scoped>
 
 .home {
   background: #2f3640;

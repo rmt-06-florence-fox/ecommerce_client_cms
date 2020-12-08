@@ -4,15 +4,14 @@
       <h3 class="display-6 font-weight-bold">Login</h3>
       <div class= "row">
         <div class="col-12 mt-5">
-          <form>
+          <form action="#" @submit.prevent="login">
           <div class="form-group font-weight-bold">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+            <label for="email">Email address</label>
+            <input type="email" v-model="loginPayload.email" class="form-control" id="login-email" placeholder="Enter email">
           </div>
           <div class="form-group font-weight-bold">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <input type="password" v-model="loginPayload.password" class="form-control" id="login-password" placeholder="Password">
           </div>
             <button type="submit" class="btn btn-warning">Login</button>
           </form>
@@ -23,9 +22,24 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
-  props: {
-    msg: String
+  name: 'LoginPage',
+  data () {
+    return {
+      loginPayload: {
+        email: '',
+        password: ''
+      }
+    }
+  },
+  methods: {
+    login () {
+      const { email, password } = this.loginPayload
+      this.$store
+        .dispatch('login', { email, password })
+        .then((result) => {
+          console.log(result)
+        })
+    }
   }
 }
 </script>
