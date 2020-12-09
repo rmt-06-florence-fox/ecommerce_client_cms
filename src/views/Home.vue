@@ -19,6 +19,11 @@ export default {
     HelloWorld,
     NavBar
   },
+  methods: {
+    changePage () {
+      this.$router.push({ name: 'Products' })
+    }
+  },
   data () {
     return {
       img: 'https://thumbs.dreamstime.com/b/eg-logo-monogram-triangle-shape-circle-rounded-isolated-gold-colors-style-black-background-design-template-176114635.jpg'
