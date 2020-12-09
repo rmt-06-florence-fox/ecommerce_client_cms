@@ -1,18 +1,27 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <img src="../assets/mrbee.jpeg">
+    <div class="hello">
+      <h1>{{ Vuex }}</h1>
+      <button @click="change">changeTitle</button>
+  </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
   name: 'Home',
-  components: {
-    HelloWorld
+  computed: {
+    Vuex () {
+      return this.$store.state.title
+    }
+  },
+  methods: {
+    change () {
+      const payload = 'selvi sayangku'
+      return this.$store.commit('change', payload)
+    }
   }
 }
 </script>
