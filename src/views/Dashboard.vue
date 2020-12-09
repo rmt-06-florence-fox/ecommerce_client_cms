@@ -1,8 +1,18 @@
 <template>
   <div>
     <Navbar></Navbar>
-    ini dash board
-    <router-view/>
+    <div class="container">
+      <div class="row">
+        <div class="col-2">
+          <div class="card sidebar">
+            <div class="card-title">ceritanya sidebar</div>
+          </div>
+        </div>
+        <div class="col-10">
+          <router-view/>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -15,5 +25,8 @@ export default {
 </script>
 
 <style>
-
+.sidebar{
+  height: 500px;
+  background-color: orange !important;
+}
 </style>
