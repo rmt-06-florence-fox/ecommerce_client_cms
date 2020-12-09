@@ -2,6 +2,7 @@
   <div>
       <NavBar/>
       <div>
+          <AddForm/>
          <ProductList/>
       </div>
   </div>
@@ -10,12 +11,15 @@
 <script>
 import NavBar from '../components/NavBar.vue'
 import ProductList from '../components/ProductList.vue'
+import AddForm from '../components/AddForm.vue'
+
 
 export default {
     name: 'ContentPage',
     components: {
         NavBar,
-        ProductList
+        ProductList,
+        AddForm
     }
 }
 </script>
