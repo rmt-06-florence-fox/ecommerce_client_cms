@@ -22,7 +22,10 @@
 import Navbar from '../components/Navbar.vue'
 export default {
   components: { Navbar },
-  name: 'DashBoard'
+  name: 'DashBoard',
+  created () {
+    this.$store.dispatch('fetch')
+  }
 }
 </script>
 

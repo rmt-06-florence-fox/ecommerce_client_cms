@@ -56,7 +56,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('access_token')
   if (to.name !== 'LoginPage' && !isAuthenticated) next({ name: 'LoginPage' })
-  else if (to.name === 'LoginPage' && isAuthenticated) next({ name: 'DashBoard' })
+  else if (to.name === 'LoginPage' && isAuthenticated) next({ name: 'ListProduct' })
   else next()
 })
 
