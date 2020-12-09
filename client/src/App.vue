@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <div id="nav">
+    <!-- <div class="nav-client">
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/login">Login</router-link> |
       <router-link to="/dashboard">Dashboard</router-link> |
       <router-link to="/create">Create Product</router-link>
-    </div>
+    </div> -->
     <router-view/>
   </div>
 </template>
@@ -20,16 +20,16 @@
   color: #2c3e50;
 }
 
-#nav {
+.nav-client {
   padding: 30px;
 }
 
-#nav a {
+.nav-client a {
   font-weight: bold;
   color: #2c3e50;
 }
 
-#nav a.router-link-exact-active {
+.nav-client a.router-link-exact-active {
   color: #42b983;
 }
 </style>
