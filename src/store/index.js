@@ -64,6 +64,43 @@ export default new Vuex.Store({
         console.log(err)
       })
     },
+    editProduct (context, payload) {
+      const { id, name, price, stock, imageurl, CategoryId } = payload
+
+      axios({
+        method: 'put',
+        url: '/products/' + id,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          name,
+          price,
+          stock,
+          image_url: imageurl,
+          CategoryId
+        }
+      }).then(({ data }) => {
+        context.dispatch('fetchAllProduct')
+        router.push('/products').catch(() => {})
+      }).catch(err => {
+        console.log(err)
+      })
+    },
+    deleteProduct (context, id) {
+      axios({
+        method: 'delete',
+        url: '/products/' + id,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      }).then(({ data }) => {
+        context.dispatch('fetchAllProduct')
+        router.push('/products').catch(() => {})
+      }).catch(err => {
+        console.log(err)
+      })
+    },
     fetchAllCategory (context) {
       axios({
         method: 'get',
