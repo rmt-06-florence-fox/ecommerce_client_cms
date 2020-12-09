@@ -23,10 +23,10 @@ class ProductController {
   static async getOne (req, res, next) {
     try {
       const id = +req.params.id
-      const product = await Product.findOne({where: {id}})
+      const product = await Product.findByPk(id)
 
       if (product) res.status(200).json({product})
-      else throw ({statusCode: 404, message: 'Product not found'})
+      else throw ({statusCode: 404, message: 'Product not found bro'})
     } catch (error) {
       next(error)
     }

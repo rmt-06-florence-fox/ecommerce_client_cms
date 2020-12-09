@@ -1,11 +1,11 @@
 const app = require('../app')
 const request = require('supertest')
-const {sequelize, User} = require('../models')
+const {sequelize, User, Product} = require('../models')
 const {queryInterface} = sequelize
 const {signToken} = require('../helpers/jwt')
 
 describe('Product Routes Test', () => {
-  let adminToken, fakeAdminToken, idProduct
+  let adminToken, fakeAdminToken, user2Product, userId1, userId2
   admin = {
     id: 1,
     username: 'admin',
@@ -24,12 +24,13 @@ describe('Product Routes Test', () => {
 
   beforeAll(done => {
     User.create(admin)
-    .then((id) => {
-      idProduct = id
+    .then(({id}) => {
+      userId1 = id
       adminToken = signToken(admin)
       return User.create(fakeAdmin)
     })
-    .then(_ => {
+    .then(id => {
+      userId2 = id
       fakeAdminToken = signToken(fakeAdmin)
       done()
     })
@@ -348,16 +349,34 @@ describe('Product Routes Test', () => {
   })
 
   describe('GET /Products/:id - show product', () => {
+    const productContent = {
+      name: 'Pillow',
+      price: 2e5,
+      image_url: 'https://image.freepik.com/free-psd/square-pillow-mockup_177774-16.jpg',
+      stock: 5
+    }
+
+    beforeAll(done => {
+      Product.create({
+        ...productContent,
+        UserId: userId2
+      })
+      .then((result) => {
+        user2Product = result
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
     test('200 Success Show Product By Id - should show product by id', done => {
       request(app)
-      .get(`/products/${idProduct.id}`)
+      .get('/products/'+ user2Product.id)
       .set('access_token', adminToken)
-      .then((result) => { // undefined
+      .then((result) => {
         const {body, status} = result
-        console.log("🚀 ~ file: product.test.js ~ line 357 ~ .then ~ result", result.body) //TODO product not found
-        console.log("🚀 ~ file: product.test.js ~ line 357 ~ .then ~ result", result.status) //TODO 404
         expect(status).toBe(200)
-        expect(body).toHaveProperty(expect.any(Object), expect.any(Object))
+        expect(body).toHaveProperty('product', expect.any(Object))
         done()
       }).catch((err) => {
         done(err)
@@ -367,10 +386,68 @@ describe('Product Routes Test', () => {
   })
 
   describe('PUT /Products/:id - update a product', () => {
+    const productContent = {
+      name: 'Pillow',
+      price: 200000,
+      image_url: 'https://image.freepik.com/free-psd/square-pillow-mockup_177774-16.jpg',
+      stock: 5
+    }
+
+    const updatedContent = {
+      name: 'Cap',
+      price: 100000,
+      image_url: 'https://image.freepik.com/free-psd/cap-mockup_1310-498.jpg',
+      stock: 10
+    }
+
+    beforeAll(done => {
+      Product.create({
+        ...productContent,
+        UserId: userId2
+      })
+      .then((result) => {
+        user2Product = result
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
     test.skip('200 Success Update Product - should update a Product if authorized', done => {
       request(app)
-      .put(`/products/${idProduct}`)
+      .put(`/products/${user2Product.id}}`)
+      .send(updatedContent)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        const {name, price, image_url, stock} = updatedContent
+        expect(status).toBe(200)
+        // expect(body).toHaveProperty('id', expect.any(Number))
+        expect(body).toHaveProperty('name', name)
+        expect(body).toHaveProperty('price', price)
+        expect(body).toHaveProperty('image_url', image_url)
+        expect(body).toHaveProperty('stock', stock)
+        // expect(body).toHaveProperty('UserId', userId2)
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+  })
 
+  describe('DELETE /Product/:id - delete a product', () => {
+    test.skip('200 Success Delete - should delete a product', done  => {
+      request(app)
+      .delete(`/products/.id}`)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(200)
+        expect(body).toHaveProperty('message', 'Delete product successfuly')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
     })
   })
 

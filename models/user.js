@@ -38,7 +38,11 @@ module.exports = (sequelize, DataTypes) => {
         }
       }
     },
-    role: DataTypes.STRING
+    role: {
+      type: DataTypes.STRING,
+      defaultValue: 'customer',
+      isIn: [['admin', 'customer']]
+    }
   }, {
     sequelize,
     modelName: 'User',
@@ -47,6 +51,8 @@ module.exports = (sequelize, DataTypes) => {
   User.addHook('beforeCreate', instance => {
     instance.password = hashPassword(instance.password)
   })
+
+
   
   return User;
 };
