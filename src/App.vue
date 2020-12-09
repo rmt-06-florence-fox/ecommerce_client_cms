@@ -1,0 +1,20 @@
+<template>
+  <v-app>
+    <v-main>
+      <router-link to="/login"></router-link>
+      <router-link to="/addproduct"></router-link>
+      <router-link to="/"></router-link>
+      <router-view></router-view>
+    </v-main>
+  </v-app>
+</template>
+
+<script>
+export default {
+  name: 'App',
+
+  data: () => ({
+    //
+  })
+}
+</script>
