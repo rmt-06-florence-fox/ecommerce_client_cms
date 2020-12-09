@@ -1,9 +1,9 @@
 <template>
-  <div class="column is-one-quarter">
-    <div class="card">
+  <div class="column is-one-third">
+    <div class="card card-equal-height">
       <div class="card-image">
         <figure class="image is-4by3">
-          <img :src="product.imageUrl" alt="Placeholder image">
+          <img :src="product.image_url" alt="Placeholder image">
         </figure>
       </div>
       <div class="card-content">
@@ -55,6 +55,22 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+  .card-content {
+    height: 100%;
+  }
 
+  .card-equal-height {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  .card-equal-height .card-footer {
+    margin-top: auto;
+  }
+
+  .card{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border-radius: 0.5rem;
+  }
 </style>

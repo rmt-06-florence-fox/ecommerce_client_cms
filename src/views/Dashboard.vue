@@ -1,5 +1,5 @@
 <template>
-  <section class="section">
+  <section class="section pt-2">
     <h1 class="title">Dashboard</h1>
     <div class = "columns is-multiline">
       <ProductCard
@@ -8,31 +8,9 @@
         @toggleModal='activateModal'
         @destroy='destroy'
       />
-
-      <div class="column is-one-quarter">
-        <h1 class="title">Test</h1>
-      </div>
-
-      <div class="column is-one-quarter">
-        <h1 class="title">Test</h1>
-      </div>
-
-      <div class="column is-one-quarter">
-        <h1 class="title">Test</h1>
-      </div>
-
-      <div class="column is-one-quarter">
-        <h1 class="title">Test</h1>
-      </div>
-
-      <div class="column is-one-quarter">
-        <h1 class="title">Test</h1>
-      </div>
     </div>
     <ModalEdit
       v-if="isActive"
-      :isActive="isActive"
-      @closeModal='closeModal'
       :targetEdit="targetEdit"
     />
   </section>
@@ -41,7 +19,7 @@
 <script>
 import ModalEdit from '../components/Edit'
 import ProductCard from '../components/ProductCard'
-import axios from '../config/axiosInstance'
+// import axios from '../config/axiosInstance'
 
 export default {
   name: 'Dashboard',
@@ -51,66 +29,34 @@ export default {
   },
   data () {
     return {
-      isActive: false,
-      products: {},
-      targetEdit: []
+      targetEdit: {}
     }
   },
   methods: {
     activateModal (id) {
-      axios({
-        method: 'GET',
-        url: '/products/' + id,
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(response => {
-          this.targetEdit = response.data.data
-          console.log(response)
-          console.log(this.targetEdit, '<<<<< targetEdit dashboard')
-          if (this.isActive) {
-            this.isActive = false
-          } else {
-            this.isActive = true
-          }
-        })
+      this.$store.dispatch('fetchProductsById', id)
     },
     closeModal () {
-      this.isActive = false
+      this.$store.commit('changeIsActive')
       this.fetchProducts()
     },
     fetchProducts () {
-      axios
-        .get('/products', {
-          headers: { access_token: localStorage.getItem('access_token') }
-        })
-        .then(response => {
-          this.products = response.data.data
-          console.log(this.products)
-        })
-        .catch(err => {
-          console.log(err.response)
-        })
+      this.$store.dispatch('fetchProducts')
     },
     destroy (id) {
-      axios({
-        method: 'DELETE',
-        url: '/products/' + id,
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(response => {
-          this.fetchProducts()
-        })
-        .catch(err => {
-          console.log(err.response)
-        })
+      this.$store.dispatch('destroy', id)
     }
   },
   created () {
     this.fetchProducts()
+  },
+  computed: {
+    products () {
+      return this.$store.state.products
+    },
+    isActive () {
+      return this.$store.state.isActive
+    }
   }
 }
 </script>

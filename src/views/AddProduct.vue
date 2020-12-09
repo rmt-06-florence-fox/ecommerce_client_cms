@@ -78,7 +78,7 @@
 </template>
 
 <script>
-import axios from '../config/axiosInstance'
+// import axios from '../config/axiosInstance'
 
 export default {
   name: 'Add Product',
@@ -92,22 +92,16 @@ export default {
   },
   methods: {
     addProduct () {
-      console.log(localStorage.getItem('access_token'))
-      axios
-        .post('/products', {
-          name: this.productName,
-          image_url: this.imageUrl,
-          price: this.productPrice,
-          stock: this.productStock
-        },
-        {
-          headers: {
-            access_token: localStorage.getItem('access_token')
-          }
-        })
+      const payload = {
+        name: this.productName,
+        image_url: this.imageUrl,
+        price: this.productPrice,
+        stock: this.productStock
+      }
+      this.$store.dispatch('addProduct', payload)
         .then(response => {
           console.log(response)
-          this.$router.push({ name: 'Homepage' })
+          this.$router.push({ name: 'Dashboard' })
         })
         .catch(err => {
           console.log(err.response)

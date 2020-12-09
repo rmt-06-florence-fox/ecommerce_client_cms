@@ -1,9 +1,9 @@
 <template>
-  <div class="modal" :class="{'is-active':isActive}">
+  <div class="modal has-text-left" :class="{'is-active':isActive}">
     <div class="modal-background"></div>
     <div class="modal-card">
       <header class="modal-card-head">
-        <p class="modal-card-title">Edit Product</p>
+        <p class="modal-card-title has-text-centered">Edit Product</p>
         <button @click.prevent="closeModal" class="delete" aria-label="close"></button>
       </header>
       <section class="modal-card-body">
@@ -17,7 +17,7 @@
             <div class="field-body">
               <div class="field">
                 <p class="control is-expanded">
-                  <input v-model="edited.name" class="input" type="text" placeholder="Product Name">
+                  <input v-model="targetEdit.name" class="input" type="text" placeholder="Product Name">
                 </p>
               </div>
             </div>
@@ -30,7 +30,7 @@
             <div class="field-body">
               <div class="field">
                 <p class="control is-expanded">
-                  <input v-model="edited.image_url" class="input" type="text" placeholder="Link Image">
+                  <input v-model="targetEdit.image_url" class="input" type="text" placeholder="Link Image">
                 </p>
               </div>
             </div>
@@ -46,7 +46,7 @@
                   <a class="button is-static">Rp</a>
                 </p>
                 <p  class="control">
-                  <input v-model="edited.price" class="input" type="number" placeholder="Product Price">
+                  <input v-model="targetEdit.price" class="input" type="number" placeholder="Product Price">
                 </p>
               </div>
             </div>
@@ -59,7 +59,7 @@
             <div class="field-body">
               <div class="field has-addons">
                 <p  class="control">
-                  <input v-model="edited.stock" class="input" type="number" placeholder="Product Stock">
+                  <input v-model="targetEdit.stock" class="input" type="number" placeholder="Product Stock">
                 </p>
               </div>
             </div>
@@ -86,53 +86,41 @@
 </template>
 
 <script>
-import axios from '../config/axiosInstance'
+// import axios from '../config/axiosInstance'
 
 export default {
   name: 'ModalEdit',
-  data () {
-    return {
-      edited: {
-        price: this.targetEdit.price,
-        image_url: this.targetEdit.image_url,
-        name: this.targetEdit.name,
-        stock: this.targetEdit.stock
-      }
+  // data () {
+  //   return {
+  //     edited: {
+  //       price: this.targetEdit.price,
+  //       image_url: this.targetEdit.image_url,
+  //       name: this.targetEdit.name,
+  //       stock: this.targetEdit.stock
+  //     }
 
-    }
-  },
-  props: [
-    'isActive',
-    'targetEdit'
-  ],
+  //   }
+  // },
   methods: {
     closeModal () {
-      console.log('closemodal')
-      this.$emit('closeModal')
-    },
-    printTarget () {
-      console.log(this.targetEdit, '<<<< target edit')
+      this.$store.commit('changeIsActive')
+      this.$store.dispatch('fetchProducts')
     },
     editProduct () {
-      axios({
-        method: 'PUT',
-        url: '/products/' + this.targetEdit.id,
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        },
-        data: this.edited
-      })
-        .then(response => {
-          this.closeModal()
-        })
-        .catch(err => {
-          console.log(err.response)
-        })
+      this.$store.dispatch('postEdit')
+    }
+  },
+  computed: {
+    isActive () {
+      return this.$store.state.isActive
+    },
+    targetEdit () {
+      return this.$store.state.targetEdit
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
 
 </style>
