@@ -6,6 +6,8 @@ import Dashboard from '../views/Dashboard.vue'
 import CreateProduct from '../views/CreateProduct.vue'
 import ProductTable from '../views/ProductTable.vue'
 import HomePage from '../views/HomePage.vue'
+import EditProduct from '../views/EditProduct.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -44,6 +46,11 @@ const routes = [
     ]
   },
   {
+    path: '/edit/:id',
+    name: 'EditProduct',
+    component: EditProduct
+  },
+  {
     path: '/about',
     name: 'About',
     // route level code-splitting
@@ -58,5 +65,10 @@ const router = new VueRouter({
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.access_token
+  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+  else if (to.name === 'Home' && isAuthenticated) next({ name: 'Dashboard'})
+  else next()
+})
 export default router

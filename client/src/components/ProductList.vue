@@ -5,7 +5,7 @@
     <td>{{ product.name }}</td>
     <td>Rp{{ convertRupiah }},00</td>
     <td>{{ product.stock }} </td>
-    <td><button class="btn btn-edit">Edit</button> <button class="btn btn-danger">Delete</button></td>
+    <td><button @click.prevent="onEdit(product.id)" class="btn btn-edit">Edit</button> <button @click.prevent="onDelete(product.id)" class="btn btn-danger">Delete</button></td>
   </tr>
 </template>
 
@@ -13,6 +13,14 @@
 export default {
   name: 'ProductList',
   props: ['product'],
+  methods: {
+    onEdit (id) {
+      this.$store.dispatch('editProduct', id)
+    },
+    onDelete (id) {
+      this.$store.dispatch('deleteProduct', id)
+    }
+  },
   computed: {
     convertRupiah () {
       const numberString = this.product.price.toString()

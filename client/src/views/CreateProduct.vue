@@ -2,29 +2,29 @@
   <section class="create-product-page">
     <div class="container col-8">
       <h1 class="text-center mb-5 header-create">Create New Product</h1>
-      <form>
+      <form @submit.prevent="onSubmit">
         <div class="form-group mt-1 row">
           <label for="input-name" class="col-sm-2 col-2 col-form-label">Name</label>
           <div class="col-sm-10 col-10">
-            <input type="text" class="form-control" id="input-name" placeholder="Product's name">
+            <input type="text" class="form-control" v-model="payload.name" id="input-name" placeholder="Product's name">
           </div>
         </div>
         <div class="form-group mt-1 row">
           <label for="input-image" class="col-sm-2 col-2 col-form-label">Image Url</label>
           <div class="col-sm-10 col-10">
-            <input type="text" class="form-control" id="input-image" placeholder="Product's image url">
+            <input type="text" class="form-control" v-model="payload.image_url" id="input-image" placeholder="Product's image url">
           </div>
         </div>
         <div class="form-group mt-1 row">
           <label for="input-price" class="col-sm-2 col-2 col-form-label">Price</label>
           <div class="col-sm-10 col-10">
-            <input type="number" class="form-control" id="input-price" placeholder="Product's price">
+            <input type="number" class="form-control" v-model="payload.price" id="input-price" placeholder="Product's price">
           </div>
         </div>
         <div class="form-group mt-1 row">
           <label for="input-stock" class="col-sm-2 col-2 col-form-label">Stock</label>
           <div class="col-sm-10 col-10">
-            <input type="number" class="form-control" id="input-stock" placeholder="Product's stock">
+            <input type="number" class="form-control" v-model="payload.stock" id="input-stock" placeholder="Product's stock">
           </div>
         </div>
         <div class="create-btn">
@@ -37,7 +37,22 @@
 
 <script>
 export default {
-  name: 'CreateProduct'
+  name: 'CreateProduct',
+  data () {
+    return {
+      payload: {
+        name: '',
+        image_url: '',
+        price: '',
+        stock: ''
+      }
+    }
+  },
+  methods: {
+    onSubmit () {
+      this.$store.dispatch('createProduct', this.payload)
+    }
+  }
 }
 </script>
 
