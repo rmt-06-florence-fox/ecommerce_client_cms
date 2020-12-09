@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     change () {
-      const payload = 'selvi sayangku'
+      const payload = 'se'
       return this.$store.commit('change', payload)
     }
   }

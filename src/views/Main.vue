@@ -2,15 +2,17 @@
   <div>
     <Navbar></Navbar>
     <Sidebar></Sidebar>
+    <!-- <Home></Home>
+    <Product></Product> -->
     <router-view />
-
-    <h1>Ini Main Vue</h1>
   </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
+// import Home from './Home'
+// import Product from './Product'
 
 export default {
   components: {
@@ -20,4 +22,13 @@ export default {
 }
 </script>
 
-<style></style>
+<style>
+body {
+    background-color:#ebf7fa
+}
+.btn-center {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+}
+</style>
