@@ -28,9 +28,13 @@
             <!-- Rigt side -->
 
             <div
-              class="mr-16 flex flex-col capitalize text-gray-600 "
+              class="mr-16 flex flex-col capitalize text-gray-600 text-left"
             >
-              categories
+              <span class="mt-2 text-black"
+                  v-for="category in product.Categories"
+                  :key="category.id">
+                {{category.name}}
+              </span>
             </div>
 
             <div
@@ -46,9 +50,14 @@
             </div>
 
             <div
-              class="mr-8 flex flex-col capitalize text-gray-600 "
+              class="mr-8 flex flex-row capitalize text-gray-600 text-sm space-x-1 items-center"
             >
-              {{product.updatedAt}}
+              <button class="bg-yellow-500 py-1 px-3 text-white">
+                Update Stock
+              </button>
+              <button class="bg-red-500 py-1 px-3 text-white">
+                Delete
+              </button>
             </div>
           </div>
     </div>

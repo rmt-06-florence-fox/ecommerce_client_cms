@@ -31,7 +31,7 @@
 
       <router-link to="add-product">
         <button
-          class="mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow"
+          class="mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow bg-green-600 hover:bg-gray-900"
         >
           <!-- Action -->
           <span>Add Product</span>
