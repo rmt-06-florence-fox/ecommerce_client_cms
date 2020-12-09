@@ -5,7 +5,7 @@
     <td>{{ product.name }}</td>
     <td>Rp{{ convertRupiah }},00</td>
     <td>{{ product.stock }} </td>
-    <td><button @click.prevent="onEdit(product.id)" class="btn btn-edit">Edit</button> <button @click.prevent="onDelete(product.id)" class="btn btn-danger">Delete</button></td>
+    <td><button @click.prevent="onEdit(product.id)" class="btn btn-edit">Edit</button> <button @click.prevent="onDelete" type="button" class="btn btn-danger">Delete</button></td>
   </tr>
 </template>
 
@@ -17,8 +17,8 @@ export default {
     onEdit (id) {
       this.$store.dispatch('editProduct', id)
     },
-    onDelete (id) {
-      this.$store.dispatch('deleteProduct', id)
+    onDelete () {
+      this.$store.dispatch('deleteProduct', this.product.id)
     }
   },
   computed: {

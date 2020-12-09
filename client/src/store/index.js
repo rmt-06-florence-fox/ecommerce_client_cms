@@ -28,7 +28,8 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           localStorage.setItem('access_token', data.access_token)
-          router.push('/dashboard')
+          // console.log(localStorage)
+          router.push('/product')
         })
         .catch(err => {
           console.log(err)
@@ -57,7 +58,7 @@ export default new Vuex.Store({
         }
       })
         .then(data => {
-          router.push('/dashboard')
+          router.push('/product')
         })
         .catch(err => {
           console.log(err)
@@ -90,7 +91,7 @@ export default new Vuex.Store({
         }
       })
         .then(data => {
-          router.push('/dashboard')
+          router.push('/product')
         })
         .catch(err => {
           console.log(err)
@@ -104,9 +105,10 @@ export default new Vuex.Store({
           access_token: localStorage.getItem('access_token')
         }
       })
-        .then(data => {
-          router.push('/dashboard')
-          // this.fetch()
+        .then(_ => {
+          // router.push('/dashboard')
+          // console.log(data)
+          this.dispatch('fetch')
         })
         .catch(err => {
           console.log(err)

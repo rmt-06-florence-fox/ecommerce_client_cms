@@ -34,7 +34,7 @@ const routes = [
     component: Dashboard,
     children: [
       {
-        path: '/',
+        path: '/product',
         name: 'ProductTable',
         component: ProductTable
       },
@@ -66,9 +66,9 @@ const router = new VueRouter({
   routes
 })
 router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.access_token
-  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-  else if (to.name === 'Home' && isAuthenticated) next({ name: 'Dashboard'})
+  const isAuthenticated = localStorage.getItem('access_token')
+  if ((to.path !== '/login' && to.path !== '/') && !isAuthenticated) next({ path: '/' })
+  else if ((to.path === '/login' || to.path === '/') && isAuthenticated) next({ name: 'ProductTable' })
   else next()
 })
 export default router
