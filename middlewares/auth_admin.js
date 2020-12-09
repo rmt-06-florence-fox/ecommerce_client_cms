@@ -28,9 +28,9 @@ class Auth {
     const id = +req.params.id
     try {
       if (id) {
-        const product = await Product.findByPk(id)
+        const product = await Product.findByOne({where: {id}})
   
-        if (req.loggedInUser.email !== 'admin@mail.com') { //! expectation checking by email && role, but undefined get role 
+        if (req.loggedInUser.email !== 'admin@mail.com') { //! expectation checking by role, but undefined get role == admin
           throw createError(401, 'You are not authorized')
         } else if (!product) throw createError(404, 'product not found!')
          else next()

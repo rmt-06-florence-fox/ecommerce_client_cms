@@ -5,7 +5,7 @@ const {queryInterface} = sequelize
 const {signToken} = require('../helpers/jwt')
 
 describe('Product Routes Test', () => {
-  let adminToken, fakeAdminToken
+  let adminToken, fakeAdminToken, idProduct
   admin = {
     id: 1,
     username: 'admin',
@@ -24,7 +24,8 @@ describe('Product Routes Test', () => {
 
   beforeAll(done => {
     User.create(admin)
-    .then(_ => {
+    .then((id) => {
+      idProduct = id
       adminToken = signToken(admin)
       return User.create(fakeAdmin)
     })
@@ -345,4 +346,32 @@ describe('Product Routes Test', () => {
       });
     })
   })
+
+  describe('GET /Products/:id - show product', () => {
+    test('200 Success Show Product By Id - should show product by id', done => {
+      request(app)
+      .get(`/products/${idProduct.id}`)
+      .set('access_token', adminToken)
+      .then((result) => { // undefined
+        const {body, status} = result
+        console.log("🚀 ~ file: product.test.js ~ line 357 ~ .then ~ result", result.body) //TODO product not found
+        console.log("🚀 ~ file: product.test.js ~ line 357 ~ .then ~ result", result.status) //TODO 404
+        expect(status).toBe(200)
+        expect(body).toHaveProperty(expect.any(Object), expect.any(Object))
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+
+    })
+  })
+
+  describe('PUT /Products/:id - update a product', () => {
+    test.skip('200 Success Update Product - should update a Product if authorized', done => {
+      request(app)
+      .put(`/products/${idProduct}`)
+
+    })
+  })
+
 })
