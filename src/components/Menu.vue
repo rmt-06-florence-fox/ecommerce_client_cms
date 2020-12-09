@@ -6,6 +6,7 @@
     <ul class="menu-list">
       <li><router-link to="/dashboard">Dashboard</router-link></li>
       <li><router-link to="/product">Add Product</router-link></li>
+      <li><a @click.prevent="logout" href="">Logout</a></li>
     </ul>
     <p class="menu-label">
       Administration
@@ -37,7 +38,13 @@
 
 <script>
 export default {
-  name: 'Menu'
+  name: 'Menu',
+  methods: {
+    logout () {
+      localStorage.clear()
+      this.$router.push({ name: 'Login' })
+    }
+  }
 }
 </script>
 

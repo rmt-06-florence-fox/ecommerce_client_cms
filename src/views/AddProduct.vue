@@ -52,7 +52,7 @@
           <div class="field-body">
             <div class="field has-addons">
               <p  class="control">
-                <input v-model="productPrice" class="input" type="number" placeholder="Product Stock">
+                <input v-model="productStock" class="input" type="number" placeholder="Product Stock">
               </p>
             </div>
           </div>
@@ -78,6 +78,8 @@
 </template>
 
 <script>
+import axios from '../config/axiosInstance'
+
 export default {
   name: 'Add Product',
   data () {
@@ -90,6 +92,26 @@ export default {
   },
   methods: {
     addProduct () {
+      console.log(localStorage.getItem('access_token'))
+      axios
+        .post('/products', {
+          name: this.productName,
+          image_url: this.imageUrl,
+          price: this.productPrice,
+          stock: this.productStock
+        },
+        {
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+        .then(response => {
+          console.log(response)
+          this.$router.push({ name: 'Homepage' })
+        })
+        .catch(err => {
+          console.log(err.response)
+        })
     }
   }
 }
