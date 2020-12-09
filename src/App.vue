@@ -61,6 +61,8 @@ export default {
     }
   },
   created () {
+    this.$store.dispatch('getProducts')
+    this.$store.dispatch('getCategories')
     if (localStorage.getItem('token')) {
       this.$store.commit('isLogin', true)
     } else {

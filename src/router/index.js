@@ -18,7 +18,7 @@ const routes = [
     component: Login
   },
   {
-    path: '/editProductForm',
+    path: '/:id',
     name: 'EditProductForm',
     component: EditProductForm
   }

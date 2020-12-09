@@ -2,10 +2,16 @@
   <div class="home">
     <div class="main-web">
       <div v-if="navOpen" class="main-nav col-1.5">
-        <h3><a href="#" class="fa fa-area-chart" style='font-size:24px'> Dashboard</a></h3>
+        <h3><a href="#" class="fa fa-area-chart" style='font-size:24px' @click.prevent="resetCategory"> Dashboard</a></h3>
           <h3><b class='fas fa-building' style='font-size:24px'> Categories : </b></h3>
           <ul class="overflow-auto">
-            <h4>elektronik</h4>
+            <Category
+              v-for="category in categories"
+              :key="category.id"
+              :category="category"
+              @showProducts="showProducts"
+              @chose="choseCategory"
+              />
           </ul>
           <h3><b class='fas fa-angle-down' style='font-size:24px'>Action : </b></h3>
           <div class="action-product">
@@ -24,7 +30,7 @@
           <div class="delete-category mt-2">
             <button class="btn btn-action" >
               <i class="fa fa-trash-o" style="font-size:24px"></i>
-              <span> Category</span>
+              <span> Del. Category</span>
             </button>
           </div>
         </div><br>
@@ -53,11 +59,11 @@
           <button class="btn" @click="openNav">
             <i class="fa fa-align-justify" style="font-size:24px"></i>
           </button>
-          <div class="user-email">USER EMAIL</div>
-          <div class="content-category">NAMA CATEGORY</div>
+          <div class="user-email">{{userEmail}}</div>
+          <div class="content-category">{{ chosenCategory.name }}</div>
         </div>
         <div class="content">
-          <div class="content-header">
+          <div class="content-header" v-show="show==='products'" v-if="products">
             <div class="content-header-text col-1">No.</div>
             <div class="content-header-text col-3">Image</div>
             <div class="content-header-text col-2">Name</div>
@@ -65,13 +71,19 @@
             <div class="content-header-text col-2">Stock</div>
             <div class="content-header-text col-2">Action</div>
           </div>
-          <div class="empty-message">
+          <div class="empty-message" v-else-if="!products">
             <h1>It's Empty here</h1>
           </div>
           <!--LOOP PRODUK DISINI-->
-          <div>
-            PRODUK
-          </div>
+          <Product/>
+          <Product
+            v-show="show==='products'"
+            v-for="(product, i) in products"
+            :key="i"
+            :product="product"
+            :counter="i"
+            :categories="categories"
+          />
           <div class="content-header">
             <div class="content-header-text col-1">No.</div>
             <div class="content-header-text col-5">Image</div>
@@ -90,13 +102,15 @@
 </template>
 
 <script>
-// @ is an alias to /src
-
+import Product from '../components/Product.vue'
+import Category from '../components/Category.vue'
 export default {
   name: 'Main',
   data () {
     return {
-      navOpen: false
+      navOpen: false,
+      chosenCategory: '',
+      show: 'products'
     }
   },
   methods: {
@@ -106,11 +120,47 @@ export default {
       } else {
         this.navOpen = true
       }
+    },
+    showProducts () {
+      this.show = 'products'
+    },
+    choseCategory (payload) {
+      this.chosenCategory = payload
+    },
+    resetCategory (payload) {
+      this.chosenCategory = ''
+      this.show = 'products'
     }
   },
+  components: {
+    Product, Category
+  },
   computed: {
+    products () {
+      if (this.chosenCategory) {
+        console.log(this.$store.state.products)
+        return this.$store.state.products.filter(
+          element => element.CategoryId === this.chosenCategory.id
+        )
+      } else {
+        return this.$store.state.products
+      }
+    },
+    categories () {
+      this.$store.dispatch('getCategories')
+      return this.$store.state.categories
+    },
+    userEmail () {
+      if (this.$store.state.loggedIn) {
+        return localStorage.getItem('user')
+      } else {
+        return ''
+      }
+    }
   },
   mounted () {
+    this.$store.dispatch('getCategories')
+    this.$store.dispatch('getProducts')
     if (localStorage.getItem('token')) {
       this.$store.commit('isLogin', true)
     } else {
@@ -142,7 +192,7 @@ export default {
   display: flex;
   flex-direction: column;
   max-width: 99%;
-  color: white
+  color: black
 }
 
 .content-category {
@@ -162,7 +212,7 @@ export default {
 
 .content-nav {
   align-items: center;
-  background-color: #e58e26;
+  background-color: #f6b93b;
   border-radius: 70px;
   box-shadow: 1px 1px 15px 5px rgba(0, 0, 0, 0.65);
   display: flex;
@@ -186,7 +236,7 @@ export default {
 }
 
 .main-nav {
-  background-color: #2f3640;
+  background-color: black;
   position: relative;
   box-shadow: 1px 1px 15px 5px rgba(0, 0, 0, 0.65);
   border-radius: 60px;
@@ -202,13 +252,13 @@ export default {
 .main-nav a {
   font-size: 1em;
   font-weight: bold;
-  color: black;
+  color: #e58e26;
   text-decoration: none;
 }
 
 b, strong {
     font-weight: bolder;
-    color: black;
+    color: #e58e26;
 }
 
 .main-nav a:hover {
@@ -224,7 +274,7 @@ b, strong {
   height: 120px;
   width: 100%;
   font-size: 20px;
-  color:white;
+  color:#e58e26;
 }
 
 .space {
@@ -240,19 +290,19 @@ b, strong {
 }
 
 .fa {
-  color: black
+  color: #2f3640
 }
 
 .fas {
-  color: black
+  color: #2f3640
 }
 
 span {
-  color:black;
+  color: #2f3640;
 }
 
 h3 {
-  color: black;
+  color: #e58e26;
 }
 
 </style>
