@@ -6,10 +6,10 @@
 
 <script>
 // @ is an alias to /src
-import LoginPage from '@/components/LoginPage.vue'
+import LoginPage from '../components/LoginPage.vue'
 
 export default {
-  name: 'Login',
+  name: 'Home',
   data () {
     return {
     }

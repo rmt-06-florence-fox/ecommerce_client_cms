@@ -7,11 +7,11 @@
           <form action="#" @submit.prevent="login">
           <div class="form-group font-weight-bold">
             <label for="email">Email address</label>
-            <input type="email" v-model="loginEmail" class="form-control" id="login-email" placeholder="Enter email">
+            <input type="email" v-model="loginPayload.email" class="form-control" id="login-email" placeholder="Enter email">
           </div>
           <div class="form-group font-weight-bold">
             <label for="exampleInputPassword1">Password</label>
-            <input type="password" v-model="loginPassword" class="form-control" id="login-password" placeholder="Password">
+            <input type="password" v-model="loginPayload.password" class="form-control" id="login-password" placeholder="Password">
           </div>
             <button type="submit" class="btn btn-warning">Login</button>
           </form>
@@ -21,36 +21,55 @@
 </template>
 
 <script>
-import axios from '../config/axiosInstance'
+import Swal from 'sweetalert2'
 export default {
   name: 'LoginPage',
   data () {
     return {
-      card: 'login',
-      loginEmail: '',
-      loginPassword: ''
+      loginPayload: {
+        email: '',
+        password: ''
+      }
     }
   },
   methods: {
     login () {
-      axios({
-        method: 'POST',
-        url: '/adminLogin',
-        data: {
-          email: this.loginEmail,
-          password: this.loginPassword
-        }
-      })
-        .then(result => {
-          console.log(result)
-          localStorage.setItem('token', result.token)
-          this.$emit('toLogin', true)
+      const { email, password } = this.loginPayload
+      console.log('tes ah')
+      this.$store
+        .dispatch('login', { email, password })
+        .then((result) => {
+          localStorage.setItem('token', result.data.token)
+          localStorage.setItem('user', result.data.email)
+          this.$store.commit('isLogin', true)
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+
+          Toast.fire({
+            icon: 'success',
+            title: 'Signed in successfully'
+          })
+          this.$router.push('/')
         })
         .catch(err => {
-          console.log(err, 'kesini yaa')
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message + '!'
+          })
         })
     }
-  }
+  },
+  props: []
 }
 </script>
 

@@ -93,7 +93,7 @@
 // @ is an alias to /src
 
 export default {
-  name: 'Home',
+  name: 'Main',
   data () {
     return {
       navOpen: false
@@ -106,6 +106,15 @@ export default {
       } else {
         this.navOpen = true
       }
+    }
+  },
+  computed: {
+  },
+  mounted () {
+    if (localStorage.getItem('token')) {
+      this.$store.commit('isLogin', true)
+    } else {
+      this.$router.push('/login')
     }
   }
 }
