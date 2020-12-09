@@ -16,7 +16,6 @@ class Auth {
           throw createError(407, 'Authentication required')
         } else {
           req.loggedInUser = decoded
-          console.log("🚀 ~ file: auth_admin.js ~ line 34 ~ Auth ~ authorizationProduct ~ req.loggedInUser.role", req.loggedInUser)
           next()
         }
       }
@@ -31,12 +30,12 @@ class Auth {
       if (id) {
         const product = await Product.findByPk(id)
   
-        if (req.loggedInUser.role !== 'admin') {
+        if (req.loggedInUser.email !== 'admin@mail.com') { //! expectation checking by email && role, but undefined get role 
           throw createError(401, 'You are not authorized')
         } else if (!product) throw createError(404, 'product not found!')
          else next()
       } else {
-        if (req.loggedInUser.role !== 'admin') {
+        if (req.loggedInUser.email !== 'admin@mail.com') {
           throw createError(401, 'You are not authorized')
         } else next()
       }
