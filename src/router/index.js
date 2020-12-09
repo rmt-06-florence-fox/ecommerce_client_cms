@@ -1,32 +1,40 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import LoginPage from '../views/LoginPage'
 import AddProductPage from '../views/AddProductPage'
 import EditProductPage from '../views/EditProductPage'
+import MainPage from '../views/MainPage'
+import ProductsCard from '../components/ProductsCard'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
   {
     path: '/login',
     name: 'LoginPage',
     component: LoginPage
   },
   {
-    path: '/addproduct',
-    name: 'AddProductPage',
-    component: AddProductPage
-  },
-  {
-    path: '/editproduct',
-    name: 'EditProductPage',
-    component: EditProductPage
+    path: '/',
+    name: 'MainPage',
+    component: MainPage,
+    children: [
+      {
+        path: '/',
+        name: 'ProductsCard',
+        component: ProductsCard
+      },
+      {
+        path: '/add',
+        name: 'AddProductPage',
+        component: AddProductPage
+      },
+      {
+        path: '/edit/:idProduct',
+        name: 'EditProductPage',
+        component: EditProductPage
+      }
+    ]
   }
 ]
 
