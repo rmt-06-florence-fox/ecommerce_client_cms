@@ -1,0 +1,81 @@
+.container-login {
+  border: black 2px solid;
+  width: 400px;
+  height: 20rem;
+  margin: auto;
+  display: flex;
+  margin-bottom: 50px;
+  margin-top: 150px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.container-login h1 {
+  text-align: center;
+}
+
+.container-add {
+  border: black 2px solid;
+  width: 400px;
+  height: 35rem;
+  margin: auto;
+  display: flex;
+  margin-bottom: 50px;
+  margin-top: 150px;
+  padding-left: 10px;
+  padding-right: 10px;
+  justify-content: space-between;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.container-add h1 {
+  text-align: center;
+}
+
+.navbar-container {
+  background-color: #F2F2F2;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  display: flex;
+  justify-content: space-between;
+  height: 80px;
+  align-items: center;
+  padding-left: 50px;
+  padding-right: 50px;
+  margin-bottom: 30px;
+}
+.navbar-container .right-item .btn {
+  margin-left: 10px;
+}
+.navbar-container a {
+  text-decoration: none;
+  color: black;
+}
+
+.container-product {
+  margin-bottom: 20px;
+  margin: auto;
+  max-width: 1500px;
+  display: flex;
+  padding-right: 20px;
+  padding-left: 20px;
+  padding-top: 30px;
+  padding-bottom: 30px;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+.container-product .card {
+  padding-top: 10px;
+  margin-bottom: 30px;
+  margin-left: 10px;
+  align-items: center;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.container-product .card img {
+  width: 80%;
+  height: 15vw;
+}
+.container-product .card .card-body .btn {
+  margin-left: 10px;
+}
+
+/*# sourceMappingURL=output.css.map */
