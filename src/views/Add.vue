@@ -66,7 +66,14 @@ export default {
             text: 'Product sucessfully created'
           })
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          console.log(err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Please do not leave any field empty'
+          })
+        })
     },
     cancel () {
       this.$router.push({ name: 'Products' })

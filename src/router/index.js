@@ -4,6 +4,9 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Add from '../views/Add.vue'
 import Edit from '../views/Edit.vue'
+import Banner from '../views/Banners.vue'
+import AddBanner from '../views/AddBanner.vue'
+import EditBanner from '../views/EditBanner.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +38,21 @@ const routes = [
     path: '/edit/:id',
     name: 'Edit',
     component: Edit
+  },
+  {
+    path: '/banners',
+    name: 'Banners',
+    component: Banner
+  },
+  {
+    path: '/addBanner',
+    name: 'AddBanner',
+    component: AddBanner
+  },
+  {
+    path: '/editBanner/:id',
+    name: 'EditBanner',
+    component: EditBanner
   }
 ]
 

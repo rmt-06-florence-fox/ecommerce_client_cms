@@ -2,17 +2,17 @@
   <div class="row">
     <div class="col-4">
         <div class="card mt-5" style="width: 20rem;">
-        <img :src="product.image" class="card-img-top mb-3" alt="image" style="width: 200px; height: 150px; margin-left:auto; margin-right: auto">
-        <div class="card-body">
+          <img :src="product.image" class="card-img-top mb-3" alt="image" style="width: 200px; height: 150px; margin-left:auto; margin-right: auto">
+          <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p class="card-text">{{ product.description }}</p>
             <p class="card-text">Rp {{ product.price }}</p>
             <a href="#" class="btn btn-primary" @click.prevent="edit(product.id)">Edit</a>
             <a href="#" @click.prevent="erase(product.id)" class="btn btn-danger ml-3" >Delete</a>
         </div>
-        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </template>
 
 <script>

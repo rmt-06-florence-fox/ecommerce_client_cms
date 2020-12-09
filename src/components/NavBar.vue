@@ -19,6 +19,9 @@
             <router-link to="/products" class="nav-link">Products</router-link>
           </li>
           <li class="nav-item">
+            <router-link to="/banners" class="nav-link">Banners</router-link>
+          </li>
+          <li class="nav-item">
             <router-link to="/add" class="nav-link">Add new product</router-link>
           </li>
         </ul>

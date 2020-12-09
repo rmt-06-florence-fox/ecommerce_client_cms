@@ -4,13 +4,11 @@
     <h1>Products</h1>
     <div class="container">
       <div class="row">
-        <div class="col-12">embed </div>
         <ProductCard
           v-for="product in products"
           :key="product.id"
           :product="product"
           class="ml-3"
-          @fetchProducts=fetchProducts
         />
       </div>
     </div>
