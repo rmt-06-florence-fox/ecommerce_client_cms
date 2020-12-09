@@ -1,7 +1,7 @@
 <template>
   <div>
     <Navbar/>
-    <div>
+    <v-container fluid>
       <v-simple-table>
         <thead>
           <tr>
@@ -56,7 +56,7 @@
           </v-card>
         </v-dialog>
       </v-simple-table>
-    </div>
+    </v-container>
     <Footer/>
   </div>
 </template>
