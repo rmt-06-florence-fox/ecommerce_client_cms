@@ -1,5 +1,5 @@
 <template>
-  <b-nav tabs align="center" class="bg-secondary m-0">
+  <b-nav tabs align="center" class="bg-secondary">
     <!-- Dashboard -->
     <b-nav-item to="/dashboard" :active='$route.name =="Dashboard"'>Dashboard
     </b-nav-item>

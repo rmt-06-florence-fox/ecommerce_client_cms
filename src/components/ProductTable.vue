@@ -8,7 +8,7 @@
     <td class="align-middle">{{ product.Category.name }}</td>
     <td class="align-middle">
       <button class="btn btn-warning" @click="editProduct">Edit</button>
-      <button class="btn btn-danger ml-3">Delete</button>
+      <button class="btn btn-danger ml-3" @click="deleteProduct">Delete</button>
     </td>
   </tr>
 </template>
@@ -23,6 +23,10 @@ export default {
     editProduct () {
       const id = this.product.id
       this.$router.push('products/' + id)
+    },
+    deleteProduct () {
+      const id = this.product.id
+      this.$store.dispatch('deleteProduct', id)
     }
   }
 }

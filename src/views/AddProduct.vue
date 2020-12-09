@@ -1,10 +1,10 @@
 <template>
-  <div class="container mt-5">
+  <div class="container mt-3">
     <div class="row text-center">
       <div class="col-sm-3"></div>
       <div class="col-sm-6">
         <h1>Add a New Product</h1>
-        <div class="card">
+        <div class="card shadow mb-5">
           <div class="card-body">
             <form @submit.prevent="addProduct">
               <div class="form-group">
@@ -23,6 +23,7 @@
                 <label>Product Category</label>
                 <select class="form-control"
                   v-model="add.CategoryId">
+                  <option value="" disabled>Select Category</option>
                   <option
                     v-for="category in categories"
                     :key="category.id"
