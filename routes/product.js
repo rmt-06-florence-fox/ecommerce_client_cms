@@ -6,6 +6,6 @@ const Auth = require('../middlewares/auth_admin')
 router.get('/', ProductController.show)
 router.use(Auth.authentication)
 router.post('/', Auth.authorizationProduct, ProductController.create)
-
+router.get('/:id', ProductController.getOne)
 
 module.exports = router
