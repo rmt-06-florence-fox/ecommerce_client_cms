@@ -1,6 +1,6 @@
 <template>
-    <div style="height:400px">
-      <h1 class="has-text-primary mb-4 title">Login Page</h1>
+    <div style="height:400px;">
+      <h1 class="has-text-primary mt-6 mb-4 title is-family-monospace">Login Page</h1>
         <div class="container card mt-6">
             <div class="field ml-4 mr-4 mt-4">
                 <p class="control has-icons-left has-icons-right">
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import axios from '../../config/axios'
 export default {
   data () {
     return {
@@ -49,16 +48,16 @@ export default {
         email: this.email,
         password: this.password
       }
-      axios
-        .post('/login', payload)
-        .then(data => {
-          console.log(data)
-          this.$router.push({ name: 'Products' })
-        })
-        .catch(err => {
-          console.log(err)
-          console.log('EROR BOSSS')
-        })
+      this.$store.dispatch('login', payload)
+      // axios
+      //   .post('/login', payload)
+      //   .then(data => {
+      //     localStorage.setItem('access_token', data.access_token)
+      //     this.$router.push('/products')
+      //   })
+      //   .catch(err => {
+      //     console.log(err)
+      //   })
     }
   }
 

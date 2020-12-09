@@ -1,12 +1,19 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/login">Login</router-link>
+    <div id="app">
+      <router-view/>
     </div>
-    <router-view />
-  </div>
 </template>
+
+<script>
+// import Navbar from './views/navbar'
+export default {
+
+  components: {
+    // Navbar
+  }
+
+}
+</script>
 
 <style>
 #app {
@@ -18,7 +25,7 @@
 }
 
 #nav {
-  padding: 10px;
+  padding: 30px;
 }
 
 #nav a {
@@ -29,9 +36,4 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-/* .content {
-  min-height: 95vh;
-  background-image: url("../img/undraw_Short_bio_re_fmx0.svg");
-  background-size: 100px;
-} */
 </style>
