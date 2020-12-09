@@ -29,7 +29,7 @@
         </span>
       </div>
 
-      <router-link to="add-product">
+      <router-link to="/add-product">
         <button
           class="mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow bg-green-600 hover:bg-gray-900"
         >
@@ -44,7 +44,7 @@
       <ul class="flex flex-col mt-2 text-gray-600 justify-items-start space-y-3">
         <!-- Links -->
         <li class="mt-8">
-          <router-link to="dashboard" class="flex ">
+          <router-link to="/dashboard" class="flex ">
             <svg
               class="fill-current h-5 w-5 "
               viewBox="0 0 24 24"

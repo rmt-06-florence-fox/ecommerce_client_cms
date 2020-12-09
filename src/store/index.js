@@ -81,8 +81,58 @@ export default new Vuex.Store({
         .then(res => {
           router.push('dashboard')
         })
+    },
+    updateProduct (context, data) {
+      axios({
+        method: 'put',
+        url: `/product/${data.id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          name: data.name,
+          image_url: data.image_url,
+          price: data.price,
+          stock: data.stock
+        }
+      })
+        .then(res => {
+          return axios({
+            method: 'delete',
+            url: `/categories/bulk/${data.id}`,
+            headers: {
+              access_token: localStorage.getItem('access_token')
+            }
+          })
+        })
+        .then(res => {
+          const bulkCat = []
+          data.catSelected.forEach(el => {
+            bulkCat.push({
+              ProductId: data.id,
+              CategoryId: el
+            })
+          })
+          console.log(bulkCat)
+          return axios({
+            method: 'post',
+            url: '/categories/bulk',
+            headers: {
+              access_token: localStorage.getItem('access_token')
+            },
+            data: bulkCat
+          })
+        })
+        .then(res => {
+          router.push('/dashboard')
+        })
     }
   },
   modules: {
+  },
+  getters: {
+    getOneToEdit: state => id => {
+      return state.products.find(el => el.id === id)
+    }
   }
 })

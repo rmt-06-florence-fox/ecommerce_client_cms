@@ -1,7 +1,7 @@
 <template>
   <div
           class="mt-2 flex px-4 py-4 justify-between bg-white shadow-xl rounded-lg cursor-pointer hover:bg-green-500"
-        >
+        @click="goEdit">
           <!-- Card -->
 
           <div class="flex justify-between">
@@ -52,9 +52,6 @@
             <div
               class="mr-8 flex flex-row capitalize text-gray-600 text-sm space-x-1 items-center"
             >
-              <button class="bg-yellow-500 py-1 px-3 text-white">
-                Update Stock
-              </button>
               <button class="bg-red-500 py-1 px-3 text-white">
                 Delete
               </button>
@@ -66,7 +63,15 @@
 <script>
 export default {
   name: 'productCard',
-  props: ['product']
+  props: ['product'],
+  methods: {
+    goEdit () {
+      this.$router.push({
+        name: 'edit-product',
+        params: { id: this.product.id }
+      })
+    }
+  }
 }
 </script>
 
