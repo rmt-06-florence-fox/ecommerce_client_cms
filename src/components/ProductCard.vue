@@ -17,19 +17,13 @@
 
 <script>
 import Swal from 'sweetalert2'
-import axios from '../axios/axiosInstance'
 export default {
   name: 'ProductCard',
   props: ['product'],
   methods: {
     edit (id) {
-      const token = localStorage.getItem('access_token')
       console.log(id)
-      axios({
-        method: 'get',
-        url: `/products/${id}`,
-        headers: { access_token: token }
-      })
+      this.$store.dispatch('findOne', id)
         .then(({ data }) => {
           console.log(data)
           const payload = {

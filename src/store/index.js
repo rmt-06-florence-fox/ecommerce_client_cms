@@ -92,6 +92,14 @@ export default new Vuex.Store({
           price: payload.price
         }
       })
+    },
+    findOne (context, id) {
+      const token = localStorage.getItem('access_token')
+      return axios({
+        method: 'get',
+        url: `/products/${id}`,
+        headers: { access_token: token }
+      })
     }
   },
   modules: {
