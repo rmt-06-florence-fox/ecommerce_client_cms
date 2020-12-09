@@ -104,6 +104,22 @@ export default new Vuex.Store({
         .catch(error => {
           console.log(error)
         })
+    },
+    delete (context, payload) {
+      console.log(payload)
+      axios({
+        method: 'delete',
+        url: `/products/${payload}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(_ => {
+
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   },
   modules: {

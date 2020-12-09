@@ -6,7 +6,7 @@
       <td><img class="product-image" :src="product.image_url" alt="gambar" srcset=""></td>
       <td>
         <button @click.prevent="editPage(product.id)" class="btn btn-warning m-1">edit</button>
-        <button class="btn btn-danger">delete</button>
+        <button @click.prevent="deleteProduct" class="btn btn-danger">delete</button>
       </td>
     </tr>
 </template>
@@ -20,6 +20,10 @@ export default {
       // this.$store.dispatch('editPagePopulate', this.product)
       const url = `/edit/${id}`
       this.$router.push(url)
+    },
+    deleteProduct () {
+      this.$store.dispatch('delete', this.product.id)
+      this.$store.dispatch('fetch')
     }
   },
   data () {
