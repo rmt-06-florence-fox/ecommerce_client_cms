@@ -1,9 +1,10 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
+// import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import DashBoard from '../views/Dashboard.vue'
 import ListProduct from '../views/List.vue'
+import AddProduct from '../views/Addproduct.vue'
 
 Vue.use(VueRouter)
 
@@ -24,9 +25,9 @@ const routes = [
         component: ListProduct
       },
       {
-        path: '/home',
-        name: 'Home',
-        component: Home
+        path: '/add',
+        name: 'AddProduct',
+        component: AddProduct
       },
       {
         path: '/about',

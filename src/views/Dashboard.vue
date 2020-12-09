@@ -9,7 +9,9 @@
           </div>
         </div>
         <div class="col-10">
-          <router-view/>
+          <div class="content-cms">
+            <router-view/>
+          </div>
         </div>
       </div>
     </div>
@@ -28,5 +30,9 @@ export default {
 .sidebar{
   height: 500px;
   background-color: orange !important;
+}
+.content-cms{
+  height: 500px;
+  overflow: scroll;
 }
 </style>

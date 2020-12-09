@@ -1,5 +1,5 @@
 <template>
-  <div class="tebodi">
+  <div>
     <table class="table">
       <thead>
         <th>name</th>

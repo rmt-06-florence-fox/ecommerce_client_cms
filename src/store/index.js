@@ -46,6 +46,24 @@ export default new Vuex.Store({
         .catch(error => {
           console.log(error)
         })
+    },
+    create (context, payload) {
+      console.log(payload)
+      axios({
+        method: 'post',
+        url: '/products',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: payload
+      })
+        .then(response => {
+          console.log(response.data)
+          router.push('/')
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   },
   modules: {
