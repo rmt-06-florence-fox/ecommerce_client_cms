@@ -10,6 +10,15 @@ class ProductController {
       next(error)
     }
   }
+
+  static async show (req, res, next) {
+    try {
+      const products = await Product.findAll()
+      res.status(200).json({products})
+    } catch (error) {
+      next(error)
+    }
+  }
 }
 
 module.exports = ProductController

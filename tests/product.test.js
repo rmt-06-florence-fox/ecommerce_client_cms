@@ -330,4 +330,19 @@ describe('Product Routes Test', () => {
     })
 
   })
+
+  describe('GET /Products - show all products', () => {
+    test('200 Success Show Product - should show all products', done => {
+      request(app)
+      .get('/products')
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(200)
+        expect(body).toHaveProperty('products', expect.any(Array))
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+  })
 })

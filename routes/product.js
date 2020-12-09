@@ -3,6 +3,7 @@ const router = express.Router()
 const ProductController = require('../controllers/product')
 const Auth = require('../middlewares/auth_admin')
 
+router.get('/', ProductController.show)
 router.use(Auth.authentication)
 router.post('/', Auth.authorizationProduct, ProductController.create)
 
