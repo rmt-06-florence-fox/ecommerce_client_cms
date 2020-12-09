@@ -1,11 +1,11 @@
 const app = require('../app')
 const request = require('supertest')
-const {sequelize, User, Product} = require('../models')
+const {sequelize, User} = require('../models')
 const {queryInterface} = sequelize
 const {signToken} = require('../helpers/jwt')
 
 describe('Product Routes Test', () => {
-  let adminToken
+  let adminToken, fakeAdminToken
   admin = {
     id: 1,
     username: 'admin',
@@ -14,10 +14,22 @@ describe('Product Routes Test', () => {
     role: 'admin'
   }
 
+  fakeAdmin = {
+    id: 2,
+    username: 'fake_admin',
+    email: 'not_admin@mail.com',
+    password: 'fake_1234',
+    role: 'fake_admin'
+  }
+
   beforeAll(done => {
     User.create(admin)
-    .then((user) => {
+    .then(_ => {
       adminToken = signToken(admin)
+      return User.create(fakeAdmin)
+    })
+    .then(_ => {
+      fakeAdminToken = signToken(fakeAdmin)
       done()
     })
     .catch(err => {
@@ -46,6 +58,69 @@ describe('Product Routes Test', () => {
       price: 2e5,
       image_url: 'https://image.freepik.com/free-psd/square-pillow-mockup_177774-16.jpg',
       stock: 5
+    }
+
+    const newProduct3 = {
+      name: 'Pillow',
+      price: '',
+      image_url: 'https://image.freepik.com/free-psd/square-pillow-mockup_177774-16.jpg',
+      stock: 5
+    }
+
+    const newProduct4 = {
+      name: 'Pillow',
+      price: 2e5,
+      image_url: '',
+      stock: 5
+    }
+
+    const newProduct5 = {
+      name: 'Pillow',
+      price: 2e5,
+      image_url: 'https://image.freepik.com/free-psd/square-pillow-mockup_177774-16.jpg',
+      stock: ''
+    }
+
+    const newProduct6 = {
+      name: 'Pillow',
+      price: -5,
+      image_url: 'https://image.freepik.com/free-psd/square-pillow-mockup_177774-16.jpg',
+      stock: 5
+    }
+
+    const newProduct7 = {
+      name: 'Pillow',
+      price: 2e5,
+      image_url: 'https://image.freepik.com/free-psd/square-pillow-mockup_177774-16.jpg',
+      stock: -10
+    }
+
+    const newProduct8 = {
+      name: 'Pillow',
+      price: 2e5,
+      image_url: 'fakeurl',
+      stock: 10
+    }
+
+    const newProduct9 = {
+      name: 'Pillow',
+      price: 'one thousand',
+      image_url: 'fakeurl.jpg',
+      stock: 10
+    }
+
+    const newProduct10 = {
+      name: 'Pillow',
+      price: 20000,
+      image_url: 'fakeurl.jpg',
+      stock: 'ten'
+    }
+
+    const newProduct11 = {
+      name: '_Pillow',
+      price: 20000,
+      image_url: 'https://image.freepik.com/free-psd/square-pillow-mockup_177774-16.jpg',
+      stock: 10
     }
 
     afterEach(done => {
@@ -89,5 +164,170 @@ describe('Product Routes Test', () => {
         done(err)
       });
     })
+
+    test('400 Failed post Product - should return error if price is null', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct3)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'Validation notEmpty on price failed')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed post Product - should return error if image_url is null', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct4)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'Validation notEmpty on image_url failed')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed post Product - should return error if stock is null', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct5)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'Validation notEmpty on stock failed')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed post Product - should return error if price minus', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct6)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'Validation min on price failed')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed post Product - should return error if stock minus', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct7)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'Validation min on stock failed')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed post Product - should return error if format url invalid', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct8)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'Validation isUrl on image_url failed')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed post Product - should return error if type data price not numeric', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct9)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'Validation isNumeric on price failed')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed post Product - should return error if type data stock not numeric', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct10)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'Validation isNumeric on stock failed')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('407 Failed post Product - should return error if access_token not provided', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct10)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(407)
+        expect(body).toHaveProperty('message', 'Authentication required')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed post Product - should return error if not authorized', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct)
+      .set('access_token', fakeAdminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(401)
+        expect(body).toHaveProperty('message', 'You are not authorized')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
+    test('400 Failed post Product - should return error if name product only allow characters', done => {
+      request(app)
+      .post('/products')
+      .send(newProduct11)
+      .set('access_token', adminToken)
+      .then((result) => {
+        const {body, status} = result
+        expect(status).toBe(400)
+        expect(body).toHaveProperty('message', 'Validation isAlphanumeric on name failed')
+        done()
+      }).catch((err) => {
+        done(err)
+      });
+    })
+
   })
 })

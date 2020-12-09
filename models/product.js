@@ -11,6 +11,7 @@ module.exports = (sequelize, DataTypes) => {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         notNull: {
           args: true,
@@ -19,6 +20,10 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           message: "Name cannot be empty"
+        },
+        isAlphanumeric: {
+          args: true,
+          message: 'Only allow alphanumeric characters'
         }
       }
     },
@@ -31,6 +36,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         notEmpty: {
           message: "Image cannot be empty"
+        },
+        isUrl: {
+          message: 'Url format required'
         }
       }
     },
