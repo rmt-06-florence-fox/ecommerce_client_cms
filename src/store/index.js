@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products: []
+    products: [],
+    editProduct: {}
   },
   mutations: {
     setProducts (state, payload) {
       state.products = payload
+    },
+    setEditProduct (state, payload) {
+      state.editProduct = payload
     }
   },
   actions: {
@@ -48,7 +52,7 @@ export default new Vuex.Store({
         })
     },
     create (context, payload) {
-      console.log(payload)
+      // console.log(payload)
       axios({
         method: 'post',
         url: '/products',
@@ -59,6 +63,42 @@ export default new Vuex.Store({
       })
         .then(response => {
           console.log(response.data)
+          router.push('/')
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    findByPk (context, payload) {
+      const id = payload
+      console.log(id, '<<< edit')
+      axios({
+        method: 'get',
+        url: `/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          console.log(data)
+          context.commit('setEditProduct', data.product)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    update (context, payload) {
+      console.log(payload)
+      axios({
+        method: 'put',
+        url: `/products/${payload.id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: payload
+      })
+        .then(response => {
+          console.log(response)
           router.push('/')
         })
         .catch(error => {

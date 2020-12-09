@@ -5,7 +5,7 @@
       <td>{{ product.stock }}</td>
       <td><img class="product-image" :src="product.image_url" alt="gambar" srcset=""></td>
       <td>
-        <button class="btn btn-warning m-1">edit</button>
+        <button @click.prevent="editPage(product.id)" class="btn btn-warning m-1">edit</button>
         <button class="btn btn-danger">delete</button>
       </td>
     </tr>
@@ -14,7 +14,19 @@
 <script>
 export default {
   name: 'Product',
-  props: ['product']
+  props: ['product'],
+  methods: {
+    editPage (id) {
+      // this.$store.dispatch('editPagePopulate', this.product)
+      const url = `/edit/${id}`
+      this.$router.push(url)
+    }
+  },
+  data () {
+    return {
+
+    }
+  }
 }
 </script>
 
