@@ -27,62 +27,12 @@
             </div>
           </div>
         </div>
-        <div class="mt-5 row row-cols-2 row-cols-md-4 g-4">
-          <div class="col">
-            <div class="card h-100">
-              <img src="https://i.pinimg.com/564x/e4/08/b1/e408b1b3dd4cba7f31e07ea3e6fd035b.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">Product title</h5>
-              </div>
-              <div class="card-footer price">
-                <p class="card-text fas fa-coins"> <small>Rp</small>1.000.000,00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="https://i.pinimg.com/564x/e4/08/b1/e408b1b3dd4cba7f31e07ea3e6fd035b.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">Product title</h5>
-              </div>
-              <div class="card-footer price">
-                <p class="card-text fas fa-coins"> <small>Rp</small>1.000.000,00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="https://i.pinimg.com/564x/e4/08/b1/e408b1b3dd4cba7f31e07ea3e6fd035b.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">Product title</h5>
-              </div>
-              <div class="card-footer price">
-                <p class="card-text fas fa-coins"> <small>Rp</small>1.000.000,00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="https://i.pinimg.com/564x/e4/08/b1/e408b1b3dd4cba7f31e07ea3e6fd035b.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">Product title</h5>
-              </div>
-              <div class="card-footer price">
-                <p class="card-text fas fa-coins"> <small>Rp</small>1.000.000,00</p>
-              </div>
-            </div>
-          </div>
-          <div class="col">
-            <div class="card h-100">
-              <img src="https://i.pinimg.com/564x/e4/08/b1/e408b1b3dd4cba7f31e07ea3e6fd035b.jpg" class="card-img-top" alt="...">
-              <div class="card-body">
-                <h5 class="card-title text-center">Product title</h5>
-              </div>
-              <div class="card-footer price">
-                <p class="card-text fas fa-coins"> <small>Rp</small>1.000.000,00</p>
-              </div>
-            </div>
-          </div>
+        <div class="row">
+          <ProductCard class="mt-5 col-md-3 col-sm-6 g-4"
+            v-for="product in products"
+            :key="product.id"
+            :product="product">
+          </ProductCard>
         </div>
       </div>
     </section>
@@ -90,8 +40,30 @@
 </template>
 
 <script>
+import ProductCard from '../components/ProductCard.vue'
 export default {
-  name: 'HomePage'
+  name: 'HomePage',
+  components: {
+    ProductCard
+  },
+  data () {
+    return {
+
+    }
+  },
+  methods: {
+    fetchProducts () {
+      this.$store.dispatch('fetch')
+    }
+  },
+  computed: {
+    products () {
+      return this.$store.state.products
+    }
+  },
+  created () {
+    this.fetchProducts()
+  }
 }
 </script>
 
@@ -102,11 +74,5 @@ export default {
   .img-carousel{
     width: 100%;
     height: 600px;
-  }
-  .price{
-    color: #16a592;
-    font-size: small;
-    display: flex;
-    /* justify-content: flex-end; */
   }
 </style>

@@ -29,6 +29,19 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    fetch (context) {
+      axios({
+        method: 'GET',
+        url: '/products'
+      })
+        .then(({ data }) => {
+          console.log(data)
+          context.commit('setProducts', data.result)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {
