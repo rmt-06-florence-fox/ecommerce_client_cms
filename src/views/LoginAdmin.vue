@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex justify-content-center w-100 h-100" id="main">
+  <div class="d-flex justify-content-center w-100 h-100" id="login-page-container">
     <div class="d-flex flex-column justify-content-center">
       <h3 class="mb-3 text-white">This is login page for admin</h3>
       <div id="form" class="p-sm-3 text-white font-weight-bolder">
@@ -53,7 +53,7 @@ button {
   font-weight: bold;
 }
 
-#main {
+#login-page-container {
   background :url(https://cdn.wallpapersafari.com/88/32/DxfPUY.jpg) ;
   
 }

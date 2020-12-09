@@ -8,7 +8,7 @@
 
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
-          <b-nav-item > <button class="btn btn-success">Add Product</button> </b-nav-item>
+          <b-nav-item > <button class="btn btn-success" v-b-modal.add >Add Product</button> </b-nav-item>
         </b-navbar-nav>
 
         <b-navbar-nav class="ml-auto">
@@ -24,12 +24,21 @@
         </b-navbar-nav>
     
       </b-collapse>
+
+      <b-modal id="add" hide-footer title="Add Product Form">
+        <AddForm/>
+      </b-modal>  
+    
     </b-navbar>
 </template>
 
 <script>
+import AddForm from './AddForm.vue'
 export default {
     name: 'NavBar',
+    components: {
+      AddForm
+    }
 }
 </script>
 

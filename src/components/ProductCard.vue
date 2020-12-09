@@ -1,6 +1,5 @@
 <template>
- <b-container>
-    <b-card
+  <b-card
     title="Card Title"
     img-src="https://picsum.photos/600/300/?image=25"
     img-alt="Image" img-top tag="article" style="max-width: 20rem;"
@@ -12,14 +11,15 @@
     </b-card-text>
 
    <b-container fluid="sm" class="card">
-      <b-button href="#" class="m-1" variant="success"> Edit </b-button>
-      <b-button href="#" class="m-1" variant="dark"> Delete </b-button>
+      <b-button href="#" class="m-1" variant="success" v-b-modal.edit> Edit </b-button>
+      <b-button href="#" class="m-1" variant="dark" > Delete </b-button>
+      <b-modal id="edit" hide-footer>
+        <EditForm/>
+      </b-modal>
    </b-container>
    
   </b-card>
-  <EditForm/>
 
- </b-container>
 </template>
 
 <script>
