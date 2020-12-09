@@ -1,22 +1,33 @@
 <template>
   <div class="container-fluid p-0">
-      <nav class="col-2 d-flex flex-column align-items-start p-0">
-          <router-link to="/login" class="btn">Login</router-link>
-          <h4>Q</h4>
-          <h4>B</h4>
-          <h4>E</h4>
-          <h4>F</h4>
-          <h4>P</h4>
-      </nav>
+      <Nav/>
+      <div class="container-fluid bg-secondary p-0 d-flex justify-content-center" style="min-height:94vh;">
+        <router-view/>
+      </div>
+      <div class="footer">
+        <small>powered with vue</small>
+      </div>
   </div>
 </template>
 
 <script>
+import Nav from '../components/Nav'
 export default {
-
+  components: {
+    Nav
+  }
 }
 </script>
 
-<style>
-
+<style scoped>
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+  margin-bottom: 0;
+}
 </style>

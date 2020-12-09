@@ -26,7 +26,6 @@
 </template>
 
 <script>
-import axios from '../config/axios'
 
 export default {
   name: 'Home',
@@ -38,21 +37,11 @@ export default {
   },
   methods: {
     login () {
-      axios({
-        url: 'login',
-        method: 'POST',
-        data: {
-          email: this.email,
-          password: this.password
-        }
-      })
-        .then(({ data }) => {
-          localStorage.setItem('access_token', data.access_token)
-          this.$router('/home')
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      const data = {
+        email: this.email,
+        password: this.password
+      }
+      this.$store.dispatch('login', data)
     }
   }
 }
