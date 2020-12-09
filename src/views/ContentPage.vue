@@ -1,15 +1,21 @@
 <template>
   <div>
-      <nav-bar></nav-bar>
+      <NavBar/>
+      <div>
+         <ProductList/>
+      </div>
   </div>
 </template>
 
 <script>
 import NavBar from '../components/NavBar.vue'
+import ProductList from '../components/ProductList.vue'
+
 export default {
     name: 'ContentPage',
     components: {
-        NavBar
+        NavBar,
+        ProductList
     }
 }
 </script>
