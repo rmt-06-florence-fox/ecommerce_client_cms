@@ -1,7 +1,7 @@
 <template>
     <div class="navbar-container container-fluid">
         <div class="left-item">
-            <router-link to="/"><h3>Home</h3></router-link>
+            <router-link to="/home"><h3>Home</h3></router-link>
         </div>
         <div class="right-item">
             <router-link to='/add'><button class="btn btn-info">Add New Item</button></router-link>
