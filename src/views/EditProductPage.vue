@@ -45,8 +45,22 @@ export default {
   },
   methods: {
     getProduct () {
-      this.$store.dispatch('getProduct')
+      const id = this.$route.params.idProduct
+      this.$store.dispatch('getProduct', id)
+    },
+    editPost () {
+      const payload = {
+        id: this.product.id,
+        name: this.product.name,
+        image_url: this.product.image_url,
+        price: this.product.price,
+        stock: this.product.stock
+      }
+      this.$store.dispatch('editPost', payload)
     }
+  },
+  created () {
+    this.getProduct()
   }
 }
 </script>

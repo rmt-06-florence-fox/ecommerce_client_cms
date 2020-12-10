@@ -20,17 +20,17 @@ const routes = [
     component: MainPage,
     children: [
       {
-        path: '/',
+        path: '',
         name: 'ProductsCard',
         component: ProductsCard
       },
       {
-        path: '/add',
+        path: 'add',
         name: 'AddProductPage',
         component: AddProductPage
       },
       {
-        path: '/edit/:idProduct',
+        path: 'edit/:idProduct',
         name: 'EditProductPage',
         component: EditProductPage
       }
@@ -44,4 +44,14 @@ const router = new VueRouter({
   routes
 })
 
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.access_token
+  if (to.name !== 'LoginPage' && !isAuthenticated) {
+    next({ name: 'LoginPage' })
+  } else if (to.name === 'LoginPage' && isAuthenticated) {
+    next({ name: 'MainPage' })
+  } else {
+    next()
+  }
+})
 export default router

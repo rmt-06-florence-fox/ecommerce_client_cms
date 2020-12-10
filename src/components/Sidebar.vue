@@ -16,9 +16,6 @@
             <router-link to="/add">Add Product</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/edit">Edit Product</router-link>
-          </li>
-          <li class="nav-item">
             <button class="btn"
               @click="logout"
               type="button">Logout</button>
