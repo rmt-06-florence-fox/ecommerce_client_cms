@@ -1,6 +1,6 @@
 <template>
   <div
-          class="mt-2 flex px-4 py-4 justify-between bg-white shadow-xl rounded-lg cursor-pointer hover:bg-green-500"
+          class="mt-2 flex px-4 py-4 justify-between bg-white shadow-xl rounded-lg cursor-pointer transform scale-100 hover:scale-105 hover:bg-green-500"
         @click="goEdit">
           <!-- Card -->
 
@@ -50,9 +50,13 @@
             </div>
 
             <div
-              class="mr-8 flex flex-row capitalize text-gray-600 text-sm space-x-1 items-center"
+              class="mr-8 flex flex-row capitalize text-gray-600 text-sm space-x-1 items-center w-full"
             >
-              <button class="bg-red-500 py-1 px-3 text-white"
+              <button class="bg-yellow-500 py-1 px-3 text-white rounded-sm transform scale-100 hover:scale-110"
+                      @click="deleteThis">
+                Re-stock
+              </button>
+              <button class="bg-red-500 py-1 px-3 text-white rounded-sm transform scale-100 hover:scale-110"
                       @click="deleteThis">
                 Delete
               </button>

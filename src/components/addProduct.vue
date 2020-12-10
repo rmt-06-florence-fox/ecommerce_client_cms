@@ -1,7 +1,7 @@
 <template>
   <div class=" w-full flex overflow-hidden">
     <main
-      class="flex-1 flex flex-col bg-gray-100 transition duration-500 ease-in-out overflow-y-auto
+      class="flex-1 flex flex-col bg-gray-100 transition duration-1000 ease-in-out overflow-y-auto
               justify-center place-items-center w-full"
     >
       <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
@@ -40,7 +40,7 @@
             </div>
             <div class="w-full flex flex-row gap-x-2">
             <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-green-600 shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
-              Update Product
+              Add Product
             </button>
             <button type="button"
                     @click="getBack"

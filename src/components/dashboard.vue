@@ -79,15 +79,15 @@
             </span>
             <span>
               <span class="text-green-500 ">
-                22
+                {{countProducts}}
               </span>
-              projects;
+              products;
             </span>
             <span>
               <span class="text-green-500 ">
-                33
+                {{countCategories}}
               </span>
-              roles
+              categories
             </span>
           </div>
           <div>
@@ -185,7 +185,7 @@
 
 <script>
 import productCard from '../components/productCard'
-import { mapState } from 'vuex'
+import { mapState, mapGetters } from 'vuex'
 
 export default {
   name: 'dashboard',
@@ -200,7 +200,11 @@ export default {
   computed: {
     ...mapState({
       products: 'products'
-    })
+    }),
+    ...mapGetters([
+      'countProducts',
+      'countCategories'
+    ])
   },
   created () {
     this.loadProducts()

@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import dashboard from '../components/dashboard'
 import addProduct from '../components/addProduct'
 import editProduct from '../components/editProduct'
+import categories from '../components/categories'
 
 Vue.use(VueRouter)
 
@@ -27,6 +28,11 @@ const routes = [
         path: 'edit-product/:id',
         name: 'edit-product',
         component: editProduct
+      },
+      {
+        path: 'categories',
+        name: 'categories',
+        component: categories
       }
     ]
   },

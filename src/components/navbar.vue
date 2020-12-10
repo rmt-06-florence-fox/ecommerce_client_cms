@@ -6,8 +6,8 @@
 
       <div class="flex flex-row border-b items-center justify-between pb-2">
         <!-- Hearder -->
-        <span class="text-lg font-semibold capitalize  flex flex-row"
-              v-html="siteTitle">
+        <span class="text-xl font-bold capitalize  flex flex-row bg-clip-text text-transparent bg-gradient-to-b from-green-800 to-green-600">
+          {{siteTitle}}
         </span>
       </div>
 
@@ -23,7 +23,7 @@
         </span>
       </div> -->
       <div class="h-full flex flex-col justify-center">
-      <router-link to="/add-product">
+      <router-link to="/add-product" router-link-active="translate-x-2">
         <button
           class="mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow bg-green-600 hover:bg-gray-900"
         >
@@ -38,7 +38,7 @@
       <ul class="flex flex-col mt-2 text-gray-600 justify-items-start space-y-3">
         <!-- Links -->
         <li class="mt-8">
-          <router-link to="/dashboard" class="flex ">
+          <router-link to="/dashboard" class="flex" router-link-active="translate-x-2">
             <svg
               class="fill-current h-5 w-5 "
               viewBox="0 0 24 24"
@@ -50,7 +50,7 @@
               ></path>
             </svg>
             <span
-              class="ml-2 capitalize font-medium text-black  site-title"
+              class="ml-2 capitalize font-medium text-black "
             >
               dashboard
             </span>
@@ -58,7 +58,7 @@
         </li>
 
         <li class="mt-8">
-          <a href="#home" class="flex">
+          <router-link to="#" class="flex ">
             <svg
               class="fill-current h-5 w-5 "
               viewBox="0 0 24 24"
@@ -72,15 +72,15 @@
             <span
               class="ml-2 capitalize font-medium text-black "
             >
-              categories
+              banner
             </span>
-          </a>
+          </router-link>
         </li>
 
         <li
-          class="mt-8 shadow py-2 bg-white rounded-lg-ml-4"
+          class="mt-8"
         >
-          <a href="#home" class="flex pl-4">
+        <router-link to="#" class="flex ">
             <svg class="fill-current h-5 w-5" viewBox="0 0 24 24">
               <path
                 d="M12 4a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4 4 4 0
@@ -88,12 +88,12 @@
                 8-4z"
               ></path>
             </svg>
-            <span class="ml-2 capitalize font-medium">users</span>
-          </a>
+            <span class="ml-2 capitalize font-medium text-black">users</span>
+        </router-link>
         </li>
 
         <li class="mt-8">
-          <a href="#home" class="flex">
+          <router-link to="/categories" class="flex ">
             <svg
               class="fill-current h-5 w-5 "
               viewBox="0 0 24 24"
@@ -107,25 +107,25 @@
             <span
               class="ml-2 capitalize font-medium text-black "
             >
-              banner
+              categories
             </span>
-          </a>
+          </router-link>
         </li>
       </ul>
       </div>
 
-      <div class="mt-auto flex items-center text-red-700 transform hover:translate-x-4 transition duration-300 ease-in-out"
+      <div class="mt-auto  py-2 px-3 rounded-md flex items-center text-red-700 transform hover:translate-x-4 transition duration-300 ease-in-out hover:bg-red-700 hover:text-white"
             @click="logout">
         <!-- important action -->
-        <a href="#home" class="flex items-center">
-          <svg class="fill-current h-5 w-5 text-red-700" viewBox="0 0 24 24">
+        <a href="#home" class="flex items-center w-full">
+          <svg class="fill-current h-5 w-5" viewBox="0 0 24 24">
             <path
               d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 012
               2v2h-2V4H5v16h9v-2h2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2
               0 012-2h9z"
             ></path>
           </svg>
-          <span class="ml-2 capitalize font-medium text-red-700">log out</span>
+          <span class="ml-2 capitalize font-medium">log out</span>
         </a>
       </div>
     </nav>
@@ -150,18 +150,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
-  margin: 40px 0 0;
+li:hover {
+  /* background-color: #1F2937; */
+  transform: translate(0.5rem);
+  transition-duration: 0.4s;
 }
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
+
 </style>

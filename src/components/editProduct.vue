@@ -1,7 +1,7 @@
 <template>
   <div class=" w-full flex overflow-hidden">
     <main
-      class="flex-1 flex flex-col bg-gray-100 transition duration-500 ease-in-out overflow-y-auto
+      class="flex-1 flex flex-col bg-gray-100 transition duration-700 ease-in-out overflow-y-auto
               justify-center place-items-center w-full"
     >
       <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">

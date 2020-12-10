@@ -29,7 +29,8 @@ export default new Vuex.Store({
         }
       })
         .then(res => {
-          context.commit('setProducts', res.data.products)
+          const sorted = res.data.products.sort((a, b) => a.createdAt - b.createdAt)
+          context.commit('setProducts', sorted)
           return axios({
             method: 'get',
             url: '/categories',
@@ -138,6 +139,62 @@ export default new Vuex.Store({
         .then(res => {
           router.push('/dashboard')
         })
+    },
+    addCat (context, data) {
+      axios({
+        method: 'post',
+        url: '/categories',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          name: data
+        }
+      })
+        .then(res => {
+          context.dispatch('loadCategories')
+        })
+    },
+    postUpdatCat (context, data) {
+      axios({
+        method: 'put',
+        url: `/categories/${data.id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          name: data.name
+        }
+      })
+        .then(res => {
+          // context.commit('setCategories', [])
+          context.dispatch('loadCategories')
+        })
+    },
+    loadCategories (context) {
+      axios({
+        method: 'get',
+        url: '/categories',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          context.commit('setCategories', res.data)
+        })
+    },
+    deleteCat (context, id) {
+      axios({
+        method: 'delete',
+        url: `/categories/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          // context.commit('setCategories', [])
+          context.dispatch('loadCategories')
+        })
     }
   },
   modules: {
@@ -145,6 +202,12 @@ export default new Vuex.Store({
   getters: {
     getOneToEdit: state => id => {
       return state.products.find(el => el.id === id)
+    },
+    countProducts: state => {
+      return state.products.length
+    },
+    countCategories: state => {
+      return state.categories.length
     }
   }
 })
