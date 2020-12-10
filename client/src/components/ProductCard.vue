@@ -7,7 +7,7 @@
                 <li>Harga : {{product.price}}</li>
                 <li>Stock : {{product.stock}}</li>
             </ul>
-            <button class="btn btn-primary">edit</button>
+            <button @click="toEditForm" class="btn btn-primary">edit</button>
             <button @click="deleteProduct(product.id)" class="btn btn-danger">delete</button>
         </div>
     </div>
@@ -20,6 +20,16 @@ export default {
   methods: {
     deleteProduct (id) {
       this.$store.dispatch('deleteProduct', id)
+    },
+    toEditForm () {
+      const payload = {
+        id: this.product.id,
+        name: this.product.name,
+        image_url: this.product.image_url,
+        price: this.product.price,
+        stock: this.product.stock
+      }
+      this.$store.dispatch('editForm', payload)
     }
   }
 }

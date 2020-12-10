@@ -7,11 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    productData: []
+    productData: [],
+    editedProductData: {}
   },
   mutations: {
     getProductData (state, payload) {
       state.productData = payload
+    },
+    dataSendToEditForm (state, payload) {
+      state.editedProductData = payload
     }
   },
   actions: {
@@ -52,6 +56,7 @@ export default new Vuex.Store({
       })
         .then((res) => {
           console.log(res)
+          context.dispatch('fetchData')
         })
         .catch((err) => {
           console.log(err)
@@ -74,6 +79,32 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
         })
+    },
+    editForm (context, payload) {
+      context.commit('dataSendToEditForm', payload)
+      router.push('/edit')
+    },
+    editProduct (context, payload) {
+      const id = payload.id
+      const accessToken = localStorage.getItem('access_token')
+      axios({
+        method: 'put',
+        url: `/product/${id}`,
+        headers: {
+          access_token: accessToken
+        },
+        data: {
+          name: payload.name,
+          image_url: payload.image_url,
+          price: payload.price,
+          stock: payload.stock
+        }
+      }).then((res) => {
+        console.log(res)
+        router.push('/')
+      }).catch((err) => {
+        console.log(err)
+      })
     }
   },
   modules: {
