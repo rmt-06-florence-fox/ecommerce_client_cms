@@ -126,6 +126,18 @@ export default new Vuex.Store({
         .then(res => {
           router.push('/dashboard')
         })
+    },
+    deleteProduct (context, id) {
+      axios({
+        method: 'delete',
+        url: `/product/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          router.push('/dashboard')
+        })
     }
   },
   modules: {

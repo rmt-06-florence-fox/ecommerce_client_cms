@@ -38,9 +38,15 @@
               </label>
               </div>
             </div>
+            <div class="w-full flex flex-row gap-x-2">
             <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-green-600 shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
-              Add Product
+              Update Product
             </button>
+            <button type="button"
+                    @click="getBack"
+                    class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red-600 shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+                Cancel</button>
+            </div>
           </form>
         </div>
     </main>
@@ -71,6 +77,9 @@ export default {
         catSelected: this.catSelected
       }
       this.$store.dispatch('postProduct', data)
+    },
+    getBack () {
+      this.$router.back()
     }
   },
   computed: {

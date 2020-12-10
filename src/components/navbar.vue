@@ -1,6 +1,6 @@
 <template>
   <nav
-      class="flex flex-col bg-gray-200 w-64 px-12 pt-4 pb-6"
+      class="flex flex-col bg-gray-200 w-64 px-12 pt-4 pb-6 place-content-between"
     >
       <!-- SideNavBar -->
 
@@ -11,13 +11,7 @@
         </span>
       </div>
 
-      <div class="mt-8">
-        <!-- User info -->
-        <img
-          class="h-12 w-12 rounded-full object-cover"
-          src="https://appzzang.me/data/editor/1608/f9c387cb6bd7a0b004f975cd92cbe2d9_1471626325_6802.png"
-          alt="enoshima profile"
-        />
+      <!-- <div class="mt-8">
         <h2 class="mt-4 text-xl  font-extrabold capitalize">
           Hello Enoshima
         </h2>
@@ -27,8 +21,8 @@
           </span>
           id789038
         </span>
-      </div>
-
+      </div> -->
+      <div class="h-full flex flex-col items-center justify-center">
       <router-link to="/add-product">
         <button
           class="mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow bg-green-600 hover:bg-gray-900"
@@ -118,6 +112,7 @@
           </a>
         </li>
       </ul>
+      </div>
 
       <div class="mt-auto flex items-center text-red-700">
         <!-- important action -->

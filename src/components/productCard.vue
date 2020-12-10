@@ -52,7 +52,8 @@
             <div
               class="mr-8 flex flex-row capitalize text-gray-600 text-sm space-x-1 items-center"
             >
-              <button class="bg-red-500 py-1 px-3 text-white">
+              <button class="bg-red-500 py-1 px-3 text-white"
+                      @click="deleteThis">
                 Delete
               </button>
             </div>
@@ -70,6 +71,9 @@ export default {
         name: 'edit-product',
         params: { id: this.product.id }
       })
+    },
+    deleteThis () {
+      this.$store.dispatch('deleteProduct', this.product.id)
     }
   }
 }

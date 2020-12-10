@@ -9,9 +9,7 @@
           transition duration-500
           ease-in-out"
         >
-          <div class="flex">
-            <!-- Top NavBar -->
-
+          <!-- <div class="flex">
             <a
               href="users-dashboard/"
               class="py-2 block text-green-500 border-green-500
@@ -38,9 +36,9 @@
             >
               access rights
             </button>
-          </div>
+          </div> -->
 
-          <div class="flex items-center select-none">
+          <!-- <div class="flex items-center select-none">
             <span
               class="hover:text-green-500 dark-hover:text-green-300 cursor-pointer mr-3 transition duration-500 ease-in-out"
             >
@@ -62,9 +60,9 @@
               class="w-12 bg-transparent focus:outline-none"
               placeholder="Search"
             />
-          </div>
+          </div> -->
         </nav>
-        <h2 class="my-4 text-4xl font-semibold ">
+        <h2 class="my-10 text-4xl font-semibold ">
           Product list
         </h2>
         <div
