@@ -1,0 +1,43 @@
+.input-group-prepend {
+  width: 5rem;
+}
+
+.input-group-text {
+  width: 100%;
+  font-size: small;
+}
+
+#app, .main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.btn-login, .btn-logout {
+  width: 4rem;
+}
+
+.login-form, .login-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.navbar {
+  position: fixed;
+  z-index: 1;
+  width: 100%;
+}
+
+.navbar-brand {
+  font-size: small;
+}
+
+.btn {
+  font-size: small;
+}
+
+.btn-add {
+  width: 6.1rem;
+}
