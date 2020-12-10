@@ -58,10 +58,21 @@ export default new Vuex.Store({
         })
     },
     addNewProduct (context, payload) {
-      axios
-        .post('/product')
+      const accessToken = localStorage.getItem('access_token')
+      axios({
+        method: 'post',
+        url: '/product',
+        headers: {
+          access_token: accessToken
+        },
+        data: payload
+      })
         .then(({ data }) => {
-
+          console.log(data)
+          router.push('/')
+        })
+        .catch((err) => {
+          console.log(err)
         })
     }
   },
