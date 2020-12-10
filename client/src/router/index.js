@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import AddProduct from '../views/AddProduct'
 import MainPage from '../views/MainPage'
 import EditProduct from '../views/EditProduct'
+import Error404 from '../views/Error404'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: Login
+  },
+  {
+    path: '*',
+    name: 'Error404',
+    component: Error404
   }
 
 ]
