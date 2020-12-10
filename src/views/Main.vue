@@ -40,7 +40,7 @@
           </h4>
           <div class="action-banner">
             <div class="view-banner">
-              <button class="btn btn-action" >
+              <button class="btn btn-action" @click.prevent="showBanners">
                   <i class='fas fa-eye' style='font-size:24px'></i>
               <span> Banner</span>
               </button>
@@ -75,7 +75,6 @@
             <h1>It's Empty here</h1>
           </div>
           <!--LOOP PRODUK DISINI-->
-          <Product/>
           <Product
             v-show="show==='products'"
             v-for="(product, i) in products"
@@ -84,16 +83,22 @@
             :counter="i"
             :categories="categories"
           />
-          <div class="content-header">
+          <div class="content-header" v-show="show==='banners'" v-if="banners">
             <div class="content-header-text col-1">No.</div>
-            <div class="content-header-text col-5">Image</div>
-            <div class="content-header-text col-3">Title</div>
-            <div class="content-header-text col-1">Status</div>
+            <div class="content-header-text col-4">Image</div>
+            <div class="content-header-text col-2">Title</div>
+            <div class="content-header-text col-3">Status</div>
             <div class="content-header-text col-2">Action</div>
           </div>
           <!--LOOP BANNER DISINI-->
           <div>
-            BANNER
+            <Banner
+              v-show="show==='banners'"
+              v-for="(banner, x) in banners"
+              :key="x"
+              :banner="banner"
+              :counter="x"
+          />
           </div>
         </div>
       </div>
@@ -104,6 +109,7 @@
 <script>
 import Product from '../components/Product.vue'
 import Category from '../components/Category.vue'
+import Banner from '../components/Banner.vue'
 export default {
   name: 'Main',
   data () {
@@ -124,6 +130,9 @@ export default {
     showProducts () {
       this.show = 'products'
     },
+    showBanners () {
+      this.show = 'banners'
+    },
     choseCategory (payload) {
       this.chosenCategory = payload
     },
@@ -133,7 +142,7 @@ export default {
     }
   },
   components: {
-    Product, Category
+    Product, Category, Banner
   },
   computed: {
     products () {
@@ -156,11 +165,15 @@ export default {
       } else {
         return ''
       }
+    },
+    banners () {
+      return this.$store.state.banners
     }
   },
   mounted () {
     this.$store.dispatch('getCategories')
     this.$store.dispatch('getProducts')
+    this.$store.dispatch('getBanners')
     if (localStorage.getItem('token')) {
       this.$store.commit('isLogin', true)
     } else {

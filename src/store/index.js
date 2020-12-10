@@ -8,7 +8,8 @@ export default new Vuex.Store({
   state: {
     loggedIn: false,
     products: [],
-    categories: ''
+    categories: '',
+    banners: []
   },
   mutations: {
     isLogin (state, payload) {
@@ -19,6 +20,9 @@ export default new Vuex.Store({
     },
     insertCategories (state, payloads) {
       state.categories = payloads
+    },
+    insertBanners (state, payloads) {
+      state.banners = payloads
     }
   },
   actions: {
@@ -56,6 +60,18 @@ export default new Vuex.Store({
       })
         .then(result => {
           context.commit('insertCategories', result.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    getBanners (context) {
+      axios({
+        method: 'GET',
+        url: '/banners'
+      })
+        .then(result => {
+          context.commit('insertBanners', result.data)
         })
         .catch(err => {
           console.log(err)
