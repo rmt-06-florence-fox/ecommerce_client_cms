@@ -35,7 +35,7 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
-          router.push('/')
+          router.push('/home')
         })
         .catch((err) => {
           console.log(err.msg, 'ini eror')
@@ -74,7 +74,7 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           console.log(data)
-          router.push('/')
+          router.push('home')
         })
         .catch((err) => {
           console.log(err)
@@ -101,7 +101,7 @@ export default new Vuex.Store({
         }
       }).then((res) => {
         console.log(res)
-        router.push('/')
+        router.push('home')
       }).catch((err) => {
         console.log(err)
       })

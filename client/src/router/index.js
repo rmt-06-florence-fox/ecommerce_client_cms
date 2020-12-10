@@ -20,7 +20,7 @@ const routes = [
         component: AddProduct
       },
       {
-        path: '',
+        path: 'home',
         name: 'Home',
         component: Home
       },

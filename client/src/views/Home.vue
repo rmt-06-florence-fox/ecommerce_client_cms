@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <router-view/>
     <div class="container-product row">
       <ProductCard
         v-for="(product,index) in productData.data"
