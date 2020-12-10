@@ -1,16 +1,13 @@
 <template>
-  <div class="about">
-    <div class="playlist">
-      <h1>Products</h1>
-      <div class="container">
-        <div class="row">
-          <ProductCard
-          v-for="product in products"
-          :key="product.id"
-          :product="product">
-          </ProductCard>
-        </div>
-      </div>
+  <div class="container mt-3">
+    <button v-if="loginStatus" type="button" class="btn btn-info mb-3" data-toggle="modal" data-target="#myModal">Add Item</button>
+    <AddForm></AddForm>
+    <div class="row">
+      <ProductCard
+      v-for="product in products"
+      :key="product.id"
+      :product="product">
+      </ProductCard>
     </div>
   </div>
 </template>
@@ -18,10 +15,12 @@
 <script>
 // @ is an alias to /src
 import ProductCard from '../components/ProductCard.vue'
+import AddForm from '../components/AddForm.vue'
 export default {
   name: 'Product',
   components: {
-    ProductCard
+    ProductCard,
+    AddForm
   },
   data () {
     return {
@@ -62,6 +61,11 @@ export default {
           price: 50000
         }
       ]
+    }
+  },
+  computed: {
+    loginStatus () {
+      return this.$store.state.loginStatus
     }
   }
 }
