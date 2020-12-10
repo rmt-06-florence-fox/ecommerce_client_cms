@@ -63,6 +63,7 @@ export default {
             text: 'now you can access to this site',
             timer: 5000
           })
+          this.$store.commit('CHANGEISLOGIN', true)
           this.$router.push('/')
         })
         .catch(err => {
@@ -72,6 +73,10 @@ export default {
             text: `${err.response.message}`,
             timer: 5000
           })
+        })
+        .finally(() => {
+          this.email = ''
+          this.password = ''
         })
     }
   }

@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar is-fixed-bottom is-dark" role="navigation" aria-label="main navigation">
+  <nav class="navbar is-fixed-top is-dark" role="navigation" aria-label="main navigation">
       <div class="navbar-brand">
         <div class="navbar-item">
           <h4 class="navbar-item title is-4 has-text-white">Dhil-Commerce CMS</h4>
@@ -14,7 +14,7 @@
 
       <div id="navbarBasicExample" :class= "class2">
         <div class="navbar-start">
-          <router-link class="navbar-item" to="/create">
+          <router-link class="navbar-item" to="/addProduct">
             Add Product
           </router-link>
 
@@ -24,10 +24,10 @@
         </div>
 
         <div class="navbar-end">
-          <h6 class="navbar-item is-italic has-text-centered" v-if="hidden == false">"Welcome admin, you can work from now. Enjoy!"</h6>
+          <h6 class="navbar-item is-italic has-text-centered" v-if="isLogin">"Welcome admin, you can work from now. Enjoy!"</h6>
           <div class="navbar-item">
             <div class="buttons">
-              <button class="navbar-item button is-danger" v-if="hidden == false" @click.prevent="logout">log out</button>
+              <button class="navbar-item button is-danger" v-if="isLogin" @click.prevent="logout">log out</button>
               <router-link class="navbar-item button is-light" to="/adminLogin" v-else>Log in as Admin</router-link>
             </div>
           </div>
@@ -56,13 +56,6 @@ export default {
         this.class2 = 'navbar-menu'
       }
     },
-    change () {
-      if (localStorage.getItem('access_token')) {
-        this.hidden = false
-      } else {
-        this.hidden = true
-      }
-    },
     logout () {
       this.$swal.fire({
         title: 'Are you sure?',
@@ -78,14 +71,16 @@ export default {
             'Thank you admin, have a nice day',
             'success'
           )
+          this.$store.commit('CHANGEISLOGIN', false)
           localStorage.clear()
-          this.change()
         }
       })
     }
   },
-  created () {
-    this.change()
+  computed: {
+    isLogin () {
+      return this.$store.state.isLogin
+    }
   }
 }
 </script>
