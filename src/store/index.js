@@ -86,7 +86,7 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           console.log('data deleted succesfuly')
-          router.push()
+          context.dispatch('fetchProducts')
         })
         .catch(err => console.log(err))
     },
