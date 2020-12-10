@@ -22,7 +22,7 @@
           id789038
         </span>
       </div> -->
-      <div class="h-full flex flex-col items-center justify-center">
+      <div class="h-full flex flex-col justify-center">
       <router-link to="/add-product">
         <button
           class="mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow bg-green-600 hover:bg-gray-900"
@@ -114,17 +114,18 @@
       </ul>
       </div>
 
-      <div class="mt-auto flex items-center text-red-700">
+      <div class="mt-auto flex items-center text-red-700 transform hover:translate-x-4 transition duration-300 ease-in-out"
+            @click="logout">
         <!-- important action -->
         <a href="#home" class="flex items-center">
-          <svg class="fill-current h-5 w-5" viewBox="0 0 24 24">
+          <svg class="fill-current h-5 w-5 text-red-700" viewBox="0 0 24 24">
             <path
               d="M16 17v-3H9v-4h7V7l5 5-5 5M14 2a2 2 0 012
               2v2h-2V4H5v16h9v-2h2v2a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2
               0 012-2h9z"
             ></path>
           </svg>
-          <span class="ml-2 capitalize font-medium">log out</span>
+          <span class="ml-2 capitalize font-medium text-red-700">log out</span>
         </a>
       </div>
     </nav>
@@ -133,6 +134,12 @@
 <script>
 export default {
   name: 'navbar',
+  methods: {
+    logout () {
+      localStorage.clear()
+      this.$router.push('/login')
+    }
+  },
   computed: {
     siteTitle () {
       return this.$store.state.siteTitle
