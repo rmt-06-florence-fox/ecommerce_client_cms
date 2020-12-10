@@ -43,7 +43,7 @@ export default new Vuex.Store({
     },
     logout () {
       localStorage.removeItem('access_token')
-      router.push('/')
+      router.push('/login')
     },
     deleteProduct (context, id) {
       const accessToken = localStorage.getItem('access_token')
