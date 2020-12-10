@@ -3,11 +3,10 @@ const {Product} = require ('../models')
 
 class ProductController {
   static async showAll (req,res,next){
-
     try{
-      const product = await Product.findAll({})
-      console.log(product)
-      res.status(200).json(product)
+      const products = await Product.findAll({})
+      console.log(products)
+      res.status(200).json(products)
     }
     catch(error) {
       console.log(error)
@@ -38,10 +37,20 @@ class ProductController {
             .catch(err => {
                 next(err)
             })
-
     }
+  }
 
-        
+  static async getDataId (req,res,next){
+    const id = +req.params.id
+    try{
+      const product = await Product.findAll({ where: {id:id} })
+      console.log(product)
+      res.status(200).json(product)
+    }
+    catch(error) {
+      console.log(error)
+      next(error)
+    }
   }
 
   static update(req,res,next){
