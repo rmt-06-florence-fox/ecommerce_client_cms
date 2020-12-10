@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="d-flex justify-content-center align-self-center">
+    <div class="d-flex mt-5 justify-content-center align-self-center">
       <h1>About Us</h1>
     </div>
     <div class="container">

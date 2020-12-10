@@ -1,12 +1,12 @@
 <template>
   <div>
     <div class="container-fluid">
-      <h1 class="">Please Register Your New Id</h1>
+      <h1 class="mt-5">Please Register Your New Id</h1>
       <div class="row d-flex">
         <div class="col-lg-6 d-flex justify-content-end">
           <img class="foxImg logo align-self-center" src="https://ecs7.tokopedia.net/img/attachment/2020/4/21/26999847/26999847_15e7941c-346d-4e0b-a912-28a3dc025b5c.png" alt="Hacktiv8 Fox">
         </div>
-        <div class="col-lg-6 mt-4 mb-4 justify-content-start d-flex">
+        <div class="col-lg-6 mb-4 justify-content-start d-flex">
           <div class="col-9">
             <form id="formregister" @submit="register" class="container card-body mt-4 mr-4 mb-4">
               <div class="form-group">
