@@ -34,7 +34,7 @@ const routes = [
     component: Dashboard,
     children: [
       {
-        path: '/product',
+        path: '/products',
         name: 'ProductTable',
         component: ProductTable
       },

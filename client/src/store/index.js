@@ -28,7 +28,7 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           localStorage.setItem('access_token', data.access_token)
-          router.push('/product')
+          router.push('/products')
         })
         .catch(err => {
           console.log(err)
@@ -57,7 +57,7 @@ export default new Vuex.Store({
         }
       })
         .then(data => {
-          router.push('/product')
+          router.push('/products')
         })
         .catch(err => {
           console.log(err)
@@ -90,7 +90,7 @@ export default new Vuex.Store({
         }
       })
         .then(data => {
-          router.push('/product')
+          router.push('/products')
         })
         .catch(err => {
           console.log(err)
