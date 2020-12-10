@@ -16,29 +16,29 @@
             <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
             <b-button variant="outline-success" class="my-2 my-sm-0" type="submit">Search</b-button>
           </b-nav-form>
-          
-          <b-nav-item> 
+
+          <b-nav-item>
             <button class="btn btn-dark">Logout</button>
           </b-nav-item>
 
         </b-navbar-nav>
-    
+
       </b-collapse>
 
       <b-modal id="add" hide-footer title="Add Product Form">
         <AddForm/>
-      </b-modal>  
-    
+      </b-modal>
+
     </b-navbar>
 </template>
 
 <script>
 import AddForm from './AddForm.vue'
 export default {
-    name: 'NavBar',
-    components: {
-      AddForm
-    }
+  name: 'NavBar',
+  components: {
+    AddForm
+  }
 }
 </script>
 

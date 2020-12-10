@@ -1,23 +1,24 @@
 <template>
   <b-card
-    title="Card Title"
-    img-src="https://picsum.photos/600/300/?image=25"
+    title="product.name"
+    img-src="product.imageUrl"
     img-alt="Image" img-top tag="article" style="max-width: 20rem;"
     class="m-2"
     >
 
-    <b-card-text>
-      Some quick example text to build on the card title and make up the bulk of the card's content.
+    <b-card-text class="d-flex">
+     <span>price : {{product.price}}</span>
+     <span>stock : {{product.stock}}</span>
     </b-card-text>
 
    <b-container fluid="sm" class="card">
       <b-button href="#" class="m-1" variant="success" v-b-modal.edit> Edit </b-button>
-      <b-button href="#" class="m-1" variant="dark" > Delete </b-button>
-      <b-modal id="edit" hide-footer>
-        <EditForm/>
+      <b-button href="#" class="m-1" variant="dark" @click="deleteHandler(product.id)" > Delete </b-button>
+      <b-modal id="edit-product.id" hide-footer>
+        <EditForm :product=product />
       </b-modal>
    </b-container>
-   
+
   </b-card>
 
 </template>
@@ -28,7 +29,8 @@ export default {
   name: 'ProductCard',
   components: {
     EditForm
-  }
+  },
+  props: ['product']
 }
 </script>
 

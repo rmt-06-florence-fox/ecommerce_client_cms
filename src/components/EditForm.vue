@@ -9,7 +9,7 @@
       placeholder="product's name goes here"
     ></b-form-input>
     </b-form-group>
-    
+
     <b-form-group label="Image URL" label-for="imageUrl">
     <b-form-input
       name="imageUrl"
@@ -44,12 +44,12 @@
 <script>
 export default {
   name: 'EditForm',
-  data (){
+  data () {
     return {
-      name : '',
-      imageUrl : '',
-      price : 0,
-      stock : 0
+      name: '',
+      imageUrl: '',
+      price: 0,
+      stock: 0
     }
   }
 }

@@ -6,7 +6,7 @@
       <product-card></product-card>
       <product-card></product-card>
       <product-card></product-card>
-      <product-card></product-card>    
+      <product-card></product-card>
   </div>
 </template>
 
@@ -14,10 +14,15 @@
 import ProductCard from './ProductCard.vue'
 
 export default {
-    name : 'ProductList',
-    components : {
-        ProductCard
+  name: 'ProductList',
+  components: {
+    ProductCard
+  },
+  computed: {
+    products () {
+      return this.$store.state.products
     }
+  }
 }
 </script>
 
