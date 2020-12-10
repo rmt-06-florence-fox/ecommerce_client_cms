@@ -66,9 +66,6 @@
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 import { mapState } from 'vuex'
-import axios from 'axios'
-
-const baseUrl = 'http://localhost:3000'
 
 export default {
   name: 'Home',
@@ -113,7 +110,9 @@ export default {
   },
   methods: {
     editItem (id) {
-      console.log(id)
+      const filtered = this.productData.filter((productData) => productData.id === id)[0]
+      this.$store.dispatch('editData', filtered)
+      this.$router.push({ path: '/editproduct/' + id })
     },
     closeDelete () {
       this.dialogDelete = false
@@ -126,20 +125,10 @@ export default {
       this.dialogDelete = true
     },
     deleteItemConfirm () {
-      axios({
-        method: 'DELETE',
-        url: `${baseUrl}/products/${this.editId}`,
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(() => {
-          this.$store.dispatch('getData')
-          this.closeDelete()
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      const id = this.editId
+
+      this.$store.dispatch('deleteProduct', id)
+      this.closeDelete()
     }
   }
 }

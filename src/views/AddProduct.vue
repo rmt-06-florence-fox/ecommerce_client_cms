@@ -80,9 +80,6 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
-import axios from 'axios'
-
-const baseUrl = 'http://localhost:3000'
 
 export default {
   components: {
@@ -106,20 +103,7 @@ export default {
         stock: this.stock
       }
 
-      axios({
-        method: 'POST',
-        url: `${baseUrl}/products`,
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        },
-        data: payload
-      })
-        .then(() => {
-          this.$router.push({ name: 'Home' })
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      this.$store.dispatch('addProduct', payload)
     },
     home () {
       this.$router.push({ name: 'Home' })

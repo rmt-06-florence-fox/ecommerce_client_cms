@@ -30,7 +30,7 @@ const routes = [
     component: AddProduct
   },
   {
-    path: '/editproduct',
+    path: '/editproduct/:id',
     name: 'EditProduct',
     component: EditProduct
   }
@@ -40,6 +40,15 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const isAuthenthicated = localStorage.getItem('access_token')
+  if (to.name !== 'Login' && !isAuthenthicated) {
+    next({ name: 'Login' })
+  } else {
+    next()
+  }
 })
 
 export default router

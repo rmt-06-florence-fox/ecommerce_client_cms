@@ -12,12 +12,13 @@
       <v-card-text>
         <v-btn
           v-for="icon in icons"
-          :key="icon"
+          :key="icon.id"
+          :href="icon.link"
           class="mx-4"
           icon
         >
           <v-icon size="24px">
-            {{ icon }}
+            {{ icon.name }}
           </v-icon>
         </v-btn>
       </v-card-text>
@@ -35,9 +36,21 @@
 export default {
   data: () => ({
     icons: [
-      'mdi-email',
-      'mdi-github',
-      'mdi-linkedin'
+      {
+        id: 1,
+        name: 'mdi-email',
+        link: 'mailto:msidiq.15@gmail.com'
+      },
+      {
+        id: 2,
+        name: 'mdi-github',
+        link: 'https://github.com/sidsoeharto'
+      },
+      {
+        id: 3,
+        name: 'mdi-linkedin',
+        link: 'https://www.linkedin.com/in/mochammad-sidiq-tri-133b25103/'
+      }
     ],
     padless: true,
     variant: 'fixed'

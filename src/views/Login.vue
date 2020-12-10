@@ -1,5 +1,5 @@
 <template>
-  <v-content>
+  <div>
     <v-container fluid fill-height>
       <v-layout align-center justify-center>
         <v-flex xs12 sm8 md4>
@@ -49,16 +49,20 @@
         </v-flex>
       </v-layout>
     </v-container>
-  </v-content>
+    <Footer
+      fixed
+    />
+  </div>
 </template>
 
 <script>
-import axios from 'axios'
+import Footer from '../components/Footer'
 // import { mapState } from 'vuex'
 
-const baseUrl = 'http://localhost:3000'
-
 export default {
+  components: {
+    Footer
+  },
   data () {
     return {
       email: '',
@@ -72,18 +76,7 @@ export default {
         password: this.password
       }
 
-      axios({
-        method: 'POST',
-        url: `${baseUrl}/login`,
-        data: payload
-      })
-        .then(({ data }) => {
-          localStorage.setItem('access_token', data.access_token)
-          this.$router.push({ name: 'Home' })
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      this.$store.dispatch('login', payload)
     }
   }
 }
