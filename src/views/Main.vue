@@ -1,18 +1,20 @@
 <template>
   <div>
     <Navbar></Navbar>
-    <Sidebar></Sidebar>
-    <!-- <Home></Home>
-    <Product></Product> -->
-    <router-view />
+    <div class="row">
+      <div class="col-2">
+        <Sidebar></Sidebar>
+      </div>
+      <div class="col-10">
+        <router-view />
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar'
 import Sidebar from '../components/Sidebar'
-// import Home from './Home'
-// import Product from './Product'
 
 export default {
   components: {

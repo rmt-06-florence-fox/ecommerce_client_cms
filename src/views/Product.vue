@@ -1,19 +1,19 @@
 <template>
 <div>
   <ProducList></ProducList>
-  <AddProduct></AddProduct>
+  <!-- <AddProduct></AddProduct> -->
 </div>
 </template>
 
 <script>
 import ProducList from '../components/ProductList.vue'
-import AddProduct from '../components/AddProduct.vue'
+// import AddProduct from '../components/AddProduct.vue'
 
 export default {
   name: 'Product',
   components: {
-    ProducList,
-    AddProduct
+    ProducList
+    // AddProduct
   }
 }
 </script>

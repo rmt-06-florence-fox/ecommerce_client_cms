@@ -8,7 +8,7 @@
       <td>{{ product.price }}</td>
       <td>{{ product.stock }}</td>
       <td>
-        <a class="btn btn-2 text-white" @click="editForm">Edit</a
+        <a class="btn btn-2 text-white" @click="toEditPage(product.id)">Edit</a
         ><a class="btn btn-3 ml-2 text-white">Delete</a>
       </td>
     </tr>
@@ -19,9 +19,8 @@ export default {
   name: 'ProductItem',
   props: ['product'],
   methods: {
-    editForm () {
-      const id = this.$route.params.id
-      this.$store.dispatch('editProduct', id)
+    toEditPage (id) {
+      this.$router.push('/editProduct/' + id)
     }
   }
 }

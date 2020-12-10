@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1 class="text-center mt-5">Add Product</h1>
+    <h1 class="text-center mt-5">Edit Product</h1>
     <form @submit.prevent="editProduct">
       <div class="form-group">
         <input
@@ -42,19 +42,30 @@
 <script>
 export default {
   name: 'EditForm',
-  props: ['updating'],
   data () {
     return {
-      task: {
-        id: this.updating.id,
-        title: this.updating.title,
-        category: this.updating.category
+      product: {
+        name: '',
+        image_url: '',
+        price: '',
+        stock: ''
       }
     }
   },
   methods: {
-    editProduct () {
+    fetchProductById () {
+      const id = this.$route.params.id
+      this.$store.dispatch('toEditPage', id)
+        .then(response => {
+          console.log(response)
+        })
+        .catch(error => {
+          console.log(error.response)
+        })
     }
+  },
+  created () {
+    this.fetchProductById()
   }
 }
 </script>

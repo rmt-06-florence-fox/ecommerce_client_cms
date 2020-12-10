@@ -43,39 +43,22 @@ export default new Vuex.Store({
       axios({
         url: 'http://localhost:3000/products',
         method: 'POST',
-        data: {
-          name: payload.product.name,
-          image_url: payload.product.image_url,
-          price: payload.product.price,
-          stock: payload.product.stock
-        },
+        data: payload,
         headers: { access_token: localStorage.getItem('access_token') }
       })
         .then((response) => {
-          console.log('satu')
-          console.log(response.data)
-          router.push('/products/id')
-        })
-        .catch((error) => {
-          console.log('dua')
-          console.log(error.response)
-        })
-    },
-    editForm (context, id) {
-      axios({
-        url: 'http://localhost:3000/products/:id',
-        method: 'GET',
-        headers: { access_token: localStorage.getItem('access_token') }
-      })
-        .then((response) => {
-          console.log('satu')
-          console.log(response.data)
           router.push('/products')
         })
         .catch((error) => {
-          console.log('dua')
           console.log(error.response)
         })
+    },
+    toEditPage (context, id) {
+      return axios({
+        url: `http://localhost:3000/products/${id}`,
+        method: 'GET',
+        headers: { access_token: localStorage.getItem('access_token') }
+      })
     }
     // deleteProduct () {
     //   axios
