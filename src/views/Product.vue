@@ -67,6 +67,11 @@ export default {
     loginStatus () {
       return this.$store.state.loginStatus
     }
+  },
+  created () {
+    if (localStorage.access_token) {
+      this.$store.commit('changeLoginStatus', true)
+    }
   }
 }
 </script>

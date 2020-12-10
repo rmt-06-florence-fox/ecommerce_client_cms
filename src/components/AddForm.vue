@@ -20,8 +20,8 @@
               <div class="form-group">
                 <input type="number" class="form-control" placeholder="Price">
               </div>
+              <button type="submit" class="btn btn-info" data-dismiss="modal">Add</button>
             </form>
-             <button type="submit" class="btn btn-info" data-dismiss="modal">Add</button>
           </div>
         </div>
       </div>
