@@ -24,8 +24,9 @@ export default new Vuex.Store({
         data: payload
       })
         .then((data) => {
-          console.log(data.data.access_token)
+          console.log(data.data)
           localStorage.setItem('access_token', data.data.access_token)
+          localStorage.setItem('role', 'admin')
           router.push('/admin')
         })
         .catch(err => console.log(err))
@@ -39,6 +40,21 @@ export default new Vuex.Store({
         .then((data) => {
           console.log(data.data)
           context.commit('fetchData', data.data)
+        })
+        .catch(err => console.log(err))
+    },
+    deleteProduct (context, id) {
+      axios({
+        method: 'DELETE',
+        url: `/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token'),
+          role: localStorage.getItem('role')
+        }
+      })
+        .then(_ => {
+          console.log('successfully deleted')
+          context.dispatch('fetchProduct')
         })
         .catch(err => console.log(err))
     }

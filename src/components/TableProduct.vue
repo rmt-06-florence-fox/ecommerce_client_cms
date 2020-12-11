@@ -22,7 +22,10 @@
           <td>{{ product.stock }}</td>
           <td>
             <button class="btn btn-info btn-sm mr-2">edit</button>
-            <button class="btn btn-danger btn-sm">delete</button>
+            <button
+              @click.prevent="deleteProduct(product.id)"
+              class="btn btn-danger btn-sm"
+            >delete</button>
           </td>
         </tr>
       </tbody>
@@ -33,7 +36,12 @@
 <script>
 export default {
   name: 'TableProduct',
-  props: ['products']
+  props: ['products'],
+  methods: {
+    deleteProduct (id) {
+      this.$store.dispatch('deleteProduct', id)
+    }
+  }
 }
 </script>
 
