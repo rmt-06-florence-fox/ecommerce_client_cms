@@ -76,6 +76,56 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    addProduct (context, payload) {
+      axios({
+        method: 'POST',
+        url: '/products',
+        headers: {
+          token: localStorage.getItem('token')
+        },
+        data: {
+          image_url: payload.image_url,
+          name: payload.name,
+          price: payload.price,
+          stock: payload.stock,
+          CategoryId: payload.CategoryId
+        }
+      })
+    },
+    addCategory (context, payload) {
+      return axios({
+        method: 'POSt',
+        url: '/category',
+        headers: { token: localStorage.getItem('token') },
+        data: {
+          name: payload.name
+        }
+      })
+    },
+    deleteCategory (context, payload) {
+      return axios({
+        method: 'DELETE',
+        url: `/category/${payload}`,
+        headers: { token: localStorage.getItem('token') }
+      })
+    },
+    addBanner (context, payload) {
+      axios({
+        method: 'POST',
+        url: '/banners',
+        header: { token: localStorage.getItem('token') },
+        data: {
+          title: payload.title,
+          image_url: payload.image_url
+        }
+      })
+        .then(() => {
+          context.dispatch('getBanners')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {

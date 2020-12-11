@@ -22,13 +22,13 @@
               </button>
             </div>
             <div class="add-category mt-2">
-            <button class="btn btn-action">
+            <button class="btn btn-action" @click="addCategory">
               <i class='fas fa-plus' style='font-size:24px'></i>
               <span> Category</span>
             </button>
           </div>
           <div class="delete-category mt-2">
-            <button class="btn btn-action" >
+            <button class="btn btn-action" @click="deleteCategory">
               <i class="fa fa-trash-o" style="font-size:24px"></i>
               <span> Del. Category</span>
             </button>
@@ -110,13 +110,17 @@
 import Product from '../components/Product.vue'
 import Category from '../components/Category.vue'
 import Banner from '../components/Banner.vue'
+import Swal from 'sweetalert2'
 export default {
   name: 'Main',
   data () {
     return {
       navOpen: false,
       chosenCategory: '',
-      show: 'products'
+      show: 'products',
+      addCategoryPayload: {
+        name: ''
+      }
     }
   },
   methods: {
@@ -132,6 +136,7 @@ export default {
     },
     showBanners () {
       this.show = 'banners'
+      this.chosenCategory = ''
     },
     choseCategory (payload) {
       this.chosenCategory = payload
@@ -139,6 +144,87 @@ export default {
     resetCategory (payload) {
       this.chosenCategory = ''
       this.show = 'products'
+    },
+    addCategory () {
+      if (!this.$store.state.loggedIn) {
+        Swal.fire('please login first')
+      } else {
+        Swal.fire({
+          title: 'Enter New Category name !',
+          input: 'text',
+          inputLabel: 'Category name',
+          showCancelButton: true,
+          inputValidator: (value) => {
+            if (!value) {
+              return 'You need to write something!'
+            }
+          }
+        })
+          .then((result) => {
+            if (result.isConfirmed) {
+              this.addCategoryPayload.name = result.value
+              return this.$store.dispatch('addCategory', this.addCategoryPayload)
+            }
+          })
+          .then(() => {
+            this.$store.dispatch('getCategories')
+          })
+          .catch(err => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: err.response.data.message + '!'
+            })
+          })
+      }
+    },
+    deleteCategory () {
+      const objCategories = {}
+      this.categories.forEach((element) => {
+        objCategories[element.id] = element.name
+      })
+      if (!this.$store.state.loggedIn) {
+        Swal.fire('Please login first')
+      } else {
+        Swal.fire({
+          title: 'Select Category !',
+          input: 'select',
+          inputOptions: objCategories,
+          inputPlaceholder: 'Select a category',
+          showCancelButton: true,
+          inputValidator: (value) => {
+            return new Promise((resolve) => {
+              if (!value) {
+                resolve('You need to select category')
+              } else {
+                resolve()
+              }
+            })
+          }
+        })
+          .then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'You just deleted one Category',
+                showConfirmButton: false,
+                timer: 1500
+              })
+              return this.$store.dispatch('deleteCategory', result.value)
+            }
+          })
+          .then(() => {
+            this.$store.dispatch('getCategories')
+          })
+          .catch(err => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: err.response.data.message + '!'
+            })
+          })
+      }
     }
   },
   components: {
