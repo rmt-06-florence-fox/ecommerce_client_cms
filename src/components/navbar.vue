@@ -1,31 +1,31 @@
 <template>
   <nav
-      class="flex flex-col bg-gray-200 w-64 px-12 pt-4 pb-6 place-content-between"
+      class="flex flex-col bg-gray-900 w-64 px-12 pt-4 pb-6 place-content-between"
     >
       <!-- SideNavBar -->
 
-      <div class="flex flex-row border-b items-center justify-between pb-2">
+      <div class="flex flex-row border justify-center py-2 w-full">
         <!-- Hearder -->
-        <span class="text-xl font-bold capitalize  flex flex-row bg-clip-text text-transparent bg-gradient-to-b from-green-800 to-green-600">
+        <span class="text-lg font-bold capitalize flex flex-row bg-clip-text text-transparent bg-gradient-to-b from-gray-50 to-white">
           {{siteTitle}}
         </span>
       </div>
 
-      <!-- <div class="mt-8">
-        <h2 class="mt-4 text-xl  font-extrabold capitalize">
-          Hello Enoshima
+      <div class="mt-8">
+        <h2 class="mt-4 text-xl  font-extrabold capitalize text-white">
+          {{user.username}}
         </h2>
         <span class="text-sm ">
-          <span class="font-semibold text-green-600 ">
-            Admin
+          <span class="font-semibold text-gray-600 ">
+            {{user.email}}
           </span>
-          id789038
+          AdminId{{user.id}}
         </span>
-      </div> -->
+      </div>
       <div class="h-full flex flex-col justify-center">
       <router-link to="/add-product" router-link-active="translate-x-2">
         <button
-          class="mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow bg-green-600 hover:bg-gray-900"
+          class="mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow bg-yellow-500 hover:bg-gray-100 hover:text-black"
         >
           <!-- Action -->
           <span>Add Product</span>
@@ -35,7 +35,7 @@
         </button>
       </router-link>
 
-      <ul class="flex flex-col mt-2 text-gray-600 justify-items-start space-y-3">
+      <ul class="flex flex-col mt-2 text-gray-300 justify-items-start space-y-3">
         <!-- Links -->
         <li class="mt-8">
           <router-link to="/dashboard" class="flex" router-link-active="translate-x-2">
@@ -50,7 +50,7 @@
               ></path>
             </svg>
             <span
-              class="ml-2 capitalize font-medium text-black "
+              class="ml-2 capitalize font-medium text-white "
             >
               dashboard
             </span>
@@ -70,7 +70,7 @@
               ></path>
             </svg>
             <span
-              class="ml-2 capitalize font-medium text-black "
+              class="ml-2 capitalize font-medium text-white "
             >
               banner
             </span>
@@ -88,7 +88,7 @@
                 8-4z"
               ></path>
             </svg>
-            <span class="ml-2 capitalize font-medium text-black">users</span>
+            <span class="ml-2 capitalize font-medium text-white">users</span>
         </router-link>
         </li>
 
@@ -105,7 +105,7 @@
               ></path>
             </svg>
             <span
-              class="ml-2 capitalize font-medium text-black "
+              class="ml-2 capitalize font-medium text-white "
             >
               categories
             </span>
@@ -114,7 +114,7 @@
       </ul>
       </div>
 
-      <div class="mt-auto  py-2 px-3 rounded-md flex items-center text-red-700 transform hover:translate-x-4 transition duration-300 ease-in-out hover:bg-red-700 hover:text-white"
+      <div class="mt-auto  py-2 px-3 rounded-md flex items-center text-gray-50 transform hover:translate-x-4 transition duration-300 ease-in-out hover:bg-gray-50 hover:text-black"
             @click="logout">
         <!-- important action -->
         <a href="#home" class="flex items-center w-full">
@@ -132,6 +132,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'navbar',
   methods: {
@@ -141,9 +143,10 @@ export default {
     }
   },
   computed: {
-    siteTitle () {
-      return this.$store.state.siteTitle
-    }
+    ...mapState({
+      siteTitle: 'siteTitle',
+      user: 'user'
+    })
   }
 }
 </script>

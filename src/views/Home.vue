@@ -17,7 +17,7 @@ export default {
     navbar
   },
   created () {
-    this.$router.push('dashboard')
+    this.$store.dispatch('loadUser')
   }
 }
 </script>

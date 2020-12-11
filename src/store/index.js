@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     siteTitle: 'JAM TANGEN',
     products: [],
-    categories: []
+    categories: [],
+    user: ''
   },
   mutations: {
     setProducts (state, value) {
@@ -17,6 +18,9 @@ export default new Vuex.Store({
     },
     setCategories (state, value) {
       state.categories = value
+    },
+    setUser (state, value) {
+      state.user = value
     }
   },
   actions: {
@@ -137,7 +141,8 @@ export default new Vuex.Store({
         }
       })
         .then(res => {
-          router.push('/dashboard')
+          // router.push('/dashboard'
+          context.dispatch('loadProducts')
         })
     },
     addCat (context, data) {
@@ -195,6 +200,131 @@ export default new Vuex.Store({
           // context.commit('setCategories', [])
           context.dispatch('loadCategories')
         })
+    },
+    loadUser (context) {
+      axios({
+        method: 'get',
+        url: '/user',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          context.commit('setUser', res.data)
+        })
+    },
+    sortProducts (context, bol) {
+      const data = []
+      context.state.products.forEach(el => {
+        data.push(el)
+      })
+      if (bol) {
+        data.sort((a, b) => {
+          if (a.name.toLowerCase() < b.name.toLowerCase()) {
+            return -1
+          }
+          if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      } else {
+        data.sort((a, b) => {
+          if (a.name.toLowerCase() > b.name.toLowerCase()) {
+            return -1
+          }
+          if (a.name.toLowerCase() < b.name.toLowerCase()) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      }
+      context.commit('setProducts', data)
+    },
+    sortCategories (context, bol) {
+      const data = []
+      context.state.products.forEach(el => {
+        data.push(el)
+      })
+      if (bol) {
+        data.sort((a, b) => {
+          if (a.Categories < b.Categories) {
+            return -1
+          }
+          if (a.Categories > b.Categories) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      } else {
+        data.sort((a, b) => {
+          if (a.Categories > b.Categories) {
+            return -1
+          }
+          if (a.Categories < b.Categories) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      }
+      context.commit('setProducts', data)
+    },
+    sortPrice (context, bol) {
+      const data = []
+      context.state.products.forEach(el => {
+        data.push(el)
+      })
+      if (bol) {
+        data.sort((a, b) => {
+          if (a.price < b.price) {
+            return -1
+          }
+          if (a.price > b.price) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      } else {
+        data.sort((a, b) => {
+          if (a.price > b.price) {
+            return -1
+          }
+          if (a.price < b.price) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      }
+      context.commit('setProducts', data)
+    },
+    sortStocks (context, bol) {
+      const data = []
+      context.state.products.forEach(el => {
+        data.push(el)
+      })
+      if (bol) {
+        data.sort((a, b) => {
+          return a.stock - b.stock
+        })
+      } else {
+        data.sort((a, b) => {
+          if (a.stock > b.stock) {
+            return -1
+          }
+          if (a.stock < b.stock) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      }
+      context.commit('setProducts', data)
     }
   },
   modules: {

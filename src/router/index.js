@@ -11,9 +11,13 @@ Vue.use(VueRouter)
 const routes = [
   {
     path: '/',
-    name: 'Home',
+    // name: 'Home',
     component: Home,
     children: [
+      {
+        path: '',
+        redirect: 'dashboard' // default child path
+      },
       {
         path: 'dashboard',
         name: 'dashboard',

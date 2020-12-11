@@ -30,21 +30,19 @@
                   class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required
                   v-model="image_url"/>
             <span class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Add Categories</span>
-            <div class="grid grid-cols-3 justify-items-start">
-              <div v-for="cat in categories" :key="cat.id">
-              <label class="inline-flex items-center mt-3">
-                  <input type="checkbox" class="form-checkbox h-5 w-5 text-gray-600" :value="cat.id"
-                          v-model="catSelected"><span class="ml-2 text-gray-700">{{cat.name}}</span>
-              </label>
-              </div>
+            <div class="mt-2 w-full">
+              <select class="w-full focus:outline-none focus:bg-gray-300 focus:shadow-inner py-2 px-3" size="5" multiple v-model="catSelected">
+              <option v-for="cat in categories" :key="cat.id" :value="cat.id" class="py-2">{{cat.name}}</option>
+              </select>
+              <span class="text-sm text-left italic subpixel-antialiased text-gray-500">use drag, control, or shift to select multiple categories</span>
             </div>
             <div class="w-full flex flex-row gap-x-2">
-            <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-green-600 shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+            <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-gray-900 shadow-lg focus:outline-none hover:bg-gray-100 hover:text-black hover:shadow-none">
               Add Product
             </button>
             <button type="button"
                     @click="getBack"
-                    class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red-600 shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+                    class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-red-600 shadow-lg focus:outline-none hover:bg-gray-100 hover:text-black hover:shadow-none">
                 Cancel</button>
             </div>
           </form>
@@ -91,5 +89,13 @@ export default {
 </script>
 
 <style>
+input[type=number] {
+  -moz-appearance: textfield;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
 
 </style>

@@ -1,6 +1,6 @@
 <template>
   <div
-          class="mt-2 flex px-4 py-4 justify-between bg-white shadow-xl rounded-lg cursor-pointer transform scale-100 hover:scale-105 hover:bg-green-500"
+          class="mt-2 flex px-4 py-4 text-black justify-between bg-white shadow-xl rounded-lg cursor-pointer transition duration-300 hover:text-white hover:bg-gray-900 hover:shadow-inner"
         @click="goEdit">
           <!-- Card -->
 
@@ -14,10 +14,10 @@
             />
 
             <div
-              class="ml-4 flex flex-col capitalize text-gray-600"
+              class="ml-4 flex flex-col capitalize text-current"
             >
               <!-- <span>name</span> -->
-              <span class="mt-2 text-black">
+              <span class="mt-2 text-current">
                 {{product.name}}
               </span>
             </div>
@@ -28,9 +28,9 @@
             <!-- Rigt side -->
 
             <div
-              class="mr-16 flex flex-col capitalize text-gray-600 text-left"
+              class="mr-16 flex flex-col capitalize text-current text-left"
             >
-              <span class="mt-2 text-black"
+              <span class="mt-2 text-current"
                   v-for="category in product.Categories"
                   :key="category.id">
                 {{category.name}}
@@ -38,13 +38,13 @@
             </div>
 
             <div
-              class="mr-16 flex flex-col capitalize text-gray-600 "
+              class="mr-16 flex flex-col capitalize text-current "
             >
              Rp. {{product.price}}
             </div>
 
             <div
-              class="mr-16 flex flex-col capitalize text-gray-600 "
+              class="mr-16 flex flex-col capitalize text-current "
             >
               {{product.stock}}
             </div>
@@ -53,11 +53,11 @@
               class="mr-8 flex flex-row capitalize text-gray-600 text-sm space-x-1 items-center w-full"
             >
               <button class="bg-yellow-500 py-1 px-3 text-white rounded-sm transform scale-100 hover:scale-110"
-                      @click="deleteThis">
+                      >
                 Re-stock
               </button>
               <button class="bg-red-500 py-1 px-3 text-white rounded-sm transform scale-100 hover:scale-110"
-                      @click="deleteThis">
+                      @click.stop="deleteThis">
                 Delete
               </button>
             </div>

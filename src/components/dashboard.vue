@@ -1,9 +1,9 @@
 <template>
   <div class=" w-full flex overflow-hidden">
     <main
-      class="flex-1 flex flex-col bg-gray-100 transition duration-500 ease-in-out overflow-y-auto"
+      class="flex-1 flex flex-col bg-gray-200 transition duration-500 ease-in-out overflow-y-auto"
     >
-      <div class="mx-10 my-2">
+      <div class="mx-10 my-2 ">
         <nav
           class="flex flex-row justify-between border-b
           transition duration-500
@@ -12,7 +12,7 @@
           <!-- <div class="flex">
             <a
               href="users-dashboard/"
-              class="py-2 block text-green-500 border-green-500
+              class="py-2 block text-gray-500 border-gray-500
               focus:outline-none border-b-2 font-medium capitalize
               transition duration-500 ease-in-out"
             >
@@ -21,8 +21,8 @@
             <button
               class="ml-6 py-2 block border-b-2 border-transparent
               focus:outline-none font-medium capitalize text-center
-              focus:text-green-500 focus:border-green-500
-              dark-focus:text-green-200 dark-focus:border-green-200
+              focus:text-gray-500 focus:border-gray-500
+              dark-focus:text-gray-200 dark-focus:border-gray-200
               transition duration-500 ease-in-out"
             >
               role
@@ -30,8 +30,8 @@
             <button
               class="ml-6 py-2 block border-b-2 border-transparent
               focus:outline-none font-medium capitalize text-center
-              focus:text-green-500 focus:border-green-500
-              dark-focus:text-green-200 dark-focus:border-green-200
+              focus:text-gray-500 focus:border-gray-500
+              dark-focus:text-gray-200 dark-focus:border-gray-200
               transition duration-500 ease-in-out"
             >
               access rights
@@ -40,7 +40,7 @@
 
           <!-- <div class="flex items-center select-none">
             <span
-              class="hover:text-green-500 dark-hover:text-green-300 cursor-pointer mr-3 transition duration-500 ease-in-out"
+              class="hover:text-gray-500 dark-hover:text-gray-300 cursor-pointer mr-3 transition duration-500 ease-in-out"
             >
               <svg viewBox="0 0 512 512" class="h-5 w-5 fill-current">
                 <path
@@ -72,19 +72,19 @@
 
           <div>
             <span>
-              <span class="text-green-500 ">
+              <span class="text-gray-500 ">
                 431
               </span>
               users;
             </span>
             <span>
-              <span class="text-green-500 ">
+              <span class="text-gray-500 ">
                 {{countProducts}}
               </span>
               products;
             </span>
             <span>
-              <span class="text-green-500 ">
+              <span class="text-gray-500 ">
                 {{countCategories}}
               </span>
               categories
@@ -94,7 +94,7 @@
             <span class="capitalize">
               project
               <span
-                class="text-green-500  cursor-pointer"
+                class="text-gray-500  cursor-pointer"
               >
                 all
               </span>
@@ -102,7 +102,7 @@
             <span class="capitalize ml-12">
               date added
               <span
-                class="text-green-500  cursor-pointer"
+                class="text-gray-500  cursor-pointer"
               >
                 all time
               </span>
@@ -110,74 +110,76 @@
             <span class="capitalize ml-12">
               role
               <span
-                class="text-green-500  cursor-pointer"
+                class="text-gray-500  cursor-pointer"
               >
                 all
               </span>
             </span>
           </div>
         </div>
-        <div class="mt-6 flex justify-between text-gray-600">
+        <div class="w-full flex flex-col items-center">
+        <div class="mt-6 flex justify-between text-gray-600 w-11/12">
           <!-- List sorting -->
 
-          <div class="ml-12 pl-4 flex capitalize">
+          <div class="ml-12 pl-4 flex capitalize select-none">
             <!-- Left side -->
-            <span class="ml-8 flex items-center">
+            <span class="ml-8 flex items-center"
+                  @click="sortProduct">
               Product's Name
-              <svg
-                class="ml-1 h-5 w-5 fill-current text-green-500 "
-                viewBox="0 0 24 24"
-              >
-                <path
-                  d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2 19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"
-                ></path>
-              </svg>
+              <svg class="ml-1 h-5 w-5 fill-current"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path :d="changeProduct">
+                  </path>
+                  </svg>
             </span>
           </div>
 
           <div class="grid grid-cols-4 capitalize w-8/12 justify-items-start">
             <!-- Right side -->
 
-            <span class="mr-16 pr-1 flex items-center">
+            <span class="mr-16 pr-1 flex items-center select-none"
+                  @click="sortCategories">
               Categories
               <svg class="ml-1 h-5 w-5 fill-current" viewBox="0 0 24 24">
                 <path
-                  d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2 19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"
+                  :d="changeCategories"
                 ></path>
               </svg>
             </span>
 
-            <span class="mr-16 pr-2 flex items-center">
+            <span class="mr-16 pr-2 flex items-center select-none"
+                  @click="sortPrice">
               Price
               <svg class="ml-1 h-5 w-5 fill-current" viewBox="0 0 24 24">
                 <path
-                  d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2 19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"
+                  :d="changePrice"
                 ></path>
               </svg>
             </span>
 
-            <span class="mr-12 flex items-center">
+            <span class="mr-12 flex items-center select-none"
+                  @click="sortStocks">
               Stocks
               <svg class="ml-1 h-5 w-5 fill-current" viewBox="0 0 24 24">
                 <path
-                  d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2 19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"
+                  :d="changeStocks"
                 ></path>
               </svg>
             </span>
             <span class="mr-16 flex items-center">
               Actions
-              <svg class="ml-1 h-5 w-5 fill-current" viewBox="0 0 24 24">
-                <path
-                  d="M18 21l-4-4h3V7h-3l4-4 4 4h-3v10h3M2 19v-2h10v2M2 13v-2h7v2M2 7V5h4v2H2z"
-                ></path>
-              </svg>
             </span>
           </div>
         </div>
+        </div>
+        <div class="w-full flex flex-col items-center">
         <productCard v-for="product in products"
                     :key="product.id"
-                    :product="product">
+                    :product="product"
+                    class="w-11/12">
         </productCard>
+        </div>
       </div>
     </main>
   </div>
@@ -192,9 +194,35 @@ export default {
   components: {
     productCard
   },
+  data () {
+    return {
+      sorted: {
+        product: false,
+        categories: false,
+        price: false,
+        stock: false
+      }
+    }
+  },
   methods: {
     loadProducts () {
       this.$store.dispatch('loadProducts')
+    },
+    sortProduct () {
+      this.sorted.product = !this.sorted.product
+      this.$store.dispatch('sortProducts', this.sorted.product)
+    },
+    sortCategories () {
+      this.sorted.categories = !this.sorted.categories
+      this.$store.dispatch('sortCategories', this.sorted.categories)
+    },
+    sortPrice () {
+      this.sorted.price = !this.sorted.price
+      this.$store.dispatch('sortPrice', this.sorted.price)
+    },
+    sortStocks () {
+      this.sorted.stock = !this.sorted.stock
+      this.$store.dispatch('sortStocks', this.sorted.stock)
     }
   },
   computed: {
@@ -204,7 +232,35 @@ export default {
     ...mapGetters([
       'countProducts',
       'countCategories'
-    ])
+    ]),
+    changeProduct () {
+      if (this.sorted.product) {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
+      } else {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
+      }
+    },
+    changeCategories () {
+      if (this.sorted.categories) {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
+      } else {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
+      }
+    },
+    changePrice () {
+      if (this.sorted.price) {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
+      } else {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
+      }
+    },
+    changeStocks () {
+      if (this.sorted.stock) {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
+      } else {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
+      }
+    }
   },
   created () {
     this.loadProducts()
