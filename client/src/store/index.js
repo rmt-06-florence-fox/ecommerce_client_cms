@@ -22,7 +22,7 @@ export default new Vuex.Store({
     login (context, payload) {
       axios({
         method: 'POST',
-        url: '/login',
+        url: '/admin/login',
         data: payload
       })
         .then(({ data }) => {
@@ -34,7 +34,7 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
-    fetch (context) {
+    fetchData (context) {
       axios({
         method: 'GET',
         url: '/products'
@@ -105,7 +105,7 @@ export default new Vuex.Store({
         }
       })
         .then(_ => {
-          context.dispatch('fetch')
+          context.dispatch('fetchData')
         })
         .catch(err => {
           console.log(err)

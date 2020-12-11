@@ -30,7 +30,7 @@ export default {
   },
   methods: {
     fetchProducts () {
-      this.$store.dispatch('fetch')
+      this.$store.dispatch('fetchData')
     }
   },
   computed: {
