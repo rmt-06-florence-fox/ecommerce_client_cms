@@ -57,6 +57,23 @@ export default new Vuex.Store({
           context.dispatch('fetchProduct')
         })
         .catch(err => console.log(err))
+    },
+    createProduct (context, payload) {
+      axios({
+        method: 'POST',
+        url: '/products',
+        headers: {
+          access_token: localStorage.getItem('access_token'),
+          role: localStorage.getItem('role')
+        },
+        data: payload
+      })
+        .then((data) => {
+          console.log(data, 'masuk pak datanya')
+          context.dispatch('fetchProduct')
+          router.push('/admin')
+        })
+        .catch(err => console.log(err))
     }
   },
   modules: {
