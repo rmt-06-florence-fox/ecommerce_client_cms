@@ -63,7 +63,7 @@
           </div> -->
         </nav>
         <h2 class="my-10 text-4xl font-semibold ">
-          Product list
+          Banner list
         </h2>
         <div
           class="pb-2 flex items-center justify-between text-gray-600 "
@@ -174,8 +174,8 @@
         </div>
         </div>
         <div class="w-full flex flex-col items-center">
-        <productCard v-for="product in products"
-                    :key="product.id"
+        <productCard v-for="banner in bannerList"
+                    :key="banner.id"
                     :product="product"
                     class="w-11/12">
         </productCard>
@@ -186,85 +186,17 @@
 </template>
 
 <script>
-import productCard from '../components/productCard'
-import { mapState, mapGetters } from 'vuex'
-
 export default {
-  name: 'dashboard',
-  components: {
-    productCard
-  },
+  name: 'banners',
   data () {
     return {
-      sorted: {
-        product: false,
-        categories: false,
-        price: false,
-        stock: false
-      }
+      bannerList: []
     }
   },
   methods: {
-    loadProducts () {
-      this.$store.dispatch('loadProducts')
-    },
-    sortProduct () {
-      this.sorted.product = !this.sorted.product
-      this.$store.dispatch('sortProducts', this.sorted.product)
-    },
-    sortCategories () {
-      this.sorted.categories = !this.sorted.categories
-      this.$store.dispatch('sortCategories', this.sorted.categories)
-    },
-    sortPrice () {
-      this.sorted.price = !this.sorted.price
-      this.$store.dispatch('sortPrice', this.sorted.price)
-    },
-    sortStocks () {
-      this.sorted.stock = !this.sorted.stock
-      this.$store.dispatch('sortStocks', this.sorted.stock)
-    }
-  },
-  computed: {
-    ...mapState({
-      products: 'products'
-    }),
-    ...mapGetters([
-      'countProducts',
-      'countCategories',
-      'countStocks'
-    ]),
-    changeProduct () {
-      if (this.sorted.product) {
-        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
-      } else {
-        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
-      }
-    },
-    changeCategories () {
-      if (this.sorted.categories) {
-        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
-      } else {
-        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
-      }
-    },
-    changePrice () {
-      if (this.sorted.price) {
-        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
-      } else {
-        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
-      }
-    },
-    changeStocks () {
-      if (this.sorted.stock) {
-        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
-      } else {
-        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
-      }
-    }
   },
   created () {
-    this.loadProducts()
+
   }
 }
 </script>

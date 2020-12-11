@@ -338,6 +338,13 @@ export default new Vuex.Store({
     },
     countCategories: state => {
       return state.categories.length
+    },
+    countStocks: state => {
+      let stock = 0
+      state.products.forEach(el => {
+        stock += el.stock
+      })
+      return stock
     }
   }
 })

@@ -5,6 +5,8 @@ import dashboard from '../components/dashboard'
 import addProduct from '../components/addProduct'
 import editProduct from '../components/editProduct'
 import categories from '../components/categories'
+import banners from '../components/banner'
+import users from '../components/users'
 
 Vue.use(VueRouter)
 
@@ -22,6 +24,16 @@ const routes = [
         path: 'dashboard',
         name: 'dashboard',
         component: dashboard
+      },
+      {
+        path: 'banners',
+        name: 'banners',
+        component: banners
+      },
+      {
+        path: 'users',
+        name: 'users',
+        component: users
       },
       {
         path: 'add-product',

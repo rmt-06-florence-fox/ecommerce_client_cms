@@ -58,7 +58,7 @@
         </li>
 
         <li class="mt-8">
-          <router-link to="#" class="flex ">
+          <router-link to="/banners" class="flex ">
             <svg
               class="fill-current h-5 w-5 "
               viewBox="0 0 24 24"
@@ -72,7 +72,7 @@
             <span
               class="ml-2 capitalize font-medium text-white "
             >
-              banner
+              banners
             </span>
           </router-link>
         </li>
@@ -80,7 +80,7 @@
         <li
           class="mt-8"
         >
-        <router-link to="#" class="flex ">
+        <router-link to="/users" class="flex ">
             <svg class="fill-current h-5 w-5" viewBox="0 0 24 24">
               <path
                 d="M12 4a4 4 0 014 4 4 4 0 01-4 4 4 4 0 01-4-4 4 4 0
