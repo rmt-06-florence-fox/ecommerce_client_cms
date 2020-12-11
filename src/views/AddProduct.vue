@@ -71,7 +71,7 @@ export default {
             text: `Successing add product "${res.data.name}"`,
             timer: 5000
           })
-          // this.$store.dispatch('fetchProduct')
+          this.$store.dispatch('fetchProduct')
           this.$router.push('/')
         })
         .catch(err => {

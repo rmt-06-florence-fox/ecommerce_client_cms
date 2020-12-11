@@ -17,10 +17,6 @@
           <router-link class="navbar-item" to="/addProduct">
             Add Product
           </router-link>
-
-          <a class="navbar-item">
-            Documentation
-          </a>
         </div>
 
         <div class="navbar-end">
@@ -38,7 +34,7 @@
 
 <script>
 export default {
-  name: 'Home',
+  name: 'Navbar',
   data () {
     return {
       hidden: true,

@@ -6,11 +6,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    isLogin: false
+    isLogin: false,
+    listProducts: []
   },
   mutations: {
     CHANGEISLOGIN (state, payload) {
       state.isLogin = payload
+    },
+    FETCHPRODUCTS (state, payload) {
+      state.listProducts = payload
     }
   },
   actions: {
@@ -38,6 +42,21 @@ export default new Vuex.Store({
           access_token: localStorage.getItem('access_token')
         }
       })
+    },
+    fetchProduct (context) {
+      axios({
+        url: '/products',
+        method: 'get',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          context.commit('FETCHPRODUCTS', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {

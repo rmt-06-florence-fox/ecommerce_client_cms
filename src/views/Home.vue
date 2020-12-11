@@ -3,19 +3,28 @@
     <div class="container" style="min-height: 100vh">
       <div style="height: 4.5rem"/>
       <div class="columns p-5">
-        <div class="column">
-          <div class="box">
-            <p class="title is-5">Flexible column</p>
-            <p class="subtitle">This column will take up the remaining space available.</p>
-          </div>
-        </div>
+        <productSec class="column" v-for= "product in listProducts" :key= "product.id" :list= "product"/>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex'
+import productSec from '../components/listProducts'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  created () {
+    this.$store.dispatch('fetchProduct')
+  },
+  components: {
+    productSec
+  },
+  computed: {
+    ...mapState({
+      listProducts: 'listProducts'
+    })
+  }
 }
 </script>
