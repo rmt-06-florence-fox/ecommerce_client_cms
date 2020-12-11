@@ -3,7 +3,7 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import router from '../router'
 
-const baseUrl = 'http://localhost:3000'
+const baseUrl = 'https://bukatoko-server.herokuapp.com'
 
 Vue.use(Vuex)
 
