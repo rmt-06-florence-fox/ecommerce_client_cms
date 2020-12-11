@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../../config/axios'
 import router from '../router'
+import swal from 'sweetalert'
 
 Vue.use(Vuex)
 
@@ -33,6 +34,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          swal('Invalid Account !', 'try again', 'error')
         })
     },
     addProduct (context, payload) {
@@ -52,7 +54,36 @@ export default new Vuex.Store({
         .catch(err => {
           console.log('masuk eror client')
           console.log(err)
+          swal('Wrong Input !', 'Empty field or minus price/stock', 'error')
         })
+    },
+    editProduct (context, payload) {
+      const accesstoken = localStorage.accesstoken
+      axios
+        .put(`/products/${payload.id}`,
+          {
+            name: payload.name,
+            image_url: payload.image_url,
+            price: payload.price,
+            stock: payload.stock
+          },
+          { headers: { accesstoken } })
+        .then(data => {
+          context.dispatch('fetchProducts')
+        })
+        .catch(err => {
+          console.log(err)
+          swal('Wrong Input !', 'Empty field or minus price/stock', 'error')
+        })
+    },
+    destroyProduct (context, destroyId) {
+      const accesstoken = localStorage.accesstoken
+      axios
+        .delete(`/products/${destroyId}`, { headers: { accesstoken } })
+        .then(data => {
+          context.dispatch('fetchProducts')
+        })
+        .catch(err => console.log(err, 'ke error bosque'))
     }
   },
   modules: {

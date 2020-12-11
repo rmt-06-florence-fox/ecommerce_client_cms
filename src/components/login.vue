@@ -1,7 +1,8 @@
 <template>
     <div style="height:400px;">
-      <h1 class="has-text-primary mt-6 mb-4 title is-family-monospace">Login Page</h1>
-        <div class="container card mt-6">
+      <img  class="mt-6" src="../img/cms-login.png" alt="">
+      <!-- <h1 class="has-text-primary mt-6 mb-4 title is-family-monospace">Login Page</h1> -->
+        <div class="container card mt-4">
             <div class="field ml-4 mr-4 mt-4">
                 <p class="control has-icons-left has-icons-right">
                     <input v-model="email" class="input" type="email" placeholder="Email">

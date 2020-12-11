@@ -27,7 +27,7 @@ export default {
   },
   created () {
     this.fetchProducts()
-    console.log(this.$store.state.products.data[0], '<===')
+    console.log('<===')
   }
 }
 </script>
