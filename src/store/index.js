@@ -56,7 +56,6 @@ export default new Vuex.Store({
         }
       })
         .then(res => {
-          console.log(res.data)
           this.dispatch('fetchProduct')
         })
         .catch(err => {
@@ -73,6 +72,43 @@ export default new Vuex.Store({
       })
         .then(res => {
           context.commit('setCategories', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    editProduct (context, payload) {
+      axios({
+        url: `/products/${payload.id}`,
+        method: 'PUT',
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          name: payload.name,
+          image_url: payload.image_url,
+          price: payload.price,
+          stock: payload.stock,
+          categoryName: payload.categoryName
+        }
+      })
+        .then(res => {
+          this.dispatch('fetchProduct')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteProduct (context, payload) {
+      axios({
+        url: `/products/${payload}`,
+        method: 'DELETE',
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(res => {
+          this.dispatch('fetchProduct')
         })
         .catch(err => {
           console.log(err)
