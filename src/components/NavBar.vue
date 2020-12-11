@@ -18,7 +18,7 @@
           </b-nav-form>
 
           <b-nav-item>
-            <button class="btn btn-dark">Logout</button>
+            <button class="btn btn-dark" @click="logout">Logout</button>
           </b-nav-item>
 
         </b-navbar-nav>
@@ -38,6 +38,12 @@ export default {
   name: 'NavBar',
   components: {
     AddForm
+  },
+  methods: {
+    logout () {
+      localStorage.removeItem('access_token')
+      this.$router.push('/')
+    }
   }
 }
 </script>

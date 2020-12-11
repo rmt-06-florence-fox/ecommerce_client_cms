@@ -1,23 +1,25 @@
 <template>
   <b-card
-    title="product.name"
-    img-src="product.imageUrl"
-    img-alt="Image" img-top tag="article" style="max-width: 20rem;"
+    :title="product.name"
+    :img-src="product.imageUrl"
+    img-alt="Image"
+    img-top
+    style="max-width: 15rem;"
     class="m-2"
     >
 
-    <b-card-text class="d-flex">
-     <span>price : {{product.price}}</span>
-     <span>stock : {{product.stock}}</span>
-    </b-card-text>
+    <b-card-body class="d-flex flex-column">
+     <div>price : {{product.price}}</div>
+     <div>stock : {{product.stock}}</div>
+    </b-card-body>
 
-   <b-container fluid="sm" class="card">
+   <b-card-footer fluid="sm" class="card">
       <b-button href="#" class="m-1" variant="success" v-b-modal.edit> Edit </b-button>
       <b-button href="#" class="m-1" variant="dark" @click="deleteHandler(product.id)" > Delete </b-button>
-      <b-modal id="edit-product.id" hide-footer>
+      <b-modal :id="edit-product.id" hide-footer>
         <EditForm :product=product />
       </b-modal>
-   </b-container>
+   </b-card-footer>
 
   </b-card>
 
@@ -30,7 +32,12 @@ export default {
   components: {
     EditForm
   },
-  props: ['product']
+  props: ['product'],
+  methods: {
+    deleteHandler () {
+      this.$store.dispatch('deleteHandler', this.product.id)
+    }
+  }
 }
 </script>
 
