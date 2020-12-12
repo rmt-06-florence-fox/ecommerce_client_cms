@@ -1,6 +1,5 @@
 <template>
     <div
-      v-if="product.length !== 0"
       class="card mb-3 col-md-2 mr-3">
       <img class="card-img-top" :src="product.image_url" :alt="product.name" />
       <div class="card-body">
@@ -10,9 +9,6 @@
       <button @click="editProduct(product.id)" class="btn btn-secondary mr-2"><i class="fas fa-edit"></i></button>
       <button @click="delProduct(product.id)" class="btn btn-danger"><i class="fas fa-trash"></i></button>
       </div>
-    </div>
-    <div v-else>
-      <h3>Data Not Found</h3>
     </div>
 </template>
 

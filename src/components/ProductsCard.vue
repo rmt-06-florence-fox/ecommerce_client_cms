@@ -1,9 +1,14 @@
 <template>
-  <div class="row justify-content-md-center">
-    <ProductItem
+  <div
+    v-if="products.length"
+    class="row justify-content-md-center">
+      <ProductItem
       v-for="product in products"
       :key="product.id"
       :product="product"></ProductItem>
+  </div>
+  <div v-else>
+    <h1>Data Not Found</h1>
   </div>
 </template>
 
