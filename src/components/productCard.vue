@@ -38,7 +38,7 @@
             </div>
 
             <div
-              class="mr-16 flex flex-col capitalize text-current "
+              class="mr-14 flex flex-col capitalize text-current text-sm"
             >
              Rp. {{priceConverted}}
             </div>

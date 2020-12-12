@@ -151,7 +151,7 @@ export default {
       })
         .then(res => {
           console.log(res.data)
-          this.$emit('closeThis')
+          this.$emit('closeThis', 'add')
           this.$emit('reload')
         })
         .catch(err => {
