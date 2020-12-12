@@ -1,7 +1,7 @@
 <template>
   <div class="container p-3 my-3 bg-dark text-white" id="form">
     <h2> Add Product </h2>
-    <form action="/action_page.php">
+    <form action="/home">
       <div class="form-group">
       <label for="name"> Name:</label>
       <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" v-model="name">
@@ -9,6 +9,10 @@
       <div class="form-group">
       <label for="image_url"> Image Url:</label>
       <input type="text" class="form-control" id="image_url" placeholder="Enter image url" name="image_url" v-model="image_url">
+      </div>
+       <div class="form-group">
+      <label for="image_url"> Description:</label>
+      <input type="text" class="form-control" id="image_url" placeholder="Enter description" name="description" v-model="description">
       </div>
       <div class="form-group">
       <label for="price"> Price:</label>
@@ -33,7 +37,26 @@ export default {
       name: '',
       image_url: '',
       price: '',
-      stock: ''
+      stock: '',
+      description: ''
+    }
+  },
+  methods: {
+    createProduct () {
+      const payload = {
+        name: this.name,
+        image_url: this.image_url,
+        price: this.price,
+        stock: this.stock,
+        description: this.description
+      }
+      this.$store.dispatch('createProduct', payload)
+        .then(({ data }) => {
+          this.$router.push('/home')
+        })
+        .catch(({ err }) => {
+          console.log(err)
+        })
     }
   }
 }

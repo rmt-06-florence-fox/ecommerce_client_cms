@@ -1,7 +1,7 @@
 <template>
   <div class="container p-3 my-3 bg-dark text-white" id="form">
     <h2> Edit Product </h2>
-    <form action="/">
+    <form action="/home">
       <div class="form-group">
       <label for="name"> Name:</label>
       <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" v-model="name">

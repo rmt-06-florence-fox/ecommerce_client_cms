@@ -87,12 +87,26 @@ export default new Vuex.Store({
           console.log(err, '<err')
         })
     },
-    login (payload) {
+    login (context, payload) {
       console.log(payload, '<data pl')
       return Axios
         .post('/login', {
-          email: payload.email,
-          password: payload.password
+          data: {
+            email: payload.email,
+            password: payload.password
+          }
+        })
+    },
+    createProduct (context, payload) {
+      return Axios
+        .post('/products', {
+          data: {
+            name: payload.name,
+            image_url: payload.image_url,
+            price: payload.price,
+            stock: payload.stock,
+            description: payload.description
+          }
         })
     }
   },
