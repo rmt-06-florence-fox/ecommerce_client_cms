@@ -11,17 +11,21 @@
     <v-spacer>
     </v-spacer>
 
-    <v-btn icon @click="home">
-      <v-icon>
-        mdi-home
-      </v-icon>
-    </v-btn>
+    <router-link to="/">
+      <v-btn icon>
+        <v-icon>
+          mdi-home
+        </v-icon>
+      </v-btn>
+    </router-link>
 
-    <v-btn icon>
-      <v-icon>
-        mdi-information
-      </v-icon>
-    </v-btn>
+    <router-link to="/about">
+      <v-btn icon>
+        <v-icon>
+          mdi-information
+        </v-icon>
+      </v-btn>
+    </router-link>
 
     <v-btn icon @click="logout">
       <v-icon>
@@ -29,19 +33,20 @@
       </v-icon>
     </v-btn>
 
-    <v-btn
-      class="ma-2 white--text"
-      color="secondary"
-      @click="addProduct"
-    >
-      Add Product
-      <v-icon
-        right
-        dark
+    <router-link to='/addproduct'>
+      <v-btn
+        class="ma-2 white--text"
+        color="secondary"
       >
-        mdi-plus
-      </v-icon>
-    </v-btn>
+        Add Product
+        <v-icon
+          right
+          dark
+        >
+          mdi-plus
+        </v-icon>
+      </v-btn>
+    </router-link>
 
   </v-app-bar>
 </template>
@@ -49,15 +54,9 @@
 <script>
 export default {
   methods: {
-    home () {
-      this.$router.push({ name: 'Home' })
-    },
     logout () {
       localStorage.clear()
       this.$router.push({ name: 'Login' })
-    },
-    addProduct () {
-      this.$router.push({ name: 'AddProduct' })
     }
   }
 }

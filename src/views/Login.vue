@@ -35,6 +35,24 @@
 
               <v-card-actions>
                 <v-container justify-center>
+                  <v-alert
+                    type="error"
+                    dense
+                    outlined
+                    v-if="alert === true"
+                  >
+                    {{ errMessage }}
+
+                    <div>
+                      <v-btn
+                        color="blue"
+                        text
+                        @click="changeAlert"
+                      >
+                        Close
+                      </v-btn>
+                    </div>
+                  </v-alert>
                   <v-layout row justify-center>
                     <v-btn
                       color="blue"
@@ -57,7 +75,7 @@
 
 <script>
 import Footer from '../components/Footer'
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -77,8 +95,12 @@ export default {
       }
 
       this.$store.dispatch('login', payload)
+    },
+    changeAlert () {
+      this.$store.commit('changeAlert', false)
     }
-  }
+  },
+  computed: mapState(['alert', 'errMessage'])
 }
 </script>
 

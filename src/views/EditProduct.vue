@@ -35,6 +35,7 @@
                     name="price"
                     prefix = 'Rp.'
                     v-model="price"
+                    required
                   >
                   </v-text-field>
 
@@ -43,6 +44,7 @@
                     label="Stock"
                     name="stock"
                     v-model="stock"
+                    required
                   >
                   </v-text-field>
 
@@ -51,6 +53,24 @@
 
               <v-card-actions>
                 <v-container justify-center>
+                  <v-alert
+                    type="error"
+                    dense
+                    outlined
+                    v-if="alert === true"
+                  >
+                    {{ errMessage }}
+
+                    <div>
+                      <v-btn
+                        color="blue"
+                        text
+                        @click="changeAlert"
+                      >
+                        Close
+                      </v-btn>
+                    </div>
+                  </v-alert>
                   <v-layout row justify-center>
                     <v-btn
                       color="blue"
@@ -83,7 +103,7 @@ import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
-  computed: mapState(['editData']),
+  computed: mapState(['editData', 'alert', 'errMessage']),
   components: {
     Navbar,
     Footer
@@ -122,6 +142,9 @@ export default {
     },
     home () {
       this.$router.push({ name: 'Home' })
+    },
+    changeAlert () {
+      this.$store.commit('changeAlert', false)
     }
   }
 }

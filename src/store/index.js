@@ -10,7 +10,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     productData: [],
-    editData: null
+    editData: null,
+    alert: false,
+    errMessage: ''
   },
   mutations: {
     getData (state, data) {
@@ -21,13 +23,19 @@ export default new Vuex.Store({
     },
     editData (state, data) {
       state.editData = data
+    },
+    changeAlert (state, condition) {
+      state.alert = condition
+    },
+    errMessage (state, message) {
+      state.errMessage = message
     }
   },
   actions: {
     login (context, payload) {
       axios({
         method: 'POST',
-        url: `${baseUrl}/login`,
+        url: `${baseUrl}/admin/login`,
         data: payload
       })
         .then(({ data }) => {
@@ -35,7 +43,18 @@ export default new Vuex.Store({
           router.push({ name: 'Home' })
         })
         .catch((err) => {
-          console.log(err)
+          context.commit('changeAlert', true)
+          if (err.response) {
+            console.log(err.response.data)
+            context.commit('errMessage', err.response.data)
+          } else if (err.request) {
+            console.log(err.request)
+            context.commit('errMessage', err.request)
+          } else {
+            console.log(err.message)
+            context.commit('errMessage', err.message)
+          }
+          context.dispatch('changeAlert')
         })
     },
     getData ({ commit, state }) {
@@ -69,7 +88,18 @@ export default new Vuex.Store({
           router.push({ name: 'Home' })
         })
         .catch((err) => {
-          console.log(err)
+          context.commit('changeAlert', true)
+          if (err.response) {
+            console.log(err.response.data)
+            context.commit('errMessage', err.response.data)
+          } else if (err.request) {
+            console.log(err.request)
+            context.commit('errMessage', err.request)
+          } else {
+            console.log(err.message)
+            context.commit('errMessage', err.message)
+          }
+          context.dispatch('changeAlert')
         })
     },
     editProduct (context, payload) {
@@ -85,7 +115,18 @@ export default new Vuex.Store({
           router.push({ name: 'Home' })
         })
         .catch(err => {
-          console.log(err)
+          context.commit('changeAlert', true)
+          if (err.response) {
+            console.log(err.response.data)
+            context.commit('errMessage', err.response.data)
+          } else if (err.request) {
+            console.log(err.request)
+            context.commit('errMessage', err.request)
+          } else {
+            console.log(err.message)
+            context.commit('errMessage', err.message)
+          }
+          context.dispatch('changeAlert')
         })
     },
     deleteProduct (context, id) {
@@ -102,6 +143,11 @@ export default new Vuex.Store({
         .catch((err) => {
           console.log(err)
         })
+    },
+    changeAlert (context) {
+      setTimeout(() => {
+        context.commit('changeAlert', false)
+      }, 3000)
     }
   },
   modules: {

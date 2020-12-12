@@ -35,6 +35,7 @@
                     name="price"
                     prefix = 'Rp.'
                     v-model="price"
+                    required
                   >
                   </v-text-field>
 
@@ -43,6 +44,7 @@
                     label="Stock"
                     name="stock"
                     v-model="stock"
+                    required
                   >
                   </v-text-field>
 
@@ -51,6 +53,24 @@
 
               <v-card-actions>
                 <v-container justify-center>
+                  <v-alert
+                    type="error"
+                    dense
+                    outlined
+                    v-if="alert === true"
+                  >
+                    {{ errMessage }}
+
+                    <div>
+                      <v-btn
+                        color="blue"
+                        text
+                        @click="changeAlert"
+                      >
+                        Close
+                      </v-btn>
+                    </div>
+                  </v-alert>
                   <v-layout row justify-center>
                     <v-btn
                       color="blue"
@@ -80,6 +100,7 @@
 <script>
 import Navbar from '../components/Navbar.vue'
 import Footer from '../components/Footer.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -107,8 +128,12 @@ export default {
     },
     home () {
       this.$router.push({ name: 'Home' })
+    },
+    changeAlert () {
+      this.$store.commit('changeAlert', false)
     }
-  }
+  },
+  computed: mapState(['alert', 'errMessage'])
 }
 </script>
 

@@ -1,11 +1,6 @@
 <template>
   <v-app>
-    <v-main>
-      <router-link to="/login"></router-link>
-      <router-link to="/addproduct"></router-link>
-      <router-link to="/"></router-link>
-      <router-view></router-view>
-    </v-main>
+    <router-view></router-view>
   </v-app>
 </template>
 

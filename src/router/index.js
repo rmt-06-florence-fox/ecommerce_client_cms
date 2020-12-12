@@ -5,6 +5,7 @@ import Home from '../views/Home.vue'
 import AddProduct from '../views/AddProduct.vue'
 import EditProduct from '../views/EditProduct.vue'
 import About from '../views/About.vue'
+import NotFound from '../views/404.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
     path: '/editproduct/:id',
     name: 'EditProduct',
     component: EditProduct
+  },
+  {
+    path: '*',
+    name: '404',
+    component: NotFound
   }
 ]
 
