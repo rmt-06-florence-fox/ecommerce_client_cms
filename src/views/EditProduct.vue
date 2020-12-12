@@ -17,7 +17,7 @@
                 </div>
                 <div class="form-group">
                     <label for="stock">Stock</label>
-                    <input type="stock" class="form-control" name="stock" id="edit-stock" placeholder="stock" v-model="editProduct.stock">
+                    <input type="number" class="form-control" name="stock" id="edit-stock" placeholder="stock" v-model="editProduct.stock">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>

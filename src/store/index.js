@@ -59,7 +59,7 @@ export default new Vuex.Store({
           router.push('/products')
         })
         .catch(e => {
-          console.log(e)
+          Vue.$vToastify.error(`${e}`)
         })
     },
     filterId (context, id) {
@@ -91,7 +91,7 @@ export default new Vuex.Store({
           router.push('/products')
         })
         .catch(e => {
-          console.log(e)
+          Vue.$vToastify.error(`${e}`)
         })
     },
     deleteProduct (context, id) {
