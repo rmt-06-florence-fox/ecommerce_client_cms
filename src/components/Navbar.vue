@@ -1,9 +1,8 @@
 <template>
-    <div id="nav" class="navbar navbar-light bg-light justify-content-between text-col">
-      <router-link to="/products">Main Page</router-link>
-      <router-link to="/products/additem">Add Item</router-link>
-      <router-link to="/products/edititem">Edit Item</router-link>
-      <a href="#" @click="logout">Logout</a>
+    <div id="nav" class="navbar navbar-secondary bg-secondary justify-content-between text-col">
+      <router-link class="link" to="/products"><h5>TokoTokoan</h5></router-link>
+      <button class="btn btn-primary"><router-link class="link" to="/additem">Add Item</router-link></button>
+      <button class="btn btn-danger"><a href="#" class="link" @click="logout">Logout</a></button>
     </div>
 </template>
 
@@ -19,5 +18,14 @@ export default {
 </script>
 
 <style>
-
+  .link {
+    text-decoration: none;
+  }
+  .image {
+    width: 50px;
+    height: 50px;
+  }
+  h5 {
+    color: aliceblue;
+  }
 </style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="fill row">
+  <div class="row d-flex">
     <Navbar></Navbar>
     <router-view/>
   </div>

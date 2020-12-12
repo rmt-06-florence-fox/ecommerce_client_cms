@@ -5,17 +5,18 @@ import MainPage from '../views/MainPage.vue'
 import AddItem from '../views/AddItem.vue'
 import EditItem from '../views/EditItem.vue'
 import NotFoundPage from '../views/NotFound.vue'
+import ProductList from '../views/ProductList.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   {
-    path: '/',
+    path: '/login',
     name: 'Login',
     component: Login
   },
   {
-    path: '/products',
+    path: '/',
     name: 'MainPage',
     component: MainPage,
     children: [
@@ -25,9 +26,14 @@ const routes = [
         component: AddItem
       },
       {
-        path: 'edititem',
+        path: 'edititem/:id',
         name: 'EditItem',
         component: EditItem
+      },
+      {
+        path: 'products',
+        name: 'ProductList',
+        component: ProductList
       }
     ]
   },

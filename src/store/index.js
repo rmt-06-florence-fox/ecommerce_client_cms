@@ -7,8 +7,16 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    products: [],
+    product: []
   },
   mutations: {
+    fetchProduct (state, data) {
+      state.products = data
+    },
+    findProduct (state, data) {
+      state.product = data
+    }
   },
   actions: {
     login (context, payload) {
@@ -37,7 +45,7 @@ export default new Vuex.Store({
         }
       })
         .then(res => {
-          console.log(res)
+          context.commit('fetchProduct', res.data)
         })
         .catch(err => {
           console.log(err)
@@ -64,12 +72,27 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    findProductById (context, id) {
+      return axios({
+        method: 'GET',
+        url: '/products/' + id,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+    },
     editProduct (context, payload) {
       axios({
         method: 'PUT',
-        url: '/products' + payload.id,
+        url: '/products/' + payload.id,
         headers: {
           access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          name: payload.name,
+          image_url: payload.image_url,
+          price: payload.price,
+          stock: payload.stock
         }
       })
         .then(res => {
@@ -80,16 +103,13 @@ export default new Vuex.Store({
         })
     },
     deleteProduct (context, id) {
-      axios({
+      return axios({
         method: 'DELETE',
         url: '/products/' + id,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
       })
-        .then(res => {
-          router.push('/products')
-        })
     }
   },
   modules: {
