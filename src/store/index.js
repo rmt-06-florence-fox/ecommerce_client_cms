@@ -36,6 +36,7 @@ export default new Vuex.Store({
         .then(response => {
           console.log(response.data)
           localStorage.setItem('access_token', response.data.access_token)
+          localStorage.setItem('status', 'verified')
           context.commit('changeLoginStatus', true)
           context.dispatch('fetchProducts')
           router.push('/admin/products')

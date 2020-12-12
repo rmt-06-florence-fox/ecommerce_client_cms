@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Product from '../views/Product.vue'
 import MainPage from '../views/MainPage'
 import FrontPage from '../views/FrontPage.vue'
+import NotFound from '../views/NotFound'
 
 Vue.use(VueRouter)
 
@@ -26,7 +27,7 @@ const routes = [
     component: FrontPage,
     children: [
       {
-        path: '/',
+        path: '',
         name: 'Home',
         component: Home
       },
@@ -36,6 +37,10 @@ const routes = [
         component: Product
       }
     ]
+  },
+  {
+    path: '*',
+    component: NotFound
   }
 ]
 
