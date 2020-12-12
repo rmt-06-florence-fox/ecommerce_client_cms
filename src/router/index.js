@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginAdmin from '../views/LoginAdmin.vue'
 import ContentPage from '../views/ContentPage.vue'
-import _404Page from '../views/404Page.vue'
+import _404Page from '../views/_404Page.vue'
 
 Vue.use(VueRouter)
 

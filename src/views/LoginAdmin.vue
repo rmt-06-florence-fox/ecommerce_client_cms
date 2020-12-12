@@ -58,9 +58,7 @@ export default {
       const email = this.email
       const password = this.password
       this.$store.dispatch('loginHandler', { email, password })
-      if (localStorage.getItem('access_token')) {
-        this.$router.push('dashboard')
-      }
+      this.$router.push('dashboard')
     }
   },
   computed: {
