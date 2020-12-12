@@ -23,7 +23,7 @@ export default new Vuex.Store({
   actions: {
     login (context, payload) {
       axios({
-        url: 'http://localhost:3000/users/login',
+        url: 'https://cryptic-wildwood-90967.herokuapp.com/users/login',
         method: 'POST',
         data: {
           email: payload.email,
@@ -54,7 +54,7 @@ export default new Vuex.Store({
 
     fetchProducts (context) {
       axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://cryptic-wildwood-90967.herokuapp.com/products',
         method: 'GET',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -76,7 +76,7 @@ export default new Vuex.Store({
 
     fetchById (context, payload) {
       axios({
-        url: `http://localhost:3000/products/${payload}`,
+        url: `https://cryptic-wildwood-90967.herokuapp.com/products/${payload}`,
         method: 'GET',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -98,7 +98,7 @@ export default new Vuex.Store({
 
     addStock (context, payload) {
       axios({
-        url: `http://localhost:3000/products/${payload.idProduct}`,
+        url: `https://cryptic-wildwood-90967.herokuapp.com/products/${payload.idProduct}`,
         method: 'PATCH',
         data: {
           stock: payload.stock
@@ -125,7 +125,7 @@ export default new Vuex.Store({
 
     addProduct (context, payload) {
       axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://cryptic-wildwood-90967.herokuapp.com/products',
         method: 'POST',
         data: {
           name: payload.name,
@@ -162,7 +162,7 @@ export default new Vuex.Store({
 
     editProduct (context, payload) {
       axios({
-        url: `http://localhost:3000/products/${payload.idProduct}`,
+        url: `https://cryptic-wildwood-90967.herokuapp.com/products/${payload.idProduct}`,
         method: 'PUT',
         data: {
           name: payload.name,
@@ -199,7 +199,7 @@ export default new Vuex.Store({
 
     deleteProduct (context, payload) {
       axios({
-        url: `http://localhost:3000/products/${payload}`,
+        url: `https://cryptic-wildwood-90967.herokuapp.com/products/${payload}`,
         method: 'DELETE',
         headers: {
           access_token: localStorage.getItem('access_token')
