@@ -4,6 +4,7 @@
     <td>{{ data.name }}</td>
     <td>Rp. {{ convertPrice }}</td>
     <td>{{ data.stock }}</td>
+    <td>{{ data.Categories[0].category }}</td>
     <td><button @click='goEdit(data.id)' class='btn btn-success mr-1'><i class="fas fa-edit"> Edit</i></button>
     <button @click='deleteItem(data.id)' class='btn btn-danger'><i class="fas fa-trash-alt"> Delete</i></button></td>
   </tr>

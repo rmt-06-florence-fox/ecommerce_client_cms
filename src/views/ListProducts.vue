@@ -8,6 +8,7 @@
             <td>Name Product</td>
             <td>Price</td>
             <td>Stock</td>
+            <td>Category</td>
             <td>Action</td>
           </tr>
         </thead>

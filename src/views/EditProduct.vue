@@ -19,6 +19,17 @@
                     <label for="stock">Stock</label>
                     <input type="number" class="form-control" name="stock" id="edit-stock" placeholder="stock" v-model="editProduct.stock">
                 </div>
+                <div class="form-group">
+                    <label for="add-category">Category</label>
+                    <select class="form-control" id="add-category" v-model="editProduct.category">
+                      <option selected disabled>Select Category</option>
+                      <SelectCategory
+                        v-for="category in listCategories"
+                        :key="category.id"
+                        :category="category"
+                      ></SelectCategory>
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
@@ -26,6 +37,7 @@
 </template>
 
 <script>
+import SelectCategory from '../components/SelectCategory'
 export default {
   name: 'EditProduct',
   data () {
@@ -35,7 +47,8 @@ export default {
         image_url: '',
         price: '',
         stock: '',
-        id: ''
+        id: '',
+        category: ''
       }
     }
   },
@@ -43,9 +56,21 @@ export default {
     edit () {
       const editedData = this.editProduct
       this.$store.dispatch('editProduct', editedData)
+    },
+    fetchCategories () {
+      this.$store.dispatch('fetchCategories')
+    }
+  },
+  components: {
+    SelectCategory
+  },
+  computed: {
+    listCategories () {
+      return this.$store.state.listCategories
     }
   },
   created () {
+    this.fetchCategories()
     const id = this.$route.params.id
     this.$store.dispatch('filterId', id)
       .then(response => {
@@ -54,6 +79,7 @@ export default {
         this.editProduct.price = response.price
         this.editProduct.stock = response.stock
         this.editProduct.id = response.id
+        this.editProduct.category = response.Categories[0].id
       })
       .catch(err => console.log(err))
   }

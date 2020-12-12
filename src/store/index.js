@@ -8,12 +8,16 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     listProducts: [],
+    listCategories: [],
     editedData: {},
     access_token: localStorage.getItem('access_token')
   },
   mutations: {
     setListProducts (state, payload) {
       state.listProducts = payload
+    },
+    setListCategories (state, payload) {
+      state.listCategories = payload
     },
     setFilterId (state, payload) {
       state.editedData = payload
@@ -34,6 +38,22 @@ export default new Vuex.Store({
         })
         .catch(err => console.log(err))
     },
+    fetchCategories (context) {
+      return new Promise((resolve, reject) => {
+        axios({
+          url: '/categories',
+          method: 'GET',
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
+        })
+          .then(({ data }) => {
+            context.commit('setListCategories', data.data)
+            resolve(data.data)
+          })
+          .catch(e => reject(e))
+      })
+    },
     login (context, user) {
       axios
         .post('/login', user)
@@ -53,7 +73,40 @@ export default new Vuex.Store({
         headers: {
           access_token: localStorage.getItem('access_token')
         },
-        data: addProduct
+        data: {
+          name: addProduct.name,
+          image_url: addProduct.image_url,
+          price: addProduct.price,
+          stock: addProduct.stock
+        }
+      })
+        .then(response => {
+          return axios({
+            url: '/productCategory',
+            method: 'POST',
+            data: {
+              ProductId: response.data.id,
+              CategoryId: addProduct.category
+            }
+          })
+        })
+        .then(response => {
+          router.push('/products')
+        })
+        .catch(e => {
+          Vue.$vToastify.error(`${e}`)
+        })
+    },
+    addCategory (context, category) {
+      axios({
+        url: '/categories',
+        method: 'POST',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          category: category
+        }
       })
         .then(response => {
           router.push('/products')
@@ -85,8 +138,23 @@ export default new Vuex.Store({
         headers: {
           access_token: localStorage.getItem('access_token')
         },
-        data: editData
+        data: {
+          name: editData.name,
+          image_url: editData.image_url,
+          price: editData.price,
+          stock: editData.stock
+        }
       })
+        .then(response => {
+          return axios({
+            url: `/editProductCategory/${editData.id}`,
+            method: 'PUT',
+            data: {
+              ProductId: editData.id,
+              CategoryId: editData.category
+            }
+          })
+        })
         .then(response => {
           router.push('/products')
         })
