@@ -7,6 +7,7 @@ import CreateProduct from '../views/CreateProduct.vue'
 import ProductTable from '../views/ProductTable.vue'
 import HomePage from '../views/HomePage.vue'
 import EditProduct from '../views/EditProduct.vue'
+import PageNotFound from '../components/PageNotFound.vue'
 
 Vue.use(VueRouter)
 
@@ -49,6 +50,11 @@ const routes = [
     path: '/edit/:id',
     name: 'EditProduct',
     component: EditProduct
+  },
+  {
+    path: '*',
+    name: 'PageNotFound',
+    component: PageNotFound
   },
   {
     path: '/about',

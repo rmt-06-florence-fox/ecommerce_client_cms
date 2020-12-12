@@ -32,11 +32,15 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .price{
     color: #16a592;
     font-size: small;
     display: flex;
     /* justify-content: flex-end; */
+  }
+  img {
+    max-height: 200px;
+    max-width: 250px;
   }
 </style>

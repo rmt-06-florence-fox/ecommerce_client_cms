@@ -126,7 +126,7 @@ export default new Vuex.Store({
         })
     },
     deleteProduct (context, id) {
-      Vue.toasted.info('Are you sure ?', {
+      Vue.toasted.error('Are you sure ?', {
         position: 'top-center',
         action: [
           {

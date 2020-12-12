@@ -2,7 +2,10 @@
   <section class="edit-product-page">
     <div class="container p-2">
       <h1 class="text-center mb-5 header-edit">Edit Data Product</h1>
-      <div class="row">
+      <div v-if="!product.name">
+        <PageNotFound></PageNotFound>
+      </div>
+      <div v-else class="row">
         <div class="col-2 ">
           <img :src="product.image_url" alt="">
         </div>
@@ -44,8 +47,13 @@
 </template>
 
 <script>
+import PageNotFound from '../components/PageNotFound'
+
 export default {
   name: 'EditProduct',
+  components: {
+    PageNotFound
+  },
   methods: {
     fetchProduct () {
       this.$store.dispatch('editProduct', this.$route.params.id)
@@ -68,7 +76,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
   .btn-edit-submit{
     background-color: #1ee2c8;
     width: 150px ;

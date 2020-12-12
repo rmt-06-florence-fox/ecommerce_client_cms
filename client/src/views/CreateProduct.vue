@@ -2,6 +2,9 @@
   <section class="create-product-page">
     <div class="container col-8">
       <h1 class="text-center mb-5 header-create">Create New Product</h1>
+      <div v-if="payload.image_url">
+        <img :src="payload.image_url" alt="" class="img-create">
+      </div>
       <form @submit.prevent="onSubmit">
         <div class="form-group mt-1 row">
           <label for="input-name" class="col-sm-2 col-2 col-form-label">Name</label>
@@ -31,6 +34,7 @@
           <button type="submit" class="mt-4 btn btn-create btn-block">Create</button>
         </div>
       </form>
+      <button @click.prevent="onCancel" type="click" class="m-2 btn btn-cancel btn-block">Cancel</button>
     </div>
   </section>
 </template>
@@ -51,6 +55,9 @@ export default {
   methods: {
     onSubmit () {
       this.$store.dispatch('createProduct', this.payload)
+    },
+    onCancel () {
+      this.$router.push('/products')
     }
   }
 }
@@ -70,5 +77,13 @@ export default {
   }
   .header-create{
     color: #16a592;
+  }
+  .img-create{
+    height: 200px;
+  }
+  .btn-cancel{
+    background-color: #c3f5ee;
+    width: 150px;
+    height: 40px;
   }
 </style>
