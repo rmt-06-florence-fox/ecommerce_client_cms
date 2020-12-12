@@ -45,7 +45,8 @@
             </svg>
           </button>
         </div>
-        <div class="h-full flex flex-col py-6 bg-gray-50 shadow-xl overflow-y-scroll">
+        <div class="h-full flex flex-col py-6 bg-gray-50 shadow-xl overflow-y-scroll"
+              v-on-clickaway="closeThis">
           <div class="px-4 sm:px-6 mt-8">
             <div v-if="onError">
              <errorBanner v-for="(error, index) in errorData"
@@ -101,6 +102,9 @@
                             Cancel</button>
                     </div>
                   </form>
+                  <div class="invisible h-6">
+                    <span></span>
+                  </div>
               </div>
             </div>
             <!-- /End replace -->
@@ -115,9 +119,13 @@
 <script>
 import axios from '../config/axios'
 import errorBanner from './errorBanner'
+import { directive as onClickaway } from 'vue-clickaway'
 
 export default {
   name: 'editBanner',
+  directives: {
+    onClickaway: onClickaway
+  },
   props: ['banner'],
   components: {
     errorBanner
