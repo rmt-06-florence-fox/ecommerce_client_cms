@@ -4,7 +4,8 @@
       <div class="row justify-content-center mt-5">
         <div class="col-4 bg-light">
           <div class="shadow-lg p-5 rounded">
-            <h5 class="mb-4 text-center"><b>Mr Bee Ecommerce</b></h5>
+            <img src="../assets/mrbee.jpeg">
+            <h5 class="mb-4 mt-4 text-center"><b>Mr Bee Ecommerce</b></h5>
             <div>
               <form @submit.prevent="login">
                 <div class="form-group">

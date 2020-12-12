@@ -12,12 +12,12 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <input
+    <!-- <input
       class="form-control form-control-dark w-100"
       type="text"
       placeholder="Search"
       aria-label="Search"
-    />
+    /> -->
     <ul class="navbar-nav px-3">
       <li class="nav-item text-nowrap">
         <a class="nav-link" href="#" @click="logout">Sign out</a>
@@ -28,6 +28,10 @@
 
 <script>
 export default {
+  name: 'Navbar',
+  // data () {
+  //   return
+  // },
   methods: {
     logout () {
       localStorage.clear()

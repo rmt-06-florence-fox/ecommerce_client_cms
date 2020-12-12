@@ -1,27 +1,17 @@
 <template>
   <div class="home">
-    <img src="../assets/mrbee.jpeg">
-    <div class="hello">
-      <h1>{{ Vuex }}</h1>
-      <button @click="change">changeTitle</button>
-  </div>
+    <div class="jumbotron">
+      <h1 class="display-4">Welcome to Mr Bee Ecommerce!</h1>
+      <p class="lead">You are logged in as administrator.</p>
+      <hr class="my-4">
+      <p>You can manage the database file here.</p>
+    </div>
   </div>
 </template>
 
 <script>
 
 export default {
-  name: 'Home',
-  computed: {
-    Vuex () {
-      return this.$store.state.title
-    }
-  },
-  methods: {
-    change () {
-      const payload = 'se'
-      return this.$store.commit('change', payload)
-    }
-  }
+  name: 'Home'
 }
 </script>
