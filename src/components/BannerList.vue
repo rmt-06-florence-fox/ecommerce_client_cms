@@ -16,25 +16,19 @@
                   scope="col"
                   style="text-align: center; font-size: 20px"
                 >
+                  Title
+                </th>
+                <th
+                  scope="col"
+                  style="text-align: center; font-size: 20px"
+                >
+                  Status
+                </th>
+                <th
+                  scope="col"
+                  style="text-align: center; font-size: 20px"
+                >
                   Image
-                </th>
-                <th
-                  scope="col"
-                  style="text-align: center; font-size: 20px"
-                >
-                  Name
-                </th>
-                <th
-                  scope="col"
-                  style="text-align: center; font-size: 20px"
-                >
-                  Price
-                </th>
-                <th
-                  scope="col"
-                  style="text-align: center; font-size: 20px"
-                >
-                  Stock
                 </th>
                 <th
                   scope="col"
@@ -45,11 +39,11 @@
               </tr>
             </thead>
             <tbody>
-              <ProductItem
-                v-for="(product, idx) in products" :key="idx"
-                :product="product"
+              <BannerItem
+                v-for="(banner, idx) in banners" :key="idx"
+                :banner="banner"
                 :idx="idx"
-              ></ProductItem>
+              ></BannerItem>
             </tbody>
           </table>
         </div>
@@ -59,25 +53,25 @@
 </template>
 
 <script>
-import ProductItem from './ProductItem'
+import BannerItem from './BannerItem'
 
 export default {
-  name: 'ProductList',
+  name: 'BannerList',
   components: {
-    ProductItem
+    BannerItem
   },
   computed: {
-    products () {
+    banners () {
       return this.$store.state.products
     }
   },
   methods: {
-    fetchProductList () {
-      this.$store.dispatch('fetchProductList')
+    fetchBannerList () {
+      this.$store.dispatch('fetchBannerList')
     }
   },
   created () {
-    this.fetchProductList()
+    this.fetchBannerList()
   }
 
 }

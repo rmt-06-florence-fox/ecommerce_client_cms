@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1 class="text-center mt-5">Edit Product</h1>
-    <form @submit.prevent="editProduct">
+    <form @submit.prevent="updateProduct">
       <div class="form-group">
         <input
           type="text"
@@ -34,7 +34,7 @@
           v-model="product.stock"
         />
       </div>
-      <button type="submit" class="btn btn-primary btn-center">Add</button>
+      <button type="submit" class="btn btn-primary btn-center">Edit</button>
     </form>
   </div>
 </template>
@@ -57,11 +57,24 @@ export default {
       const id = this.$route.params.id
       this.$store.dispatch('toEditPage', id)
         .then(response => {
-          console.log(response)
+          this.product.name = response.data.product.name
+          this.product.image_url = response.data.product.image_url
+          this.product.price = response.data.product.price
+          this.product.stock = response.data.product.stock
         })
         .catch(error => {
           console.log(error.response)
         })
+    },
+    updateProduct () {
+      const payload = {
+        id: this.$route.params.id,
+        name: this.product.name,
+        image_url: this.product.image_url,
+        price: this.product.price,
+        stock: this.product.stock
+      }
+      this.$store.dispatch('updateProduct', payload)
     }
   },
   created () {

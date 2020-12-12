@@ -3,8 +3,10 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import Main from '../views/Main.vue'
-import AddProduct from '../components/AddProduct.vue'
-import EditProduct from '../components/EditProduct.vue'
+import AddProduct from '../views/AddProduct.vue'
+import EditProduct from '../views/EditProduct.vue'
+import AddBanner from '../views/AddBanner.vue'
+import EditBanner from '../views/EditBanner.vue'
 
 Vue.use(VueRouter)
 
@@ -41,7 +43,26 @@ const routes = [
         path: 'editProduct/:id',
         name: 'EditProduct',
         component: EditProduct
+      },
+      {
+        path: 'banners',
+        name: 'Banners',
+        // route level code-splitting
+        // this generates a separate chunk (about.[hash].js) for this route
+        // which is lazy-loaded when the route is visited.
+        component: () => import(/* webpackChunkName: "about" */ '../views/Banner.vue')
+      },
+      {
+        path: 'addBanner',
+        name: 'AddBanner',
+        component: AddBanner
+      },
+      {
+        path: 'editBanner/:id',
+        name: 'EditBanner',
+        component: EditBanner
       }
+
     ]
   }
 ]

@@ -1,16 +1,16 @@
 <template>
 <div>
-  <ProducList></ProducList>
+  <BannerList></BannerList>
 </div>
 </template>
 
 <script>
-import ProducList from '../components/ProductList.vue'
+import BannerList from '../components/BannerList.vue'
 
 export default {
-  name: 'Product',
+  name: 'Banner',
   components: {
-    ProducList
+    BannerList
   }
 }
 </script>
