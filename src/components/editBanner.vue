@@ -47,6 +47,11 @@
         </div>
         <div class="h-full flex flex-col py-6 bg-gray-50 shadow-xl overflow-y-scroll">
           <div class="px-4 sm:px-6 mt-8">
+            <div v-if="onError">
+             <errorBanner v-for="(error, index) in errorData"
+                          :key="index"
+                          :error="error"></errorBanner>
+            </div>
             <h2 id="slide-over-heading" class="text-2xl font-bold text-gray-900">
               Edit Banner
             </h2>
@@ -62,7 +67,7 @@
                         v-model="title"/>
                       <label for="image" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Banner Image</label>
                         <input id="image" type="text" name="image" placeholder="Banner image"
-                        class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required
+                        class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                         v-model="image_url"/>
                         <img v-if="image_url" :src="image_url" class="h-auto w-full">
                       <label for="status" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Banner status</label>
@@ -109,16 +114,22 @@
 
 <script>
 import axios from '../config/axios'
+import errorBanner from './errorBanner'
 
 export default {
   name: 'editBanner',
   props: ['banner'],
+  components: {
+    errorBanner
+  },
   data () {
     return {
       status: '',
       title: '',
       image_url: '',
-      size: ''
+      size: '',
+      onError: false,
+      errorData: ''
     }
   },
   methods: {
@@ -144,7 +155,10 @@ export default {
           this.$emit('reload')
         })
         .catch(err => {
-          console.log(err)
+          this.onError = true
+          setTimeout(() => { this.onError = false }, 2000)
+          this.errorData = err.response.data.errors
+          console.log(err.response)
         })
     },
     setBanner () {

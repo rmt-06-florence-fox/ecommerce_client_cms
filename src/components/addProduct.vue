@@ -4,6 +4,11 @@
       class="flex-1 flex flex-col bg-gray-100 transition duration-1000 ease-in-out overflow-y-auto
               justify-center place-items-center w-full"
     >
+      <div v-if="onProductError">
+             <errorBanner v-for="(error, index) in errorProductList"
+                          :key="index"
+                          :error="error"></errorBanner>
+      </div>
       <div class="w-11/12 p-12 bg-white sm:w-8/12 md:w-1/2 lg:w-5/12">
           <h1 class="text-xl font-semibold">Add New Product</h1>
           <form class="mt-6" @submit.prevent="postProduct">
@@ -54,16 +59,22 @@
 
 <script>
 import { mapState } from 'vuex'
+import errorBanner from './errorBanner'
 
 export default {
   name: 'addProduct',
+  components: {
+    errorBanner
+  },
   data () {
     return {
       name: '',
       image_url: '',
-      price: 0,
-      stock: 0,
-      catSelected: []
+      price: null,
+      stock: null,
+      catSelected: [],
+      onError: false,
+      errorData: ''
     }
   },
   methods: {
@@ -83,8 +94,13 @@ export default {
   },
   computed: {
     ...mapState({
-      categories: 'categories'
+      categories: 'categories',
+      onProductError: 'onProductError',
+      errorProductList: 'errorProductList'
     })
+  },
+  created () {
+    this.$store.dispatch('loadProducts')
   }
 }
 </script>

@@ -4,6 +4,11 @@
       class="flex-1 flex flex-col bg-gray-100 transition duration-1000 ease-in-out overflow-y-auto
               justify-center place-items-center w-full"
     >
+    <div v-if="onErrorCat">
+             <errorBanner v-for="(error, index) in onCatError"
+                          :key="index"
+                          :error="error"></errorBanner>
+      </div>
     <div class="text-4xl font-bold">
         Category List
     </div>
@@ -23,7 +28,7 @@
             <form class="mt-6" @submit.prevent="postUpdatCat">
               <label for="name" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Category Name</label>
               <input id="name" type="text" name="name" placeholder="Category Name"
-                    class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required
+                    class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                     v-model="name"
                     />
               <div class="w-full flex flex-row gap-x-2">
@@ -50,7 +55,7 @@
           <form class="mt-6" @submit.prevent="addCat">
             <label for="name" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Category Name</label>
             <input id="name" type="text" name="name" placeholder="Category Name"
-                  class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required
+                  class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner"
                   v-model="newName"/>
             <div class="w-full flex flex-row gap-x-2">
             <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-gray-600 shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
@@ -67,9 +72,13 @@
 <script>
 import { mapState } from 'vuex'
 import { directive as onClickaway } from 'vue-clickaway'
+import errorBanner from './errorBanner'
 
 export default {
   name: 'categories',
+  components: {
+    errorBanner
+  },
   directives: {
     onClickaway: onClickaway
   },
@@ -108,8 +117,13 @@ export default {
   },
   computed: {
     ...mapState({
-      categories: 'categories'
+      categories: 'categories',
+      onErrorCat: 'onErrorCat',
+      onCatError: 'onCatError'
     })
+  },
+  created () {
+    this.$store.dispatch('loadCategories')
   }
 }
 </script>

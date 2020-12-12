@@ -54,7 +54,7 @@
             >
               <button class="bg-yellow-500 py-1 px-3 text-white rounded-sm transform scale-100 hover:scale-110"
                       >
-                Re-stock
+                Edit
               </button>
               <button class="bg-red-500 py-1 px-3 text-white rounded-sm transform scale-100 hover:scale-110"
                       @click.stop="deleteThis">

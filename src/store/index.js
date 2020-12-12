@@ -10,7 +10,11 @@ export default new Vuex.Store({
     siteTitle: 'JAM TANGEN',
     products: [],
     categories: [],
-    user: ''
+    user: '',
+    onProductError: false,
+    errorProductList: '',
+    onErrorCat: false,
+    onCatError: ''
   },
   mutations: {
     setProducts (state, value) {
@@ -21,6 +25,18 @@ export default new Vuex.Store({
     },
     setUser (state, value) {
       state.user = value
+    },
+    setProductError (state, value) {
+      state.onProductError = value
+    },
+    setErrorProduct (state, value) {
+      state.errorProductList = value
+    },
+    setonErrorCat (state, val) {
+      state.onErrorCat = val
+    },
+    setonCatError (state, val) {
+      state.onCatError = val
     }
   },
   actions: {
@@ -86,6 +102,11 @@ export default new Vuex.Store({
         .then(res => {
           router.push('dashboard')
         })
+        .catch(err => {
+          context.commit('setProductError', true)
+          setTimeout(() => { context.commit('setProductError', false) }, 2000)
+          context.commit('setErrorProduct', err.response.data.errors)
+        })
     },
     updateProduct (context, data) {
       axios({
@@ -131,6 +152,11 @@ export default new Vuex.Store({
         .then(res => {
           router.push('/dashboard')
         })
+        .catch(err => {
+          context.commit('setProductError', true)
+          setTimeout(() => { context.commit('setProductError', false) }, 2000)
+          context.commit('setErrorProduct', err.response.data.errors)
+        })
     },
     deleteProduct (context, id) {
       axios({
@@ -159,6 +185,11 @@ export default new Vuex.Store({
         .then(res => {
           context.dispatch('loadCategories')
         })
+        .catch(err => {
+          context.commit('setonErrorCat', true)
+          setTimeout(() => { context.commit('setonErrorCat', false) }, 2000)
+          context.commit('setonCatError', err.response.data.errors)
+        })
     },
     postUpdatCat (context, data) {
       axios({
@@ -174,6 +205,11 @@ export default new Vuex.Store({
         .then(res => {
           // context.commit('setCategories', [])
           context.dispatch('loadCategories')
+        })
+        .catch(err => {
+          context.commit('setonErrorCat', true)
+          setTimeout(() => { context.commit('setonErrorCat', false) }, 2000)
+          context.commit('setonCatError', err.response.data.errors)
         })
     },
     loadCategories (context) {

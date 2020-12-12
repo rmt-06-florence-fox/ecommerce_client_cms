@@ -18,17 +18,17 @@
         >
           <div class="px-5">
             <button class="py-2 px-3 focus:outline-none hover:bg-black hover:text-white"
-                  @click="addingBanner">
+                  @click="publishAll">
               Publish All Banner
             </button>
             <button class="py-2 px-3 focus:outline-none hover:bg-black hover:text-white"
-                  >
+                  @click="unpublishAll">
               Unpublish All Banner
             </button>
           </div>
           <div class="px-5 py-2 hover:bg-black hover:text-white transform hover:-translate-x-3 transition duration-300 ease-in-out">
             <button class="px-2 focus:outline-none"
-                  >
+                  @click="addingBanner">
               Add Banner
             </button>
           </div>
@@ -124,7 +124,7 @@ export default {
   methods: {
     loadBanners () {
       axios({
-        methods: 'get',
+        method: 'get',
         url: '/banner',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -157,6 +157,37 @@ export default {
       //   .then(res => {
       //     this.bannerRaw = res.data
       //   })
+    },
+    publishAll () {
+      console.log('publishAll')
+      axios({
+        method: 'put',
+        url: '/banner',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          status: true
+        }
+      })
+        .then(res => {
+          this.loadBanners()
+        })
+    },
+    unpublishAll () {
+      axios({
+        method: 'put',
+        url: '/banner',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          status: false
+        }
+      })
+        .then(res => {
+          this.loadBanners()
+        })
     }
   },
   created () {
