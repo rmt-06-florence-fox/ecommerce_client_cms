@@ -1,19 +1,25 @@
 <template>
-  <b-card-group deck class="row justify-content-center" id="product-list">
+ <div>
+    <b-modal id="errors-modal" title="Ooops, error(s) happened" hide-footer>
+    <ErrorPage />
+    </b-modal>
+    <b-card-group deck class="row justify-content-center" id="product-list">
       <ProductCard
       v-for="product in products"
       :key="product.id"
       :product="product" />
-  </b-card-group>
+    </b-card-group>
+ </div>
 </template>
 
 <script>
 import ProductCard from './ProductCard.vue'
-
+import ErrorPage from './ErrorPage.vue'
 export default {
   name: 'ProductList',
   components: {
-    ProductCard
+    ProductCard,
+    ErrorPage
   },
   methods: {
     fetchProducts () {
@@ -23,6 +29,15 @@ export default {
   computed: {
     products () {
       return this.$store.state.products
+    },
+    errors () {
+      return this.$store.state.errors
+    }
+  },
+  watch: {
+    errors () {
+      if (this.errors.length) this.$bvModal.show('errors-modal')
+      else this.$bvModal.hide('errors-modal')
     }
   },
   created () {

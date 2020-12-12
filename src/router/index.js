@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginAdmin from '../views/LoginAdmin.vue'
 import ContentPage from '../views/ContentPage.vue'
+import _404Page from '../views/404Page.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +16,11 @@ const routes = [
     path: '/dashboard',
     name: 'ContentPage',
     component: ContentPage
+  },
+  {
+    path: '*',
+    name: 'NotFoundPage',
+    component: _404Page
   }
 ]
 const router = new VueRouter({

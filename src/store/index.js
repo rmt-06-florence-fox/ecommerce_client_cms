@@ -31,6 +31,7 @@ export default new Vuex.Store({
         }
       }).then(({ data }) => {
         localStorage.setItem('access_token', data.access_token)
+        context.commit('setErrors', [])
       }).catch(err => {
         context.commit('setErrors', err.response.data.messages)
       })
@@ -41,10 +42,10 @@ export default new Vuex.Store({
         method: 'GET',
         headers: { access_token: localStorage.getItem('access_token') }
       }).then(({ data }) => {
-        const payload = data.products
-        context.commit('changeProducts', payload)
+        context.commit('changeProducts', data)
+        context.commit('setErrors', [])
       }).catch(err => {
-        console.log(err, '<<<< error from fetch Prods')
+        // console.log(err, '<<<< error from fetch Prods')
         context.commit('setErrors', err.response.data.messages)
       })
     },
@@ -56,8 +57,9 @@ export default new Vuex.Store({
       }).then(({ data }) => {
         context.dispatch('fetchProducts')
         context.commit('successMessage', data.message)
+        context.commit('setErrors', [])
       }).catch(err => {
-        console.log(err)
+        // console.log(err)
         context.commit('setErrors', err.response.data.messages)
       })
     },
@@ -70,6 +72,7 @@ export default new Vuex.Store({
         headers: { access_token: localStorage.getItem('access_token') }
       }).then(_ => {
         context.dispatch('fetchProducts')
+        context.commit('setErrors', [])
         context.commit('successMessage', 'Product has been edited')
       }).catch(err => {
         context.commit('setErrors', err.response.data.messages)
@@ -85,6 +88,7 @@ export default new Vuex.Store({
       }).then(_ => {
         context.dispatch('fetchProducts')
         context.commit('successMessage', 'One product has been added')
+        context.commit('setErrors', [])
       }).catch(err => {
         context.commit('setErrors', err.response.data.messages)
       })
