@@ -43,6 +43,11 @@ export default {
     },
     hideModal () {
       this.$refs['my-modal'].hide()
+      this.name = ''
+      this.image_url = ''
+      this.price = ''
+      this.stock = ''
+      this.categorySelected = ''
     },
     toggleModal () {
       // We pass the ID of the button that we want to return focus to
@@ -59,6 +64,11 @@ export default {
       }
       this.$store.dispatch('addProduct', payload)
       this.hideModal()
+      this.name = ''
+      this.image_url = ''
+      this.price = ''
+      this.stock = ''
+      this.categorySelected = ''
     },
     fetchCategory () {
       this.$store.dispatch('fetchCategory')

@@ -61,6 +61,11 @@ export default {
       }
       this.$store.dispatch('editProduct', payload)
       this.hideModal()
+      this.name = this.product.name
+      this.image_url = this.product.image_url
+      this.price = this.product.price
+      this.stock = this.product.stock
+      this.categoryName = this.product.Category.name
     },
     fetchCategory () {
       this.$store.dispatch('fetchCategory')

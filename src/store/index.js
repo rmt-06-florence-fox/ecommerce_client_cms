@@ -65,6 +65,7 @@ export default new Vuex.Store({
           this.dispatch('fetchProduct')
         })
         .catch(err => {
+          Swal.fire(' Add Product Failed')
           console.log(err)
         })
     },
@@ -103,6 +104,7 @@ export default new Vuex.Store({
           this.dispatch('fetchProduct')
         })
         .catch(err => {
+          Swal.fire('Edit Product Failed')
           console.log(err)
         })
     },
@@ -119,6 +121,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          Swal.fire(' Delete Failed')
         })
     },
     addCategory (context, payload) {
@@ -138,6 +141,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          Swal.fire(' Add Category Failed')
         })
     },
     increaseStock (context, payload) {
@@ -155,6 +159,7 @@ export default new Vuex.Store({
           Swal.fire('Updated Stock Success')
         })
         .catch(err => {
+          Swal.fire('Update stock Failed')
           console.log(err)
         })
     },
@@ -174,6 +179,7 @@ export default new Vuex.Store({
           Swal.fire('Updated Stock Success')
         })
         .catch(err => {
+          Swal.fire('Update stock Failed')
           console.log(err)
         })
     },
@@ -210,6 +216,7 @@ export default new Vuex.Store({
           this.dispatch('fetchBanner')
         })
         .catch(err => {
+          Swal.fire('Create Banner Failed')
           console.log(err)
         })
     },
@@ -231,6 +238,7 @@ export default new Vuex.Store({
           this.dispatch('fetchBanner')
         })
         .catch(err => {
+          Swal.fire('Edit Banner Failed')
           console.log(err)
         })
     },

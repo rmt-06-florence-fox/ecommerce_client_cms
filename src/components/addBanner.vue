@@ -52,6 +52,10 @@ export default {
       }
       this.$store.dispatch('addBanner', payload)
       this.hideModal()
+
+      this.title = ''
+      this.image_url = ''
+      this.statusSelected = ''
     }
   }
 }

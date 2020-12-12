@@ -56,6 +56,9 @@ export default {
 
       this.$store.dispatch('editBanner', payload)
       this.hideModal()
+      this.title = this.banner.title
+      this.image_url = this.banner.image_url
+      this.statusSelected = this.banner.status
     }
   }
 }

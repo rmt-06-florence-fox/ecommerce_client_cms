@@ -7,7 +7,7 @@
             <h3>Category Name</h3>
             <input class="text-center" v-model="name"  type="text" required >
         </div>
-        <b-button class="mt-2" variant="outline-warning" block @click="addCategory" >add</b-button>
+        <b-button class="mt-3" variant="outline-warning" block @click="addCategory" >add</b-button>
         <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-button>
         </b-modal>
     </form>
@@ -40,6 +40,7 @@ export default {
       }
       this.$store.dispatch('addCategory', payload.name)
       this.hideModal()
+      this.name = ''
     }
   }
 }
