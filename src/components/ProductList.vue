@@ -1,7 +1,10 @@
 <template>
  <div>
     <b-modal id="errors-modal" title="Ooops, error(s) happened" hide-footer>
-    <ErrorPage />
+      <ErrorPage />
+    </b-modal>
+    <b-modal id="success-modal" title="Edited" hide-footer>
+      <Success />
     </b-modal>
     <b-card-group deck class="row justify-content-center" id="product-list">
       <ProductCard
@@ -15,11 +18,13 @@
 <script>
 import ProductCard from './ProductCard.vue'
 import ErrorPage from './ErrorPage.vue'
+import Success from './Success.vue'
 export default {
   name: 'ProductList',
   components: {
     ProductCard,
-    ErrorPage
+    ErrorPage,
+    Success
   },
   methods: {
     fetchProducts () {
@@ -32,12 +37,20 @@ export default {
     },
     errors () {
       return this.$store.state.errors
+    },
+    message () {
+      console.log('computed kepanggil', this.$store.state.successMessage)
+      return this.$store.state.successMessage
     }
   },
   watch: {
     errors () {
       if (this.errors.length) this.$bvModal.show('errors-modal')
       else this.$bvModal.hide('errors-modal')
+    },
+    message () {
+      console.log('watch kepanggil')
+      if (this.successMessage.length) this.$bvModal.show('success-modal')
     }
   },
   created () {

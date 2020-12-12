@@ -1,5 +1,8 @@
 <template>
   <div class="d-flex justify-content-center w-100 h-100" id="login-page-container">
+    <b-modal id="errors-modal" title="Ooops, error(s) happened" hide-footer>
+      <ErrorPage />
+    </b-modal>
     <div class="d-flex flex-column justify-content-center">
       <h3 class="mb-3 text-white">This is login page for admin</h3>
       <div id="form" class="p-sm-3 text-white font-weight-bolder">
@@ -38,8 +41,12 @@
 </template>
 
 <script>
+import ErrorPage from '../components/ErrorPage.vue'
 export default {
   name: 'LoginAdmin',
+  components: {
+    ErrorPage
+  },
   data () {
     return {
       email: '',
@@ -57,8 +64,17 @@ export default {
     }
   },
   computed: {
-    errors () {
+    messages () {
       return this.$store.messages
+    },
+    errors () {
+      return this.$store.state.errors
+    }
+  },
+  watch: {
+    errors () {
+      if (this.errors.length) this.$bvModal.show('errors-modal')
+      else this.$bvModal.hide('errors-modal')
     }
   }
 }

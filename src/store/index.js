@@ -18,6 +18,9 @@ export default new Vuex.Store({
     },
     successMessage (state, string) {
       state.successMessage = string
+      setTimeout(_ => {
+        state.succesMessage = ''
+      }, 3000)
     }
   },
   actions: {

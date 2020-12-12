@@ -1,28 +1,28 @@
 <template>
   <b-card
-    :title="product.name"
-    :img-src="product.imageUrl"
-    img-alt="Image"
-    img-top
-    style="max-width: 15rem;"
-    class="m-2"
-    >
+      :title="product.name"
+      :img-src="product.imageUrl"
+      :img-alt="product.name"
+      img-height="40%"
+      img-top
+      style="max-width: 20rem;"
+      class="m-2"
+      >
 
-    <b-card-body class="d-flex flex-column">
-     <div>price : {{formattingPrice()}}</div>
-     <div>stock : {{product.stock}}</div>
-    </b-card-body>
-
-   <b-card-footer fluid="sm" class="card">
-      <button class="m-1 btn-success" v-b-modal="modalId"> Edit </button>
-      <button class="m-1 btn-dark" @click="deleteHandler(product.id)" > Delete </button>
-      <b-modal :id="modalId" hide-footer>
-        <EditForm :product="product" />
+      <b-card-body class="d-flex flex-column">
+      <div>price : {{formattingPrice()}}</div>
+      <div>stock : {{product.stock}}</div>
+      </b-card-body>
+    <b-card-footer fluid="sm" class="d-flex flex-column">
+        <button class="m-1 btn-success" v-b-modal="modalId"> Edit </button>
+        <button class="m-1 btn-dark" @click="deleteHandler(product.id)" > Delete </button>
+    </b-card-footer>
+    <b-card-footer>
+       <b-modal :id="modalId" hide-footer title="Edit Product">
+          <EditForm :product="product"/>
       </b-modal>
-   </b-card-footer>
-
+    </b-card-footer>
   </b-card>
-
 </template>
 
 <script>
