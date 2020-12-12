@@ -15,6 +15,9 @@ const routes = [
     path: '/',
     // name: 'Home',
     component: Home,
+    meta: {
+      title: 'Jam Tangen Ecommerce CMS'
+    },
     children: [
       {
         path: '',
@@ -23,11 +26,17 @@ const routes = [
       {
         path: 'dashboard',
         name: 'dashboard',
+        meta: {
+          title: 'Jam Tangen Ecommerce CMS'
+        },
         component: dashboard
       },
       {
         path: 'banners',
         name: 'banners',
+        meta: {
+          title: 'Jam Tangen Ecommerce CMS'
+        },
         component: banners
         // children: [{
         //   path: '/add',
@@ -38,27 +47,42 @@ const routes = [
       {
         path: 'users',
         name: 'users',
+        meta: {
+          title: 'Jam Tangen Ecommerce CMS'
+        },
         component: users
       },
       {
         path: 'add-product',
         name: 'add-product',
+        meta: {
+          title: 'Jam Tangen Ecommerce CMS'
+        },
         component: addProduct
       },
       {
         path: 'edit-product/:id',
         name: 'edit-product',
+        meta: {
+          title: 'Jam Tangen Ecommerce CMS'
+        },
         component: editProduct
       },
       {
         path: 'categories',
         name: 'categories',
+        meta: {
+          title: 'Jam Tangen Ecommerce CMS'
+        },
         component: categories
       }
     ]
   },
   {
     path: '/login',
+    meta: {
+      title: 'Jam Tangen Ecommerce CMS'
+    },
     name: 'Login',
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route

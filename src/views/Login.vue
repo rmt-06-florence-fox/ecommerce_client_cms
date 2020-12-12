@@ -1,7 +1,7 @@
 <template>
   <div class="w-full h-screen flex">
     <img
-      src="https://images.unsplash.com/photo-1604242692760-2f7b0c26856d?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1049&q=80"
+      src="../assets/bg.jpg"
       alt="background"
       class="object-cover object-center h-screen w-7/12"
     />
