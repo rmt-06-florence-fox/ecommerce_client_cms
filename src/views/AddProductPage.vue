@@ -3,22 +3,26 @@
     <h1>ADD PRODUCT</h1>
     <div class="col-4 border border-transparent mx-auto shadow-lg p-3 mb-5 bg-white rounded">
         <img src="https://dewey.tailorbrands.com/production/brand_version_mockup_image/822/4281206822_be209932-fad6-4caa-8203-807240681ada.png?cb=1607775908" class="img2">
-      <form style="margin-top: 80px;" @submit.prevent="addProduct">
+      <form style="margin-top: 80px;">
         <div class="form-group">
-          <label for="InputName">Email address</label>
-          <input placeholder="productName" type="text" class="form-control" id="InputproductName" required>
+          <label for="InputName">name product</label>
+          <input v-model="name"  placeholder="product name" type="text" class="form-control" id="InputproductName" required>
           <small id="productNameHelp" class="form-text text-muted">example: baju hermes</small>
         </div>
         <div class="form-group">
           <label for="InputImageUrl">Image Url</label>
-          <input placeholder="Image Url" type="text" class="form-control" id="InputImageUrl" required>
+          <input v-model="imageUrl" placeholder="Image Url" type="text" class="form-control" id="InputImageUrl" required>
           <small id="productNameHelp" class="form-text text-muted">example: http://...</small>
         </div>
         <div class="form-group">
           <label for="InputPrice">price</label>
-          <input placeholder="price" type="text" class="form-control" id="Inputprice" required>
+          <input v-model="price" placeholder="price" type="text" class="form-control" id="Inputprice" required>
         </div>
-        <button type="submit" class="btn-login">Add</button>
+        <div class="form-group">
+          <label for="InputStock">Stock</label>
+          <input v-model="stock" placeholder="Stock" type="text" class="form-control" id="InputStock" required>
+        </div>
+        <button type="button" @click="addProduct" class="btn-login">Add</button>
         <button @click="cancel" class="btn-cancel">Cancel</button>
       </form>
     </div>
@@ -27,9 +31,30 @@
 
 <script>
 export default {
+  data () {
+    return {
+      name: '',
+      price: '',
+      imageUrl: '',
+      stock: ''
+    }
+  },
   methods: {
     addProduct () {
-      this.$router.push({ path: '/' })
+      const payload = {
+        name: this.name,
+        imageUrl: this.imageUrl,
+        price: this.price,
+        stock: this.stock
+      }
+      this.$store.dispatch('addProduct', payload)
+        .then(({ data }) => {
+          this.$router.push({ path: '/' })
+        })
+        .catch(error => {
+          this.$router.push({ path: '/' })
+          console.log(error)
+        })
     },
     cancel () {
       this.$router.push({ path: '/' })

@@ -1,12 +1,12 @@
 <template>
-  <div class="row col-8 mx-auto">
-      <div class="card ml-5 mt-3" style="width: 14rem;">
-      <img src="https://miro.medium.com/max/1200/1*mk1-6aYaf_Bes1E3Imhc0A.jpeg" class="card-img-top">
+  <div>
+    <div class="card ml-5 mt-3" style="width: 14rem;" id="card">
+      <img :src="product.imageUrl" class="card-img-top" style="width: 14rem; height: 12rem">
       <div class="card-body">
-        <h5 class="card-title">name product</h5>
-        <p class="card-text">price</p>
+        <h5 class="card-title">name product {{ product.name }}</h5>
+        <p class="card-text">price {{ product.price }}</p>
         <button class="btn-edit">edit</button>
-        <button class="btn-delete">delete</button>
+        <button class="btn-delete" @click="deleteProduct">delete</button>
       </div>
     </div>
   </div>
@@ -14,11 +14,33 @@
 
 <script>
 export default {
-
+  props: ['product'],
+  data () {
+    return {
+      id: this.product.id
+    }
+  },
+  methods: {
+    deleteProduct () {
+      console.log(this.id, '<<<<<<< ini id delete product')
+      this.$store.dispatch('deleteProduct', this.id)
+        .then(({ data }) => {
+          this.$router.push({ path: '/' })
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    }
+  },
+  created () {
+  }
 }
 </script>
 
 <style>
+  #card {
+    margin-bottom: 20px;
+  }
   .btn-edit {
     width: 70px;
     border-radius: 10px;
