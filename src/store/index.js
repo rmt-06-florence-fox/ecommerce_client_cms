@@ -21,7 +21,7 @@ export default new Vuex.Store({
   actions: {
     login (context, payload) {
       axios({
-        url: 'http://localhost:3000/login',
+        url: 'https://e-commerce-cms-efrizal.herokuapp.com/login',
         method: 'POST',
         data: { email: payload.email, password: payload.password }
       })
@@ -35,7 +35,7 @@ export default new Vuex.Store({
     },
     fetchProductList (context) {
       axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://e-commerce-cms-efrizal.herokuapp.com/products',
         method: 'GET',
         headers: { access_token: localStorage.getItem('access_token') }
       })
@@ -48,7 +48,7 @@ export default new Vuex.Store({
     },
     addProduct (context, payload) {
       axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://e-commerce-cms-efrizal.herokuapp.com/products',
         method: 'POST',
         data: payload,
         headers: { access_token: localStorage.getItem('access_token') }
@@ -67,14 +67,14 @@ export default new Vuex.Store({
     },
     toEditPage (context, id) {
       return axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://e-commerce-cms-efrizal.herokuapp.com/products/${id}`,
         method: 'GET',
         headers: { access_token: localStorage.getItem('access_token') }
       })
     },
     updateProduct (context, payload) {
       axios({
-        url: `http://localhost:3000/products/${payload.id}`,
+        url: `https://e-commerce-cms-efrizal.herokuapp.com/products/${payload.id}`,
         method: 'PUT',
         data: payload,
         headers: { access_token: localStorage.getItem('access_token') }
@@ -96,7 +96,7 @@ export default new Vuex.Store({
     },
     deleteProduct (context, id) {
       axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://e-commerce-cms-efrizal.herokuapp.com/products/${id}`,
         method: 'DELETE',
         headers: { access_token: localStorage.getItem('access_token') }
       })
@@ -117,7 +117,7 @@ export default new Vuex.Store({
     },
     fetchBannerList (context) {
       axios({
-        url: 'http://localhost:3000/banners',
+        url: 'https://e-commerce-cms-efrizal.herokuapp.com/banners',
         method: 'GET',
         headers: { access_token: localStorage.getItem('access_token') }
       })
@@ -130,7 +130,7 @@ export default new Vuex.Store({
     },
     addBanner (context, payload) {
       axios({
-        url: 'http://localhost:3000/banners',
+        url: 'https://e-commerce-cms-efrizal.herokuapp.com/banners',
         method: 'POST',
         data: payload,
         headers: { access_token: localStorage.getItem('access_token') }
@@ -149,14 +149,14 @@ export default new Vuex.Store({
     },
     toEditBannerPage (context, id) {
       return axios({
-        url: `http://localhost:3000/banners/${id}`,
+        url: `https://e-commerce-cms-efrizal.herokuapp.com/banners/${id}`,
         method: 'GET',
         headers: { access_token: localStorage.getItem('access_token') }
       })
     },
     updateBanner (context, payload) {
       axios({
-        url: `http://localhost:3000/banners/${payload.id}`,
+        url: `https://e-commerce-cms-efrizal.herokuapp.com/banners/${payload.id}`,
         method: 'PUT',
         data: payload,
         headers: { access_token: localStorage.getItem('access_token') }
@@ -178,7 +178,7 @@ export default new Vuex.Store({
     },
     deleteBanner (context, id) {
       axios({
-        url: `http://localhost:3000/banners/${id}`,
+        url: `https://e-commerce-cms-efrizal.herokuapp.com/banners/${id}`,
         method: 'DELETE',
         headers: { access_token: localStorage.getItem('access_token') }
       })
