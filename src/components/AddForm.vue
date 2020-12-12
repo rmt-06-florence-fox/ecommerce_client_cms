@@ -1,6 +1,6 @@
 <template>
 <div class="container justify-content-center">
-    <form @submit.prevent="addProduct">
+    <form @submit.prevent="addProduct" enctype="multipart/form-data">
     <div class="form-group">
       <label >Name</label>
       <input v-model="name" type="text" class="form-control">
@@ -48,7 +48,8 @@ export default {
       image_url: '',
       category: '',
       stock: '',
-      price: ''
+      price: '',
+      image: ''
     }
   }
 }

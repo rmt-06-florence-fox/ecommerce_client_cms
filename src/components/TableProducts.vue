@@ -27,9 +27,6 @@ export default {
     products () {
       return this.$store.state.products
     }
-  },
-  created () {
-    this.$store.dispatch('getProducts')
   }
 }
 </script>

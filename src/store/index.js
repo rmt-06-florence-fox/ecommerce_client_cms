@@ -79,6 +79,7 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          context.dispatch('getProducts')
           router.push('/')
         })
     },
@@ -92,11 +93,9 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           context.dispatch('getProducts')
-          router.push('/')
         })
         .catch(err => {
           console.log(err)
-          router.push('/')
         })
     }
   },
