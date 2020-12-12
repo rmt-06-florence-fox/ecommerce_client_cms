@@ -10,7 +10,7 @@
       <td>{{ product.stock }}</td>
       <td>
         <button @click.prevent="editForm(product.id)" class="btn btn-outline-success btn-sm me-2"><i class='far fa-edit'></i></button>
-        <button @click.prevent="deleteProduct" class="btn btn-outline-danger btn-sm"><i class='far fa-trash-alt'></i></button>
+        <button @click.prevent="deleteProduct(product.id)" class="btn btn-outline-danger btn-sm"><i class='far fa-trash-alt'></i></button>
       </td>
     </tr>
   </tbody>
@@ -23,6 +23,9 @@ export default {
   methods: {
     editForm (id) {
       this.$router.push(`/products/${id}`)
+    },
+    deleteProduct (id) {
+      this.$store.dispatch('delete', id)
     }
   }
 }

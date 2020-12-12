@@ -20,8 +20,6 @@
 </template>
 
 <script>
-import axios from '../config/axiosInstance'
-
 export default {
   data () {
     return {
@@ -35,18 +33,7 @@ export default {
         email: this.email,
         password: this.password
       }
-      axios({
-        method: 'POST',
-        url: '/login',
-        data: payload
-      })
-        .then(({ data }) => {
-          localStorage.setItem('access_token', data.access_token)
-          this.$router.push({ name: 'Products' })
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      this.$store.dispatch('login', payload)
     }
   }
 }
@@ -58,7 +45,7 @@ export default {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding-right: 5%;
-    margin-top: 5%;
+    margin-top: 3%;
+    margin-bottom: 5%;
   }
 </style>

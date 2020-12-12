@@ -1,19 +1,24 @@
 <template>
   <section>
+    <Navbar></Navbar>
     <div class="home">
-      <h1>Ecom</h1>
-      <button type="submit" class="btn btn-success">Login</button>
-      <img alt="Vue logo" src="../assets/home.jpg" height="400px">
+      <h1>CMS</h1>
+      <img src="../assets/background.jpg" height="700px">
     </div>
   </section>
 </template>
 
 <script>
-// @ is an alias to /src
+import Navbar from '../components/Navbar'
 
 export default {
   name: 'Home',
   components: {
+    Navbar
   }
 }
 </script>
+
+<style>
+
+</style>

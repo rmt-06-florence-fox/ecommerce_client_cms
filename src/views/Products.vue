@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import axios from '../config/axiosInstance'
 import Navbar from '../components/Navbar'
 import ProductList from '../components/ProductList'
 
@@ -35,27 +34,14 @@ export default {
     Navbar,
     ProductList
   },
-  data () {
-    return {
-      products: []
-    }
-  },
   methods: {
     fetchProducts () {
-      axios({
-        method: 'GET',
-        url: '/products',
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(({ data }) => {
-          // console.log(data)
-          this.products = data
-        })
-        .catch(err => {
-          console.log(err)
-        })
+      this.$store.dispatch('fetch')
+    }
+  },
+  computed: {
+    products () {
+      return this.$store.state.products
     }
   },
   created () {
