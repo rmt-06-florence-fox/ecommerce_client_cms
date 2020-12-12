@@ -1,11 +1,11 @@
 <template>
-  <b-form>
+  <b-form @submit.prevent="editHandler">
 
     <b-form-group label="Name" label-for="name">
     <b-form-input
       name="name"
       type="text"
-      v-model="name"
+      v-model="product.name"
       placeholder="product's name goes here"
     ></b-form-input>
     </b-form-group>
@@ -14,7 +14,7 @@
     <b-form-input
       name="imageUrl"
       type="text"
-      v-model="imageUrl"
+      v-model="product.imageUrl"
       placeholder="Image URL goes here"
     ></b-form-input>
     </b-form-group>
@@ -23,7 +23,7 @@
     <b-form-input
       name="stock"
       type="number"
-      v-model="stock"
+      v-model="product.stock"
       placeholder="Product's stock goes here"
     ></b-form-input>
     </b-form-group>
@@ -32,11 +32,11 @@
     <b-form-input
       name="price"
       type="number"
-      v-model="price"
+      v-model="product.price"
       placeholder="Product's stock goes here"
     ></b-form-input>
     </b-form-group>
-    <b-button variant="success"> Edit </b-button>
+    <b-button variant="success" type="submit"> Edit </b-button>
 
   </b-form>
 </template>
@@ -44,12 +44,12 @@
 <script>
 export default {
   name: 'EditForm',
-  data () {
-    return {
-      name: '',
-      imageUrl: '',
-      price: 0,
-      stock: 0
+  props: ['product'],
+  methods: {
+    editHandler () {
+      console.log('masuk methods edit')
+      console.log(this.product)
+      this.$store.dispatch('editHandler', this.product)
     }
   }
 }

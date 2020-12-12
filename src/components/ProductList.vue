@@ -3,7 +3,7 @@
       <ProductCard
       v-for="product in products"
       :key="product.id"
-      :product="product"/>
+      :product="product" />
   </b-card-group>
 </template>
 

@@ -16,8 +16,8 @@ export default new Vuex.Store({
     changeProducts (state, array) {
       state.products = array
     },
-    succesMessage (state, string) {
-      state.succesMessage = string
+    successMessage (state, string) {
+      state.successMessage = string
     }
   },
   actions: {
@@ -54,10 +54,22 @@ export default new Vuex.Store({
         method: 'DELETE',
         headers: { access_token: localStorage.getItem('access_token') }
       }).then(({ data }) => {
-        const payload = data.products
-        context.commit('successMessage', payload)
+        context.commit('successMessage', data.message)
       }).catch(err => {
         console.log(err)
+        context.commit('setErrors', err.response.data.messages)
+      })
+    },
+    editHandler (context, product) {
+      const { id, name, imageUrl, stock, price } = product
+      axios({
+        url: '/products/' + id,
+        method: 'PUT',
+        data: { name, imageUrl, stock, price },
+        headers: { access_token: localStorage.getItem('access_token') }
+      }).then(_ => {
+        context.commit('successMessage', 'Product has been edited')
+      }).catch(err => {
         context.commit('setErrors', err.response.data.messages)
       })
     }
