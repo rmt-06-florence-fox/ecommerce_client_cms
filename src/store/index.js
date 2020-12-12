@@ -1,139 +1,133 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from '../config/axiosIntance'
-import router from '../router'
+import Vue from "vue";
+import Vuex from "vuex";
+import router from "../router";
+import axios from "../axios/axiosInstance.js";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    products: [],
-    product: {}
+    productData: [],
+    productById: [],
   },
   mutations: {
-    fetchData (state, payload) {
-      state.products = payload
+    setProductData(state, payload) {
+      state.productData = payload;
     },
-    DataProduct (state, payload) {
-      state.product = payload
-    }
+    setProductById(state, payload) {
+      state.productById = payload;
+    },
   },
   actions: {
-    login (commit, payload) {
-      // console.log(payload)
+    login(context, payload) {
       axios({
-        method: 'POST',
-        url: 'login',
-        data: {
-          email: payload.email,
-          password: payload.password
-        }
+        url: "/users/login",
+        method: "POST",
+        data: payload,
       })
-        .then(response => {
-          localStorage.setItem('access_token', response.data.access_token)
-          router.push('/main-page')
-          console.log(response.data)
+        .then((response) => {
+          localStorage.setItem("access_token", response.data.access_token);
+          router.push("/landing-page");
         })
-        .catch(err => {
-          console.log(err)
-        })
+        .catch((err) => console.log(err));
     },
-    fetchData (context) {
-      axios({
-        url: 'product',
-        method: 'GET',
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(response => {
-          context.commit('fetchData', response.data)
-          console.log(response.data)
-        })
-        .catch(err => {
-          console.log(err)
-        })
+    logout() {
+      localStorage.removeItem("access_token");
+      router.push("/login");
     },
-    addProduct (context, payload) {
-      // console.log(payload)
+    fetchProduct(context) {
       axios({
-        url: 'product',
-        method: 'POST',
+        method: "GET",
+        url: "/products",
         headers: {
-          access_token: localStorage.getItem('access_token')
+          access_token: localStorage.getItem("access_token"),
         },
+      })
+        .then((response) => {
+          console.log(response.data);
+          context.commit("setProductData", response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    fetchProductById(context, id) {
+      console.log(id, "from store");
+      axios({
+        method: "GET",
+        url: `/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      })
+        .then((response) => {
+          context.commit("setProductById", response.data);
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    createProduct(context, payload) {
+      console.log(payload);
+      axios({
+        method: "POST",
+        url: "/products",
+        data: payload,
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    editProduct(context, payload) {
+      axios({
+        method: "PUT",
+        url: `/products/${payload.id}`,
         data: {
           name: payload.name,
           image_url: payload.image_url,
           price: payload.price,
-          stock: payload.stock
-        }
-      })
-        .then(response => {
-          console.log(response.data)
-          router.push('/main-page/product')
-        })
-        .catch(err => {
-          console.log(err.response.data.msg)
-        })
-    },
-    deleteProduct (context, id) {
-      // console.log(context)
-      axios({
-        url: 'product/' + id,
-        method: 'DELETE',
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(response => {
-          console.log(response.data)
-          context.dispatch('fetchData')
-        })
-        .catch(err => {
-          console.log(err.response.data.msg)
-        })
-    },
-    DataProduct (context, id) {
-      axios({
-        url: 'product/' + id,
-        method: 'GET',
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(response => {
-          console.log(response.data)
-          context.commit('DataProduct', response.data)
-        })
-        .catch(err => {
-          console.log(err.response.data.msg)
-        })
-    },
-    UpdateProduct (context, payload) {
-      // console.log(payload, 'dari store')
-      axios({
-        url: 'product/' + payload.id,
-        method: 'PUT',
-        headers: {
-          access_token: localStorage.getItem('access_token')
+          stock: payload.stock,
         },
-        data: {
-          name: payload.name,
-          image_url: payload.image_url,
-          price: payload.price,
-          stock: payload.stock
-        }
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
       })
-        .then(response => {
-          // console.log(response.data)
-          router.push('/main-page/product')
+        .then((response) => {
+          console.log(response);
         })
-        .catch(err => {
-          console.log(err.response.data.msg)
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    deleteProduct(context, id) {
+      axios({
+        method: "DELETE",
+        url: `/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem("access_token"),
+        },
+      })
+        .then((response) => {
+          console.log(response.data);
         })
-    }
+        .catch((err) => {
+          console.log(err);
+        });
+    },
   },
-  modules: {
-  }
-})
+  getters: {
+    filterProduct: (state) => (search) => {
+      return state.productData.filter((element) => {
+        return element.name.match(search);
+      });
+    },
+  },
+  modules: {},
+});

@@ -1,4 +1,4 @@
-# ecommerce_client_cms
+# client
 
 ## Project setup
 ```
