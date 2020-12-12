@@ -7,12 +7,15 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    products: []
+    products: [],
+    product: {}
   },
   mutations: {
     fetchData (state, payload) {
-      console.log(payload, '<<<< yoooi')
       state.products = payload
+    },
+    editProduct (state, payload) {
+      state.product = payload
     }
   },
   actions: {
@@ -24,7 +27,6 @@ export default new Vuex.Store({
         data: payload
       })
         .then((data) => {
-          console.log(data.data)
           localStorage.setItem('access_token', data.data.access_token)
           localStorage.setItem('role', 'admin')
           router.push('/admin')
@@ -38,7 +40,6 @@ export default new Vuex.Store({
         url: '/products'
       })
         .then((data) => {
-          console.log(data.data)
           context.commit('fetchData', data.data)
         })
         .catch(err => console.log(err))
@@ -71,6 +72,36 @@ export default new Vuex.Store({
         .then((data) => {
           console.log(data, 'masuk pak datanya')
           context.dispatch('fetchProduct')
+          router.push('/admin')
+        })
+        .catch(err => console.log(err))
+    },
+    editProduct (context, id) {
+      axios({
+        method: 'GET',
+        url: `/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token'),
+          role: localStorage.getItem('role')
+        }
+      })
+        .then((data) => {
+          console.log(data.data)
+          context.commit('editProduct', data.data)
+        })
+        .catch(err => console.log(err))
+    },
+    updateProduct (context, payload) {
+      axios({
+        method: 'PUT',
+        url: `/products/${payload.id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token'),
+          role: localStorage.getItem('role')
+        },
+        data: payload
+      })
+        .then(() => {
           router.push('/admin')
         })
         .catch(err => console.log(err))

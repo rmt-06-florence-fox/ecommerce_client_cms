@@ -21,7 +21,10 @@
           <td>{{ product.price }}</td>
           <td>{{ product.stock }}</td>
           <td>
-            <button class="btn btn-info btn-sm mr-2">edit</button>
+            <button
+              @click.prevent="editProduct(product.id)"
+              class="btn btn-info btn-sm mr-2"
+            >edit</button>
             <button
               @click.prevent="deleteProduct(product.id)"
               class="btn btn-danger btn-sm"
@@ -40,6 +43,9 @@ export default {
   methods: {
     deleteProduct (id) {
       this.$store.dispatch('deleteProduct', id)
+    },
+    editProduct (id) {
+      this.$router.push(`/edit/${id}`)
     }
   }
 }
@@ -48,5 +54,9 @@ export default {
 <style scoped>
   img {
     height: 150px;
+    width: 150px;
+    background-size:cover;
+    background-position:center;
+    border-radius:50%;
   }
 </style>

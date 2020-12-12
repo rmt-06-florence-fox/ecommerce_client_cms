@@ -1,10 +1,11 @@
 <template>
-<div class="container">
-  <form @submit.prevent="createProduct">
+  <div class="container">
+    <h1>edit form</h1>
+    <form @submit.prevent="editProduct">
     <div class="form-group">
       <label for="inputProductName">product name</label>
       <input
-        v-model="inputProductName"
+        v-model="product.name"
         type="text"
         class="form-control"
         id="inputProductName"
@@ -15,7 +16,7 @@
     <div class="form-group">
       <label for="inputImage">Image name</label>
       <input
-        v-model="inputImage"
+        v-model="product.image_url"
         type="text"
         class="form-control"
         id="inputImage"
@@ -26,7 +27,7 @@
     <div class="form-group">
       <label for="inputStock">Stock</label>
       <input
-        v-model="inputStock"
+        v-model="product.stock"
         type="number"
         class="form-control"
         id="inputStock"
@@ -38,7 +39,7 @@
     <div class="form-group">
       <label for="inputPrice">Price</label>
       <input
-        v-model="inputPrice"
+        v-model="product.price"
         type="number"
         class="form-control"
         min="0"
@@ -49,30 +50,25 @@
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
   </form>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: 'AddForm',
-  data () {
-    return {
-      inputProductName: '',
-      inputImage: '',
-      inputStock: 0,
-      inputPrice: 0
+  name: 'EditForm',
+  computed: {
+    product () {
+      return this.$store.state.product
     }
   },
+  created () {
+    const id = +this.$route.params.id
+    // console.log(id)
+    this.$store.dispatch('editProduct', id)
+  },
   methods: {
-    createProduct () {
-      const payload = {
-        name: this.inputProductName,
-        image_url: this.inputImage,
-        stock: +this.inputStock,
-        price: +this.inputPrice
-      }
-      console.log(payload)
-      this.$store.dispatch('createProduct', payload)
+    editProduct () {
+      this.$store.dispatch('updateProduct', this.product)
     }
   }
 }

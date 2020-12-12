@@ -1,11 +1,10 @@
 <template>
   <div>
     <h1>admin dashboard page</h1>
-    <button
-      type="button"
+    <router-link
+      to="/addform"
       class="btn btn-primary btn-sm mb-3"
-      @click.prevent="createProduct"
-    >create</button>
+    >create</router-link>
     <TableProduct
       :products="products"
     ></TableProduct>
