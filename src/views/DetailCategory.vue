@@ -2,7 +2,7 @@
   <div class="container mt-3">
     <div class="row text-center">
       <div class="col-lg-12">
-        <h1>Edit a Category</h1>
+        <h1 class="text-dark">Edit a Category</h1>
       </div>
       <div class="col-lg-6">
         <div class="card shadow mb-5">

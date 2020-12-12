@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container mt-3">
     <h1>Ooops its look like what you're searching is not found.</h1>
     <img src="https://www.clipartkey.com/mpngs/m/210-2106327_robot-error-404-png.png" class="notfound" alt="404 not found">
   </div>
@@ -13,6 +13,6 @@ export default {
 
 <style>
 .notfound {
-  max-width: 80vw;
+  max-height: 20vw;
 }
 </style>

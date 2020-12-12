@@ -2,7 +2,7 @@
   <div>
     <div class="bg-secondary container-fluid">
       <div class="row justify-content-center align-self-center p-2">
-        <h1 class="text-dark">ADMIN PANEL E-COMMERCE</h1>
+        <h1 class="text-white title">ADMIN PANEL E-COMMERCE</h1>
       </div>
     </div>
     <Navbar/>
@@ -38,4 +38,7 @@ export default {
 </script>
 
 <style>
+.title {
+  text-shadow: 2px 2px black;
+}
 </style>

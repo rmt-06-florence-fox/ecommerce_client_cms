@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-lg-2"></div>
       <div class="col-lg-8">
-        <h1>Dashboard</h1>
+        <h1 class="text-dark">Dashboard</h1>
         <table class="table table-bordered">
           <tr>
             <th scope="col" class="w-50">Total Product</th>
