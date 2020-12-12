@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     isLogin: false,
-    listProducts: []
+    listProducts: [],
+    product: {}
   },
   mutations: {
     CHANGEISLOGIN (state, payload) {
@@ -15,6 +16,21 @@ export default new Vuex.Store({
     },
     FETCHPRODUCTS (state, payload) {
       state.listProducts = payload
+    },
+    GETPRODUCT (state, payload) {
+      state.product = payload
+    },
+    CHANGENAME (state, payload) {
+      state.product.name = payload
+    },
+    CHANGEIMAGE (state, payload) {
+      state.product.image_url = payload
+    },
+    CHANGEPRICE (state, payload) {
+      state.product.price = payload
+    },
+    CHANGESTOCK (state, payload) {
+      state.product.stock = payload
     }
   },
   actions: {
@@ -57,6 +73,45 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    getProduct (context, payload) {
+      axios({
+        url: `/products/${payload}`,
+        method: 'get',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          context.commit('GETPRODUCT', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    editProduct (context, payload) {
+      return axios({
+        url: `/products/${payload.id}`,
+        method: 'put',
+        data: {
+          name: payload.name,
+          image_url: payload.image_url,
+          price: payload.price,
+          stock: payload.stock
+        },
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+    },
+    destroyProduct (context, payload) {
+      return axios({
+        url: `/products/${payload}`,
+        method: 'delete',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
     }
   },
   modules: {

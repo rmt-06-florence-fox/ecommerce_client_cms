@@ -1,32 +1,32 @@
 <template>
-  <div class="addProduct">
+  <div class="editProduct">
     <div style="height: 1rem"/>
     <div class="container  is-flex is-align-items-center is-justify-content-center" style="min-height: 100vh">
       <div class="column p-5 is-6">
-          <form class="box" @submit.prevent= "addProduct">
-            <h5 class="subtitle is-5">Add the product here:</h5>
+          <form class="box" @submit.prevent= "editProduct(product)">
+            <h5 class="subtitle is-5">Edit the product here:</h5>
             <div class="field">
               <label class="label">Name</label>
               <div class="control">
-                <input class="input" type="text" placeholder="Text input" v-model= "name">
+                <input class="input" type="text" placeholder="Text input" v-model= "productName">
               </div>
             </div>
             <div class="field">
               <label class="label">Image URL</label>
               <div class="control">
-                <input class="input" type="text" placeholder="Link input" v-model= "image_url">
+                <input class="input" type="text" placeholder="Link input" v-model= "productImage">
               </div>
             </div>
             <div class="field">
               <label class="label">Price</label>
               <div class="control">
-                <input class="input" type="number" placeholder="Number input" v-model= "price">
+                <input class="input" type="number" placeholder="Number input" v-model= "productPrice">
               </div>
             </div>
             <div class="field">
               <label class="label">Stock</label>
               <div class="control">
-                <input class="input" type="number" placeholder="Number input" v-model= "stock">
+                <input class="input" type="number" placeholder="Number input" v-model= "productStock">
               </div>
             </div>
             <div class="field is-grouped">
@@ -45,31 +45,24 @@
 
 <script>
 export default {
-  name: 'AddProduct',
-  data () {
-    return {
-      name: '',
-      image_url: '',
-      price: '',
-      stock: ''
-    }
-  },
+  name: 'EditProduct',
   methods: {
-    addProduct () {
+    editProduct (value) {
       const obj = {
-        name: this.name,
-        image_url: this.image_url,
-        price: this.price,
-        stock: this.stock
+        id: this.$route.params.id,
+        name: value.name,
+        image_url: value.image_url,
+        price: value.price,
+        stock: value.stock
       }
-      // console.log(obj)
-      this.$store.dispatch('addProduct', obj)
+      console.log(obj)
+      this.$store.dispatch('editProduct', obj)
         .then(res => {
           // console.log(res.data)
           this.$swal.fire({
             icon: 'success',
-            title: 'Add success',
-            text: `Successing add product "${res.data.name}"`,
+            title: 'Edit success',
+            text: `Successing edit product "${res.data.name}"`,
             timer: 5000
           })
           this.$store.dispatch('fetchProduct')
@@ -92,6 +85,47 @@ export default {
           this.price = ''
           this.stock = ''
         })
+    }
+  },
+  created () {
+    const id = this.$route.params.id
+    this.$store.dispatch('getProduct', id)
+  },
+  computed: {
+    product () {
+      return this.$store.state.product
+    },
+    productName: {
+      get () {
+        return this.$store.state.product.name
+      },
+      set (value) {
+        this.$store.commit('CHANGENAME', value)
+      }
+    },
+    productImage: {
+      get () {
+        return this.$store.state.product.image_url
+      },
+      set (value) {
+        this.$store.commit('CHANGEIMAGE', value)
+      }
+    },
+    productPrice: {
+      get () {
+        return this.$store.state.product.price
+      },
+      set (value) {
+        this.$store.commit('CHANGEPRICE', value)
+      }
+    },
+    productStock: {
+      get () {
+        return this.$store.state.product.stock
+      },
+      set (value) {
+        this.$store.commit('CHANGESTOCK', value)
+      }
     }
   }
 }

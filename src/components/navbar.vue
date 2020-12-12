@@ -37,7 +37,6 @@ export default {
   name: 'Navbar',
   data () {
     return {
-      hidden: true,
       class1: 'navbar-burger burger',
       class2: 'navbar-menu'
     }
@@ -71,6 +70,13 @@ export default {
           localStorage.clear()
         }
       })
+    }
+  },
+  created () {
+    if (localStorage.getItem('access_token')) {
+      this.$store.commit('CHANGEISLOGIN', true)
+    } else {
+      this.$store.commit('CHANGEISLOGIN', false)
     }
   },
   computed: {
