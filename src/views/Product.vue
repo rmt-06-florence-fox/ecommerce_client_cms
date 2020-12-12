@@ -2,11 +2,15 @@
   <div class="container mt-3">
     <button v-if="loginStatus" type="button" class="btn btn-info mb-3" data-toggle="modal" data-target="#myModal">Add Item</button>
     <AddForm></AddForm>
+    <EditForm
+    v-if="EditStatus"
+    :populateProduct="populateProduct"></EditForm>
     <div class="row">
       <ProductCard
       v-for="product in products"
       :key="product.id"
-      :product="product">
+      :product="product"
+      @populate="populate">
       </ProductCard>
     </div>
   </div>
@@ -15,15 +19,23 @@
 <script>
 // @ is an alias to /src
 import ProductCard from '../components/ProductCard.vue'
-import AddForm from '../components/AddForm.vue'
+import AddForm from '../components/AddForm'
+import EditForm from '../components/EditForm'
 export default {
   name: 'Product',
   components: {
     ProductCard,
-    AddForm
+    AddForm,
+    EditForm
   },
   data () {
     return {
+      populateProduct: ''
+    }
+  },
+  methods: {
+    populate (value) {
+      this.populateProduct = value
     }
   },
   computed: {
@@ -32,6 +44,9 @@ export default {
     },
     products () {
       return this.$store.state.products
+    },
+    EditStatus () {
+      return this.$store.state.EditStatus
     }
   },
   created () {

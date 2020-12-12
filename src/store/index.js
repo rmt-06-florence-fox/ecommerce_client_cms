@@ -9,12 +9,7 @@ export default new Vuex.Store({
   state: {
     loginStatus: false,
     products: [],
-    populate: {
-      name: 'lalala',
-      image_url: '',
-      stock: '',
-      price: ''
-    }
+    EditStatus: false
   },
   mutations: {
     changeLoginStatus (state, status) {
@@ -25,6 +20,10 @@ export default new Vuex.Store({
     },
     changeEditedProduct (state, product) {
       state.populate = product
+    },
+    changeEditStatus (state, payload) {
+      state.EditStatus = payload.status
+      state.populate = payload.product
     }
   },
   actions: {
@@ -127,6 +126,24 @@ export default new Vuex.Store({
       }).catch(err => {
         console.log(err)
       })
+    },
+
+    updateProduct (context, payload) {
+      axios({
+        url: `/admin/products/${payload.id}`,
+        method: 'put',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: payload
+      })
+        .then(response => {
+          console.log(response)
+          context.dispatch('fetchProducts')
+        })
+        .catch(err => {
+          console.log(err.response.data)
+        })
     }
   },
   modules: {

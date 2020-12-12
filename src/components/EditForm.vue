@@ -1,5 +1,5 @@
 <template>
-  <div class="modal" id="EditForm">
+  <div class="modal fade" id="EditForm">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
@@ -12,15 +12,15 @@
                 <input type="text" class="form-control" placeholder="Product Name" v-model="product.name">
               </div>
               <div class="form-group">
-                <input type="text" class="form-control" placeholder="Product Image URL">
+                <input type="text" class="form-control" placeholder="Product Image URL" v-model="product.image_url">
               </div>
               <div class="form-group">
-                <input type="number" class="form-control" placeholder="Stock">
+                <input type="number" class="form-control" placeholder="Stock" v-model="product.stock">
               </div>
               <div class="form-group">
-                <input type="number" class="form-control" placeholder="Price">
+                <input type="number" class="form-control" placeholder="Price" v-model="product.price">
               </div>
-              <button type="submit" class="btn btn-info" data-dismiss="modal">Edit</button>
+              <button type="submit" class="btn btn-info" data-dismiss="modal" @click="updatePoduct">Edit</button>
             </form>
           </div>
         </div>
@@ -31,8 +31,18 @@
 <script>
 export default {
   name: 'EditForm',
+  data () {
+    return {
+      product: this.populateProduct
+    }
+  },
   props: {
-    product: Object
+    populateProduct: Object
+  },
+  methods: {
+    updatePoduct () {
+      this.$store.dispatch('updateProduct', this.product)
+    }
   }
 }
 </script>

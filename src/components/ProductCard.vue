@@ -6,7 +6,7 @@
           <h5 class="card-title">{{ product.name }}</h5>
           <div>Price: {{ product.price }}</div>
           <div>Stock: {{ product.stock }}</div>
-          <button  type="button" v-if="loginStatus" class="btn btn-info mb-3 mt-3" data-toggle="modal" data-target="#EditForm">Edit</button>
+          <button  type="button" v-if="loginStatus" class="btn btn-info mb-3 mt-3" data-toggle="modal" data-target="#EditForm" @click="changeEditStatus">Edit</button>
           <button type="button" v-if="loginStatus" class="btn btn-danger mb-3 mt-3" @click="deleteProduct">Delete</button>
         </div>
     </div>
@@ -22,6 +22,10 @@ export default {
   methods: {
     deleteProduct () {
       this.$store.dispatch('deleteProduct', this.product.id)
+    },
+    changeEditStatus () {
+      this.$store.commit('changeEditStatus', { product: this.product, status: true })
+      this.$emit('populate', this.product)
     }
   },
   computed: {
