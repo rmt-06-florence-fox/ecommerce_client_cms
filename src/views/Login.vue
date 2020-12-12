@@ -10,7 +10,7 @@
                     </div>
                     <div class="m-4">
                         <label for="">Password</label>
-                        <input v-model="password" type="text" class="form-control">
+                        <input v-model="password" type="password" class="form-control">
                     </div>
                     <button class="btn btn-outline-dark m-2">Login</button>
                 </form>
