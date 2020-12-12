@@ -325,6 +325,66 @@ export default new Vuex.Store({
         })
       }
       context.commit('setProducts', data)
+    },
+    sortUpdated (context, bol) {
+      const data = []
+      context.state.products.forEach(el => {
+        data.push(el)
+      })
+      if (bol) {
+        data.sort((a, b) => {
+          if (a.updatedAt < b.updatedAt) {
+            return -1
+          }
+          if (a.updatedAt > b.updatedAt) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      } else {
+        data.sort((a, b) => {
+          if (a.updatedAt > b.updatedAt) {
+            return -1
+          }
+          if (a.updatedAt < b.updatedAt) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      }
+      context.commit('setProducts', data)
+    },
+    sortCreated (context, bol) {
+      const data = []
+      context.state.products.forEach(el => {
+        data.push(el)
+      })
+      if (bol) {
+        data.sort((a, b) => {
+          if (a.createdAt < b.createdAt) {
+            return -1
+          }
+          if (a.createdAt > b.createdAt) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      } else {
+        data.sort((a, b) => {
+          if (a.createdAt > b.createdAt) {
+            return -1
+          }
+          if (a.createdAt < b.createdAt) {
+            return 1
+          }
+          // a must be equal to b
+          return 0
+        })
+      }
+      context.commit('setProducts', data)
     }
   },
   modules: {

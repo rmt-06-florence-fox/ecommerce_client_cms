@@ -48,7 +48,7 @@
         <div class="h-full flex flex-col py-6 bg-gray-50 shadow-xl overflow-y-scroll">
           <div class="px-4 sm:px-6 mt-8">
             <h2 id="slide-over-heading" class="text-2xl font-bold text-gray-900">
-              Add Banner
+              Edit Banner
             </h2>
           </div>
           <div class="mt-6 relative flex-1 px-4 sm:px-6">
@@ -68,10 +68,10 @@
                       <label for="status" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Banner status</label>
                         <div class="flex flex-row w-full gap-x-3 justify-center pb-2">
                         <label class="inline-flex items-center mt-3">
-                            <input type="radio" value="1" v-model="status" class="form-radio h-5 w-5 text-gray-600"><span class="ml-2 text-gray-700">Published</span>
+                            <input type="radio" value="true" v-model="status" class="form-radio h-5 w-5 text-gray-600"><span class="ml-2 text-gray-700">Published</span>
                         </label>
                         <label class="inline-flex items-center mt-3">
-                            <input type="radio" value="0" v-model="status" class="form-radio h-5 w-5 text-gray-600"><span class="ml-2 text-gray-700">Unpublished</span>
+                            <input type="radio" value="false" v-model="status" class="form-radio h-5 w-5 text-gray-600"><span class="ml-2 text-gray-700">Unpublished</span>
                         </label>
                         </div>
                       <label for="status" class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Banner Size</label>
@@ -88,7 +88,7 @@
                         </div>
                     <div class="w-full flex flex-row gap-x-2">
                         <button type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-gray-900 shadow-lg focus:outline-none hover:bg-gray-100 hover:text-black hover:shadow-none">
-                        Add Banner
+                        Update Banner
                         </button>
                         <button type="button"
                                 @click="closeThis"
@@ -111,7 +111,8 @@
 import axios from '../config/axios'
 
 export default {
-  name: 'addBanner',
+  name: 'editBanner',
+  props: ['banner'],
   data () {
     return {
       status: '',
@@ -122,12 +123,12 @@ export default {
   },
   methods: {
     closeThis () {
-      this.$emit('closeThis', 'add')
+      this.$emit('closeThis', 'edit')
     },
     postBanner () {
       axios({
-        method: 'post',
-        url: '/banner',
+        method: 'put',
+        url: `/banner/${this.banner.id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         },
@@ -139,14 +140,22 @@ export default {
         }
       })
         .then(res => {
-          console.log(res.data)
           this.$emit('closeThis')
           this.$emit('reload')
         })
         .catch(err => {
           console.log(err)
         })
+    },
+    setBanner () {
+      this.title = this.banner.title
+      this.size = this.banner.size
+      this.image_url = this.banner.image_url
+      this.status = this.banner.status
     }
+  },
+  created () {
+    this.setBanner()
   }
 }
 </script>

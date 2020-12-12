@@ -29,6 +29,7 @@
             <input id="image" type="text" name="image" placeholder="Image URL"
                   class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required
                   v-model="image_url"/>
+            <img v-if="image_url" :src="image_url" class="h-auto w-28">
             <span class="block mt-2 text-xs font-semibold text-gray-600 uppercase">Add Categories</span>
             <div class="mt-2 w-full">
               <select class="w-full focus:outline-none focus:bg-gray-300 focus:shadow-inner py-2 px-3" size="5" multiple v-model="catSelected">

@@ -90,30 +90,26 @@
               categories
             </span>
           </div>
-          <div>
-            <span class="capitalize">
-              project
-              <span
-                class="text-gray-500  cursor-pointer"
-              >
-                all
-              </span>
+          <div class="flex flex-row space-x-2">
+            <span class="capitalize flex flex-row select-none"
+                @click="sortCreated">
+              Sort by Created
+              <svg class="ml-1 h-4 w-4 fill-current"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path :d="changeCreated">
+                  </path>
+                  </svg>
             </span>
-            <span class="capitalize ml-12">
-              date added
-              <span
-                class="text-gray-500  cursor-pointer"
-              >
-                all time
-              </span>
-            </span>
-            <span class="capitalize ml-12">
-              role
-              <span
-                class="text-gray-500  cursor-pointer"
-              >
-                all
-              </span>
+            <span class="capitalize flex flex-row select-none"
+                @click="sortUpdated">
+              Sort by Updated
+              <svg class="ml-1 h-4 w-4 fill-current"
+                  viewBox="0 0 20 20"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path :d="changeUpdated">
+                  </path>
+                  </svg>
             </span>
           </div>
         </div>
@@ -200,7 +196,9 @@ export default {
         product: false,
         categories: false,
         price: false,
-        stock: false
+        stock: false,
+        updatedAt: false,
+        createdAt: false
       }
     }
   },
@@ -223,6 +221,14 @@ export default {
     sortStocks () {
       this.sorted.stock = !this.sorted.stock
       this.$store.dispatch('sortStocks', this.sorted.stock)
+    },
+    sortUpdated () {
+      this.sorted.updatedAt = !this.sorted.updatedAt
+      this.$store.dispatch('sortUpdated', this.sorted.updatedAt)
+    },
+    sortCreated () {
+      this.sorted.createdAt = !this.sorted.createdAt
+      this.$store.dispatch('sortCreated', this.sorted.createdAt)
     }
   },
   computed: {
@@ -257,6 +263,20 @@ export default {
     },
     changeStocks () {
       if (this.sorted.stock) {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
+      } else {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
+      }
+    },
+    changeCreated () {
+      if (this.sorted.createdAt) {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
+      } else {
+        return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
+      }
+    },
+    changeUpdated () {
+      if (this.sorted.updatedAt) {
         return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h5a1 1 0 000-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM13 16a1 1 0 102 0v-5.586l1.293 1.293a1 1 0 001.414-1.414l-3-3a1 1 0 00-1.414 0l-3 3a1 1 0 101.414 1.414L13 10.414V16z'
       } else {
         return 'M3 3a1 1 0 000 2h11a1 1 0 100-2H3zM3 7a1 1 0 000 2h7a1 1 0 100-2H3zM3 11a1 1 0 100 2h4a1 1 0 100-2H3zM15 8a1 1 0 10-2 0v5.586l-1.293-1.293a1 1 0 00-1.414 1.414l3 3a1 1 0 001.414 0l3-3a1 1 0 00-1.414-1.414L15 13.586V8z'
