@@ -28,10 +28,18 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           localStorage.setItem('access_token', data.access_token)
+          Vue.toasted.show(`Welcome, ${payload.email.split('@')[0]} !!!`, {
+            icon: 'check',
+            position: 'top-center'
+          })
           router.push('/products')
         })
         .catch(err => {
-          console.log(err)
+          // console.log(err.response.data)
+          Vue.toasted.error(err.response.data.message, {
+            icon: 'times',
+            position: 'top-center'
+          })
         })
     },
     fetchData (context) {
@@ -57,10 +65,21 @@ export default new Vuex.Store({
         }
       })
         .then(data => {
+          Vue.toasted.success('Successfully created new product !!!', {
+            position: 'top-center'
+          })
           router.push('/products')
         })
         .catch(err => {
-          console.log(err)
+          console.log(err.response.data.messages)
+          const errMessage = err.response.data.messages
+          errMessage.forEach((e) => {
+            Vue.toasted.error(e.message, {
+              icon: 'times',
+              position: 'top-right',
+              closeOnSwipe: true
+            })
+          })
         })
     },
     editProduct (context, id) {
@@ -90,26 +109,56 @@ export default new Vuex.Store({
         }
       })
         .then(data => {
+          Vue.toasted.success('Successfully updated data product !!!', {
+            position: 'top-center'
+          })
           router.push('/products')
         })
         .catch(err => {
-          console.log(err)
+          const errMessage = err.response.data.messages
+          errMessage.forEach((e) => {
+            Vue.toasted.error(e.message, {
+              icon: 'times',
+              position: 'top-right',
+              closeOnSwipe: true
+            })
+          })
         })
     },
     deleteProduct (context, id) {
-      axios({
-        method: 'DELETE',
-        url: '/products/' + id,
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
+      Vue.toasted.info('Are you sure ?', {
+        position: 'top-center',
+        action: [
+          {
+            text: 'Yes',
+            onClick: (e, toastedObject) => {
+              toastedObject.goAway(0)
+              axios({
+                method: 'DELETE',
+                url: '/products/' + id,
+                headers: {
+                  access_token: localStorage.getItem('access_token')
+                }
+              })
+                .then(_ => {
+                  Vue.toasted.success('Successfully deleted this product !', {
+                    position: 'top-center'
+                  })
+                  context.dispatch('fetchData')
+                })
+                .catch(err => {
+                  console.log(err)
+                })
+            }
+          },
+          {
+            text: 'Cancel',
+            onClick: (e, toastedObject) => {
+              toastedObject.goAway(0)
+            }
+          }
+        ]
       })
-        .then(_ => {
-          context.dispatch('fetchData')
-        })
-        .catch(err => {
-          console.log(err)
-        })
     }
   },
   modules: {
