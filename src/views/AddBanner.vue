@@ -1,20 +1,41 @@
 <template>
   <div class="container">
-      <h1 class="text-center mb-4">New Product</h1>
+      <h1 class="text-center mb-4">New Banner</h1>
     <div>
       <b-form @submit="onSubmit" @reset="onReset" v-if="show">
         <b-form-group
           id="input-group-1"
-          label="Name"
+          label="Title"
           label-for="input-1"
         >
           <b-form-input
             id="input-1"
-            v-model="form.name"
+            v-model="form.title"
             type="text"
             required
-            placeholder="Enter product name"
+            placeholder="Enter banner title"
           ></b-form-input>
+        </b-form-group>
+
+        <b-form-group id="input-group-3" label="Status" label-for="input-3">
+          <!-- <b-form-input
+            type="number"
+            id="input-3"
+            v-model="form.status"
+            required
+            placeholder="Input status"
+          ></b-form-input> -->
+          <div>
+            <b-form-select
+              v-model="selected"
+              :options="options"
+              class="mb-3"
+              value-field="item"
+              text-field="name"
+              disabled-field="notEnabled"
+            ></b-form-select>
+          <!-- <div class="mt-3">Selected: <strong>{{ selected }}</strong></div> -->
+        </div>
         </b-form-group>
 
         <b-form-group id="input-group-2" label="Image URL" label-for="input-2">
@@ -23,26 +44,6 @@
             v-model="form.imageUrl"
             required
             placeholder="Enter image url"
-          ></b-form-input>
-        </b-form-group>
-
-         <b-form-group id="input-group-3" label="Price" label-for="input-3">
-          <b-form-input
-            type="number"
-            id="input-3"
-            v-model="form.price"
-            required
-            placeholder="Input price"
-          ></b-form-input>
-        </b-form-group>
-          <!-- <p>{{ form.price }}</p> -->
-         <b-form-group id="input-group-4" label="Stocks" label-for="input-4">
-          <b-form-input
-            id="input-4"
-            type="number"
-            v-model="form.stock"
-            required
-            placeholder="Input stocks"
           ></b-form-input>
         </b-form-group>
 
@@ -62,32 +63,33 @@ export default {
   data () {
     return {
       form: {
-        name: '',
-        imageUrl: '',
-        price: null,
-        stock: null
+        title: '',
+        imageUrl: ''
       },
-      show: true
+      show: true,
+      selected: 'Active',
+      options: [
+        { item: 'Active', name: 'Active' },
+        { item: 'Inactive', name: 'Inactive' }
+      ]
     }
   },
   methods: {
     onSubmit (evt) {
       evt.preventDefault()
-      console.log(this.form.name, this.form.imageUrl, this.form.price, this.form.stock)
-      this.$store.dispatch('createProduct', {
-        name: this.form.name,
+      console.log(this.form.title, this.form.imageUrl, this.selected)
+      this.$store.dispatch('createBanner', {
+        title: this.form.title,
         imageUrl: this.form.imageUrl,
-        price: this.form.price,
-        stock: this.form.stock
+        status: this.selected
       })
     },
     onReset (evt) {
       evt.preventDefault()
       // Reset our form values
-      this.form.name = ''
+      this.form.title = ''
       this.form.imageUrl = ''
-      this.form.price = null
-      this.form.stock = null
+      this.form.status = ''
       // Trick to reset/clear native browser form validation state
       this.show = false
       this.$nextTick(() => {

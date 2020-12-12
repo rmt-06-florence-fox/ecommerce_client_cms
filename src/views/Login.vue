@@ -39,12 +39,12 @@
               </form>
               <br />
               <p class="text-left">Or continue with Google</p>
-              <!-- <GoogleLogin
+              <GoogleLogin
                 :params="params"
                 :renderParams="renderParams"
                 :onSuccess="onSuccess"
               ></GoogleLogin>
-              <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
+              <!-- <div class="g-signin2" data-onsuccess="onSignIn"></div> -->
             </div>
           </div>
         </div>
@@ -54,15 +54,42 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login'
 export default {
   name: 'LoginPage',
+  components: {
+    GoogleLogin
+  },
   data () {
     return {
       email: '',
-      password: ''
+      password: '',
+      params: {
+        client_id:
+          '1048832564850-fpn38itn9av9bci2rfeoedhnih2sqnsi.apps.googleusercontent.com'
+      },
+      // only needed if you want to render the button with the google ui
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true
+      }
     }
   },
   methods: {
+    onSuccess (googleUser) {
+      const googleToken = googleUser.getAuthResponse().id_token
+      console.log(googleToken)
+      this.$store.dispatch('loginGoogle', googleToken)
+        .then(response => {
+          localStorage.setItem('access_token', response.data.access_token)
+          this.$router.push({ name: 'Home' })
+          this.$store.dispatch('fetchProducts')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
     login () {
       const data = {
         email: this.email,

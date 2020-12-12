@@ -29,7 +29,15 @@
       </ul>
       <ul class="navbar-nav ml-auto">
         <li>
-          <button class="btn btn-danger" @click="logout">Logout</button>
+          <a href="#" @click="logout" style="text-decoration: none"
+           ><GoogleLogin
+              :params="params"
+              :logoutButton="true"
+              class="nav-link btn btn-danger p-1 w"
+              style="color: black"
+              >Logout</GoogleLogin
+            ><span class="sr-only">(current)</span></a>
+          <!-- <button class="btn btn-danger" @click="logout">Logout</button> -->
         </li>
       </ul>
     </div>
@@ -37,8 +45,21 @@
 </template>
 
 <script>
+import GoogleLogin from 'vue-google-login'
+
 export default {
   name: 'Navbar',
+  components: {
+    GoogleLogin
+  },
+  data () {
+    return {
+      params: {
+        client_id:
+            '1048832564850-fpn38itn9av9bci2rfeoedhnih2sqnsi.apps.googleusercontent.com'
+      }
+    }
+  },
   methods: {
     logout () {
       this.$store.dispatch('logout')

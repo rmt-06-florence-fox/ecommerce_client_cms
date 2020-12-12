@@ -8,7 +8,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
-    productsById: {}
+    productsById: {},
+    banners: [],
+    bannerById: {}
   },
   mutations: {
     setProducts (state, data) {
@@ -16,6 +18,12 @@ export default new Vuex.Store({
     },
     setProductsById (state, data) {
       state.productsById = data
+    },
+    setBanners (state, data) {
+      state.banners = data
+    },
+    setBannerById (state, data) {
+      state.bannerById = data
     }
   },
   actions: {
@@ -119,6 +127,82 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    createBanner (context, obj) {
+      axios({
+        method: 'POST',
+        url: '/banners',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          title: obj.title,
+          imageUrl: obj.imageUrl,
+          status: obj.status
+        }
+      })
+        .then(_ => {
+          router.push({ name: 'Banner' })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    fetchBanners (context) {
+      axios({
+        method: 'GET',
+        url: '/banners',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(data => {
+          context.commit('setBanners', data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    destroyBanner (context, id) {
+      return axios({
+        method: 'DELETE',
+        url: '/banners/' + id,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+    },
+    updateBanner (context, obj) {
+      return axios({
+        method: 'PUT',
+        url: '/banners/' + obj.id,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          title: obj.title,
+          imageUrl: obj.imageUrl,
+          status: obj.status
+        }
+      })
+    },
+    fetchBannerById (context, id) {
+      return axios({
+        method: 'GET',
+        url: '/banners/' + Number(id),
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+    },
+    loginGoogle (context, googleToken) {
+      return axios({
+        method: 'POST',
+        url: 'http://localhost:3000/googleLogin',
+        data: {
+          googleToken
+        }
+      })
     }
   },
   modules: {
