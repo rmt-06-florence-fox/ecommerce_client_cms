@@ -38,7 +38,8 @@
                 <input type="text" placeholder="Product Image" class="form-control" v-model="productById.image_url">
               </div>
               <button type="submit" class="btn btn-primary">Edit Product</button>
-              <button class="btn btn-danger ml-3" @click="deleteProduct">Delete</button>
+              <a class="btn btn-danger ml-3" @click="deleteProduct">Delete</a>
+              <a class="btn btn-warning ml-3 text-white" @click="back">Cancel</a>
             </form>
           </div>
         </div>
@@ -78,6 +79,9 @@ export default {
     deleteProduct () {
       const id = this.$route.params.id
       this.$store.dispatch('deleteProduct', id)
+    },
+    back () {
+      this.$router.go(-1)
     }
   },
   created () {

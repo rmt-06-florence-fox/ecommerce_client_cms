@@ -3,6 +3,7 @@
     <!-- Dashboard -->
     <b-nav-item to="/dashboard" :active='$route.name =="Dashboard"'>Dashboard
     </b-nav-item>
+
     <!-- Products -->
     <b-nav-item-dropdown
       :toggle-class="$route.name === 'ListProduct' || $route.name === 'AddProduct' || $route.name === 'DetailProduct' ? 'active' : ''"
@@ -20,27 +21,37 @@
       >Add Product
       </b-dropdown-item>
     </b-nav-item-dropdown>
+
     <!-- Categories -->
     <b-nav-item-dropdown
-      :toggle-class="$route.name === 'ListCategory' || $route.name === 'AddCategory' ? 'active' : ''"
+      :toggle-class="$route.name === 'ListCategory' || $route.name === 'AddCategory' || $route.name === 'DetailCategory' ? 'active' : ''"
       text="Category"
       right
     >
       <b-dropdown-item to="/categories" :active='$route.name == "ListCategory"'>List Category</b-dropdown-item>
-      <b-dropdown-item>Add Category</b-dropdown-item>
+      <b-dropdown-item
+      to="/categories/add"
+      :active='$route.name == "AddCategory"'
+      >Add Category
+      </b-dropdown-item>
     </b-nav-item-dropdown>
+
     <!-- Banners -->
     <b-nav-item-dropdown
-      :toggle-class="$route.name === 'ListBanner' || $route.name === 'AddBanner' ? 'active' : ''"
+      :toggle-class="$route.name === 'ListBanner' || $route.name === 'AddBanner' || $route.name === 'DetailBanner' ? 'active' : ''"
       text="Banner"
       right
     >
       <b-dropdown-item to="/banners" :active='$route.name == "ListBanner"'>List Banner</b-dropdown-item>
-      <b-dropdown-item>Add Banner</b-dropdown-item>
+      <b-dropdown-item
+      to="/banners/add"
+      :active='$route.name == "AddBanner"'
+      >Add Banner
+      </b-dropdown-item>
     </b-nav-item-dropdown>
     <!-- Logout -->
     <b-nav-item-dropdown
-      text="User"
+      text="Option"
       right
     >
       <b-dropdown-item @click.prevent="logout">Logout</b-dropdown-item>
