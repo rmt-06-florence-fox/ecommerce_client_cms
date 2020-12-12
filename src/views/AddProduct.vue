@@ -58,7 +58,14 @@ export default {
           this.$router.push('/home')
         })
         .catch(error => {
-          console.log(error)
+          console.log('masukkkk', error.response.data.message)
+          this.$alert(error.response.data.message)
+        })
+        .finally(() => {
+          this.name = ''
+          this.image_url = ''
+          this.price = ''
+          this.stock = ''
         })
     },
     cancel () {

@@ -6,13 +6,13 @@
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">Email</span>
         </div>
-        <input type="email" class="form-control" aria-describedby="basic-addon3" v-model="email" required>
+        <input type="email" class="form-control" aria-describedby="basic-addon3" v-model="email" placeholder="Enter your email" required>
       </div>
       <div class="input-group mb-3 mb-0">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">Password</span>
         </div>
-        <input type="password" class="form-control" aria-describedby="basic-addon3" v-model="password" required>
+        <input type="password" class="form-control" aria-describedby="basic-addon3" v-model="password" placeholder="Enter your password" required>
       </div>
     </div>
     <button type="button" class="btn btn-primary col-3 p-1 mb-2 btn-login" @click.prevent="login">Login</button>
@@ -36,11 +36,12 @@ export default {
       }
       this.$store.dispatch('login', obj)
         .then(response => {
+          console.log('masuuukkkk', response)
           localStorage.setItem('access_token', response.data.access_token)
           this.$router.push('/home')
         })
         .catch(error => {
-          console.log(error)
+          this.$alert(error.response.data.message)
         })
         .finally(() => {
           this.email = ''
