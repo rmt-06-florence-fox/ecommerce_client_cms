@@ -63,122 +63,48 @@
           </div> -->
         </nav>
         <h2 class="my-10 text-4xl font-semibold ">
-          Banner list
+          User list
         </h2>
-        <div
-          class="pb-2 flex items-center justify-between text-gray-600 "
-        >
-          <!-- Header -->
-
-          <div>
-            <span>
-              <span class="text-gray-500 ">
-                {{countStocks}}
-              </span>
-              items;
-            </span>
-            <span>
-              <span class="text-gray-500 ">
-                {{countProducts}}
-              </span>
-              products;
-            </span>
-            <span>
-              <span class="text-gray-500 ">
-                {{countCategories}}
-              </span>
-              categories
-            </span>
-          </div>
-          <div>
-            <span class="capitalize">
-              project
-              <span
-                class="text-gray-500  cursor-pointer"
-              >
-                all
-              </span>
-            </span>
-            <span class="capitalize ml-12">
-              date added
-              <span
-                class="text-gray-500  cursor-pointer"
-              >
-                all time
-              </span>
-            </span>
-            <span class="capitalize ml-12">
-              role
-              <span
-                class="text-gray-500  cursor-pointer"
-              >
-                all
-              </span>
-            </span>
-          </div>
-        </div>
         <div class="w-full flex flex-col items-center">
         <div class="mt-6 flex justify-between text-gray-600 w-11/12">
-          <!-- List sorting -->
-
-          <div class="ml-12 pl-4 flex capitalize select-none">
-            <!-- Left side -->
-            <span class="ml-8 flex items-center"
-                  @click="sortProduct">
-              Product's Name
-              <svg class="ml-1 h-5 w-5 fill-current"
-                  viewBox="0 0 20 20"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path :d="changeProduct">
-                  </path>
-                  </svg>
+          <div class="grid grid-cols-2 justify-items-center w-6/12">
+            <div
+              class=" capitalize text-current"
+            >
+            <span class="mt-2 text-current">
+                Username
             </span>
+            </div>
+            <div
+              class=" capitalize text-current"
+            >
+              <!-- <span>name</span> -->
+              <span class="mt-2 text-current">
+                Email
+              </span>
+            </div>
+
           </div>
 
-          <div class="grid grid-cols-4 capitalize w-8/12 justify-items-start">
-            <!-- Right side -->
+          <div class="grid grid-cols-1 w-6/12 justify-items-center">
+            <!-- Rigt side -->
 
-            <span class="mr-16 pr-1 flex items-center select-none"
-                  @click="sortCategories">
-              Categories
-              <svg class="ml-1 h-5 w-5 fill-current" viewBox="0 0 24 24">
-                <path
-                  :d="changeCategories"
-                ></path>
-              </svg>
-            </span>
-
-            <span class="mr-16 pr-2 flex items-center select-none"
-                  @click="sortPrice">
-              Price
-              <svg class="ml-1 h-5 w-5 fill-current" viewBox="0 0 24 24">
-                <path
-                  :d="changePrice"
-                ></path>
-              </svg>
-            </span>
-
-            <span class="mr-12 flex items-center select-none"
-                  @click="sortStocks">
-              Stocks
-              <svg class="ml-1 h-5 w-5 fill-current" viewBox="0 0 24 24">
-                <path
-                  :d="changeStocks"
-                ></path>
-              </svg>
-            </span>
-            <span class="mr-16 flex items-center select-none">
-              Actions
-            </span>
+            <div
+              class="capitalize text-left"
+            >
+              <span class="mt-2">
+                Address
+              </span>
+            </div>
           </div>
         </div>
         </div>
         <div class="w-full flex flex-col items-center">
-        <productCard v-for="banner in bannerList"
-                    :key="banner.id"
-                    :product="product"
+        <userCard v-for="user in users"
+                    :key="user.id"
+                    :user="user"
                     class="w-11/12">
-        </productCard>
+        </userCard>
         </div>
       </div>
     </main>
@@ -186,10 +112,35 @@
 </template>
 
 <script>
+import axios from '../config/axios'
+import userCard from '../components/userCard'
+
 export default {
   name: 'users',
+  components: {
+    userCard
+  },
+  data () {
+    return {
+      users: []
+    }
+  },
+  methods: {
+    loadUsers () {
+      axios({
+        methods: 'get',
+        url: '/user/all',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(res => {
+          this.users = res.data
+        })
+    }
+  },
   created () {
-    this.$store.dispatch('loadUsers')
+    this.loadUsers()
   }
 }
 </script>

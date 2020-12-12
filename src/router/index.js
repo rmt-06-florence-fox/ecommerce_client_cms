@@ -29,6 +29,11 @@ const routes = [
         path: 'banners',
         name: 'banners',
         component: banners
+        // children: [{
+        //   path: '/add',
+        //   name: 'addBanner',
+        //   component: addBanner
+        // }]
       },
       {
         path: 'users',

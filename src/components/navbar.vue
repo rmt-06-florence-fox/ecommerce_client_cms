@@ -25,7 +25,7 @@
       <div class="h-full flex flex-col justify-center">
       <router-link to="/add-product" router-link-active="translate-x-2">
         <button
-          class="mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow bg-yellow-500 hover:bg-gray-100 hover:text-black"
+          class="focus:outline-none mt-8 flex items-center justify-between py-3 px-2 text-white rounded-lg shadow bg-yellow-500 hover:bg-gray-100 hover:text-black"
         >
           <!-- Action -->
           <span>Add Product</span>
