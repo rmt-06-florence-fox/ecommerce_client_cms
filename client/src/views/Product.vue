@@ -16,15 +16,19 @@
 </template>
 
 <script>
-import axios from '../config/axiosInstance.js'
 import ProductCard from '../components/ProductCard.vue'
 
 export default {
   name: 'Product',
   data () {
     return {
-      products: [],
       embed: ''
+    }
+  },
+  computed: {
+    products () {
+      // return this.$store.state.products
+      return this.$store.getters.filteredProduct
     }
   },
   components: {
@@ -32,12 +36,7 @@ export default {
   },
   methods: {
     fetchProduct () {
-      axios
-        .get('/products')
-        .then(({ data }) => {
-          this.products = data
-        })
-        .catch(console.log)
+      this.$store.dispatch('fetchProduct')
     }
   },
   created () {

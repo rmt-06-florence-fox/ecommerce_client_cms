@@ -18,7 +18,6 @@
                         </div>
                         <button type="submit" class="btn btn-primary btn-block">Submit</button>
                     </form><br>
-                    <div class="g-signin2" data-onsuccess="onSignIn"></div><br>
                     <button id="back-register" class="btn btn-secondary btn-block">don't have account yet?</button>
                 </div>
             </div>
@@ -28,6 +27,7 @@
 
 <script>
 export default {
+  name: 'Login',
   data () {
     return {
       email: '',
@@ -41,7 +41,8 @@ export default {
         password: this.password
       }
       console.log(payload)
-      this.$router.push('/products')
+      // this.$router.push('/')
+      this.$store.dispatch('login', payload)
     }
   }
 }

@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <Navbar />
     <router-view/>
+    <div class="text-center text-muted p-3">{{ title }} 2020</div>
   </div>
 </template>
 
 <script>
-import Navbar from './components/Navbar.vue'
-
 export default {
-  components: {
-    Navbar
+  computed: {
+    title () {
+      return this.$store.state.title
+    }
   }
 }
 </script>
