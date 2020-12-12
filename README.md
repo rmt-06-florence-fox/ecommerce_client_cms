@@ -1,5 +1,18 @@
 # ecommerce_client_cms
 
+## Deployed Client :
+
+### Visit Page > [https://e-commerce-cms-amp.web.app/](https://e-commerce-cms-amp.web.app/)
+
+```
+Admin User for CRUD Products :
+  
+  Email: admin@email.com
+  Password: 123456
+```
+
+---
+
 ## Project setup
 ```
 npm install
