@@ -54,20 +54,22 @@ export default new Vuex.Store({
         method: 'DELETE',
         headers: { access_token: localStorage.getItem('access_token') }
       }).then(({ data }) => {
+        context.dispatch('fetchProducts')
         context.commit('successMessage', data.message)
       }).catch(err => {
         console.log(err)
         context.commit('setErrors', err.response.data.messages)
       })
     },
-    editHandler (context, product) {
-      const { id, name, imageUrl, stock, price } = product
+    editHandler (context, payload) {
+      const { id, name, imageUrl, stock, price } = payload
       axios({
         url: '/products/' + id,
         method: 'PUT',
         data: { name, imageUrl, stock, price },
         headers: { access_token: localStorage.getItem('access_token') }
       }).then(_ => {
+        context.dispatch('fetchProducts')
         context.commit('successMessage', 'Product has been edited')
       }).catch(err => {
         context.commit('setErrors', err.response.data.messages)
@@ -81,6 +83,7 @@ export default new Vuex.Store({
         data: payload,
         headers: { access_token: localStorage.getItem('access_token') }
       }).then(_ => {
+        context.dispatch('fetchProducts')
         context.commit('successMessage', 'One product has been added')
       }).catch(err => {
         context.commit('setErrors', err.response.data.messages)

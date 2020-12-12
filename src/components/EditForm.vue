@@ -5,7 +5,7 @@
     <b-form-input
       name="name"
       type="text"
-      v-model="product.name"
+      v-model="name"
       placeholder="product's name goes here"
     ></b-form-input>
     </b-form-group>
@@ -14,7 +14,7 @@
     <b-form-input
       name="imageUrl"
       type="text"
-      v-model="product.imageUrl"
+      v-model="imageUrl"
       placeholder="Image URL goes here"
     ></b-form-input>
     </b-form-group>
@@ -23,7 +23,7 @@
     <b-form-input
       name="stock"
       type="number"
-      v-model="product.stock"
+      v-model="stock"
       placeholder="Product's stock goes here"
     ></b-form-input>
     </b-form-group>
@@ -32,7 +32,7 @@
     <b-form-input
       name="price"
       type="number"
-      v-model="product.price"
+      v-model="price"
       placeholder="Product's stock goes here"
     ></b-form-input>
     </b-form-group>
@@ -44,13 +44,32 @@
 <script>
 export default {
   name: 'EditForm',
+  data () {
+    return {
+      name: '',
+      imageUrl: '',
+      stock: 0,
+      price: 0
+    }
+  },
   props: ['product'],
   methods: {
     editHandler () {
-      console.log('masuk methods edit')
-      console.log(this.product)
-      this.$store.dispatch('editHandler', this.product)
+      const { name, imageUrl, stock, price } = this
+      const payload = { id: this.product.id, name, imageUrl, stock, price }
+      this.$store.dispatch('editHandler', payload)
+      this.$bvModal.hide('edit-' + this.product.id)
+    },
+    initialState () {
+      const { name, imageUrl, stock, price } = this.product
+      this.name = name
+      this.imageUrl = imageUrl
+      this.stock = stock
+      this.price = price
     }
+  },
+  created () {
+    this.initialState()
   }
 }
 </script>

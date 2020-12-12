@@ -24,11 +24,12 @@
         </b-navbar-nav>
 
       </b-collapse>
-
-      <b-modal id="add" hide-footer title="Add Product Form">
+      <b-modal
+      id="add"
+      hide-footer
+      title="Add Product Form">
         <AddForm/>
       </b-modal>
-
     </b-navbar>
 </template>
 

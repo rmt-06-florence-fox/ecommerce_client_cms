@@ -35,7 +35,7 @@
       placeholder="Product's stock goes here"
     ></b-form-input>
     </b-form-group>
-    <b-button variant="success" type="submit"> Add </b-button>
+    <b-button variant="success" type="submit" block> Add </b-button>
 
   </b-form>
 </template>
@@ -55,6 +55,7 @@ export default {
     addHandler () {
       const { name, imageUrl, price, stock } = this
       this.$store.dispatch('addHandler', { name, imageUrl, price, stock })
+      this.$bvModal.hide('add')
     }
   }
 }
