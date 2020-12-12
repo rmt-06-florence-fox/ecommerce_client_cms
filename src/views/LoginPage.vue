@@ -6,7 +6,7 @@
                 <div class="row justify-content-center my-auto">
                     <div class="col-md-8 col-10 my-5">
                         <div class="row justify-content-center px-3 mb-3"> <img id="logo" src="../assets/logo.png"> </div>
-                        <h3 class="mb-5 text-center heading"><strong>Tadika Mesra</strong></h3>
+                        <h3 class="mb-5 text-center heading"><strong>Tadika Mesra Store</strong></h3>
                         <h6 class="msg-info">Login dulu baru mesen!</h6>
                         <form @submit.prevent="login">
                             <div class="form-group">
