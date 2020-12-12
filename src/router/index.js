@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import LoginPage from '../views/LoginPage.vue'
+import FormEdit from '../views/FormEdit.vue'
+import FormAddData from '../views/FormAdd.vue'
 
 Vue.use(VueRouter)
 
@@ -15,6 +17,16 @@ const routes = [
     path: '/login',
     name: 'LoginPage',
     component: LoginPage
+  },
+  {
+    path: '/additem',
+    name: 'FormAddData',
+    component: FormAddData
+  },
+  {
+    path: '/edititem',
+    name: 'FormEdit',
+    component: FormEdit
   },
   {
     path: '/about',

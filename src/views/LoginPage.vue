@@ -1,13 +1,11 @@
 <template>
     <div>
-         <router-view/>
-        <Header></Header>
         <Navbar></Navbar>
         <div class="d-flex bg">
             <div class="mx-auto mt-3">
                 <div class="shadow p-3 mb-5 bgS rounded mx-auto mt-4 color-page">
                     <div class="text-center">
-                        <h2>E-commerace</h2>
+                        <h2>BukaPalak</h2>
                     </div>
                     <form @submit.prevent="login">
                         <div class="form-group row">
@@ -40,13 +38,11 @@
 
 <script>
 import Navbar from '../components/Navbar'
-import Header from '../components/Header'
 
 export default {
   name: 'FormLogin',
   components: {
-    Navbar,
-    Header
+    Navbar
   },
   data () {
     return {
@@ -61,7 +57,8 @@ export default {
         password: this.password
       }
       this.$store.dispatch('login', payload)
-    //   this.$router.push('/home') // ini cara pindah halaman
+      //  ini Programatic
+      this.$router.push('/home') // ini cara pindah halaman
     }
   }
 }

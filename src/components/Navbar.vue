@@ -6,8 +6,8 @@
             </div>
             <div>
                 <ul class="right-navbar">
-                    <li><button type="button" class="btn btn-outline-primary text-light button1">Login</button></li>
-                    <li><button type="button" class="btn btn-primary button2">Register</button></li>
+                    <li><button type="button" class="btn btn-outline-primary text-light button1"><a @click="pageLogin" href="#">Login</a></button></li>
+                    <li><button type="button" class="btn btn-primary button2"><a @click="pageRegister" href="#">Register</a></button></li>
                 </ul>
             </div>
         </div>
@@ -16,7 +16,15 @@
 
 <script>
 export default {
-
+  name: 'Navbar',
+  methods: {
+    pageLogin () {
+      this.$router.push('/login')
+    },
+    pageRegister () {
+      this.$router.push('/home')
+    }
+  }
 }
 </script>
 
