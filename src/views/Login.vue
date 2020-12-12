@@ -1,20 +1,18 @@
 <template>
-    <div class="login-container ">
-        <div class="login-card">
-            <div class="login-form mt-2">
-                <form @submit.prevent="login">
-                    <div class="form-group mt-2">
-                    <label for="login-email">Email address :</label>
-                    <input v-model="email" type="email" class="form-control" id="email_input_login" autocomplete="email" required>
-                    </div>
-                    <div class="form-group mt-2">
-                    <label for="login-password">Password :</label>
-                    <input v-model="password" type="password" class="form-control" id="password_input_login" autocomplete="current-password" required>
-                    </div>
-                    <button class="login-btn mt-2 btn-dark">Login</button>
-                </form>
-            </div>
-        </div>
+    <div class="login-container">
+      <div class="login-form mt-2">
+          <form @submit.prevent="login">
+              <div class="form-group">
+              <label for="login-email">Email address :</label>
+              <input v-model="email" type="email" class="form-control mt-4" id="email_input_login" autocomplete="email" required>
+              </div>
+              <div class="form-group mt-4">
+              <label for="login-password">Password :</label>
+              <input v-model="password" type="password" class="form-control mt-4" id="password_input_login" autocomplete="current-password" required>
+              </div>
+              <button class="login-btn ">Login</button>
+          </form>
+      </div>
     </div>
 </template>
 <script>
@@ -47,11 +45,31 @@ export default {
 
 <style>
 .login-container {
-    display: flex;
-    justify-content: center;
+  display: flex;
+  height: 51.5vw;
+  align-items: center;
+  justify-content: center;
+  background-color: #525252;
 }
-.login-card {
-    width: 30%;
-    background-color: beige;
+.login-form {
+  align-content: right;
+  width: 30%;
+  display: flex;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+}
+.form-control {
+  width: 20vw;
+  border-color: black;
+  background-color: #24001e;
+}
+.login-btn {
+  background-color: white;
+  margin-top: 2rem;
+  font-size: 20px;
+  color: #24001e;
+  width: 17vw;
+  padding: 10px;
 }
 </style>

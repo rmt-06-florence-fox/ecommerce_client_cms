@@ -1,13 +1,15 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../config/axiosInstance'
+import Swal from 'sweetalert2'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     products: [],
-    categories: []
+    categories: [],
+    banners: []
   },
   mutations: {
     setProducts (state, payload) {
@@ -15,6 +17,9 @@ export default new Vuex.Store({
     },
     setCategories (state, payload) {
       state.categories = payload
+    },
+    setBanner (state, payload) {
+      state.banners = payload
     }
   },
   actions: {
@@ -56,6 +61,7 @@ export default new Vuex.Store({
         }
       })
         .then(res => {
+          Swal.fire(' Add Product Success')
           this.dispatch('fetchProduct')
         })
         .catch(err => {
@@ -93,6 +99,7 @@ export default new Vuex.Store({
         }
       })
         .then(res => {
+          Swal.fire(' Edit Product Success')
           this.dispatch('fetchProduct')
         })
         .catch(err => {
@@ -113,8 +120,147 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    addCategory (context, payload) {
+      axios({
+        url: '/category',
+        method: 'POST',
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          name: payload
+        }
+      })
+        .then(res => {
+          Swal.fire(' Create Category Success')
+          this.dispatch('fetchCategory')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    increaseStock (context, payload) {
+      axios({
+        url: `/products/${payload.id}`,
+        method: 'PATCH',
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          stock: payload.stock
+        }
+      })
+        .then(res => {
+          Swal.fire('Updated Stock Success')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    decreaseStock (context, payload) {
+      console.log('disini kan?', payload)
+      axios({
+        url: `/products/${payload.id}`,
+        method: 'PATCH',
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          stock: payload.stock
+        }
+      })
+        .then(res => {
+          Swal.fire('Updated Stock Success')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    fetchBanner (context) {
+      axios({
+        url: '/banner',
+        method: 'GET',
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(res => {
+          context.commit('setBanner', res.data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    addBanner (context, payload) {
+      axios({
+        url: '/banner',
+        method: 'POST',
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          title: payload.title,
+          image_url: payload.image_url,
+          status: payload.status
+        }
+      })
+        .then(res => {
+          Swal.fire(' Create Banner Success')
+          this.dispatch('fetchBanner')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    editBanner (context, payload) {
+      axios({
+        url: `/banner/${payload.id}`,
+        method: 'PUT',
+        headers: {
+          access_token: localStorage.access_token
+        },
+        data: {
+          title: payload.title,
+          image_url: payload.image_url,
+          status: payload.status
+        }
+      })
+        .then(res => {
+          Swal.fire(' Edit Banner Success')
+          this.dispatch('fetchBanner')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteBanner (context, payload) {
+      axios({
+        url: `/banner/${payload}`,
+        method: 'DELETE',
+        headers: {
+          access_token: localStorage.access_token
+        }
+      })
+        .then(res => {
+          this.dispatch('fetchBanner')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     }
   },
   modules: {
+  },
+  getters: {
+    filteredProduct: (state) => (name) => {
+      return state.products.filter(product => {
+        if (!name || name === 'all') {
+          return product
+        } else {
+          return product.Category.name === name
+        }
+      })
+    }
   }
 })

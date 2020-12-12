@@ -1,6 +1,6 @@
 <template>
   <div>
-    <b-button class="btn-primary" @click="showModal">Edit</b-button>
+    <b-button class="btn-danger" id="btn-edit-product" @click="showModal">Edit</b-button>
     <form @submit.prevent="editProduct">
         <b-modal ref="my-modal" hide-footer title="Edit product">
         <div class="d-block text-center">
@@ -18,7 +18,7 @@
               <option v-for="element in getCategory" :key="element.id" >{{element.name}}</option>
             </select>
         </div>
-        <b-button class="mt-2" variant="outline-warning" block @click="editProduct" >add</b-button>
+        <b-button class="mt-2" variant="outline-warning" block @click="editProduct" >Save</b-button>
         <b-button class="mt-3" variant="outline-danger" block @click="hideModal">Close Me</b-button>
         </b-modal>
     </form>
@@ -78,5 +78,7 @@ export default {
 </script>
 
 <style>
-
+#btn-edit-product {
+  width: 6vw;
+}
 </style>

@@ -1,10 +1,14 @@
 <template>
     <div class="navbar" id="nav">
       <div class="left-navbar">
-        <router-link to="/">Home</router-link>
+        <h5>CMS</h5>
+      </div>
+      <div class="center-navbar">
+        <router-link to="/home">Home</router-link> |
+        <router-link to="/banner">Banner</router-link>
       </div>
       <div class="right-navbar">
-          <button class="btn-dark" @click="logout">logout</button>
+          <button class="btn-danger" @click="logout">logout</button>
       </div>
     </div>
 </template>
