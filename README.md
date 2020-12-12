@@ -1,4 +1,10 @@
 # ecommerce_client_cms
+```
+link demo: (https://ecommerce-jar.web.app/)
+link server: (https://e-commerce-jar.herokuapp.com/)
+login with account : email: admin@mail.com,
+                     password: 123456
+ ```
 
 ## Project setup
 ```
