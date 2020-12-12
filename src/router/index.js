@@ -5,6 +5,7 @@ import Login from '../views/Login.vue'
 import MainPage from '../views/MainPage.vue'
 import Product from '../views/Product.vue'
 import AddProduct from '../views/AddProduct.vue'
+import EditProduct from '../views/EditProduct.vue'
 
 Vue.use(VueRouter)
 
@@ -33,6 +34,11 @@ const routes = [
         path: 'addProduct',
         name: 'AddProduct',
         component: AddProduct
+      },
+      {
+        path: 'editProduct/:id',
+        name: 'EditProduct',
+        component: EditProduct
       },
       {
         path: 'about',

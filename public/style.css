@@ -1,5 +1,5 @@
 .input-group-prepend {
-  width: 5rem;
+  width: 6rem;
 }
 
 .input-group-text {
@@ -40,6 +40,15 @@
 
 .btn-add {
   width: 6.1rem;
+}
+
+.card-img-top {
+  height: 200px;
+}
+
+.button-add-form {
+  display: flex;
+  justify-content: center;
 }
 
 /*# sourceMappingURL=style.css.map */

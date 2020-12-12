@@ -2,8 +2,6 @@
   <nav class="navbar navbar-dark bg-primary">
     <div>
       <a class="navbar-brand" href="" @click.prevent="goHome">Home</a>
-      <a class="navbar-brand" href="" @click.prevent="goAbout">About</a>
-      <a class="navbar-brand" href="" @click.prevent="goProduct">Product</a>
     </div>
     <button class="btn-danger btn btn-logout p-1" @click.prevent="logout">Logout</button>
   </nav>
@@ -23,6 +21,7 @@ export default {
       this.$router.push('/product')
     },
     logout () {
+      localStorage.clear()
       this.$router.push('/login')
     }
   }

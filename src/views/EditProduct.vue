@@ -28,7 +28,7 @@
       </div>
     </div>
     <div class="button-add-form">
-      <button type="button" class="btn btn-primary col-5 p-1 m-2 btn-add" @click.prevent="addProduct">Add Product</button>
+      <button type="button" class="btn btn-primary col-5 p-1 m-2 btn-add" @click.prevent="editProduct">Save</button>
       <button type="button" class="btn btn-danger col-4 p-1 m-2 btn-add" @click.prevent="cancel">Cancel</button>
     </div>
   </div>
@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  name: 'AddProduct',
+  name: 'EditProduct',
   data () {
     return {
       name: '',
@@ -46,14 +46,28 @@ export default {
     }
   },
   methods: {
-    addProduct () {
-      const obj = {
+    fetchDetailProduct () {
+      const id = this.$route.params.id
+      this.$store.dispatch('fetchDataById', id)
+        .then(response => {
+          this.name = response.data.name
+          this.image_url = response.data.image_url
+          this.price = response.data.price
+          this.stock = response.data.stock
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    editProduct () {
+      const id = this.$route.params.id
+      this.$store.dispatch('editData', {
+        id,
         name: this.name,
         image_url: this.image_url,
         price: this.price,
         stock: this.stock
-      }
-      this.$store.dispatch('addProduct', obj)
+      })
         .then(response => {
           this.$router.push('/home')
         })
@@ -65,10 +79,8 @@ export default {
       this.$router.push('/home')
     }
   },
-  computed: {
-    picture: () => {
-      return this.image_url
-    }
+  created () {
+    this.fetchDetailProduct()
   }
 }
 </script>
