@@ -16,7 +16,6 @@ const routes = [
   },
   {
     path: '/',
-    name: 'MainPage',
     component: MainPage,
     children: [
       {

@@ -1,49 +1,48 @@
 <template>
-  <div class="container-fluid">
-  <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse show" style="">
-      <div class="position-sticky pt-3">
-        <ul class="nav flex-column">
-          <li class="nav-item">
-            <router-link to="/">Home</router-link>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">
-              <router-link to="/login">Login</router-link>
-            </a>
-          </li>
-          <li class="nav-item">
-            <router-link to="/add">Add Product</router-link>
-          </li>
-          <li class="nav-item">
-            <button class="btn"
-              @click="logout"
-              type="button">Logout</button>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor"><div class="chartjs-size-monitor-expand"><div class=""></div></div><div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
-      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-        <h1 class="h2">Dashboard</h1>
-      </div>
-    </main>
-  </div>
-</div>
+  <nav
+    id="sidebarMenu"
+    class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse show"
+    style=""
+  >
+    <div class="position-sticky sb-list">
+      <ul class="nav flex-column">
+        <li class="nav-item">
+          <router-link class="nav-link active" to="/"><i class="fas fa-home mr-3"></i>Home</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link active" to="/add"><i class="fas fa-plus-square mr-3"></i>Add Product</router-link>
+        </li>
+        <li class="nav-item">
+          <a @click="logout" class="nav-link active" href="#"><i class="fas fa-sign-out-alt mr-3"></i>Logout</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
 </template>
 
 <script>
+import Swal from 'sweetalert2'
 export default {
   name: 'Sidebar',
   methods: {
     logout () {
-      this.$store.dispatch('logout')
+      Swal.fire({
+        title: 'Are you sure to logout?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#007bff',
+        cancelButtonColor: '#af3838',
+        confirmButtonText: 'Yes, logout!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          localStorage.clear()
+          this.$router.push('/login')
+        }
+      })
     }
   }
 }
 </script>
 
 <style>
-
 </style>

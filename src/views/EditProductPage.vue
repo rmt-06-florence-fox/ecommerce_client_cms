@@ -1,6 +1,5 @@
 <template>
   <div class="editProduct">
-      <h1>Edit Product</h1>
       <form @submit.prevent="editPost">
       <div class="form-group">
         <label>Name</label>
@@ -38,6 +37,11 @@
 <script>
 export default {
   name: 'EditProductPage',
+  data () {
+    return {
+      pageName: 'Edit Product'
+    }
+  },
   computed: {
     product () {
       return this.$store.state.product
@@ -57,14 +61,17 @@ export default {
         stock: this.product.stock
       }
       this.$store.dispatch('editPost', payload)
+    },
+    setPage () {
+      this.$store.commit('setPage', this.pageName)
     }
   },
   created () {
     this.getProduct()
+    this.setPage()
   }
 }
 </script>
 
 <style>
-
 </style>

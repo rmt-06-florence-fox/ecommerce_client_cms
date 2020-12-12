@@ -1,7 +1,6 @@
 <template>
   <div class="addProduct">
-      <h1>Add Product</h1>
-      <form @submit.prevent="add">
+    <form @submit.prevent="add">
       <div class="form-group">
         <label>Name</label>
         <input
@@ -40,6 +39,7 @@ export default {
   name: 'AddProductPage',
   data () {
     return {
+      pageName: 'Add Product',
       name: '',
       image_url: '',
       price: '',
@@ -55,11 +55,16 @@ export default {
         stock: this.stock
       }
       this.$store.dispatch('addProduct', payload)
+    },
+    setPage () {
+      this.$store.commit('setPage', this.pageName)
     }
+  },
+  created () {
+    this.setPage()
   }
 }
 </script>
 
 <style>
-
 </style>

@@ -2,11 +2,13 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../config/axiosInstance'
 import router from '../router'
+import Swal from 'sweetalert2'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    title: 'Ecommerce',
+    pageName: '',
     products: [],
     product: {}
   },
@@ -16,6 +18,9 @@ export default new Vuex.Store({
     },
     setProduct (state, payload) {
       state.product = payload
+    },
+    setPage (state, payload) {
+      state.pageName = payload
     }
   },
   actions: {
@@ -30,7 +35,15 @@ export default new Vuex.Store({
         .then(({ data }) => {
           context.commit('setProducts', data.products)
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Show Products Failed!',
+            text: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
     },
     addProduct (context, payload) {
       axios({
@@ -42,10 +55,23 @@ export default new Vuex.Store({
         data: payload
       })
         .then(({ data }) => {
-          console.log('add success')
+          Swal.fire({
+            icon: 'success',
+            title: 'Add Product Success!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           router.push('/')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Add Product Failed!',
+            text: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
     },
     getProduct (context, id) {
       axios({
@@ -56,10 +82,17 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
           context.commit('setProduct', data.product)
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Get Product Failed!',
+            text: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
     },
     editPost (context, payload) {
       axios({
@@ -71,10 +104,23 @@ export default new Vuex.Store({
         data: payload
       })
         .then(({ data }) => {
-          console.log('edit success')
+          Swal.fire({
+            icon: 'success',
+            title: 'Edit Product Success!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           router.push('/')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Edit Product Failed!',
+            text: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
     },
     delProduct (context, id) {
       axios({
@@ -85,10 +131,17 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log('data deleted succesfuly')
           context.dispatch('fetchProducts')
         })
-        .catch(err => console.log(err))
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Delete Product Failed!',
+            text: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
     },
     login (context, payload) {
       axios({
@@ -98,15 +151,30 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
+          Swal.fire({
+            icon: 'success',
+            title: 'Login Success!',
+            showConfirmButton: false,
+            timer: 1500
+          })
           router.push('/')
         })
-        .catch(err => console.log(err))
-    },
-    logout () {
-      localStorage.clear()
-      router.push('/login')
+        .catch(err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Failed!',
+            text: err.response.data.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
+        })
     }
   },
   modules: {
+  },
+  getters: {
+    rupiahCurrency: (state, getters) => {
+      return getters.doneTodos.length
+    }
   }
 })

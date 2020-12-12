@@ -1,5 +1,7 @@
 <template>
   <div class="login">
+    <h3 class="text-center">E-Commerce Admin</h3>
+    <h5 class="text-center text-muted">Login</h5>
     <form @submit.prevent="login">
       <div class="form-group">
         <label>Email address</label>
@@ -9,7 +11,6 @@
           class="form-control"
           aria-describedby="emailHelp"
           placeholder="Enter email">
-        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
       </div>
       <div class="form-group">
         <label>Password</label>
@@ -47,5 +48,4 @@ export default {
 </script>
 
 <style>
-
 </style>
