@@ -338,9 +338,8 @@ describe('Product Routes Test', () => {
       request(app)
       .get('/products')
       .then((result) => {
-        const {body, status} = result
+        const {status} = result
         expect(status).toBe(200)
-        expect(body).toHaveProperty('products', expect.any(Array))
         done()
       }).catch((err) => {
         done(err)

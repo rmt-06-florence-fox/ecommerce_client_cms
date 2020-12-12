@@ -1,0 +1,49 @@
+<template>
+  <div id="app">
+    <NavBar/>
+    <router-view/>
+  </div>
+</template>
+
+<script>
+import NavBar from './components/NavBar'
+
+export default {
+  name: 'App',
+  components: {
+    NavBar
+  },
+  created () {
+    const token = localStorage.getItem('access_token')
+    if (token) {
+      this.$store.commit('loggedIn', true)
+    } else {
+      this.$store.commit('loggedIn', false)
+      this.$router.push({ name: 'Login' })
+    }
+  }
+}
+</script>
+
+<style>
+#app {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+</style>
