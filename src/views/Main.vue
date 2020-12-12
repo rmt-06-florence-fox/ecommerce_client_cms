@@ -46,7 +46,7 @@
               </button>
             </div>
             <div class="add-banner mt-2">
-              <button class="btn btn-action">
+              <button class="btn btn-action" @click="addBanner">
                  <i class='fas fa-plus' style='font-size:24px'></i>
               <span> Banner</span>
               </button>
@@ -120,6 +120,10 @@ export default {
       show: 'products',
       addCategoryPayload: {
         name: ''
+      },
+      addBannerPayload: {
+        title: '',
+        image_url: ''
       }
     }
   },
@@ -224,6 +228,53 @@ export default {
               text: err.response.data.message + '!'
             })
           })
+      }
+    },
+    addBanner () {
+      if (this.$store.state.loggedIn) {
+        Swal.fire({
+          title: 'Enter banner title !',
+          input: 'text',
+          inputLabel: 'Banner title',
+          showCancelButton: true,
+          inputValidator: (value) => {
+            if (!value) {
+              return 'You need to write something!'
+            }
+          }
+        })
+          .then((result) => {
+            this.addBannerPayload.title = result.value
+            if (result.isConfirmed) {
+              Swal.fire({
+                title: 'Enter banner image_url !',
+                input: 'text',
+                inputLabel: 'Banner image',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                  if (!value) {
+                    return 'You need to write something!'
+                  }
+                }
+              })
+                .then(result => {
+                  if (result) {
+                    this.addBannerPayload.image_url = result.value
+                  }
+                  if (result.isConfirmed) {
+                    this.$store.dispatch('addBanner', this.addBannerPayload)
+                  }
+                })
+                .catch((err) => {
+                  console.log(err)
+                })
+            }
+          })
+          .catch(err => {
+            console.log(err)
+          })
+      } else {
+        Swal.fire('Please login first')
       }
     }
   },

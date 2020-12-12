@@ -114,7 +114,7 @@ export default new Vuex.Store({
       axios({
         method: 'POST',
         url: '/banners',
-        header: { token: localStorage.getItem('token') },
+        headers: { token: localStorage.getItem('token') },
         data: {
           title: payload.title,
           image_url: payload.image_url
@@ -126,6 +126,31 @@ export default new Vuex.Store({
         .catch(err => {
           console.log(err)
         })
+    },
+    deleteBanner (context, id) {
+      axios({
+        method: 'DELETE',
+        url: '/banners/' + id,
+        headers: { token: localStorage.getItem('token') }
+      })
+        .then(() => {
+          context.dispatch('getBanners')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    editBanner (context, payload) {
+      return axios({
+        method: 'PUT',
+        url: '/banners/' + payload.id,
+        headers: { token: localStorage.getItem('token') },
+        data: {
+          image_url: payload.image_url,
+          title: payload.title,
+          status: payload.status
+        }
+      })
     }
   },
   modules: {
