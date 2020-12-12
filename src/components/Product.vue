@@ -22,7 +22,22 @@ export default {
       this.$router.push(url)
     },
     deleteProduct () {
-      this.$store.dispatch('delete', this.product.id)
+      this.$toasted.info('are you sure?', {
+        action: [
+          {
+            text: 'yes',
+            onClick: (e, toastObject) => {
+              this.$store.dispatch('delete', this.product.id)
+            }
+          },
+          {
+            text: 'no',
+            onClick: (e, toastObject) => {
+              toastObject.goAway(0)
+            }
+          }
+        ]
+      })
       // this.$store.dispatch('fetch')
     }
   },

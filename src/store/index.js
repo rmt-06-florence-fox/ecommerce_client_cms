@@ -29,10 +29,17 @@ export default new Vuex.Store({
         .then(({ data }) => {
           // console.log(data)
           localStorage.setItem('access_token', data.access_token)
+          Vue.toasted.success('welcome', {
+            action: {
+              text: payload.email.split('@')[0],
+              position: 'top-right'
+            }
+          })
           router.push('/')
         })
-        .catch(error => {
-          console.log(error)
+        .catch(({ response }) => {
+          // console.log(error.response.data)
+          Vue.toasted.error(response.data.message, { icon: 'skull' })
         })
     },
     fetch (context) {
@@ -44,11 +51,11 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
+          // console.log(data)
           context.commit('setProducts', data.products)
         })
-        .catch(error => {
-          console.log(error)
+        .catch(({ response }) => {
+          console.log(response)
         })
     },
     create (context, payload) {
@@ -62,11 +69,16 @@ export default new Vuex.Store({
         data: payload
       })
         .then(response => {
-          console.log(response.data)
+          // console.log(response.data)
+          Vue.toasted.success('added!', { icon: 'thumbs-up' })
           router.push('/')
         })
-        .catch(error => {
-          console.log(error)
+        .catch(({ response }) => {
+          // console.log(response.data.messages)
+          const errors = response.data.messages
+          errors.forEach(e => {
+            Vue.toasted.error(e, { icon: 'skull' })
+          })
         })
     },
     findByPk (context, payload) {
@@ -80,7 +92,7 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          console.log(data)
+          // console.log(data)
           context.commit('setEditProduct', data.product)
         })
         .catch(error => {
@@ -98,11 +110,17 @@ export default new Vuex.Store({
         data: payload
       })
         .then(response => {
-          console.log(response)
+          // console.log(response)
+          context.commit('setEditProduct', {})
+          Vue.toasted.success('Updated!')
           router.push('/')
         })
-        .catch(error => {
-          console.log(error)
+        .catch(({ response }) => {
+          // console.log(error)
+          const errors = response.data.messages
+          errors.forEach(e => {
+            Vue.toasted.error(e, { icon: 'skull' })
+          })
         })
     },
     delete (context, payload) {

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="container">
-      <div class="row">
+      <div v-if="currentData.name" class="row">
         <div class="col-2"><img :src="currentData.image_url" alt="" srcset=""></div>
         <div class="col-10">
           <form @submit.prevent="doEdit" action="">
@@ -32,6 +32,11 @@
             <button class="btn btn-primary mt-5">edit</button>
           </form>
         </div>
+      </div>
+      <div v-else>
+        <h1>PRODUCT NOT FOUND</h1>
+        <p><small>404</small></p>
+        <router-link to="/" class="fas fa-database mb-4"> back to list</router-link>
       </div>
     </div>
   </div>
