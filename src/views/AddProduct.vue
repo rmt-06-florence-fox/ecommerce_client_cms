@@ -79,6 +79,7 @@
 
 <script>
 // import axios from '../config/axiosInstance'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'Add Product',
@@ -101,10 +102,24 @@ export default {
       this.$store.dispatch('addProduct', payload)
         .then(response => {
           console.log(response)
-          this.$router.push({ name: 'Dashboard' })
+          Swal.fire({
+            icon: 'success',
+            title: 'Add Product Success',
+            showConfirmButton: false,
+            timer: 1000
+          })
+
+          const self = this
+          setTimeout(function () {
+            self.$router.push({ name: 'Dashboard' })
+          }, 1100)
         })
         .catch(err => {
-          console.log(err.response)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message
+          })
         })
     }
   }

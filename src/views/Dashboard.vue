@@ -1,9 +1,14 @@
 <template>
   <section class="section pt-2">
     <h1 class="title">Dashboard</h1>
+    <div class="field">
+      <div class="control" :class="{'is-loading': isLoading}">
+        <input v-model="searchQuery" class="input" type="text" placeholder="Filter by name">
+      </div>
+    </div>
     <div class = "columns is-multiline">
       <ProductCard
-        v-for="product in products" :key="product.id"
+        v-for="product in filtered" :key="product.id"
         :product="product"
         @toggleModal='activateModal'
         @destroy='destroy'
@@ -29,7 +34,9 @@ export default {
   },
   data () {
     return {
-      targetEdit: {}
+      targetEdit: {},
+      query: '',
+      searchQuery: ''
     }
   },
   methods: {
@@ -56,11 +63,22 @@ export default {
     },
     isActive () {
       return this.$store.state.isActive
+    },
+    isLoading () {
+      return this.$store.state.isLoading
+    },
+    filtered () {
+      return this.$store.getters.filtered(this.query)
+    }
+  },
+  watch: {
+    searchQuery: function (val) {
+      this.$store.commit('changeIsLoading')
+      this.query = val
     }
   }
 }
 </script>
 
-<style>
-
+<style scoped>
 </style>

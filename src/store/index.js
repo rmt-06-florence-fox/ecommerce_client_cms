@@ -1,14 +1,16 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../config/axiosInstance'
-
+import Swal from 'sweetalert2'
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     products: [],
     isActive: false,
-    targetEdit: {}
+    targetEdit: {},
+    isLoading: false,
+    searchQuery: ''
   },
   mutations: {
     changeProducts (state, payload) {
@@ -23,6 +25,17 @@ export default new Vuex.Store({
     },
     fillTargetEdit (state, payload) {
       state.targetEdit = payload
+    },
+    changeIsLoading (state) {
+      // if (state.isLoading) {
+      //   state.isLoading = false
+      // } else {
+      //   state.isLoading = true
+      // }
+      state.isLoading = true
+    },
+    deactivate (state) {
+      state.isLoading = false
     }
   },
   actions: {
@@ -55,10 +68,23 @@ export default new Vuex.Store({
         }
       })
         .then(response => {
-          this.dispatch('fetchProducts')
+          Swal.fire({
+            icon: 'success',
+            title: 'Delete Success',
+            showConfirmButton: false,
+            timer: 1000
+          })
+
+          setTimeout(function () {
+            context.dispatch('fetchProducts')
+          }, 1000)
         })
         .catch(err => {
-          console.log(err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message
+          })
         })
     },
     fetchProductsById (context, id) {
@@ -71,8 +97,8 @@ export default new Vuex.Store({
       })
         .then(response => {
           console.log(response.data.data)
-          this.commit('fillTargetEdit', response.data.data)
-          this.commit('changeIsActive')
+          context.commit('fillTargetEdit', response.data.data)
+          context.commit('changeIsActive')
         })
         .catch(err => {
           console.log(err.response)
@@ -96,19 +122,39 @@ export default new Vuex.Store({
     postEdit (context) {
       axios({
         method: 'PUT',
-        url: '/products/' + this.state.targetEdit.id,
+        url: '/products/' + context.state.targetEdit.id,
         headers: {
           access_token: localStorage.getItem('access_token')
         },
-        data: this.state.targetEdit
+        data: context.state.targetEdit
       })
         .then(response => {
-          this.commit('changeIsActive')
-          this.dispatch('fetchProducts')
+          Swal.fire({
+            icon: 'success',
+            title: 'Edit Product Success',
+            showConfirmButton: false,
+            timer: 1000
+          })
+
+          setTimeout(function () {
+            context.commit('changeIsActive')
+          }, 1000)
+          context.dispatch('fetchProducts')
         })
         .catch(err => {
-          console.log(err.response)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message
+          })
         })
+    }
+  },
+  getters: {
+    filtered: (state) => (val) => {
+      return state.products.filter(product => {
+        return product.name.toLowerCase().includes(val.toLowerCase())
+      })
     }
   },
   modules: {
