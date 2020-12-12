@@ -40,7 +40,7 @@
             <div
               class="mr-16 flex flex-col capitalize text-current "
             >
-             Rp. {{product.price}}
+             Rp. {{priceConverted}}
             </div>
 
             <div
@@ -78,6 +78,17 @@ export default {
     },
     deleteThis () {
       this.$store.dispatch('deleteProduct', this.product.id)
+    }
+  },
+  computed: {
+    priceConverted () {
+      return this.product.price
+        .toString()
+        .split('')
+        .reverse()
+        .map((el, i) => i % 3 === 0 && i !== 0 ? `${el}.` : el)
+        .reverse()
+        .join('') + ',00'
     }
   }
 }
