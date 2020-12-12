@@ -6,7 +6,7 @@
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat, Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
@@ -23,6 +23,6 @@
 }
 
 #nav a.router-link-exact-active {
-  color: #42b983;
+  color: #f1f5f3;
 }
 </style>

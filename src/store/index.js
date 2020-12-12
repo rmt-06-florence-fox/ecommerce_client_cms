@@ -115,7 +115,7 @@ export default new Vuex.Store({
         }
       })
         .then(_ => {
-          this.dispatch('fetch')
+          context.dispatch('fetch')
         })
         .catch(error => {
           console.log(error)

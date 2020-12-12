@@ -21,17 +21,17 @@ const routes = [
     component: DashBoard,
     children: [
       {
-        path: '/',
+        path: '',
         name: 'ListProduct',
         component: ListProduct
       },
       {
-        path: '/add',
+        path: 'add',
         name: 'AddProduct',
         component: AddProduct
       },
       {
-        path: '/edit/:id',
+        path: 'edit/:id',
         name: 'EditProduct',
         component: EditProduct
       },

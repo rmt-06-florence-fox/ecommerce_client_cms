@@ -23,7 +23,7 @@ export default {
     },
     deleteProduct () {
       this.$store.dispatch('delete', this.product.id)
-      this.$store.dispatch('fetch')
+      // this.$store.dispatch('fetch')
     }
   },
   data () {
