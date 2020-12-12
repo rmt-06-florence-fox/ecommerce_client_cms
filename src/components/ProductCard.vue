@@ -49,7 +49,7 @@ export default {
       this.$emit('toggleModal', id)
     },
     destroy (id) {
-      this.$emit('destroy', id)
+      this.$store.dispatch('destroy', id)
     }
   }
 }

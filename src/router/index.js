@@ -9,6 +9,18 @@ import AddProduct from '../views/AddProduct.vue'
 
 Vue.use(VueRouter)
 
+const routerGuard = (to, from, next) => {
+  const isAuthenticated = localStorage.getItem('access_token')
+  console.log(to, '<<<< to')
+  console.log(from, '<<<< from')
+  console.log(isAuthenticated, '<<<<< authenticated')
+  if (isAuthenticated) {
+    next()
+  } else {
+    next({ name: 'Login' })
+  }
+}
+
 const routes = [
   {
     path: '/',
@@ -25,7 +37,8 @@ const routes = [
         name: 'Add Product',
         component: AddProduct
       }
-    ]
+    ],
+    beforeEnter: routerGuard
   },
   {
     path: '/register',
@@ -53,11 +66,11 @@ const router = new VueRouter({
   routes
 })
 
-const isAuthenticated = localStorage.getItem('access_token')
-
-router.beforeEach((to, from, next) => {
-  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-  else next()
-})
+// router.beforeEach((to, from, next) => {
+//   console.log(to, '<<<< to')
+//   console.log(from, '<<<< from')
+//   if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+//   else next()
+// })
 
 export default router

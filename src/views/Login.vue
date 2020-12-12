@@ -37,7 +37,7 @@
 
 <script>
 // import axios from '../config/axiosInstance'
-
+import Swal from 'sweetalert2'
 export default {
   name: 'Login',
   data () {
@@ -53,10 +53,24 @@ export default {
         .then(response => {
           const accessToken = response.data.access_token
           localStorage.setItem('access_token', accessToken)
-          this.$router.push({ name: 'Dashboard' })
+          Swal.fire({
+            icon: 'success',
+            title: 'Login Success',
+            showConfirmButton: false,
+            timer: 1000
+          })
+
+          const self = this
+          setTimeout(function () {
+            self.$router.push({ name: 'Dashboard' })
+          }, 1000)
         })
         .catch(err => {
-          console.log(err.response)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.response.data.message
+          })
         })
     }
   }
