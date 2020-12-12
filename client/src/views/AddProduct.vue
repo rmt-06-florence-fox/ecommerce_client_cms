@@ -1,6 +1,7 @@
 <template>
 <div>
-  <form @submit.prevent="addData" class="addproduct">
+  <div class="form">
+     <form @submit.prevent="addData" class="addproduct">
     <div class="form-floating mb-3">
       <input  v-model="name" type="text" class="form-control" id="name" placeholder="Produk Name" >
       <label for="name" id="name" >Name</label>
@@ -15,10 +16,12 @@
     </div>
     <div class="form-floating mb-3">
       <input v-model="price" type="text" class="form-control" id="price" placeholder="20000">
-      <label for="price">Price</label>
+      <label for="price">Price</label><br>
       <button type="sumbit" class="btn btn-outline-success"> Submit </button>
     </div>
   </form>
+
+  </div>
 </div>
 </template>
 
@@ -43,12 +46,23 @@ export default {
       }
       console.log(data)
       this.$store.dispatch('addData', data)
-      this.$router.push('/dashboard')
     }
   }
 }
 </script>
 
-<style>
+<style scoped>
+
+.form{
+  min-width: 20px;
+  margin-left: 300px;
+  margin-right: 300px;
+  background-color: grey;
+  padding: 30px;
+}
+.btn-outline-success{
+  background-color:yellowgreen;
+  color: grey;
+}
 
 </style>

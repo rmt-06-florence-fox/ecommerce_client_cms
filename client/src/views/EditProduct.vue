@@ -1,7 +1,7 @@
 <template>
 <div>
   <!-- {{editproduct}} -->
-  <form @submit.prevent="submit" class="addproduct">
+  <form @submit.prevent="submit" class="form">
     <div class="form-floating mb-3">
       <input  v-model="name" type="text" class="form-control" id="name" placeholder="Produk Name" >
       <label for="name" id="name" > {{editproduct[0].name}} </label>
@@ -66,6 +66,17 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+.form{
+  min-width: 20px;
+  margin-left: 300px;
+  margin-right: 300px;
+  background-color: grey;
+  padding: 30px;
+}
+.btn-outline-success{
+  background-color:yellowgreen;
+  color: grey;
+}
 
 </style>

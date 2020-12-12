@@ -1,18 +1,16 @@
 <template>
-<div class="row">
-    <div class="row justify-content-center">
-      <div class="col-md-3 mt-4 mr-auto" >
-      <div class="card" >
-      <img class="card-img-top" :src="products.image_url" >
-    <div class="card-body">
-     <p class="card-text">
-       name {{products.name}} <br>
-       stock {{products.stock}} <br>
-       price {{products.price}} <br>
-     </p>
-     <button @click.prevent="editProduct(products.id)" type="button" class="btn btn-info">edit</button>
-     <button @click.prevent="deleteData" type="button" class="btn btn-danger">Delete</button>
-    </div>
+<div class="container">
+    <div class="row">
+        <div class="card" >
+        <img class="card-img-top" :src="products.image_url" >
+      <div class="card-body">
+      <p class="card-text">
+        name : {{products.name}} <br>
+        stock : {{products.stock}} <br>
+        price : {{products.price}} <br>
+      </p>
+      <button @click.prevent="editProduct(products.id)" type="button" class="btn btn-info">edit</button>
+      <button @click.prevent="deleteData" type="button" class="btn btn-danger">Delete</button>
       </div>
     </div>
   </div>
@@ -35,7 +33,6 @@ export default {
   methods: {
     editProduct (id) {
       this.$router.push(`/edit/${id}`)
-      // this.$store.dispatch('coba', id)
     },
     deleteData () {
       this.$store.dispatch('deleteData', this.products.id)
@@ -44,6 +41,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.container {
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  flex-wrap: wrap;
+}
 </style>

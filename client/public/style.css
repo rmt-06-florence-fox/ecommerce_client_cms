@@ -1,0 +1,136 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#app {
+  font-family: 'Nanum Gothic', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #FFF;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+h1 {
+  text-align: center;
+} 
+
+/* Login Form Page */
+/* .login {
+  text-align: center;
+}
+small {
+  color: grey;
+}
+button.login-btn {
+  border-color: grey;
+  border-radius: .50em;
+  box-shadow: 0 6px grey;
+  background-color: #ffda79;
+  color: black;
+  outline: none;
+  width: 100px;
+}
+
+button:active {
+  transform: translateY(5px)
+} */
+
+/* Home Page (Dashboard etc) */
+/* #nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+	background-color: #273c75;
+}
+
+ul {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  margin-top: 15px;
+  padding: 10px;
+	width: 500px;
+	height: 50px;
+}
+
+li {
+  list-style: none;
+}
+
+a.logout {
+  margin-right: 50px;
+}
+
+/* Add Product Form Page */
+/* #add-form, #edit-form {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 20px;
+}
+
+.add-form, .edit-form {
+  background-color: #fdcb6e;
+  width: 500px;
+  padding: 30px;
+  border-radius: 0.3em;
+  color: #fff;
+}
+
+.add-btn, .edit-btn {
+  margin-left: 160px;
+} */ 
+
+/* Product Item box */
+/* div.product-item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 1200px;
+  height: 180px;
+  padding: 15px;
+  margin-top: 50px;
+  margin-left: 10%;
+  background-color: #ffda79;
+  border-radius: .35em;
+}
+
+.product-detail {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #ffeaa7;
+  height: 100%;
+  width: 990px;
+}
+
+h5 {
+  font-size: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 70%;
+  width: 10%;
+}
+
+.page-title {
+  font-size: 50px; 
+  margin-top: 30px
+}
+
+#dashboard {
+  margin-bottom: 100px;
+}

@@ -2,6 +2,9 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../axios/axios'
 import router from '../router'
+import VueSweetalert2 from 'vue-sweetalert2'
+import 'sweetalert2/dist/sweetalert2.min.css'
+Vue.use(VueSweetalert2)
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -26,11 +29,13 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           console.log(data)
+          Vue.swal('Login Success')
           localStorage.setItem('access_token', data.access_token)
           router.push('/dashboard')
         })
         .catch(err => {
           console.log(err)
+          Vue.swal('Failed to Login', `${err.response.data.message}`, 'error')
         })
     },
     fetchData (context) {
@@ -69,18 +74,15 @@ export default new Vuex.Store({
         headers: {
           access_token: localStorage.getItem('access_token')
         },
-        data: {
-          name: data.name,
-          image_url: data.image_url,
-          stock: data.stock,
-          price: data.price
-        }
+        data: data
       })
-        .then((data) => {
-          this.dispatch('fetchData')
+        .then((response) => {
+          Vue.swal('Success', 'Add new product succeed', 'success')
+          router.push('/dashboard')
         })
-        .catch((err) => {
-          console.log(err)
+        .catch(({ response }) => {
+          console.log(response.data.message)
+          Vue.swal('Failed Add Product', `${response.data.message}`, 'error')
         })
     },
     getEdit (context, id) {
@@ -116,26 +118,9 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          Vue.swal('Failed edit Product', `${err.response.data.message}`, 'error')
         })
     }
-  },
-  coba (context, id) {
-    console.log('diget edit')
-    // axios({
-    //   method: 'GET',
-    //   url: '/products/' + id,
-    //   headers: {
-    //     access_token: localStorage.getItem('access_token')
-    //   }
-    // })
-    //   .then(({ data }) => {
-    //     console.log(data)
-    //     context.commit('setEditProduct', data)
-    //     router.push(`/edit/${id}`)
-    //   })
-    //   .catch(err => {
-    //     console.log(err)
-    //   })
   },
   modules: {
   }

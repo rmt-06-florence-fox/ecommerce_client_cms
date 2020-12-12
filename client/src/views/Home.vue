@@ -1,10 +1,12 @@
 <template>
-<div class="container">
+<div class="container item">
   <!-- {{products}} -->
-  <ProductCard
+  <!-- <ul> -->
+  <ProductCard class="col-md-3 mt-4 mr-auto"
     v-for="product in products"
     :key="product.id"
     :products="product"> </ProductCard>
+  <!-- <ul> -->
 </div>
 </template>
 
@@ -40,5 +42,11 @@ export default {
 
 .container {
   border-left-width: 40px;
+  justify-content: flex-start;
+  align-self: auto;
+  flex-wrap: wrap;
+}
+.item {
+   align-self: auto;
 }
 </style>
