@@ -6,6 +6,9 @@ import EditProductPage from '../views/EditProductPage'
 import MainPage from '../views/MainPage'
 import ProductsCard from '../components/ProductsCard'
 import NotFound from '../views/NotFound'
+import AddBannerPage from '../views/AddBannerPage'
+import EditBannerPage from '../views/EditBannerPage'
+import BannersCard from '../components/BannersCard'
 
 Vue.use(VueRouter)
 
@@ -33,6 +36,22 @@ const routes = [
         path: 'edit/:idProduct',
         name: 'EditProductPage',
         component: EditProductPage
+      },
+
+      {
+        path: 'banners',
+        name: 'BannersCard',
+        component: BannersCard
+      },
+      {
+        path: 'banners/add',
+        name: 'AddBannerPage',
+        component: AddBannerPage
+      },
+      {
+        path: 'banners/edit/:idBanner',
+        name: 'EditBannerPage',
+        component: EditBannerPage
       }
     ]
   },

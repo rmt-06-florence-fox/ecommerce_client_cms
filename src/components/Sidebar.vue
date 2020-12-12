@@ -13,6 +13,12 @@
           <router-link class="nav-link active" to="/add"><i class="fas fa-plus-square mr-3"></i>Add Product</router-link>
         </li>
         <li class="nav-item">
+          <router-link class="nav-link active" to="/banners"><i class="fas fa-image mr-3"></i>Banners</router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link active" to="/banners/add"><i class="fas fa-plus-circle mr-3"></i>Add Banner</router-link>
+        </li>
+        <li class="nav-item">
           <a @click="logout" class="nav-link active" href="#"><i class="fas fa-sign-out-alt mr-3"></i>Logout</a>
         </li>
       </ul>
