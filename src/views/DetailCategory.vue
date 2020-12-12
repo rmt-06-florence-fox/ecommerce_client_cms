@@ -47,7 +47,7 @@
                   <td class="align-middle">{{ product.id }}</td>
                   <td class="align-middle">{{ product.name }}</td>
                   <td class="align-middle">{{ product.stock }}</td>
-                  <button class="btn btn-danger ml-3" @click="deleteProduct(product.id)">Delete</button>
+                  <td class="align-middle"><button class="btn btn-danger ml-3" @click="deleteProduct(product.id)">Delete</button></td>
                 </tr>
               </tbody>
             </table>
@@ -91,6 +91,11 @@ export default {
   },
   created () {
     this.detailCategoryById()
+  },
+  mounted () {
+    if (this.$store.state.error) {
+      this.$swal('Hello Vue world!!!')
+    }
   }
 }
 </script>
