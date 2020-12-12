@@ -8,24 +8,28 @@
           type="text"
           class="form-control">
       </div>
+      <label>Status</label>
       <div class="form-group">
-        <label>Status</label>
-        <input
+        <div class="form-check form-check-inline">
+          <input
           v-model="status"
           type="radio"
           id="active"
           name="status"
-          class="form-control"
-          value="active">
-          <label>Active</label>
-        <input
+          value="active"
+          class="form-check-input">
+          <label class="form-check-label">Active</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
           v-model="status"
           type="radio"
           id="active"
           name="status"
-          class="form-control"
-          value="inactive">
-          <label>Inactive</label>
+          value="inactive"
+          class="form-check-input">
+          <label class="form-check-label">Inactive</label>
+        </div>
       </div>
       <div class="form-group">
         <label>Image Url</label>

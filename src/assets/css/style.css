@@ -21,7 +21,7 @@ body {
   object-fit: contain;
 }
 
-.addProduct {
+.addProduct, .addBanner {
   width: 30rem;
   position: relative;
   text-align: left;
@@ -34,7 +34,7 @@ body {
   padding: 3rem 3rem;
 }
 
-.editProduct {
+.editProduct, .editBanner {
   width: 30rem;
   position: relative;
   text-align: left;
