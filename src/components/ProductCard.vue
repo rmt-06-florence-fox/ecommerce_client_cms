@@ -6,8 +6,8 @@
           <h5 class="card-title">{{ product.name }}</h5>
           <div>Price: {{ product.price }}</div>
           <div>Stock: {{ product.stock }}</div>
-          <button v-if="loginStatus" class="btn btn-info mb-3 mt-3">Edit</button>
-          <button v-if="loginStatus" class="btn btn-danger mb-3 mt-3">Delete</button>
+          <button  type="button" v-if="loginStatus" class="btn btn-info mb-3 mt-3" data-toggle="modal" data-target="#EditForm">Edit</button>
+          <button type="button" v-if="loginStatus" class="btn btn-danger mb-3 mt-3" @click="deleteProduct">Delete</button>
         </div>
     </div>
   </div>
@@ -18,6 +18,11 @@ export default {
   name: 'ProductCard',
   props: {
     product: Object
+  },
+  methods: {
+    deleteProduct () {
+      this.$store.dispatch('deleteProduct', this.product.id)
+    }
   },
   computed: {
     loginStatus () {

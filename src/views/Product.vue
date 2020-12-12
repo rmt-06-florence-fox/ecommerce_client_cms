@@ -24,53 +24,20 @@ export default {
   },
   data () {
     return {
-      products: [
-        {
-          id: 1,
-          name: 'Guns, Gems, and Steel',
-          image_url: 'https://images-na.ssl-images-amazon.com/images/I/51c2SFXFpzL.jpg',
-          stock: 10,
-          price: 50000
-        },
-        {
-          id: 2,
-          name: 'Guns, Gems, and Steel 2',
-          image_url: 'https://images-na.ssl-images-amazon.com/images/I/51c2SFXFpzL.jpg',
-          stock: 10,
-          price: 50000
-        },
-        {
-          id: 3,
-          name: 'Guns, Gems, and Steel 3',
-          image_url: 'https://images-na.ssl-images-amazon.com/images/I/51c2SFXFpzL.jpg',
-          stock: 10,
-          price: 50000
-        },
-        {
-          id: 4,
-          name: 'Guns, Gems, and Steel 4',
-          image_url: 'https://images-na.ssl-images-amazon.com/images/I/51c2SFXFpzL.jpg',
-          stock: 10,
-          price: 50000
-        },
-        {
-          id: 5,
-          name: 'Guns, Gems, and Steel 4',
-          image_url: 'https://images-na.ssl-images-amazon.com/images/I/51c2SFXFpzL.jpg',
-          stock: 10,
-          price: 50000
-        }
-      ]
     }
   },
   computed: {
     loginStatus () {
       return this.$store.state.loginStatus
+    },
+    products () {
+      return this.$store.state.products
     }
   },
   created () {
     if (localStorage.access_token) {
       this.$store.commit('changeLoginStatus', true)
+      this.$store.dispatch('fetchProducts')
     }
   }
 }

@@ -7,11 +7,24 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    loginStatus: false
+    loginStatus: false,
+    products: [],
+    populate: {
+      name: 'lalala',
+      image_url: '',
+      stock: '',
+      price: ''
+    }
   },
   mutations: {
     changeLoginStatus (state, status) {
       state.loginStatus = status
+    },
+    changeProducts (state, products) {
+      state.products = products
+    },
+    changeEditedProduct (state, product) {
+      state.populate = product
     }
   },
   actions: {
@@ -46,11 +59,74 @@ export default new Vuex.Store({
         }
       })
         .then(response => {
-          console.log(response.data)
+          context.commit('changeProducts', response.data)
         })
         .catch(err => {
           console.log(err.response.data)
         })
+    },
+
+    addProduct (context, payload) {
+      axios({
+        url: '/admin/products',
+        method: 'post',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: payload
+      })
+        .then(response => {
+          console.log(response)
+          context.dispatch('fetchProducts')
+        })
+        .catch(err => {
+          console.log(err.response.data)
+        })
+    },
+
+    deleteProduct (context, payload) {
+      const swalWithBootstrapButtons = Vue.swal.mixin({
+        customClass: {
+          confirmButton: 'btn btn-success',
+          cancelButton: 'btn btn-danger'
+        },
+        buttonsStyling: false
+      })
+      swalWithBootstrapButtons.fire({
+        title: 'Are you sure?',
+        text: "You won't be able to revert this!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Yes, delete it!',
+        cancelButtonText: 'No, cancel!',
+        reverseButtons: true
+      }).then((result) => {
+        if (result.isConfirmed) {
+          axios({
+            url: `/admin/products/${payload}`,
+            method: 'delete',
+            headers: {
+              access_token: localStorage.getItem('access_token')
+            }
+          })
+            .then(response => {
+              swalWithBootstrapButtons.fire(
+                'Deleted!',
+                'Your file has been deleted.',
+                'success'
+              )
+              context.dispatch('fetchProducts')
+            })
+        } else {
+          swalWithBootstrapButtons.fire(
+            'Cancelled',
+            'Your product is safe :)',
+            'error'
+          )
+        }
+      }).catch(err => {
+        console.log(err)
+      })
     }
   },
   modules: {
