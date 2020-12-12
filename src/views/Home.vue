@@ -24,11 +24,15 @@ export default {
     },
     fetchAllCategory () {
       this.$store.dispatch('fetchAllCategory')
+    },
+    fetchAllBanner () {
+      this.$store.dispatch('fetchAllBanner')
     }
   },
   created () {
     this.fetchAllProduct()
     this.fetchAllCategory()
+    this.fetchAllBanner()
   }
 }
 </script>

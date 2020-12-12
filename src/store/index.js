@@ -10,7 +10,9 @@ export default new Vuex.Store({
     products: [],
     productById: '',
     categories: [],
-    categoryById: ''
+    categoryById: '',
+    banners: [],
+    bannerById: ''
   },
   mutations: {
     fetchAllProduct (state, payload) {
@@ -24,9 +26,16 @@ export default new Vuex.Store({
     },
     fetchCategoryById (state, payload) {
       state.categoryById = payload
+    },
+    fetchAllBanner (state, payload) {
+      state.banners = payload
+    },
+    fetchBannerById (state, payload) {
+      state.bannerById = payload
     }
   },
   actions: {
+    // ! Product
     fetchAllProduct (context) {
       axios({
         method: 'get',
@@ -128,6 +137,7 @@ export default new Vuex.Store({
         console.log(err.response.data.message)
       })
     },
+    // ! Category
     fetchAllCategory (context) {
       axios({
         method: 'get',
@@ -199,6 +209,83 @@ export default new Vuex.Store({
       }).then(({ data }) => {
         context.dispatch('fetchAllCategory')
         router.push('/categories').catch(() => {})
+      }).catch(err => {
+        console.log(err.response.data.message)
+      })
+    },
+    // ! Banner
+    fetchAllBanner (context) {
+      axios({
+        method: 'get',
+        url: '/banners',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      }).then(({ data }) => {
+        context.commit('fetchAllBanner', data.banners)
+      }).catch(err => {
+        console.log(err.response.data.message)
+      })
+    },
+    fetchBannerById (context, id) {
+      axios({
+        method: 'get',
+        url: '/banners/' + id,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      }).then(({ data }) => {
+        context.commit('fetchBannerById', data.banner)
+      }).catch(err => {
+        console.log(err.response.data.message)
+      })
+    },
+    addBanner (context, payload) {
+      axios({
+        method: 'post',
+        url: '/banners',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: payload
+      }).then(({ data }) => {
+        context.dispatch('fetchAllBanner')
+        router.push('/banners').catch(() => {})
+      }).catch(err => {
+        console.log(err.response.data.message)
+      })
+    },
+    editBanner (context, payload) {
+      const { id, title, status, imageurl } = payload
+
+      axios({
+        method: 'put',
+        url: '/banners/' + id,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          title,
+          status,
+          image_url: imageurl
+        }
+      }).then(({ data }) => {
+        context.dispatch('fetchAllBanner')
+        router.push('/banners').catch(() => {})
+      }).catch(err => {
+        console.log(err.response.data.message)
+      })
+    },
+    deleteBanner (context, payload) {
+      axios({
+        method: 'delete',
+        url: '/banners/' + payload,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      }).then(({ data }) => {
+        context.dispatch('fetchAllBanner')
+        router.push('/banners').catch(() => {})
       }).catch(err => {
         console.log(err.response.data.message)
       })
