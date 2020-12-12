@@ -16,6 +16,9 @@ export default {
   components: {
     Navbar,
     ProductCard
+  },
+  created () {
+    
   }
 }
 </script>
