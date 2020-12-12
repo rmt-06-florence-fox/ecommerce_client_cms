@@ -106,6 +106,10 @@ export default {
   transition: 300ms;
 }
 
+.far {
+  color: black
+}
+
 .far:hover {
   color: #f6b93b;
   transition: 300ms;

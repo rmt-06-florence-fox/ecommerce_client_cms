@@ -16,7 +16,7 @@
           <h3><b class='fas fa-angle-down' style='font-size:24px'>Action : </b></h3>
           <div class="action-product">
             <div class="add-product">
-              <button class="btn btn-action">
+              <button class="btn btn-action" @click="addProduct">
                 <i class="fas fa-plus" style="font-size:24px"></i>
                 <span> Product</span>
               </button>
@@ -69,7 +69,7 @@
             <div class="content-header-text col-2">Name</div>
             <div class="content-header-text col-2">Price</div>
             <div class="content-header-text col-2">Stock</div>
-            <div class="content-header-text col-2">Action</div>
+            <div class="content-header-text col-2">Edit/Delete</div>
           </div>
           <div class="empty-message" v-else-if="!products">
             <h1>It's Empty here</h1>
@@ -124,7 +124,15 @@ export default {
       addBannerPayload: {
         title: '',
         image_url: ''
-      }
+      },
+      addProductPayload: {
+        name: '',
+        image_url: '',
+        price: '',
+        stock: ''
+      },
+      categoriesList: '',
+      showEditProduct: false
     }
   },
   methods: {
@@ -272,6 +280,75 @@ export default {
           })
           .catch(err => {
             console.log(err)
+          })
+      } else {
+        Swal.fire('Please login first')
+      }
+    },
+    addProduct () {
+      if (this.$store.state.loggedIn) {
+        const objCategories = {}
+        this.categories.forEach((element) => {
+          objCategories[element.id] = element.name
+        })
+        Swal.fire({
+          title: 'Product Identity',
+          html:
+          '<input id="swal-input1" class="swal2-input" placeholder="Image URL">' +
+          '<input id="swal-input2" class="swal2-input" placeholder="Product Name">' +
+          '<input id="swal-input3" class="swal2-input" placeholder="Product Price">' +
+          '<input id="swal-input4" class="swal2-input" type="number" min="0" placeholder="Product Stock">',
+          focusConfirm: false,
+          preConfirm: () => {
+            return [
+              document.getElementById('swal-input1').value,
+              document.getElementById('swal-input2').value,
+              document.getElementById('swal-input3').value,
+              document.getElementById('swal-input4').value
+            ]
+          }
+        })
+          .then(result => {
+            if (result.isConfirmed) {
+              this.addProductPayload = {
+                name: result.value[1],
+                image_url: result.value[0],
+                price: result.value[2],
+                stock: result.value[3]
+              }
+              return Swal.fire({
+                title: 'Select Category !',
+                input: 'select',
+                inputOptions: objCategories,
+                inputPlaceholder: 'Select a category',
+                showCancelButton: true,
+                inputValidator: (value) => {
+                  return new Promise((resolve) => {
+                    if (!value) {
+                      resolve('You need to select category')
+                    } else {
+                      resolve()
+                    }
+                  })
+                }
+              })
+            }
+          })
+          .then(result => {
+            if (result.isConfirmed) {
+              this.addProductPayload.CategoryId = result.value
+              return this.$store.dispatch('addProduct', this.addProductPayload)
+            }
+          })
+          .then(() => {
+            this.$store.dispatch('getProducts')
+          })
+          .catch(err => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: err.response.data.message + '!'
+            })
           })
       } else {
         Swal.fire('Please login first')

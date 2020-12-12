@@ -9,7 +9,8 @@ export default new Vuex.Store({
     loggedIn: false,
     products: [],
     categories: '',
-    banners: []
+    banners: [],
+    editProductValue: {}
   },
   mutations: {
     isLogin (state, payload) {
@@ -23,6 +24,9 @@ export default new Vuex.Store({
     },
     insertBanners (state, payloads) {
       state.banners = payloads
+    },
+    insertEditProductValue (state, payloads) {
+      state.editProductValue = payloads
     }
   },
   actions: {
@@ -78,7 +82,7 @@ export default new Vuex.Store({
         })
     },
     addProduct (context, payload) {
-      axios({
+      return axios({
         method: 'POST',
         url: '/products',
         headers: {
@@ -149,6 +153,43 @@ export default new Vuex.Store({
           image_url: payload.image_url,
           title: payload.title,
           status: payload.status
+        }
+      })
+    },
+    changeBannerStatus (context, payload) {
+      axios({
+        method: 'PATCH',
+        url: '/banners/' + payload.id,
+        headers: { token: localStorage.getItem('token') },
+        data: {
+          status: payload.status
+        }
+      })
+        .then(() => {
+          context.dispatch('getBanners')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    deleteProduct (context, id) {
+      return axios({
+        method: 'DELETE',
+        url: '/products/' + id,
+        headers: { token: localStorage.getItem('token') }
+      })
+    },
+    editProduct (context, payload) {
+      return axios({
+        method: 'PUT',
+        url: '/products/' + payload.id,
+        headers: { token: localStorage.getItem('token') },
+        data: {
+          image_url: payload.image_url,
+          name: payload.name,
+          price: payload.price,
+          stock: payload.stock,
+          CategoryId: payload.CategoryId
         }
       })
     }

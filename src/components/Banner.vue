@@ -17,8 +17,18 @@
       <div class="col-5">
         <div class="banner-property banner-status" id="banner-status">
           <a
-            href="#">
-            keaktifan banner
+            href="#"
+            v-if="banner.status === 'Active'"
+            @click.prevent="statusInactive"
+          >
+            <i class='fas fa-toggle-on' style='font-size:24px'></i>
+          </a>
+          <a
+            href="#"
+            v-else-if="banner.status === 'Inactive'"
+            @click.prevent="statusActive"
+          >
+            <i class='fas fa-toggle-off' style='font-size:24px'></i>
           </a>
         </div>
       </div>
@@ -126,6 +136,33 @@ export default {
       } else {
         Swal.fire('Please login first')
       }
+    },
+    statusActive () {
+      if (this.$store.state.loggedIn) {
+        this.$store.dispatch('changeBannerStatus', {
+          id: this.banner.id,
+          status: 'Active'
+        })
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'you just activated the banner',
+          showConfirmButton: false,
+          timer: 1500
+        })
+      } else {
+        Swal.fire('Please login first')
+      }
+    },
+    statusInactive () {
+      if (this.$store.state.loggedIn) {
+        this.$store.dispatch('changeBannerStatus', {
+          id: this.banner.id,
+          status: 'Inactive'
+        })
+      } else {
+        Swal.fire('Please login first')
+      }
     }
   },
   props: ['banner', 'counter'],
@@ -163,6 +200,9 @@ a:hover {
 .fa {
   color: black
 }
+.far {
+  color: black
+}
 
 .fa:hover {
   color: #f6b93b;
@@ -189,6 +229,6 @@ a:hover {
 }
 
 .fas:hover {
-  color: #ff793f;
+  color: #f6b93b;
 }
 </style>
