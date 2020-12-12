@@ -1,7 +1,7 @@
 <template>
   <div class="container ui">
     <Navbar/>
-    <div class="doubling stackable three column ui grid container">
+    <div v-if="products.length > 0" class="doubling stackable three column ui grid container">
       <div class="column" v-for="product in products" :key="product.id">
         <div class="ui card">
           <div class="image">
@@ -30,6 +30,12 @@
         </div>
       </div>
     </div>
+
+    <div v-else>
+      <h1>
+        Ooops. No products match your search criteria. Please search again.
+      </h1>
+    </div>
   </div>
 </template>
 
@@ -37,13 +43,25 @@
 import Navbar from '@/components/Navbar'
 
 export default {
-  name: 'Homepage',
+  name: 'SearchResults',
+  data () {
+    return {
+      products: []
+    }
+  },
   components: {
     Navbar
   },
   methods: {
-    fetchAllProducts () {
-      this.$store.dispatch('fetchAllProducts')
+    fetchAllProductsByCategory () {
+      const category = this.$route.params.category
+      this.$store.dispatch('searchProductByCategory', category)
+        .then(({ data }) => {
+          console.log(data)
+          this.products = data
+        }).catch((err) => {
+          console.log(err)
+        })
     },
     deleteProduct (id) {
       this.$store.dispatch('deleteProduct', id)
@@ -54,12 +72,7 @@ export default {
     }
   },
   created () {
-    this.fetchAllProducts()
-  },
-  computed: {
-    products () {
-      return this.$store.state.products
-    }
+    this.fetchAllProductsByCategory()
   }
 }
 </script>

@@ -10,14 +10,39 @@ const routes = [
     component: () => import('../views/Homepage')
   },
   {
+    path: '/banner',
+    name: 'Banner',
+    component: () => import('../views/Bannerpage')
+  },
+  {
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login')
   },
   {
-    path: '/add',
+    path: '/add-product',
     name: 'AddPage',
     component: () => import('../components/AddForm')
+  },
+  {
+    path: '/edit-product/:id',
+    name: 'EditProduct',
+    component: () => import('../components/EditForm')
+  },
+  {
+    path: '/add-banner',
+    name: 'AddPageBanner',
+    component: () => import('../components/AddFormBanner')
+  },
+  {
+    path: '/edit-banner/:id',
+    name: 'EditBanner',
+    component: () => import('../components/EditFormBanner')
+  },
+  {
+    path: '/search-results/:category',
+    name: 'SearchResults',
+    component: () => import('../components/SearchResults')
   }
 ]
 
