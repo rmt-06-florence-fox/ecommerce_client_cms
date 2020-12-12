@@ -86,7 +86,12 @@ export default new Vuex.Store({
           context.commit('GETPRODUCT', res.data)
         })
         .catch(err => {
-          console.log(err)
+          this.$swal.fire({
+            icon: 'error',
+            title: `${err.response.status} ${err.response.statusText}`,
+            text: `${err.response.message}`,
+            timer: 5000
+          })
         })
     },
     editProduct (context, payload) {
