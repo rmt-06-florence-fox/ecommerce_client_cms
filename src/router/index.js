@@ -1,39 +1,35 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
 import Login from '../views/LoginPage.vue'
 import ListProducts from '../views/ListProducts.vue'
-import Detail from '../views/Detail.vue'
 import AddProduct from '../views/AddProducts.vue'
 import EditProduct from '../views/EditProduct.vue'
+import MainPage from '../views/MainPage.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/',
-    name: 'Home',
-    component: Home
-  },
-  {
-    path: '/products',
-    name: 'ListProducts',
-    component: ListProducts
-  },
   {
     path: '/login',
     name: 'Login',
     component: Login
   },
   {
-    path: '/add',
-    name: 'AddProduct',
-    component: AddProduct
-  },
-  {
-    path: '/products/:id',
-    name: 'DetailProducts',
-    component: Detail
+    path: '/',
+    name: 'MainPage',
+    component: MainPage,
+    children: [
+      {
+        path: '/products',
+        name: 'ListProducts',
+        component: ListProducts
+      },
+      {
+        path: '/add',
+        name: 'AddProduct',
+        component: AddProduct
+      }
+    ]
   },
   {
     path: '/edit/:id',
@@ -46,6 +42,13 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  const isAuthenticated = localStorage.getItem('access_token')
+  if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
+  else if (to.name === 'Login' && isAuthenticated) next({ name: 'ListProducts' })
+  else next()
 })
 
 export default router

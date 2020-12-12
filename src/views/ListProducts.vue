@@ -1,14 +1,24 @@
 <template>
   <div class="listProduct">
       <h1>List Product</h1>
-      <div class="container">
-          <div class="row">
-              <ListItems
-                v-for="data in listProducts" :key='data.id'
-                :data="data"
-              ></ListItems>
-          </div>
-      </div>
+      <table class='table'>
+        <thead class='thead-dark'>
+          <tr>
+            <td>Image</td>
+            <td>Name Product</td>
+            <td>Price</td>
+            <td>Stock</td>
+            <td>Action</td>
+          </tr>
+        </thead>
+        <tbody>
+          <ListItems
+            v-for="data in listProducts"
+            :key='data.id'
+            :data='data'
+          ></ListItems>
+        </tbody>
+      </table>
   </div>
 </template>
 
@@ -26,7 +36,6 @@ export default {
   },
   computed: {
     listProducts () {
-      console.log(`${this.$store.state.listProducts}`)
       return this.$store.state.listProducts.data
     }
   },

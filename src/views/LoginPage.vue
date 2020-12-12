@@ -12,7 +12,6 @@
                 <input type="password" class="form-control" name="password" id="password-input" placeholder="password" v-model="user.password">
             </div>
             <button class="btn btn-primary" type="submit">Submit</button>
-            <button class="btn btn-danger" @click="logout">Logout</button>
         </form>
     </div>
   </div>
@@ -32,12 +31,6 @@ export default {
     login () {
       const user = this.user
       this.$store.dispatch('login', user)
-        .then(() => this.$router.push('/products'))
-        .catch(e => console.log(e))
-    },
-    logout () {
-      localStorage.removeItem('access_token')
-      this.$router.push('/login')
     }
   }
 }

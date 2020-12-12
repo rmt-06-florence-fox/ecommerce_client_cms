@@ -1,13 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../config/axiosInstance'
+import router from '../router'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     listProducts: [],
-    filteredData: [],
+    editedData: {},
     access_token: localStorage.getItem('access_token')
   },
   mutations: {
@@ -15,7 +16,7 @@ export default new Vuex.Store({
       state.listProducts = payload
     },
     setFilterId (state, payload) {
-      state.filteredData = payload
+      state.editedData = payload
     }
   },
   actions: {
@@ -39,12 +40,13 @@ export default new Vuex.Store({
         .then(response => {
           const token = response.data.access_token
           localStorage.setItem('access_token', token)
+          router.push('/products')
         })
         .catch(e => {
           console.log(e)
         })
     },
-    add (context, addProduct) {
+    addProduct (context, addProduct) {
       axios({
         url: '/products',
         method: 'POST',
@@ -54,38 +56,54 @@ export default new Vuex.Store({
         data: addProduct
       })
         .then(response => {
-          console.log(response.data)
+          router.push('/products')
         })
         .catch(e => {
           console.log(e)
         })
     },
     filterId (context, id) {
-      axios({
-        url: `/products/${id}`,
-        method: 'GET',
-        headers: {
-          access_token: localStorage.getItem('access_token')
-        }
-      })
-        .then(({ data }) => {
-          console.log(data)
-          context.commit('setFilterId', data)
+      return new Promise((resolve, reject) => {
+        axios({
+          url: `/products/${id}`,
+          method: 'GET',
+          headers: {
+            access_token: localStorage.getItem('access_token')
+          }
         })
-        .catch(err => console.log(err))
+          .then(({ data }) => {
+            context.commit('setFilterId', data)
+            resolve(data)
+          })
+          .catch(err => reject(err))
+      })
     },
-    edit (context, id, edittedData) {
+    editProduct (context, editData) {
       axios({
-        url: `/products/${id}`,
+        url: `/products/${editData.id}`,
         method: 'PUT',
         headers: {
           access_token: localStorage.getItem('access_token')
         },
-        data: edittedData
+        data: editData
       })
         .then(response => {
-          console.log(response.data)
-          this.$router.push('/products')
+          router.push('/products')
+        })
+        .catch(e => {
+          console.log(e)
+        })
+    },
+    deleteProduct (context, id) {
+      axios({
+        url: `/products/${id}`,
+        method: 'DELETE',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(response => {
+          context.dispatch('fetchProducts')
         })
         .catch(e => {
           console.log(e)

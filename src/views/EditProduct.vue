@@ -3,8 +3,6 @@
         <div id="edit-page" class="bg-light col mt-5 rounded">
             <form id="edit-form" class="input-margin" @submit.prevent="edit">
                 <h1>Edit Form</h1>
-                <p>{{Detail}}</p>
-                <p>{{Detail.name}}</p>
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" name="name" id="edit-name" placeholder="name" v-model="editProduct.name">
@@ -21,7 +19,7 @@
                     <label for="stock">Stock</label>
                     <input type="stock" class="form-control" name="stock" id="edit-stock" placeholder="stock" v-model="editProduct.stock">
                 </div>
-                <button type="submit" class="btn btn-primary" >Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
@@ -36,29 +34,28 @@ export default {
         name: '',
         image_url: '',
         price: '',
-        stock: ''
+        stock: '',
+        id: ''
       }
     }
   },
   methods: {
-    filterId () {
-      const id = this.$route.params.id
-      this.$store.dispatch('filterId', id)
-    },
     edit () {
-      const id = this.$route.params.id
-      const edittedData = this.editProduct
-      this.$store.dispatch('edit', id, edittedData)
-    }
-  },
-  computed: {
-    Detail () {
-      console.log(`${this.$store.state.filteredData}`)
-      return this.$store.state.filteredData
+      const editedData = this.editProduct
+      this.$store.dispatch('editProduct', editedData)
     }
   },
   created () {
-    this.filterId()
+    const id = this.$route.params.id
+    this.$store.dispatch('filterId', id)
+      .then(response => {
+        this.editProduct.name = response.name
+        this.editProduct.image_url = response.image_url
+        this.editProduct.price = response.price
+        this.editProduct.stock = response.stock
+        this.editProduct.id = response.id
+      })
+      .catch(err => console.log(err))
   }
 }
 </script>

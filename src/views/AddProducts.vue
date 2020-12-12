@@ -41,7 +41,7 @@ export default {
   methods: {
     add () {
       const addProduct = this.addProduct
-      this.$store.dispatch('add', addProduct)
+      this.$store.dispatch('addProduct', addProduct)
         .then(() => { this.$router.push('/products') })
         .catch(e => console.log(e))
     }
