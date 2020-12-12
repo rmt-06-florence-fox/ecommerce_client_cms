@@ -6,17 +6,22 @@
       </div>
     </div>
     <Navbar/>
+    <div class="viewing">
     <router-view/>
+    </div>
+    <Footer/>
   </div>
 </template>
 
 <script>
 import Navbar from '../components/Navbar'
+import Footer from '../components/Footer'
 
 export default {
   name: 'Home',
   components: {
-    Navbar
+    Navbar,
+    Footer
   },
   methods: {
     fetchAllProduct () {
@@ -40,5 +45,8 @@ export default {
 <style>
 .title {
   text-shadow: 2px 2px black;
+}
+.viewing {
+  min-height: 75vh;
 }
 </style>
