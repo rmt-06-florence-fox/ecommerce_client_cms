@@ -28,11 +28,6 @@
                 Submit
               </button>
             </p>
-            <p class="control">
-              <router-link class="button is-light" to="/">
-                Cancel
-              </router-link>
-            </p>
           </div>
         </fieldset>
       </form>

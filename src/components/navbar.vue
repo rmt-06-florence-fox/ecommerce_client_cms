@@ -14,7 +14,7 @@
 
       <div id="navbarBasicExample" :class= "class2">
         <div class="navbar-start">
-          <router-link class="navbar-item" to="/addProduct">
+          <router-link class="navbar-item" v-if="isLogin" to="/addProduct">
             Add Product
           </router-link>
         </div>
@@ -24,7 +24,6 @@
           <div class="navbar-item">
             <div class="buttons">
               <button class="navbar-item button is-danger" v-if="isLogin" @click.prevent="logout">log out</button>
-              <router-link class="navbar-item button is-light" to="/adminLogin" v-else>Log in as Admin</router-link>
             </div>
           </div>
         </div>
