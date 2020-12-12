@@ -7,6 +7,8 @@ import ListProduct from '../views/ListProduct.vue'
 import AddProduct from '../views/AddProduct.vue'
 import DetailProduct from '../views/DetailProduct.vue'
 import ListCategory from '../views/ListCategory.vue'
+import AddCategory from '../views/AddCategory.vue'
+import DetailCategory from '../views/DetailCategory'
 import ListBanner from '../views/ListBanner.vue'
 import NotFound from '../views/NotFound.vue'
 
@@ -51,6 +53,16 @@ const routes = [
         path: 'categories',
         name: 'ListCategory',
         component: ListCategory
+      },
+      {
+        path: 'categories/add',
+        name: 'AddCategory',
+        component: AddCategory
+      },
+      {
+        path: 'categories/:id',
+        name: 'DetailCategory',
+        component: DetailCategory
       },
       {
         path: 'banners',

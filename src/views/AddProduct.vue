@@ -38,6 +38,7 @@
                 <input type="text" placeholder="Product Image" class="form-control" v-model="add.image_url">
               </div>
               <button type="submit" class="btn btn-primary">Add Product</button>
+              <a class="btn btn-warning ml-3 text-white" @click="back">Cancel</a>
             </form>
           </div>
         </div>
@@ -72,6 +73,9 @@ export default {
       }
 
       this.$store.dispatch('addProduct', payload)
+    },
+    back () {
+      this.$router.go(-1)
     }
   },
   computed: {
