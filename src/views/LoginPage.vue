@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import axios from '../config/axiosInstance'
 
 export default {
   data () {
@@ -56,7 +56,7 @@ export default {
       }
       axios({
         method: 'post',
-        url: 'http://localhost:3000/login',
+        url: '/login',
         data: obj
       })
         .then(response => {
