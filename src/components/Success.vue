@@ -7,7 +7,9 @@ export default {
   name: 'Success',
   computed: {
     message () {
-      return this.$store.state.successMessage
+      const message = this.$store.state.successMessage
+      // console.log('masuk ke success', message)
+      return message
     }
   }
 }

@@ -7,7 +7,7 @@ export default new Vuex.Store({
   state: {
     products: [],
     errors: [],
-    succesMessage: ''
+    successMessage: ''
   },
   mutations: {
     setErrors (state, payload) {
@@ -19,8 +19,8 @@ export default new Vuex.Store({
     successMessage (state, string) {
       state.successMessage = string
       setTimeout(_ => {
-        state.succesMessage = ''
-      }, 3000)
+        state.successMessage = ''
+      }, 1300)
     }
   },
   actions: {
