@@ -7,6 +7,7 @@ import editProduct from '../components/editProduct'
 import categories from '../components/categories'
 import banners from '../components/banner'
 import users from '../components/users'
+import errorPage from '../views/error'
 
 Vue.use(VueRouter)
 
@@ -88,6 +89,11 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+  },
+  {
+    // will match everything
+    path: '*',
+    component: errorPage
   }
 ]
 
