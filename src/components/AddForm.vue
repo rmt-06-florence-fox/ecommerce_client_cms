@@ -1,6 +1,5 @@
 <template>
-  <b-form>
-
+  <b-form  @submit.prevent="addHandler">
     <b-form-group label="Name" label-for="name">
     <b-form-input
       name="name"
@@ -36,7 +35,7 @@
       placeholder="Product's stock goes here"
     ></b-form-input>
     </b-form-group>
-    <b-button variant="success"> Add </b-button>
+    <b-button variant="success" type="submit"> Add </b-button>
 
   </b-form>
 </template>
@@ -50,6 +49,12 @@ export default {
       imageUrl: '',
       price: 0,
       stock: 0
+    }
+  },
+  methods: {
+    addHandler () {
+      const { name, imageUrl, price, stock } = this
+      this.$store.dispatch('addHandler', { name, imageUrl, price, stock })
     }
   }
 }

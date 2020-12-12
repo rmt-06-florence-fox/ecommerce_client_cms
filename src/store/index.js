@@ -72,6 +72,19 @@ export default new Vuex.Store({
       }).catch(err => {
         context.commit('setErrors', err.response.data.messages)
       })
+    },
+    addHandler (context, payload) {
+      console.log(payload)
+      axios({
+        url: '/products',
+        method: 'POST',
+        data: payload,
+        headers: { access_token: localStorage.getItem('access_token') }
+      }).then(_ => {
+        context.commit('successMessage', 'One product has been added')
+      }).catch(err => {
+        context.commit('setErrors', err.response.data.messages)
+      })
     }
   },
   modules: {
