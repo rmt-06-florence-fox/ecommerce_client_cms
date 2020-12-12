@@ -29,9 +29,19 @@ export default new Vuex.Store({
           console.log(data)
           localStorage.setItem('access_token', data.access_token)
           router.push({ name: 'Home' })
+          Vue.swal(
+            'Success!',
+            'Welcome',
+            'success'
+          )
         })
         .catch(err => {
           console.log(err)
+          Vue.swal(
+            'Error!',
+            err.response.data.msg,
+            'error'
+          )
         })
     },
     fetchProducts (context) {
@@ -48,6 +58,11 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          Vue.swal(
+            'Error!',
+            err.response.data.msg,
+            'error'
+          )
         })
     },
     addProduct (context, payload) {
@@ -60,11 +75,21 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
+          Vue.swal(
+            'Success!',
+            'Add Product!',
+            'success'
+          )
           console.log(data)
           router.push({ name: 'Home' })
         })
         .catch(err => {
           console.log(err)
+          Vue.swal(
+            'Error!',
+            err.response.data.msg,
+            'error'
+          )
         })
     },
     deleteProduct (context, payload) {
@@ -78,9 +103,19 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           context.dispatch('fetchProducts')
+          Vue.swal(
+            'Success!',
+            'Delete Product Success',
+            'success'
+          )
         })
         .catch(err => {
           console.log(err)
+          Vue.swal(
+            'Error!',
+            err.response.data.msg,
+            'error'
+          )
         })
     },
     fetchProductsById (context, payload) {
@@ -96,6 +131,11 @@ export default new Vuex.Store({
         })
         .catch(err => {
           console.log(err)
+          Vue.swal(
+            'Error!',
+            err.response.data.msg,
+            'error'
+          )
         })
     },
     editProduct (context, payload) {
@@ -111,9 +151,19 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           router.push({ name: 'Home' })
+          Vue.swal(
+            'Success!',
+            'Edit Product Success!',
+            'success'
+          )
         })
         .catch(err => {
           console.log(err)
+          Vue.swal(
+            'Error!',
+            err.response.data.msg,
+            'error'
+          )
         })
     }
   },
