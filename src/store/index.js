@@ -21,7 +21,7 @@ export default new Vuex.Store({
   actions: {
     fetchDataProducts (context) {
       axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://e-commerce-server-hacktiv8rmt6.herokuapp.com/products',
         method: 'GET',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -38,7 +38,7 @@ export default new Vuex.Store({
       const id = payload
 
       axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://e-commerce-server-hacktiv8rmt6.herokuapp.com/products/${id}`,
         method: 'GET',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -53,7 +53,7 @@ export default new Vuex.Store({
     },
     addProduct (context, payload) {
       axios({
-        url: 'http://localhost:3000/products',
+        url: 'https://e-commerce-server-hacktiv8rmt6.herokuapp.com/products',
         method: 'POST',
         data: {
           name: payload.name,
@@ -73,7 +73,7 @@ export default new Vuex.Store({
       const id = payload
 
       axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: `https://e-commerce-server-hacktiv8rmt6.herokuapp.com/products/${id}`,
         method: 'DELETE',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -88,7 +88,7 @@ export default new Vuex.Store({
     },
     editProduct (context, payload) {
       axios({
-        url: `http://localhost:3000/products/${payload.id}`,
+        url: `https://e-commerce-server-hacktiv8rmt6.herokuapp.com/products/${payload.id}`,
         method: 'PUT',
         data: {
           name: payload.name,
@@ -110,7 +110,7 @@ export default new Vuex.Store({
     },
     login (context, payload) {
       axios({
-        url: 'http://localhost:3000/login',
+        url: 'https://e-commerce-server-hacktiv8rmt6.herokuapp.com/login',
         method: 'POST',
         data: {
           email: payload.email,
