@@ -28,4 +28,7 @@ h1 {
   height: 40px;
   margin-top: 100px;
 }
+img {
+  width: 450px;
+}
 </style>
