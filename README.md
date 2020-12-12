@@ -1,5 +1,11 @@
 # ecommerce-cms-client
 
+Client: 
+https://ecomm-cms-sidsoeharto.web.app/
+
+Server:
+https://bukatoko-server.herokuapp.com/
+
 ## Project setup
 ```
 npm install
