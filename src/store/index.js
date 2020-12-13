@@ -30,7 +30,7 @@ export default new Vuex.Store({
       // console.log(payload)
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/login',
+        url: 'https://bukapalak.herokuapp.com/login',
         data: payload
       })
     },
@@ -39,7 +39,7 @@ export default new Vuex.Store({
       // console.log('-0-0-0-0-0')
       axios({
         method: 'get',
-        url: 'http://localhost:3000/products',
+        url: 'https://bukapalak.herokuapp.com/products',
         headers: {
           acces_token: localStorage.acces_token
         }
@@ -56,7 +56,7 @@ export default new Vuex.Store({
     getDataById ({ commit }, id) {
       axios({
         method: 'get',
-        url: 'http://localhost:3000/products/' + id,
+        url: 'https://bukapalak.herokuapp.com/products/' + id,
         headers: {
           acces_token: localStorage.acces_token
         },
@@ -74,7 +74,7 @@ export default new Vuex.Store({
     addItem ({ commit }, payload) {
       return axios({
         method: 'post',
-        url: 'http://localhost:3000/products',
+        url: 'https://bukapalak.herokuapp.com/products',
         headers: {
           acces_token: localStorage.acces_token
         },
@@ -90,7 +90,7 @@ export default new Vuex.Store({
     updateItem ({ commit }, payload) {
       return axios({
         method: 'put',
-        url: 'http://localhost:3000/products/' + payload.id,
+        url: 'https://bukapalak.herokuapp.com/products/' + payload.id,
         headers: {
           acces_token: localStorage.acces_token
         },
@@ -101,7 +101,7 @@ export default new Vuex.Store({
     deleteItem ({ commit }, id) {
       return axios({
         method: 'delete',
-        url: 'http://localhost:3000/products/' + id,
+        url: 'https://bukapalak.herokuapp.com/products/' + id,
         headers: {
           acces_token: localStorage.acces_token
         },
