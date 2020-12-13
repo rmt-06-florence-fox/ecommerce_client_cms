@@ -7,7 +7,7 @@
         </div>
         <div class="form-group">
             <label for="imageurl-edit">Image_url</label>
-            <input type="text" class="form-control" id="imageurl-edit" v-model="product.imageurl">
+            <input type="text" class="form-control" id="imageurl-edit" v-model="product.image_url">
         </div>
         <div class="form-group">
             <label for="price-edit">Price</label>

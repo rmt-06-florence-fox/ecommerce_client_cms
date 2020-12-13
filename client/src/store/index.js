@@ -16,7 +16,7 @@ export default new Vuex.Store({
       state.products = payload
     },
     setProduct (state, payload) {
-      state.products = payload
+      state.product = payload
     }
   },
   actions: {
@@ -86,7 +86,7 @@ export default new Vuex.Store({
     editProduct (context, id) {
       axios({
         method: 'GET',
-        url: '/http://localhost:3000/products/' + id,
+        url: 'http://localhost:3000/products/' + id,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -125,7 +125,7 @@ export default new Vuex.Store({
         }
       })
         .then(data => {
-          router.push('/products')
+          this.dispatch('fetchProduct')
         })
         .catch(err => {
           console.log(err)
