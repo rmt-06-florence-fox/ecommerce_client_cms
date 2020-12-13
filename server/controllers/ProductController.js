@@ -1,6 +1,34 @@
 const { Product } = require('../models/index.js');
 
 class ProductController {
+    static showProduct(req, res, next) {
+        Product.findAll()
+        .then(data => {
+            res.status(200).json(data);
+        })
+        .catch(err => {
+            next(err)
+        });
+    }
+
+    static showProductById(req, res, next) {
+        Product.findByPk(req.params.id)
+        .then(data => {
+            if (data) {
+                res.status(200).json(data);
+            } 
+            else {
+                throw {
+                    status: 404,
+                    message: 'error not found'
+                }            
+            }
+        })
+        .catch(err => {
+            next(err)
+        });
+    }
+    
     static createProduct(req, res, next) {       
         Product.create({
           name: req.body.name,

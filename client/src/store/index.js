@@ -12,6 +12,9 @@ export default new Vuex.Store({
     product: {}
   },
   mutations: {
+    setProducts (state, payload) {
+      state.products = payload
+    },
     setProduct (state, payload) {
       state.products = payload
     }
@@ -33,11 +36,16 @@ export default new Vuex.Store({
         })
     },
     fetchProduct (context) {
-      axios
-        .get('/products')
+      axios({
+        method: 'GET',
+        url: 'http://localhost:3000/products',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
         .then(({ data }) => {
           // this.products = data
-          context.commit('setProduct', data)
+          context.commit('setProducts', data)
         })
         .catch(err => console.log(err))
     },
@@ -45,10 +53,13 @@ export default new Vuex.Store({
       console.log(id, '>>>> payload from component detai.vue')
       axios({
         method: 'GET',
-        url: `/products/${id}`
+        url: `http://localhost:3000/products/${id}`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
       })
         .then(({ data }) => {
-          context.commit('setDetail', data)
+          context.commit('setProduct', data)
         })
         .catch(err => {
           if (err.response.status === 404) {
@@ -67,14 +78,15 @@ export default new Vuex.Store({
         }
       })
         .then(data => {
-          router.$router.push('/products')
+          // context.dispatch('fetchProduct')
+          router.push('/products')
         })
         .catch(console.log)
     },
     editProduct (context, id) {
       axios({
         method: 'GET',
-        url: '/http://localhost:3000/edit/' + id,
+        url: '/http://localhost:3000/products/' + id,
         headers: {
           access_token: localStorage.getItem('access_token')
         }

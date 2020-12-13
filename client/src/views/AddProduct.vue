@@ -7,23 +7,23 @@
                     <form @submit.prevent="addProduct" id="form-add">
                         <div class="form-group">
                             <label for="add-name">Name</label>
-                            <input type="text" class="form-control" id="name-input">
+                            <input type="text" class="form-control" id="name-input" v-model="payload.name">
                         </div>
                         <div class="form-group">
                             <label for="add-imageurl">Image Url</label>
-                            <input type="text" class="form-control" id="imageurl-input">
+                            <input type="text" class="form-control" id="imageurl-input" v-model="payload.image_url">
                         </div>
                         <div class="form-group">
                             <label for="add-price">Price</label>
-                            <input type="text" class="form-control" id="price-input">
+                            <input type="text" class="form-control" id="price-input" v-model="payload.price">
                         </div>
                         <div class="form-group">
                             <label for="add-stock">Stock</label>
-                            <input type="text" class="form-control" id="stock-input">
+                            <input type="text" class="form-control" id="stock-input" v-model="payload.stock">
                         </div>
                         <div class="form-group">
                             <label for="add-category">Category</label>
-                            <select class="form-control" id="category-input">
+                            <select class="form-control" id="category-input" v-model="payload.category">
                                 <option selected disabled>Select Category</option>
                                 <option>Standard</option>
                                 <option>Traditional</option>
@@ -45,11 +45,13 @@ export default {
   name: 'Add',
   data () {
     return {
-      name: '',
-      image_url: '',
-      price: '',
-      stock: '',
-      category: ''
+      payload: {
+        name: '',
+        image_url: '',
+        price: '',
+        stock: '',
+        category: ''
+      }
     }
   },
   methods: {

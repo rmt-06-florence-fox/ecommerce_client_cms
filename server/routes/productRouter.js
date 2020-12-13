@@ -6,9 +6,11 @@ const authorization = require('../middlewares/authorization.js');
 const ProductController = require('../controllers/ProductController.js');
 
 productRouter.use(authentication)
+productRouter.get('/', ProductController.showProduct);
 productRouter.post('/', ProductController.createProduct);
 
 productRouter.use('/:id', authorization)
+productRouter.get('/:id', ProductController.showProductById);
 productRouter.put('/:id', ProductController.replaceProduct);
 productRouter.delete('/:id', ProductController.deleteProduct);
 

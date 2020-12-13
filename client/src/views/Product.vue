@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h1>Product List</h1>
+    <h1>Product List</h1><br>
     <div class="container">
         <!-- <div class="row">
             <div class="col-12" v-if="embed">
@@ -9,7 +9,7 @@
         </div> -->
         <div class="row">
             <!-- <ProductCard v-for="product in products" :key="product.id" :product="product"/> -->
-            <ProductCard />
+            <ProductCard v-for="product in products" :key="product.id" :product="product" />
         </div>
     </div>
   </div>
@@ -27,8 +27,8 @@ export default {
   },
   computed: {
     products () {
-      // return this.$store.state.products
-      return this.$store.getters.filteredProduct
+      return this.$store.state.products
+      // return this.$store.getters.filteredProduct
     }
   },
   components: {
