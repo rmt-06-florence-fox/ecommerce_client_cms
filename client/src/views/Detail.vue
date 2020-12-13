@@ -13,7 +13,7 @@ export default {
       this.$store.dispatch('fetchProductById', id)
     },
     created () {
-      this.fetchDetailById()
+      this.fetchProductById()
     },
     computed: {
       product () {

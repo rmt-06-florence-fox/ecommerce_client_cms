@@ -50,7 +50,7 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
     },
     fetchProductById (context, id) {
-      console.log(id, '>>>> payload from component detai.vue')
+      console.log(id, '>>>> payload from component detail.vue')
       axios({
         method: 'GET',
         url: `http://localhost:3000/products/${id}`,
