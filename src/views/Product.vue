@@ -1,11 +1,11 @@
 <template>
-  <div>
-    <Header></Header>
-    <NavbarAdmin></NavbarAdmin>
-    <button @click="formAddItem" type="button" class="btn btn-info mt-3 mb-2">Add Items</button>
-    <ItemCards v-for='data in dataItems.data' :key="data.id" :data="data"></ItemCards>
-    <router-view/>
-    <Footer></Footer>
+    <div>
+        <Header></Header>
+        <NavbarAdmin></NavbarAdmin>
+        <PageFetchData></PageFetchData>
+        <button @click="formAddItem" type="button" class="btn btn-info mt-3">Add Items</button>
+        <router-view/>
+        <Footer></Footer>
   </div>
 </template>
 
@@ -13,15 +13,14 @@
 import Footer from '../components/Footer'
 import Header from '../components/Header'
 import NavbarAdmin from '../components/NavbarAdmin'
-import ItemCards from '../components/ItemCards'
-
+import PageFetchData from '../views/PageFetchData'
 export default {
-  name: 'MainPageAdmin',
+  name: 'Product',
   components: {
     Footer,
     Header,
     NavbarAdmin,
-    ItemCards
+    PageFetchData
   },
   methods: {
     fetchData () {
@@ -32,7 +31,7 @@ export default {
       this.$router.push('/login')
     },
     formAddItem () {
-      this.$router.push('/additem')
+      this.$router.push('/mainpage/additem')
     }
   },
   created () {

@@ -2,11 +2,13 @@
     <div>
         <div class="navbar-custom">
             <div class="logo-navbar">
-                <img src="../assets/output-onlinepngtools (1).png" alt="logo" width="170px">
+                <a @click="mainPage" href="#">
+                    <img src="../assets/output-onlinepngtools (1).png" alt="logo" width="170px">
+                </a>
             </div>
             <div>
                 <ul class="right-navbar">
-                    <li><button type="button" class="btn btn-danger button2"><a @click="logout" href="#">Logout</a></button></li>
+                    <li><button type="button" class="btn btn-danger button2"><a class="text-center" @click="logout" href="#">Logout</a></button></li>
                 </ul>
             </div>
         </div>
@@ -19,7 +21,10 @@ export default {
   methods: {
     logout () {
       localStorage.clear()
-      this.$router.push('/home')
+      this.$router.push('/')
+    },
+    mainPage () {
+      this.$router.push('/mainpage')
     }
   }
 }
@@ -54,5 +59,8 @@ export default {
 }
 .color-page {
     background-color: #c8d6e5;
+}
+.m-c {
+    padding: 0px;
 }
 </style>

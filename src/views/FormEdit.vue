@@ -1,10 +1,11 @@
 <template>
   <div>
+      <Header></Header>
       <Navbar></Navbar>
       <div class="d-flex bg mx-auto mt-5">
           <div class="shadow-sm p-3 mb-5 bg-white rounded mx-auto">
             <div class="text-center">
-                <h2>Form Add Item</h2>
+                <h2>Form Edit Item</h2>
             </div>
             <form @submit.prevent="editData">
                 <div class="form-group row">
@@ -47,10 +48,13 @@
             </form>
           </div>
       </div>
+      <Footer></Footer>
   </div>
 </template>
 
 <script>
+import Footer from '../components/Footer'
+import Header from '../components/Header'
 import Navbar from '../components/NavbarAdmin'
 export default {
   name: 'FormEdit',
@@ -58,22 +62,32 @@ export default {
     return {
       name: '',
       image_url: '',
-      price: 0,
-      stock: 0
+      price: '',
+      stock: ''
     }
   },
   components: {
+    Footer,
+    Header,
     Navbar
   },
   methods: {
     editData () {
       const dataObj = {
+        id: this.$route.params.id,
         name: this.name,
-        image_url: this.name,
+        image_url: this.image_url,
         price: +this.price,
         stock: +this.stock
       }
-      console.log(dataObj)
+      this.$store.dispatch('updateItem', dataObj)
+        .then(({ data }) => {
+          this.$store.dispatch('fetchData')
+          this.$router.push('/mainpage')
+        })
+        .catch(err => {
+          console.log(err)
+        })
     },
     cekLocalStorage () {
       this.$router.push('/home')
@@ -83,6 +97,21 @@ export default {
     const accesToken = localStorage.getItem('acces_token')
     if (!accesToken) {
       this.cekLocalStorage()
+    }
+    const id = this.$route.params.id
+    this.$store.dispatch('getDataById', id)
+  },
+  computed: {
+    dataById () {
+      return this.$store.state.selectedItem
+    }
+  },
+  watch: { // watch ini akan selalu update dan langsung mengexecute dirinya setiap ada perubahan apapun yang mau di watch nya.
+    dataById () {
+      this.name = this.dataById.name
+      this.image_url = this.dataById.image_url
+      this.price = this.dataById.price
+      this.stock = this.dataById.stock
     }
   }
 }

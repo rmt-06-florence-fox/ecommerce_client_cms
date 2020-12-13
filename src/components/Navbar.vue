@@ -2,7 +2,9 @@
     <div>
         <div class="navbar-custom">
             <div class="logo-navbar">
-                <img src="../assets/output-onlinepngtools (1).png" alt="logo" width="170px">
+                <a @click="home" href="#">
+                    <img src="../assets/output-onlinepngtools (1).png" alt="logo" width="170px">
+                </a>
             </div>
             <div>
                 <ul class="right-navbar">
@@ -22,7 +24,15 @@ export default {
       this.$router.push('/login')
     },
     pageRegister () {
-      this.$router.push('/home')
+      this.$router.push('/')
+    },
+    home () {
+      const accesToken = localStorage.getItem('acces_token')
+      if (!accesToken) {
+        this.$router.push('/')
+      } else {
+        this.$router.push('/mainpage')
+      }
     }
   }
 }

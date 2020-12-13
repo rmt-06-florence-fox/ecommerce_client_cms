@@ -1,13 +1,12 @@
 <template>
     <div>
-        <Navbar></Navbar>
         <div class="d-flex bg">
-            <div class="mx-auto mt-3">
+            <div class="mx-auto mt-1">
                 <div class="shadow p-3 mb-5 bgS rounded mx-auto mt-4 color-page">
                     <div class="text-center">
                         <h2>BukaPalak</h2>
                     </div>
-                    <form @submit.prevent="login">
+                    <form @submit.prevent="submitLogin">
                         <div class="form-group row">
                             <div class="mx-auto mt-2">
                                 <label for="emailLogIn" class="col-sm-2 col-form-label">Email:</label> <br>
@@ -37,13 +36,10 @@
 </template>
 
 <script>
-import Navbar from '../components/Navbar'
+import Swal from 'sweetalert2'
 
 export default {
   name: 'FormLogin',
-  components: {
-    Navbar
-  },
   data () {
     return {
       email: '',
@@ -51,14 +47,30 @@ export default {
     }
   },
   methods: {
-    login () {
+    submitLogin () {
       const payload = {
         email: this.email,
         password: this.password
       }
       this.$store.dispatch('login', payload)
       //  ini Programatic
-      this.$router.push('/home') // ini cara pindah halaman
+      //   this.$router.push('/mainpage') // ini cara pindah halaman
+        .then(({ data }) => {
+        //   console.log(data)
+          localStorage.setItem('acces_token', data.acces_token)
+          this.$router.push('/mainpage')
+        //   commit('getAccesToken', data.acces_token) // showAll data ini nanti dipakai untuk nama function di mutations, parameter 2 data yang didapat dr server
+        })
+        .catch(err => {
+          console.log(err)
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'wrong Email/Password',
+            footer: 'Try Again'
+          })
+          // console.log('-0-0-0-')
+        })
     }
   }
 }
