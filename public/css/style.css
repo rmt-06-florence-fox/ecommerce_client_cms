@@ -1,0 +1,220 @@
+body {
+	color: white;
+	overflow-x: hidden;
+	height: 100%;
+	background-image: url('https://media.istockphoto.com/vectors/black-background-vector-id1167050865?k=6&m=1167050865&s=612x612&w=0&h=I-wf_Vv-MzqTfcYd8AxZKKvXGM3yC6DNNAEOHswvaMY=');
+}
+
+h1 {
+	color: white;
+}
+
+.foxLogo {
+	height: 50px
+}
+
+.bg-content {
+	background-color: rgba(128, 128, 128, 0.378);
+}
+
+.custom-navbar {
+  background-image: url('https://i.pinimg.com/originals/16/51/a7/1651a7e049cf443edc1cffe560600e0f.jpg');
+  color: white;
+  padding: 15px;
+  font: 100% Helvetica, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+	width: 100%;
+	box-shadow:white;
+}
+
+.title-nav-bar {
+  align-items: center;
+  height: 100%;
+  padding: 0px;
+}
+
+.card0 {
+	box-shadow: 0px 4px 8px 0px #757575;
+	border-radius: 0px;
+}
+
+.card2 {
+	margin: 0px 40px;
+}
+
+.image {
+	width: 360px;
+	height: 280px;
+}
+
+.border-line {
+	border-right: 1px solid #eeeeee;
+}
+
+.line {
+	height: 1px;
+	width: 45%;
+	background-color: #e0e0e0;
+	margin-top: 10px;
+}
+
+.or {
+	width: 10%;
+	font-weight: bold;
+}
+
+.text-sm {
+	font-size: 14px !important;
+}
+
+::placeholder {
+	color: #bdbdbd;
+	opacity: 1;
+	font-weight: 300;
+}
+
+:-ms-input-placeholder {
+	color: #bdbdbd;
+	font-weight: 300;
+}
+
+::-ms-input-placeholder {
+	color: #bdbdbd;
+	font-weight: 300;
+}
+
+#app {
+	font-family: Avenir, Helvetica, Arial, sans-serif;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	text-align: center;
+	color: #2c3e50;
+}
+
+#nav {
+	padding: 30px;
+}
+
+#nav a {
+	font-weight: bold;
+	color: white;
+}
+
+#nav a.router-link-exact-active {
+	color: red;
+}
+
+input,
+textarea {
+	padding: 10px 12px 10px 12px;
+	border: 1px solid lightgrey;
+	border-radius: 2px;
+	margin-bottom: 5px;
+	margin-top: 2px;
+	width: 100%;
+	box-sizing: border-box;
+	color: #2c3e50;
+	font-size: 14px;
+	letter-spacing: 1px;
+}
+
+input:focus,
+textarea:focus {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	border: 1px solid #304ffe;
+	outline-width: 0;
+}
+
+button:focus {
+	-moz-box-shadow: none !important;
+	-webkit-box-shadow: none !important;
+	box-shadow: none !important;
+	outline-width: 0;
+}
+
+a {
+	color: inherit;
+	cursor: pointer;
+}
+
+.btn-blue {
+	background-color: #1a237e;
+	width: 150px;
+	color: #fff;
+	border-radius: 2px;
+}
+
+div.form
+{
+    display: block;
+    text-align: center;
+}
+
+form
+{
+    display: inline-block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.btn-blue:hover {
+	background-color: #000;
+	cursor: pointer;
+}
+
+.bg-blue {
+	color: #fff;
+	background-color: #1a237e;
+}
+
+.logo {
+	width: 250px;
+	height: 200px;
+}
+
+h2 {
+	color: wheat;
+}
+
+h3 {
+	color: black;
+}
+
+.img-banner {
+	height: 200px;
+}
+
+.gambar-product {
+	width: 100px;
+}
+
+h4 {
+	color: white;
+}
+
+small {
+	color: black;
+}
+
+.actionbutton {
+	width: 25px;
+	height: 25px;
+}
+
+.input-text {
+	height: 75px;
+}
+
+.gambar-product-edit {
+	width: 150px;
+	border-radius: 10px;
+}
+
+.logo-home {
+	width: 500px;
+}
