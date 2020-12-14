@@ -2,17 +2,8 @@
   <v-main>
     <v-container fluid>
       <v-simple-table>
-        <thead>
-          <tr>
-            <th
-              class="font-weight-bold title"
-              v-for="item in headers"
-              :key="item.name"
-              scope="col"
-            >{{item.text}}
-            </th>
-          </tr>
-        </thead>
+        <ProductTableHead>
+        </ProductTableHead>
         <tbody>
           <tr v-for="data in productData" :key="data.id" class="overflow-y-auto">
             <td>{{ data.name }}</td>
@@ -62,38 +53,20 @@
 <script>
 // @ is an alias to /src
 import { mapState } from 'vuex'
+import ProductTableHead from '../components/ProductTableHead'
 
 export default {
   name: 'Home',
   data: () => ({
     dialogDelete: false,
-    editId: -1,
-    headers: [
-      {
-        text: 'Name',
-        value: 'name'
-      },
-      {
-        text: 'Image',
-        value: 'image_url'
-      },
-      {
-        text: 'Price',
-        value: 'price'
-      },
-      {
-        text: 'Stock',
-        value: 'stock'
-      },
-      {
-        text: 'Actions',
-        value: 'actions'
-      }
-    ]
+    editId: -1
   }),
+  components: {
+    ProductTableHead
+  },
   computed: mapState(['productData']),
   created () {
-    this.$store.dispatch('getData')
+    this.$store.dispatch('getProducts')
   },
   watch: {
     dialogDelete (val) {

@@ -15,7 +15,7 @@ export default new Vuex.Store({
     errMessage: ''
   },
   mutations: {
-    getData (state, data) {
+    setProducts (state, data) {
       state.productData = data
     },
     logout (state) {
@@ -57,7 +57,7 @@ export default new Vuex.Store({
           context.dispatch('changeAlert')
         })
     },
-    getData ({ commit, state }) {
+    getProducts ({ commit, state }) {
       axios({
         method: 'GET',
         url: `${baseUrl}/products`,
@@ -66,7 +66,7 @@ export default new Vuex.Store({
         }
       })
         .then(({ data }) => {
-          commit('getData', data)
+          commit('setProducts', data)
         })
         .catch((err) => {
           console.log(err)
@@ -138,7 +138,7 @@ export default new Vuex.Store({
         }
       })
         .then(() => {
-          context.dispatch('getData')
+          context.dispatch('getProducts')
         })
         .catch((err) => {
           console.log(err)
