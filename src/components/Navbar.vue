@@ -3,6 +3,7 @@
     color="blue"
     flat
     dark
+    max-height=64px
   >
     <v-toolbar-title>
       E-Commerce CMS
