@@ -23,7 +23,7 @@ export default new Vuex.Store({
     login (context, payload) {
       axios({
         method: 'POST',
-        url: 'https://obscure-caverns-50261.herokuapp.com/login',
+        url: 'https://ecommerce-sandy.herokuapp.com/login',
         data: payload
       })
         .then(({ data }) => {
@@ -38,7 +38,7 @@ export default new Vuex.Store({
     fetchProduct (context) {
       axios({
         method: 'GET',
-        url: 'https://obscure-caverns-50261.herokuapp.com/products',
+        url: 'https://ecommerce-sandy.herokuapp.com/products',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -53,7 +53,7 @@ export default new Vuex.Store({
       console.log(id, '>>>> payload from component detail.vue')
       axios({
         method: 'GET',
-        url: `https://obscure-caverns-50261.herokuapp.com/products/${id}`,
+        url: `https://ecommerce-sandy.herokuapp.com/products/${id}`,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -71,7 +71,7 @@ export default new Vuex.Store({
       console.log(payload, '<<<< berupa object dari component addProduct.vue')
       axios({
         method: 'POST',
-        url: 'https://obscure-caverns-50261.herokuapp.com/products',
+        url: 'https://ecommerce-sandy.herokuapp.com/products',
         data: payload,
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -86,7 +86,7 @@ export default new Vuex.Store({
     editProduct (context, id) {
       axios({
         method: 'GET',
-        url: 'https://obscure-caverns-50261.herokuapp.com/products/' + id,
+        url: 'https://ecommerce-sandy.herokuapp.com/products/' + id,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
@@ -103,7 +103,7 @@ export default new Vuex.Store({
     updateProduct (context, payload) {
       axios({
         method: 'PUT',
-        url: 'https://obscure-caverns-50261.herokuapp.com/products/' + payload.id,
+        url: 'https://ecommerce-sandy.herokuapp.com/products/' + payload.id,
         data: payload,
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -119,7 +119,7 @@ export default new Vuex.Store({
     deleteProduct (context, id) {
       axios({
         method: 'DELETE',
-        url: 'https://obscure-caverns-50261.herokuapp.com/products/' + id,
+        url: 'https://ecommerce-sandy.herokuapp.com/products/' + id,
         headers: {
           access_token: localStorage.getItem('access_token')
         }
