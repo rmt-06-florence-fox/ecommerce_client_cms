@@ -41,12 +41,12 @@ module.exports = (sequelize, DataTypes) => {
         notEmpty: {
           args: true,
           msg: 'price empty'
+        },
+        min: {
+          args:[0],
+          msg: 'Price cannot be less than 0'
         }
       },
-      min: {
-        args:[0],
-        msg: 'Price cannot be less than 0'
-      }
     },
     stock: {
       type: DataTypes.INTEGER,
