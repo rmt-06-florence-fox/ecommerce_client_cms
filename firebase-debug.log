@@ -1,0 +1,110 @@
+[debug] [2020-12-14T12:18:27.896Z] ----------------------------------------------------------------------
+[debug] [2020-12-14T12:18:27.899Z] Command:       /home/blacklist/.nvm/versions/node/v14.13.0/bin/node /home/blacklist/.nvm/versions/node/v14.13.0/bin/firebase init
+[debug] [2020-12-14T12:18:27.900Z] CLI Version:   8.19.0
+[debug] [2020-12-14T12:18:27.900Z] Platform:      linux
+[debug] [2020-12-14T12:18:27.900Z] Node Version:  v14.13.0
+[debug] [2020-12-14T12:18:27.900Z] Time:          Mon Dec 14 2020 19:18:27 GMT+0700 (Western Indonesia Time)
+[debug] [2020-12-14T12:18:27.901Z] ----------------------------------------------------------------------
+[debug] [2020-12-14T12:18:27.901Z] 
+[debug] [2020-12-14T12:18:27.903Z] >>> [apiv2][query] GET https://firebase-public.firebaseio.com/cli.json [none]
+[debug] [2020-12-14T12:18:27.927Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-14T12:18:27.928Z] > authorizing via signed-in user
+[info] 
+     ######## #### ########  ######## ########     ###     ######  ########
+     ##        ##  ##     ## ##       ##     ##  ##   ##  ##       ##
+     ######    ##  ########  ######   ########  #########  ######  ######
+     ##        ##  ##    ##  ##       ##     ## ##     ##       ## ##
+     ##       #### ##     ## ######## ########  ##     ##  ######  ########
+
+You're about to initialize a Firebase project in this directory:
+
+  /home/blacklist/Documents/h8/p2/w3/d1/ecommerce_client_cms
+
+Before we get started, keep in mind:
+
+  * You are initializing in an existing Firebase project directory
+
+[debug] [2020-12-14T12:18:28.703Z] <<< [apiv2][status] GET https://firebase-public.firebaseio.com/cli.json 200
+[debug] [2020-12-14T12:18:28.704Z] <<< [apiv2][body] GET https://firebase-public.firebaseio.com/cli.json {"cloudBuildErrorAfter":1594252800000,"cloudBuildWarnAfter":1590019200000,"defaultNode10After":1594252800000,"minVersion":"3.0.5","node8DeploysDisabledAfter":1613390400000,"node8RuntimeDisabledAfter":1615809600000,"node8WarnAfter":1600128000000}
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[info] i  .firebaserc already has a default project, using e-commerce-cms-efrizal. 
+[debug] [2020-12-14T12:18:33.195Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-12-14T12:18:33.196Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-12-14T12:18:33.777Z] <<< HTTP RESPONSE 500 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Mon, 14 Dec 2020 12:18:33 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-14T12:18:33.778Z] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2020-12-14T12:18:33.781Z] FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+    at Object.<anonymous> (/home/blacklist/.nvm/versions/node/v14.13.0/lib/node_modules/firebase-tools/lib/auth.js:23:32)
+    at Module._compile (internal/modules/cjs/loader.js:1085:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:791:14)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:88:18)
+    at Object.<anonymous> (/home/blacklist/.nvm/versions/node/v14.13.0/lib/node_modules/firebase-tools/lib/init/features/hosting/github.js:20:16)
+    at Module._compile (internal/modules/cjs/loader.js:1085:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:791:14)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:88:18)
+    at Object.<anonymous> (/home/blacklist/.nvm/versions/node/v14.13.0/lib/node_modules/firebase-tools/lib/init/features/hosting/index.js:5:24)
+    at Module._compile (internal/modules/cjs/loader.js:1085:30)
+[error] 
+[error] Error: Failed to get Firebase project e-commerce-cms-efrizal. Please make sure the project exists and your account has permission to access it.
+[debug] [2020-12-14T12:18:54.543Z] ----------------------------------------------------------------------
+[debug] [2020-12-14T12:18:54.547Z] Command:       /home/blacklist/.nvm/versions/node/v14.13.0/bin/node /home/blacklist/.nvm/versions/node/v14.13.0/bin/firebase deploy
+[debug] [2020-12-14T12:18:54.547Z] CLI Version:   8.19.0
+[debug] [2020-12-14T12:18:54.547Z] Platform:      linux
+[debug] [2020-12-14T12:18:54.547Z] Node Version:  v14.13.0
+[debug] [2020-12-14T12:18:54.548Z] Time:          Mon Dec 14 2020 19:18:54 GMT+0700 (Western Indonesia Time)
+[debug] [2020-12-14T12:18:54.548Z] ----------------------------------------------------------------------
+[debug] [2020-12-14T12:18:54.548Z] 
+[debug] [2020-12-14T12:18:54.557Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2020-12-14T12:18:54.558Z] > authorizing via signed-in user
+[debug] [2020-12-14T12:18:54.558Z] [iam] checking project e-commerce-cms-efrizal for permissions ["firebase.projects.get","firebasehosting.sites.update"]
+[debug] [2020-12-14T12:18:54.562Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-12-14T12:18:54.563Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-12-14T12:18:54.978Z] <<< HTTP RESPONSE 500 {"cache-control":"no-cache, no-store, max-age=0, must-revalidate","pragma":"no-cache","date":"Mon, 14 Dec 2020 12:18:54 GMT","expires":"Mon, 01 Jan 1990 00:00:00 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-14T12:18:54.981Z] [iam] error while checking permissions, command may fail: FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2020-12-14T12:18:54.984Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2020-12-14T12:18:54.985Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ <request body omitted>
+[debug] [2020-12-14T12:18:55.502Z] <<< HTTP RESPONSE 500 {"expires":"Mon, 01 Jan 1990 00:00:00 GMT","pragma":"no-cache","cache-control":"no-cache, no-store, max-age=0, must-revalidate","date":"Mon, 14 Dec 2020 12:18:55 GMT","content-type":"application/json; charset=utf-8","vary":"X-Origin, Referer, Origin,Accept-Encoding","server":"scaffolding on HTTPServer2","x-xss-protection":"0","x-frame-options":"SAMEORIGIN","x-content-type-options":"nosniff","alt-svc":"h3-29=\":443\"; ma=2592000,h3-T051=\":443\"; ma=2592000,h3-Q050=\":443\"; ma=2592000,h3-Q046=\":443\"; ma=2592000,h3-Q043=\":443\"; ma=2592000,quic=\":443\"; ma=2592000; v=\"46,43\"","accept-ranges":"none","transfer-encoding":"chunked"}
+[debug] [2020-12-14T12:18:55.503Z] Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+[debug] [2020-12-14T12:18:55.507Z] FirebaseError: Authentication Error: Your credentials are no longer valid. Please run firebase login --reauth
+
+For CI servers and headless environments, generate a new token with firebase login:ci
+    at Object.<anonymous> (/home/blacklist/.nvm/versions/node/v14.13.0/lib/node_modules/firebase-tools/lib/auth.js:23:32)
+    at Module._compile (internal/modules/cjs/loader.js:1085:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:791:14)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:88:18)
+    at Object.<anonymous> (/home/blacklist/.nvm/versions/node/v14.13.0/lib/node_modules/firebase-tools/lib/init/features/hosting/github.js:20:16)
+    at Module._compile (internal/modules/cjs/loader.js:1085:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:1114:10)
+    at Module.load (internal/modules/cjs/loader.js:950:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:791:14)
+    at Module.require (internal/modules/cjs/loader.js:974:19)
+    at require (internal/modules/cjs/helpers.js:88:18)
+    at Object.<anonymous> (/home/blacklist/.nvm/versions/node/v14.13.0/lib/node_modules/firebase-tools/lib/init/features/hosting/index.js:5:24)
+    at Module._compile (internal/modules/cjs/loader.js:1085:30)
+[error] 
+[error] Error: Failed to get Firebase project e-commerce-cms-efrizal. Please make sure the project exists and your account has permission to access it.
