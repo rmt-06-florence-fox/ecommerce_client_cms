@@ -6,7 +6,6 @@
              <div class="col-lg-10">
                  <div class="cart_container">
                      <div class="cart_title">Etalase {{ title }}</div>
-                     <!-- v-for -->
                      <div v-if="addForm === false" @click="addFormStatus" class="cart_buttons"><button type="button" class="button cart_button_checkout">Tambah Produk</button></div>
                      <div class='col-12 m-5' v-if="addForm === true">
                       <form @submit.prevent="addProduct">
@@ -30,29 +29,8 @@
                       </form>
                         <p @click="addFormStatusFalse" class="col-12 m-2">cancel</p>
                      </div>
-                     <div class="cart_items" v-for="(product, i) in allProducts" :key="i">
-                       <!-- <router-link to="/detail/"> -->
-                         <ul class="cart_list" @click="goDetail(product.id)">
-                             <li class="cart_item clearfix">
-                                 <div class="cart_item_image"><img :src="product.image_url" alt=""></div>
-                                 <div class="cart_item_info d-flex flex-md-row flex-column justify-content-between">
-                                     <div class="cart_item_name cart_info_col">
-                                         <div class="cart_item_title">Nama</div>
-                                         <div class="cart_item_text">{{ product.name }}</div>
-                                     </div>
-                                     <div class="cart_item_quantity cart_info_col">
-                                         <div class="cart_item_title">Stock</div>
-                                         <div class="cart_item_text">{{ product.stock }}</div>
-                                     </div>
-                                     <div class="cart_item_price cart_info_col">
-                                         <div class="cart_item_title">Harga</div>
-                                         <div class="cart_item_text">Rp {{ product.price }}</div>
-                                     </div>
-                                 </div>
-                             </li>
-                         </ul>
-                       <!-- </router-link> -->
-                     </div>
+                     <!-- benerin -->
+                     <ProductRow v-for="product in allProducts" :key="product.id" :product="product"></ProductRow>
                  </div>
              </div>
          </div>
@@ -63,7 +41,12 @@
 
 <script>
 import { mapState } from 'vuex'
+import ProductRow from '../components/ProductRow'
+
 export default {
+  components: {
+    ProductRow
+  },
   data () {
     return {
       addForm: false,
@@ -104,6 +87,9 @@ export default {
           this.price = ''
           this.image_url = ''
           // console.log(this.allProducts)
+        })
+        .catch(error => {
+          console.log(error)
         })
     }
   },

@@ -63,6 +63,9 @@ export default {
           localStorage.setItem('access_token', response.data.access_token)
           this.$router.push('/home')
         })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }

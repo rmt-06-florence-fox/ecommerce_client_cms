@@ -29,6 +29,9 @@ export default new Vuex.Store({
           // console.log(this.allProducts)
           context.commit('setAllProducts', data)
         })
+        .catch(error => {
+          console.log(error)
+        })
     },
     getProductById (context, id) {
       return axios({

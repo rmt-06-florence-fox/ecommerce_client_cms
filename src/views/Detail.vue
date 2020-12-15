@@ -53,6 +53,7 @@
 
 <script>
 export default {
+  name: 'Detail',
   data () {
     return {
       productDetails: '',
@@ -102,12 +103,14 @@ export default {
         })
     },
     deleteProduct (id) {
-      this.$store.dispatch('delete', id)
+      console.log('hiha')
+      this.$store.dispatch('deleteProduct', id)
         .then((response) => {
-          console.log(response)
+          // console.log(response)
           this.$router.push('/store')
         })
         .catch(err => {
+          console.log('haha')
           console.log(err)
         })
     }
