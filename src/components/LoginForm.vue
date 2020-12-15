@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid col-md-4 justify-content-center">
     <b-card class="mt-3 d-flex flex-column" header="LOGIN">
-      <b-form @submit="login" @reset="cancel" v-if="show">
+      <b-form @submit.prevent="login" @reset.prevent="cancel" v-if="show">
         <b-form-group
           class="text-left"
           id="input-group-1"
@@ -51,14 +51,10 @@ export default {
     }
   },
   methods: {
-    login (el) {
-      el.preventDefault()
-      console.log(this.form)
-      localStorage.setItem('access_token', this.form.email)
-      this.$router.push('/main')
+    login () {
+      this.$store.dispatch('login', this.form)
     },
-    cancel (el) {
-      el.preventDefault()
+    cancel () {
       // Reset our form values
       this.form.email = ''
       this.form.password = ''
@@ -70,5 +66,6 @@ export default {
       })
     }
   }
+
 }
 </script>

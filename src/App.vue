@@ -4,6 +4,17 @@
   </div>
 </template>
 
+<script>
+export default {
+  created () {
+    if (!localStorage.access_token) {
+      this.$router.push('/login')
+    }
+  }
+
+}
+</script>
+
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
