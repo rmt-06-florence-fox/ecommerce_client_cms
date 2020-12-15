@@ -27,7 +27,7 @@ export default new Vuex.Store({
       })
         .then((response) => {
           localStorage.setItem('access_token', response.data.access_token)
-          router.push('/products')
+          router.push('/home')
         })
         .catch((error) => {
           Swal.fire('Login Failed', `${error.response.data.message}`, 'error')
