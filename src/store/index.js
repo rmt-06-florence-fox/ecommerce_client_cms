@@ -26,6 +26,9 @@ export default new Vuex.Store({
     CHANGEIMAGE (state, payload) {
       state.product.image_url = payload
     },
+    CHANGECATEGORY (state, payload) {
+      state.product.category = payload
+    },
     CHANGEPRICE (state, payload) {
       state.product.price = payload
     },
@@ -36,7 +39,7 @@ export default new Vuex.Store({
   actions: {
     login (context, obj) {
       return axios({
-        url: '/adminLogin',
+        url: '/login',
         method: 'post',
         data: {
           email: obj.email,
@@ -51,6 +54,7 @@ export default new Vuex.Store({
         data: {
           name: obj.name,
           image_url: obj.image_url,
+          category: obj.category,
           price: obj.price,
           stock: obj.stock
         },
@@ -101,6 +105,7 @@ export default new Vuex.Store({
         data: {
           name: payload.name,
           image_url: payload.image_url,
+          category: payload.category,
           price: payload.price,
           stock: payload.stock
         },

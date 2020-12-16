@@ -18,6 +18,12 @@
               </div>
             </div>
             <div class="field">
+              <label class="label">Category</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Text input" v-model= "category">
+              </div>
+            </div>
+            <div class="field">
               <label class="label">Price</label>
               <div class="control">
                 <input class="input" type="number" placeholder="Number input" v-model= "price">
@@ -50,6 +56,7 @@ export default {
     return {
       name: '',
       image_url: '',
+      category: '',
       price: '',
       stock: ''
     }
@@ -59,6 +66,7 @@ export default {
       const obj = {
         name: this.name,
         image_url: this.image_url,
+        category: this.category,
         price: this.price,
         stock: this.stock
       }
@@ -89,6 +97,7 @@ export default {
         .finally(() => {
           this.name = ''
           this.image_url = ''
+          this.category = ''
           this.price = ''
           this.stock = ''
         })

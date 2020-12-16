@@ -18,6 +18,12 @@
               </div>
             </div>
             <div class="field">
+              <label class="label">Category</label>
+              <div class="control">
+                <input class="input" type="text" placeholder="Link input" v-model= "productCategory">
+              </div>
+            </div>
+            <div class="field">
               <label class="label">Price</label>
               <div class="control">
                 <input class="input" type="number" placeholder="Number input" v-model= "productPrice">
@@ -52,10 +58,11 @@ export default {
         id: this.$route.params.id,
         name: value.name,
         image_url: value.image_url,
+        category: value.category,
         price: value.price,
         stock: value.stock
       }
-      console.log(obj)
+      // console.log(obj)
       this.$store.dispatch('editProduct', obj)
         .then(res => {
           // console.log(res.data)
@@ -82,6 +89,7 @@ export default {
         .finally(() => {
           this.name = ''
           this.image_url = ''
+          this.category = ''
           this.price = ''
           this.stock = ''
         })
@@ -109,6 +117,14 @@ export default {
       },
       set (value) {
         this.$store.commit('CHANGEIMAGE', value)
+      }
+    },
+    productCategory: {
+      get () {
+        return this.$store.state.product.category
+      },
+      set (value) {
+        this.$store.commit('CHANGECATEGORY', value)
       }
     },
     productPrice: {

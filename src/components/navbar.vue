@@ -67,7 +67,7 @@ export default {
           )
           this.$store.commit('CHANGEISLOGIN', false)
           localStorage.clear()
-          this.$router.push('/adminLogin')
+          this.$router.push('/login')
         }
       })
     }

@@ -2,15 +2,16 @@
   <div class="columns">
     <div class="column is-narrow">
       <div class="box" style="width: 200px">
-        <img :src= "image" alt="">
+        <img :src= "image" alt="" class="image is-fullwidth">
       </div>
     </div>
-    <div class="column p-4">
-      <div class="box p-5">
+    <div class="column">
+      <div class="box">
         <div class="columns">
           <div class="column is-8">
             <p class="title is-4 pb-1">{{list.name}}</p>
             <ol class="subtitle" style="list-style-type: none">
+              <li class="is-size-6"><b>Category :</b> {{list.category}}</li>
               <li class="is-size-6"><b>Price :</b> {{priceRp}}</li>
               <li class="is-size-6"><b>Stock(s) :</b> {{list.stock}}</li>
             </ol>

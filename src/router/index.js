@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
-import AdminLogin from '../views/AdminLogin.vue'
+import Login from '../views/Login.vue'
 import AddProduct from '../views/AddProduct.vue'
 import EditProduct from '../views/EditProduct.vue'
 import NotFound from '../views/NotFound.vue'
@@ -27,9 +27,9 @@ const routes = [
     ]
   },
   {
-    path: '/adminLogin',
-    name: 'AdminLogin',
-    component: AdminLogin
+    path: '/login',
+    name: 'Login',
+    component: Login
   },
   {
     path: '*',
@@ -46,8 +46,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const authenticated = localStorage.access_token
-  if (to.name !== 'AdminLogin' && !authenticated) next({ name: 'AdminLogin' })
-  else if (to.name === 'AdminLogin' && authenticated) next({ next: 'Home' })
+  if (to.name !== 'Login' && !authenticated) next({ name: 'Login' })
+  else if (to.name === 'Login' && authenticated) next({ next: 'Home' })
   else next()
 })
 

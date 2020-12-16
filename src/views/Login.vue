@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  name: 'AdminLogin',
+  name: 'Login',
   data () {
     return {
       email: '',
