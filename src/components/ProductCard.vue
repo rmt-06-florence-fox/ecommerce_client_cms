@@ -32,8 +32,8 @@
             ></b-form-input>
           </b-input-group>
 
-          <b-button size="sm" class="col-2" variant="primary" @click.prevent='updateProduct'>Update</b-button>
-          <b-button size="sm" class="col-2" variant="danger"  @click.prevent='deleteProduct'>Delete</b-button>
+          <mdb-btn size="sm"  class="col-2 pr-1 pl-1 m-0" color="indigo" @click='updateProduct'>Update</mdb-btn>
+          <b-icon type="button" icon="trash-fill" aria-hidden="true" @click.prevent='deleteProduct'></b-icon>
         </b-form>
       </b-col>
     </b-row>
@@ -41,6 +41,7 @@
 </template>
 
 <script>
+import { mdbBtn } from 'mdbvue'
 export default {
   name: 'ProductCard',
   props: ['product'],
@@ -50,8 +51,8 @@ export default {
         id: this.product.id,
         name: this.product.name,
         image_url: this.product.image_url,
-        price: '',
-        stock: ''
+        price: '' || this.product.price,
+        stock: '' || this.product.stock
       }
     }
   },
@@ -66,6 +67,10 @@ export default {
     deleteProduct () {
       this.$store.dispatch('deleteProduct', this.product.id)
     }
+  },
+  components: {
+
+    mdbBtn
   }
 
 }

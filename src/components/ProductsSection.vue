@@ -1,15 +1,13 @@
 <template>
-  <b-col class="col-9 p-4">
-    <div class="d-flex flex-row justify-content-between">
+  <b-col class="col-9 p-0">
+    <div class="d-flex flex-row justify-content-between mb-0 mt-3">
+      <h3 class=" d-flex flex-row">Product List</h3>
       <b-button
         size="sm"
-        class="mb-2 d-flex flex-row"
+        class=" d-flex flex-row"
         variant="primary"
         @click="modalShow = !modalShow"
         >Add Product</b-button
-      >
-      <b-button size="sm" class="mb-2 d-flex flex-row" variant="primary"
-        @click='logout '>Logout</b-button
       >
       <b-modal v-model="modalShow">
         <template #modal-title> Add Product </template>
@@ -72,6 +70,7 @@
         </template>
       </b-modal>
     </div>
+    <hr class="m-0"/>
     <!-- Table -->
     <b-table :fields="fields"> </b-table>
     <!-- Product Cards -->
@@ -90,9 +89,9 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'product', label: 'Product Info', class: 'text-left' },
-        { key: 'price', label: 'Price' },
-        { key: 'stock', label: 'Stock' },
+        { key: 'product', label: 'Product Info', class: 'text-left ' },
+        { key: 'price', label: 'Price', class: 'text-right ' },
+        { key: 'stock', label: 'Stock', class: 'text-right ' },
         { key: 'actions', label: 'Actions' }
       ],
       modalShow: false,
@@ -114,10 +113,8 @@ export default {
     addProduct () {
       this.$store.dispatch('addProduct', this.newProduct)
       this.modalShow = false
-    },
-    logout () {
-      this.$store.dispatch('logout')
     }
+
   },
 
   created () {

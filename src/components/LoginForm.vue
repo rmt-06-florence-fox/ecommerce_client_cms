@@ -1,44 +1,36 @@
 <template>
-  <div class="container-fluid col-md-4 justify-content-center">
-    <b-card class="mt-3 d-flex flex-column" header="LOGIN">
-      <b-form @submit.prevent="login" @reset.prevent="cancel" v-if="show">
-        <b-form-group
-          class="text-left"
-          id="input-group-1"
-          label="Email address:"
-          label-for="input-1"
-        >
-          <b-form-input
-            id="input-1"
-            v-model="form.email"
-            type="email"
-            required
-            placeholder="example@mail.com"
-          ></b-form-input>
-        </b-form-group>
-
-        <b-form-group
-          class="text-left"
-          id="input-group-2"
-          label="Password:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            type="password"
-            v-model="form.password"
-            required
-          ></b-form-input>
-        </b-form-group>
-
-        <b-button class="m-1" type="submit" variant="primary">Login</b-button>
-        <b-button class="m-1" type="reset" variant="danger">Cancel</b-button>
-      </b-form>
-    </b-card>
+  <!-- Material form login -->
+  <div class="container col-sm-3">
+    <h3 class= "text-center">Muchsin Store</h3>
+    <hr/>
+    <form @submit.prevent="login">
+      <p class="h4 text-center mb-4">Please Log in</p>
+      <div class="grey-text text-left">
+        <mdb-input
+          label="Your email"
+          icon="envelope"
+          type="email"
+          v-model="form.email"
+          required
+        />
+        <mdb-input
+          label="Your password"
+          icon="lock"
+          type="password"
+          v-model="form.password"
+          required
+        />
+      </div>
+      <div class="text-center">
+        <mdb-btn type="submit">Login</mdb-btn>
+      </div>
+    </form>
+    <!-- Material form login -->
   </div>
 </template>
 
 <script>
+import { mdbInput, mdbBtn } from 'mdbvue'
 export default {
   data () {
     return {
@@ -65,7 +57,10 @@ export default {
         this.show = true
       })
     }
+  },
+  components: {
+    mdbInput,
+    mdbBtn
   }
-
 }
 </script>

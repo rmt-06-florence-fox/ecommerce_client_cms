@@ -1,21 +1,23 @@
 <template>
-  <div class="home">
-    <Navbar />
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Muchsin Store" />;
-  </div>
+  <b-container fluid class="d-flex">
+    <ProfileSection></ProfileSection>
+    <ProductsSection></ProductsSection>
+  </b-container>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
-import Navbar from '../components/Navbar'
-
+import ProfileSection from '../components/ProfileSection'
+import ProductsSection from '../components/ProductsSection'
 export default {
   name: 'Home',
+
   components: {
-    HelloWorld,
-    Navbar
+    ProfileSection,
+    ProductsSection
   }
+
 }
 </script>
+
+<style>
+</style>

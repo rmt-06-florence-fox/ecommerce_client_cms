@@ -1,6 +1,5 @@
 <template>
-  <div class="login">
-    <h1 class="mt-3">This is Login page</h1>
+  <div class="login d-flex text-left">
     <LoginForm/>
   </div>
 </template>
@@ -16,3 +15,10 @@ export default {
   }
 }
 </script>
+
+<style >
+.login{
+   align-items:center;
+   height: 100vh
+}
+</style>

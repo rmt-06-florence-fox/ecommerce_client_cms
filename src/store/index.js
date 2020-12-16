@@ -18,7 +18,7 @@ export default new Vuex.Store({
     SET_DATA (state, payload) {
       state.productList = payload
     },
-    SET_MESSAGE(state, payload) {
+    SET_MESSAGE (state, payload) {
       state.message = payload
     },
     SET_ERR_MESSAGE (state, payload) {
@@ -34,9 +34,10 @@ export default new Vuex.Store({
 
       })
         .then(({ data }) => {
-          localStorage.access_token = data.access_token
           commit('SET_LOGIN', true)
-          router.push('/main')
+          localStorage.access_token = data.access_token
+          localStorage.role = data.role
+          router.push('/')
         })
         .catch(err => {
           const message = err.response.data.message
@@ -110,7 +111,7 @@ export default new Vuex.Store({
           dispatch('errors', message)
         })
     },
-    success({ commit }, payload) {
+    success ({ commit }, payload) {
       commit('SET_MESSAGE', payload)
     },
     errors ({ commit }, payload) {
