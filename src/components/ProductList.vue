@@ -1,7 +1,8 @@
 <template>
  <div>
-    <b-card-group deck class="row justify-content-center" id="product-list">
+    <b-card-group columns class="row justify-content-center" id="product-list">
       <ProductCard
+      class="col-md-4"
       v-for="product in products"
       :key="product.id"
       :product="product" />

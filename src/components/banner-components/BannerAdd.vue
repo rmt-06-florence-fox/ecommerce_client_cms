@@ -36,7 +36,7 @@ export default {
         title: this.title,
         imageUrl: this.imageUrl
       })
-      this.$bvModal.hide('add-banner')
+      this.$bvModal.hide('addBanner')
     }
   }
 }

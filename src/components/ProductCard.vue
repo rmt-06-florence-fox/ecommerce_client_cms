@@ -7,7 +7,6 @@
       img-top
       style="max-width: 20rem; height: 38rem"
       class=" "
-      no-body
       >
 
       <div class="d-flex flex-column p-2">

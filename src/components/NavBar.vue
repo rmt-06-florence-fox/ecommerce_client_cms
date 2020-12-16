@@ -9,8 +9,24 @@
       <b-collapse id="nav-collapse" is-nav>
         <b-navbar-nav>
           <b-nav-item >
-            <button class="btn btn-success" v-b-modal.add v-if="content === 'product'">Add Product</button>
-            <button class="btn btn-success" v-b-modal.add-banner v-else-if="content === 'banner'">Add Banner</button>
+            <div v-if="content === 'product'">
+               <button class="btn btn-success" @click="showModal('add')">Add Product</button>
+               <b-modal
+                id="add"
+                hide-footer
+                title="Add Product Form">
+                <AddForm/>
+              </b-modal>
+            </div>
+            <div v-else-if="content === 'banner'">
+              <button class="btn btn-success" @click="showModal('addBanner')" >Add Banner</button>
+              <b-modal
+                id="addBanner"
+                hide-footer
+                title="Add Banner Form">
+                <BannerAdd/>
+              </b-modal>
+            </div>
           </b-nav-item>
         </b-navbar-nav>
 
@@ -19,25 +35,11 @@
             <b-form-input class="mr-sm-2" placeholder="Search"></b-form-input>
             <b-button variant="outline-success" class="my-2 my-sm-0" type="submit">Search</b-button>
           </b-nav-form> -->
-
           <b-nav-item>
             <button class="btn btn-dark" @click="logout">Logout</button>
           </b-nav-item>
         </b-navbar-nav>
-
       </b-collapse>
-      <b-modal
-        id="add"
-        hide-footer
-        title="Add Product Form">
-        <AddForm/>
-      </b-modal>
-      <b-modal
-        id="add-banner"
-        hide-footer
-        title="Add Banner Form">
-        <BannerAdd/>
-      </b-modal>
     </b-navbar>
 </template>
 
@@ -55,6 +57,9 @@ export default {
     logout () {
       localStorage.removeItem('access_token')
       this.$router.push('/')
+    },
+    showModal (modalId) {
+      this.$bvModal.show(modalId)
     }
   }
 }
