@@ -31,13 +31,6 @@ export default {
         password: this.password
       }
       this.$store.dispatch('login', payload)
-        .then(({ data }) => {
-          localStorage.setItem('access_token', data.access_token)
-          this.$router.push({ name: 'Home' })
-        })
-        .catch(err => {
-          console.log(err)
-        })
     }
   }
 }

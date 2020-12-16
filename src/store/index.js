@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../config/axiosInstance'
 import Swal from 'sweetalert2'
+import router from '../router/index'
 
 Vue.use(Vuex)
 
@@ -24,10 +25,19 @@ export default new Vuex.Store({
   },
   actions: {
     login (context, payload) {
-      return axios
+      axios
         .post('/login', {
           email: payload.email,
           password: payload.password
+        })
+        .then(({ data }) => {
+          Swal.fire('login success')
+          localStorage.setItem('access_token', data.access_token)
+          router.push({ name: 'Home' })
+        })
+        .catch(err => {
+          Swal.fire(err.message)
+          console.log(err)
         })
     },
     fetchProduct (context) {
