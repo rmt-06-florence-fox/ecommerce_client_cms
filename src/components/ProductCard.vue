@@ -1,6 +1,6 @@
 <template>
   <b-card
-      :title="product.name"
+      :title="product.category"
       :img-src="product.imageUrl"
       :img-alt="product.name"
       img-height="45%"
@@ -10,8 +10,9 @@
       >
 
       <div class="d-flex flex-column p-2">
-        <h3>price : {{formattingPrice()}}</h3>
-        <h3>stock : {{product.stock}}</h3>
+        <h3>{{ product.name }}</h3>
+        <h4>price : {{ formattingPrice() }}</h4>
+        <h4>stock : {{ product.stock }}</h4>
       </div>
     <div fluid="sm" class="d-flex flex-column bg-light">
         <button class="m-1 btn-success p-1" v-b-modal="modalId"> Edit </button>

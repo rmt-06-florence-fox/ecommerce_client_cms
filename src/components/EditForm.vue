@@ -19,6 +19,15 @@
     ></b-form-input>
     </b-form-group>
 
+    <b-form-group label="Category" label-for="category">
+    <b-form-input
+      name="category"
+      type="text"
+      v-model="category"
+      placeholder="category"
+    ></b-form-input>
+    </b-form-group>
+
     <b-form-group label="Stock" label-for="stock">
     <b-form-input
       name="stock"
@@ -48,6 +57,7 @@ export default {
     return {
       name: '',
       imageUrl: '',
+      category: '',
       stock: 0,
       price: 0
     }
@@ -55,17 +65,18 @@ export default {
   props: ['product'],
   methods: {
     editHandler () {
-      const { name, imageUrl, stock, price } = this
-      const payload = { id: this.product.id, name, imageUrl, stock, price }
+      const { name, imageUrl, stock, price, category } = this
+      const payload = { id: this.product.id, name, imageUrl, stock, price, category }
       this.$store.dispatch('editHandler', payload)
       this.$bvModal.hide('edit-' + this.product.id)
     },
     initialState () {
-      const { name, imageUrl, stock, price } = this.product
+      const { name, imageUrl, stock, price, category } = this.product
       this.name = name
       this.imageUrl = imageUrl
       this.stock = stock
       this.price = price
+      this.category = category
     }
   },
   created () {

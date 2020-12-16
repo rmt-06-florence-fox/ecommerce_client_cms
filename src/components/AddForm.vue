@@ -18,6 +18,15 @@
     ></b-form-input>
     </b-form-group>
 
+    <b-form-group label="Category" label-for="Category">
+    <b-form-input
+      name="Category"
+      type="text"
+      v-model="category"
+      placeholder="category"
+    ></b-form-input>
+    </b-form-group>
+
     <b-form-group label="Stock" label-for="stock">
     <b-form-input
       name="stock"
@@ -47,14 +56,15 @@ export default {
     return {
       name: '',
       imageUrl: '',
+      category: '',
       price: 0,
       stock: 0
     }
   },
   methods: {
     addHandler () {
-      const { name, imageUrl, price, stock } = this
-      this.$store.dispatch('addHandler', { name, imageUrl, price, stock })
+      const { name, imageUrl, price, stock, category } = this
+      this.$store.dispatch('addHandler', { name, imageUrl, price, stock, category })
       this.$bvModal.hide('add')
     }
   }

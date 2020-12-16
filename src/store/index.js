@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from '../config/axios-config.js'
+import router from '../router'
 
 Vue.use(Vuex)
 export default new Vuex.Store({
@@ -39,6 +40,9 @@ export default new Vuex.Store({
       }).then(({ data }) => {
         localStorage.setItem('access_token', data.access_token)
         context.commit('setErrors', [])
+        setTimeout(() => {
+          router.push('dashboard')
+        }, 800)
       }).catch(err => {
         context.commit('setErrors', err.response.data.messages)
       })
@@ -71,11 +75,11 @@ export default new Vuex.Store({
       })
     },
     editHandler (context, payload) {
-      const { id, name, imageUrl, stock, price } = payload
+      const { id, name, imageUrl, stock, price, category } = payload
       axios({
         url: '/products/' + id,
         method: 'PUT',
-        data: { name, imageUrl, stock, price },
+        data: { name, imageUrl, stock, price, category },
         headers: { access_token: localStorage.getItem('access_token') }
       }).then(_ => {
         context.dispatch('fetchProducts')

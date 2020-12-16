@@ -58,7 +58,6 @@ export default {
       const email = this.email
       const password = this.password
       this.$store.dispatch('loginHandler', { email, password })
-      this.$router.push('dashboard')
     }
   },
   computed: {
