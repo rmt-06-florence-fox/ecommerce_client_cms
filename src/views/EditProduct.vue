@@ -40,6 +40,8 @@
 </template>
 
 <script>
+import Swal from 'sweetalert2'
+
 export default {
   name: 'EditForm',
   data () {
@@ -63,7 +65,11 @@ export default {
           this.product.stock = response.data.product.stock
         })
         .catch(error => {
-          console.log(error.response)
+          Swal.fire('Failed',
+            `${error.response.data.message}`,
+            'error'
+          )
+          console.log(error.response.data.message)
         })
     },
     updateProduct () {
