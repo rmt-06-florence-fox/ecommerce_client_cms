@@ -12,19 +12,17 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home,
-    children: [
-      {
-        path: 'addProduct',
-        name: 'AddProduct',
-        component: AddProduct
-      },
-      {
-        path: 'editProduct/:id',
-        name: 'EditProduct',
-        component: EditProduct
-      }
-    ]
+    component: Home
+  },
+  {
+    path: '/addProduct',
+    name: 'AddProduct',
+    component: AddProduct
+  },
+  {
+    path: '/editProduct/:id',
+    name: 'EditProduct',
+    component: EditProduct
   },
   {
     path: '/login',

@@ -62,7 +62,6 @@ export default {
       })
         .then((res) => {
           if (res.isConfirmed) {
-            console.log('jojo')
             this.$store.dispatch('destroyProduct', id)
               .then(res => {
                 this.$swal.fire({

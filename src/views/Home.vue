@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <router-view/>
     <div class="container" style="min-height: 100vh">
       <div style="height: 4.5rem"/>
       <h3 class="title is-3 pt-5 pl-5">List Products</h3>
