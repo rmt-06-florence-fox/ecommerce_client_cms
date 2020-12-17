@@ -3,13 +3,14 @@ import Vuex from 'vuex'
 import axios from 'axios'
 import router from '../router'
 
-const baseUrl = 'https://bukatoko-server.herokuapp.com'
+const baseUrl = 'http://localhost:3000'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
     productData: [],
+    categories: [],
     editData: null,
     alert: false,
     errMessage: ''
@@ -17,6 +18,9 @@ export default new Vuex.Store({
   mutations: {
     setProducts (state, data) {
       state.productData = data
+    },
+    setCategories (state, data) {
+      state.categories = data
     },
     logout (state) {
       state.productData = []
@@ -67,6 +71,21 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           commit('setProducts', data)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
+    getCategories ({ commit, state }) {
+      axios({
+        method: 'GET',
+        url: `${baseUrl}/categories`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
+        .then(({ data }) => {
+          commit('setCategories', data)
         })
         .catch((err) => {
           console.log(err)

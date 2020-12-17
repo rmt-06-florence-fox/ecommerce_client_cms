@@ -22,6 +22,10 @@ export default {
           value: 'name'
         },
         {
+          text: 'Category',
+          value: 'category'
+        },
+        {
           text: 'Image',
           value: 'image_url'
         },

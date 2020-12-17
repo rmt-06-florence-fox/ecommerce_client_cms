@@ -19,6 +19,14 @@
                 >
                 </v-text-field>
 
+                <v-select
+                  :items="categories"
+                  v-model="category"
+                  item-text="name"
+                  item-value="id"
+                  label="Category"
+                ></v-select>
+
                 <v-text-field
                   prepend-icon="mdi-image"
                   label="Image Url"
@@ -101,6 +109,7 @@ export default {
     return {
       name: '',
       image_url: '',
+      category: '',
       price: null,
       stock: null
     }
@@ -110,9 +119,12 @@ export default {
       const payload = {
         name: this.name,
         image_url: this.image_url,
+        CategoryId: this.category,
         price: this.price,
         stock: this.stock
       }
+
+      console.log(payload)
 
       this.$store.dispatch('addProduct', payload)
     },
@@ -123,7 +135,10 @@ export default {
       this.$store.commit('changeAlert', false)
     }
   },
-  computed: mapState(['alert', 'errMessage'])
+  computed: mapState(['alert', 'errMessage', 'categories']),
+  created () {
+    this.$store.dispatch('getCategories')
+  }
 }
 </script>
 

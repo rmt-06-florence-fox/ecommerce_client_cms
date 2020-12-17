@@ -49,6 +49,21 @@
       </v-btn>
     </router-link>
 
+    <router-link to='/addcategory'>
+      <v-btn
+        class="ma-2 white--text"
+        color="secondary"
+      >
+        Add Category
+        <v-icon
+          right
+          dark
+        >
+          mdi-plus
+        </v-icon>
+      </v-btn>
+    </router-link>
+
   </v-app-bar>
 </template>
 
@@ -63,6 +78,6 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style>
+  a { text-decoration: none;}
 </style>

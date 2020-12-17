@@ -7,6 +7,7 @@
         <tbody>
           <tr v-for="data in productData" :key="data.id" class="overflow-y-auto">
             <td>{{ data.name }}</td>
+            <td>{{ data.Category.name }}</td>
             <td>
               <v-img
                 :src="data.image_url"
