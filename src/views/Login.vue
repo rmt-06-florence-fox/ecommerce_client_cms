@@ -36,7 +36,7 @@ export default {
       }
       this.$store.dispatch('login', obj)
         .then(response => {
-          console.log('masuuukkkk', response)
+          console.log('masuk sinii >>>>', response)
           localStorage.setItem('access_token', response.data.access_token)
           this.$router.push('/home')
         })

@@ -51,4 +51,8 @@
   justify-content: center;
 }
 
+.select-category {
+  overflow: scroll;
+}
+
 /*# sourceMappingURL=style.css.map */

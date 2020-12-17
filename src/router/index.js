@@ -6,6 +6,9 @@ import MainPage from '../views/MainPage.vue'
 import Product from '../views/Product.vue'
 import AddProduct from '../views/AddProduct.vue'
 import EditProduct from '../views/EditProduct.vue'
+import Category from '../views/Category.vue'
+import AddCategory from '../views/AddCategory.vue'
+import EditCategory from '../views/EditCategory.vue'
 
 Vue.use(VueRouter)
 
@@ -29,6 +32,21 @@ const routes = [
         path: 'product',
         name: 'Product',
         component: Product
+      },
+      {
+        path: 'category',
+        name: 'Category',
+        component: Category
+      },
+      {
+        path: 'addCategory',
+        name: 'AddCategory',
+        component: AddCategory
+      },
+      {
+        path: 'editCategory/:id',
+        name: 'EditCategory',
+        component: EditCategory
       },
       {
         path: 'addProduct',

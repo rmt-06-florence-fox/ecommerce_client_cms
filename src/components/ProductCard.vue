@@ -4,6 +4,7 @@
       <img :src="product.image_url" class="card-img-top" :alt="product.name">
       <div class="card-body">
         <h5 class="card-title">{{product.name}}</h5>
+        <p class="card-text">{{product.Category.name}}</p>
         <p class="card-text">Harga: {{product.price}}</p>
         <p class="card-text">Stock: {{product.stock}}</p>
         <a href="#" class="btn btn-primary mr-1" @click.prevent="edit(product.id)">Edit</a>
