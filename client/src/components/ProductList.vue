@@ -1,6 +1,6 @@
 <template>
   <tr>
-    <th>{{ product.id }} </th>
+    <th>{{ index + 1 }} </th>
     <td><img :src="product.image_url" alt="" class="img-product"></td>
     <td>{{ product.name }}</td>
     <td>Rp{{ convertRupiah }},00</td>
@@ -12,7 +12,7 @@
 <script>
 export default {
   name: 'ProductList',
-  props: ['product'],
+  props: ['product', 'index'],
   methods: {
     onEdit (id) {
       this.$store.dispatch('editProduct', id)

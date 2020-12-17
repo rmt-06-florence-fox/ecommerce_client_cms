@@ -71,15 +71,17 @@ export default new Vuex.Store({
           router.push('/products')
         })
         .catch(err => {
-          console.log(err.response.data.messages)
-          const errMessage = err.response.data.messages
-          errMessage.forEach((e) => {
-            Vue.toasted.error(e.message, {
-              icon: 'times',
-              position: 'top-right',
-              closeOnSwipe: true
+          if (err.response.data.messages) {
+            console.log(err.response.data.messages)
+            const errMessage = err.response.data.messages
+            errMessage.forEach((e) => {
+              Vue.toasted.error(e.message, {
+                icon: 'times',
+                position: 'top-right',
+                closeOnSwipe: true
+              })
             })
-          })
+          } else console.log(err)
         })
     },
     editProduct (context, id) {

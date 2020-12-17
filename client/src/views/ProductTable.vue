@@ -13,7 +13,7 @@
           </tr>
         </thead>
         <tbody>
-          <ProductList v-for="product in products" :key="product.id" :product="product"></ProductList>
+          <ProductList v-for="(product, index) in products" :key="index" :index="index" :product="product"></ProductList>
         </tbody>
       </table>
     </section>
