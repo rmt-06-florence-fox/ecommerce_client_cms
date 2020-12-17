@@ -53,8 +53,8 @@ export default {
 
 <style scoped>
   img {
-    height: 150px;
-    width: 150px;
+    height: 100px;
+    width: 100px;
     background-size:cover;
     background-position:center;
     border-radius:50%;
