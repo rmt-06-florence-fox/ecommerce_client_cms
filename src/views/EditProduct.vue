@@ -19,6 +19,14 @@
                 >
                 </v-text-field>
 
+                <v-select
+                  :items="categories"
+                  v-model="category"
+                  item-text="name"
+                  item-value="id"
+                  label="Category"
+                ></v-select>
+
                 <v-text-field
                   prepend-icon="mdi-image"
                   label="Image Url"
@@ -97,22 +105,25 @@
 import { mapState } from 'vuex'
 
 export default {
-  computed: mapState(['editData', 'alert', 'errMessage']),
+  computed: mapState(['editData', 'alert', 'errMessage', 'categories']),
   data () {
     return {
       id: null,
       name: '',
+      category: null,
       image_url: '',
       price: null,
       stock: null
     }
   },
   created () {
+    this.$store.dispatch('getCategories')
     if (this.editData === null) {
       this.$router.push({ path: '/' })
     } else {
       this.id = this.editData.id
       this.name = this.editData.name
+      this.category = this.editData.Category.id
       this.image_url = this.editData.image_url
       this.price = this.editData.price
       this.stock = this.editData.stock
@@ -123,6 +134,7 @@ export default {
       const payload = {
         id: this.id,
         name: this.name,
+        category: this.category,
         image_url: this.image_url,
         price: this.price,
         stock: this.stock

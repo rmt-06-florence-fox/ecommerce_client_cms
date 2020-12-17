@@ -4,6 +4,7 @@ import Login from '../views/Login.vue'
 import Home from '../views/Home.vue'
 import AddProduct from '../views/AddProduct.vue'
 import EditProduct from '../views/EditProduct.vue'
+import AddCategory from '../views/AddCategory.vue'
 import About from '../views/About.vue'
 import NotFound from '../views/404.vue'
 
@@ -34,6 +35,11 @@ const routes = [
     path: '/editproduct/:id',
     name: 'EditProduct',
     component: EditProduct
+  },
+  {
+    path: '/addcategory',
+    name: 'AddCategory',
+    component: AddCategory
   },
   {
     path: '*',

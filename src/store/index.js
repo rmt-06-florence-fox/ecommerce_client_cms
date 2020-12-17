@@ -163,6 +163,33 @@ export default new Vuex.Store({
           console.log(err)
         })
     },
+    addCategory (context, payload) {
+      axios({
+        method: 'POST',
+        url: `${baseUrl}/categories`,
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: payload
+      })
+        .then(() => {
+          router.push({ name: 'Home' })
+        })
+        .catch((err) => {
+          context.commit('changeAlert', true)
+          if (err.response) {
+            console.log(err.response.data)
+            context.commit('errMessage', err.response.data)
+          } else if (err.request) {
+            console.log(err.request)
+            context.commit('errMessage', err.request)
+          } else {
+            console.log(err.message)
+            context.commit('errMessage', err.message)
+          }
+          context.dispatch('changeAlert')
+        })
+    },
     changeAlert (context) {
       setTimeout(() => {
         context.commit('changeAlert', false)
