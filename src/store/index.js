@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import Axios from '../config/axiosInstance'
+import axios from 'axios'
 
 Vue.use(Vuex)
 
@@ -35,8 +35,13 @@ export default new Vuex.Store({
   },
   actions: {
     fetchData (context) {
-      Axios
-        .get('/products', { headers: { access_token: localStorage.getItem('access_token') } })
+      axios({
+        url: 'http://localhost:3000/products',
+        method: 'get',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
         .then(({ data }) => {
           context.commit('setProducts', data)
         })
@@ -46,19 +51,20 @@ export default new Vuex.Store({
     },
     editData ({ context, state }, id) {
       console.log(state.product, id, '<<dari edit data')
-      Axios
-        .put(`/products/${id}`, {
-          headers: {
-            access_token: localStorage.getItem('access_token')
-          },
-          data: {
-            name: state.product.name,
-            image_url: state.product.image_url,
-            description: state.product.description,
-            stock: state.product.stock,
-            price: state.product.price
-          }
-        })
+      axios({
+        url: 'http://localhost:3000/products',
+        method: 'put',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          name: state.product.name,
+          image_url: state.product.image_url,
+          description: state.product.description,
+          stock: state.product.stock,
+          price: state.product.price
+        }
+      })
         .then(({ data }) => {
           console.log(data)
           context.commit('setProduct', data)
@@ -68,8 +74,13 @@ export default new Vuex.Store({
         })
     },
     fetchDataById (context, id) {
-      Axios
-        .get(`/products/${id}`, { headers: { access_token: localStorage.getItem('access_token') } })
+      axios({
+        url: `http://localhost:3000/products/${id}`,
+        method: 'get',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
         .then(({ data }) => {
           context.commit('setProduct', data)
         })
@@ -78,8 +89,13 @@ export default new Vuex.Store({
         })
     },
     deleted ({ context }, id) {
-      Axios
-        .delete('/products/' + id, { headers: { access_token: localStorage.getItem('access_token') } })
+      axios({
+        url: `http://localhost:3000/products/${id}`,
+        method: 'delete',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        }
+      })
         .then(({ data }) => {
           console.log('data berhasil dihapus')
         })
@@ -89,28 +105,35 @@ export default new Vuex.Store({
     },
     login (context, payload) {
       console.log(payload, '<data pl')
-      return Axios
-        .post('/login', {
-          data: {
-            email: payload.email,
-            password: payload.password
-          }
-        })
+      return axios({
+        url: 'http://localhost:3000/loginadm',
+        method: 'post',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          email: payload.email,
+          password: payload.password
+        }
+      })
     },
     createProduct (context, payload) {
-      return Axios
-        .post('/products', {
-          data: {
-            name: payload.name,
-            image_url: payload.image_url,
-            price: payload.price,
-            stock: payload.stock,
-            description: payload.description
-          }
-        })
+      return axios({
+        url: 'http://localhost:3000/products',
+        method: 'post',
+        headers: {
+          access_token: localStorage.getItem('access_token')
+        },
+        data: {
+          name: payload.name,
+          image_url: payload.image_url,
+          price: payload.price,
+          stock: payload.stock,
+          description: payload.description
+        }
+      })
     }
   },
   modules: {
-
   }
 })

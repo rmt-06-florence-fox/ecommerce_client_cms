@@ -10,8 +10,8 @@
       <li class="list-group-item">{{product.stock}}</li>
     </ul>
     <div class="card-body">
-      <a @click.prevent="changePage" class="card-link">Edit</a>
-      <a @click.prevent="deleted" class="card-link">Delete</a>
+      <a @click="changePage" class="card-link">Edit</a>
+      <a @click="deleted" class="card-link">Delete</a>
     </div>
   </div>
 </template>
@@ -21,9 +21,9 @@ export default {
   name: 'productCard',
   props: ['product'],
   methods: {
-    // editPage () {
-    //   this.$emit('editPage', this.product.id)
-    // },
+    edit
+    
+    
     deleted () {
       this.$emit('deleted', this.product.id)
     },

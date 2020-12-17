@@ -4,37 +4,36 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import CreateProduct from '../views/CreateProduct.vue'
 import EditProduct from '../views/EditProduct.vue'
+import MainHome from '../views/MainHome.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
-  {
-    path: '/home',
-    name: 'Home',
-    component: Home
-  },
   {
     path: '/',
     name: 'Login',
     component: Login
   },
   {
-    path: '/create',
-    name: 'CreateProduct',
-    component: CreateProduct
-  },
-  {
-    path: '/edit/:id',
-    name: 'EditProduct',
-    component: EditProduct
-  },
-  {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/',
+    component: MainHome,
+    children: [
+      {
+        path: 'home',
+        name: 'Home',
+        component: Home
+      },
+      {
+        path: 'create',
+        name: 'CreateProduct',
+        component: CreateProduct
+      },
+      {
+        path: 'edit/:id',
+        name: 'EditProduct',
+        component: EditProduct
+      }
+    ]
   }
 ]
 

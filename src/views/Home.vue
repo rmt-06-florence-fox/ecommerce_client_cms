@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <button @click="logout"> Logout </button>
     <div class="container p-3 my-3 bg-dark text-white">
       <h1> Product List </h1>
       <div id="card">
@@ -31,10 +30,6 @@ export default {
     },
     deleted (id) {
       this.$store.dispatch('deleted', id)
-    },
-    logout () {
-      localStorage.clear()
-      this.$router.push('/')
     }
   },
   created () {
