@@ -4,7 +4,7 @@ const {
   Model
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Customer extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -12,9 +12,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Customer.hasMany(models.Cart)
     }
   };
-  User.init({
+  Customer.init({
     email: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -45,14 +46,13 @@ module.exports = (sequelize, DataTypes) => {
     },
     role: DataTypes.STRING
   }, {
-    hooks: {
-      beforeCreate: (instance, opt) => {
-        let salt = bcrypt.genSaltSync(10);
-        instance.password = bcrypt.hashSync(instance.password, salt);
-      }
-    },
     sequelize,
-    modelName: 'User',
+    modelName: 'Customer',
   });
-  return User;
+  Customer.addHook('beforeCreate', (customer, options) => {
+    let salt = bcrypt.genSaltSync(10);
+    customer.password = bcrypt.hashSync(customer.password, salt);
+    customer.role = "customer"
+  });
+  return Customer;
 };

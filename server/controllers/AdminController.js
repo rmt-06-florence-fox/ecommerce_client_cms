@@ -1,8 +1,8 @@
-const { User } = require('../models/index.js');
+const { User } = require('../models/index.js');  // User adalah nama model untuk admin
 const bcrypt = require('bcryptjs');
 const { generateToken } = require('../helpers/jwt.js');
 
-class UserController {
+class AdminController {
     static login(req, res, next) {
         User.findOne({where: {email: req.body.email}})
         .then(data => {
@@ -31,4 +31,4 @@ class UserController {
     }
 }
 
-module.exports = UserController;
+module.exports = AdminController;
