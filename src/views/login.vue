@@ -1,10 +1,11 @@
 <template>
     <div>
         <div class="col-sm-4 container" style="box-shadow: 0px 0px 10px;">
-            <div style="height: 200px;"></div>
-            <h2 class="row justify-content-md-center">Login Account</h2>
+            <div style="height: 30px;"></div>
+            <img width="150" height="150" src="../assets/login.svg" alt="">
+            <h2 class="row justify-content-md-center mt-5">Login Account</h2>
             <div class="row justify-content-md-center">
-            <div class="col col-sm-8" style="margin: 20%">
+            <div class="col col-sm-8" style="margin: 10%">
         <form @submit.prevent="login">
         <div class="form-group">
             <input type="email" class="form-control" v-model="email" aria-describedby="emailHelp" required placeholder="Email">
@@ -30,9 +31,6 @@ export default {
     }
   },
   methods: {
-    goHome () {
-      this.$router.push('/')
-    },
     login () {
       const payload = {
         email: this.email,

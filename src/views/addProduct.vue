@@ -1,7 +1,7 @@
 <template>
     <div>
-        <div class="col-sm-6 container" style="box-shadow: 0px 0px 10px;">
-            <div style="height: 200px;"></div>
+        <div class="col-sm-5 container" style="box-shadow: 0px 0px 10px;">
+            <div style="height: 100px;"></div>
             <h2 class="row justify-content-md-center">Add Product</h2>
             <div class="row justify-content-md-center">
             <div class="col col-sm-8" style="margin: 20%">
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <input type="number" class="form-control" v-model="newProduct.stock" required placeholder="Stock">
-        </div>
+        </div><br>
         <button type="submit" class="btn btn-primary">Add Product</button><br>
         </form>
             </div>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'addProduct',
+  name: 'AddProduct',
   data () {
     return {
       newProduct: {
@@ -42,7 +42,10 @@ export default {
   methods: {
     addProduct () {
       this.$store.dispatch('addProduct', this.newProduct)
-        .then(() => { this.$router.push('/products') })
+        .then(() => {
+          this.$router.push('/products')
+          this.$store.dispatch('fetchProduct')
+        })
         .catch(error => console.log(error))
     }
   }

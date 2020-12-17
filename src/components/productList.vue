@@ -1,8 +1,8 @@
 <template>
   <tr>
-      <td><img class="product-image" src="product.image_url" alt="image"></td>
+      <td><img class="product-image" :src="product.image_url" alt="image"></td>
       <td>{{ product.name }}</td>
-      <td>{{ product.price }}</td>
+      <td>Rp {{ product.price }}</td>
       <td>{{ product.stock }}</td>
       <td>
           <button @click.prevent="editPage(product.id)" class="btn btn-primary">Edit</button>
@@ -26,5 +26,8 @@ export default {
 </script>
 
 <style>
-
+.product-image {
+  width: 235px;
+  height: 150px;
+}
 </style>

@@ -1,44 +1,40 @@
 <template>
-  <div class="listProduct">
-      <h1>List Product</h1>
-      <table>
-          <thead>
+  <div>
+      <br><h1>List Product</h1><br>
+      <br><table>
+          <thead style="width: 200px;">
               <tr>
-                  <td>Image</td>
-                  <td>Name</td>
-                  <td>Price</td>
-                  <td>Stock</td>
-                  <td>Action</td>
+                  <th>Image</th>
+                  <th style="width: 200px;">Name</th>
+                  <th style="width: 200px;">Price</th>
+                  <th style="width: 200px;">Stock</th>
+                  <th>Action</th>
               </tr>
           </thead>
           <tbody>
-              <dataProduct v-for="product in products" :key="product.id" :product="product"></dataProduct>
+              <DataProduct v-for="product in products" :key="product.id" :product="product"></DataProduct>
           </tbody>
       </table>
   </div>
 </template>
 
 <script>
-import dataProduct from '../components/productList'
+import DataProduct from '../components/productList'
 export default {
+  components: { DataProduct },
   name: 'ListProduct',
-  components: { dataProduct },
   data () {
     return {
 
     }
   },
-  methods: {
-    fetchProduct () {
-      this.$store.dispatch('fetchProduct')
-    }
-  },
   created () {
-    this.fetchProduct()
+    // this.fetchProduct()
+    this.$store.dispatch('fetchProduct')
   },
   computed: {
     products () {
-      return this.$store.state.products
+      return this.$store.state.product
     }
   }
 }

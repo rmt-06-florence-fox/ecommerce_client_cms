@@ -1,7 +1,7 @@
 <template>
       <div>
-        <div class="col-sm-6 container" style="box-shadow: 0px 0px 10px;">
-            <div style="height: 200px;"></div>
+        <div class="col-sm-5 container" style="box-shadow: 0px 0px 10px;">
+            <div style="height: 100px;"></div>
             <h2 class="row justify-content-md-center">Edit Product</h2>
             <div class="row justify-content-md-center">
             <div class="col col-sm-8" style="margin: 20%">
@@ -17,7 +17,7 @@
         </div>
         <div class="form-group">
             <input type="number" class="form-control" v-model="editProduct.stock" required placeholder="Stock">
-        </div>
+        </div><br>
         <button type="submit" class="btn btn-primary">Update Product</button><br>
         </form>
             </div>
@@ -28,7 +28,7 @@
 
 <script>
 export default {
-  name: 'editProduct',
+  name: 'EditPage',
   data () {
     return {
       editProduct: {
@@ -50,11 +50,12 @@ export default {
     const id = this.$route.params.id
     this.$store.dispatch('findById', id)
       .then(Response => {
-        this.editProduct.id = Response.id
-        this.editProduct.name = Response.name
-        this.editProduct.image_url = Response.image_url
-        this.editProduct.price = Response.price
-        this.editProduct.stock = Response.stock
+        console.log(this.$store.state.editedProduct)
+        this.editProduct.id = this.$store.state.editedProduct.id
+        this.editProduct.name = this.$store.state.editedProduct.name
+        this.editProduct.image_url = this.$store.state.editedProduct.image_url
+        this.editProduct.price = this.$store.state.editedProduct.price
+        this.editProduct.stock = this.$store.state.editedProduct.stock
       })
       .catch(error => {
         console.log(error)

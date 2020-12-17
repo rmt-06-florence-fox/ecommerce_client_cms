@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Login from '../views/login.vue'
 import Home from '../views/Home.vue'
-import ListProduct from '../views/listProduct.vue'
-import AddProduct from '../views/addProduct.vue'
+import ListProduct from '../views/ListProduct.vue'
+import AddProduct from '../views/AddProduct.vue'
 import EditProduct from '../views/editProduct.vue'
 
 Vue.use(VueRouter)
@@ -15,18 +15,18 @@ const routes = [
     component: Home,
     children: [
       {
-        path: '/products',
+        path: 'products',
         name: 'ListProduct',
         component: ListProduct
       },
       {
-        path: '/add',
+        path: 'add',
         name: 'AddProduct',
         component: AddProduct
       },
       {
-        path: '/edit/:id',
-        name: 'EditProduct',
+        path: 'edit/:id',
+        name: 'EditPage',
         component: EditProduct
       }
     ]
@@ -47,7 +47,7 @@ const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('access_token')
   if (to.name !== 'Login' && !isAuthenticated) next({ name: 'Login' })
-  else if (to.name === 'Login' && isAuthenticated) next({ name: ListProduct })
+  else if (to.name === 'Login' && isAuthenticated) next({ name: 'ListProduct' })
   else next()
 })
 

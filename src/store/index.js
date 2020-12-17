@@ -15,7 +15,7 @@ export default new Vuex.Store({
       state.product = payload
     },
     setUpdateProduct (state, payload) {
-      state.editProduct = payload
+      state.editedProduct = payload
     }
   },
   actions: {
@@ -27,7 +27,7 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
-          router.push('/')
+          router.push('/products')
         })
         .catch(error => {
           console.log(error)
@@ -37,13 +37,14 @@ export default new Vuex.Store({
     fetchProduct (context) {
       axios({
         method: 'GET',
-        url: '/products',
+        url: 'products',
         headers: {
           access_token: localStorage.getItem('access_token')
         }
       })
         .then(({ data }) => {
-          context.commit('listProduct', data.product)
+          console.log(data, '>>>storefetch')
+          context.commit('setProduct', data)
         })
         .catch(error => {
           console.log(error)
@@ -61,6 +62,7 @@ export default new Vuex.Store({
       })
         .then(response => {
           console.log(response)
+          context.dispatch('fetchProduct')
           router.push('/products')
         })
         .catch(error => {
@@ -69,7 +71,7 @@ export default new Vuex.Store({
     },
 
     findById (context, id) {
-      axios({
+      return axios({
         method: 'GET',
         url: `/products/${id}`,
         headers: {
@@ -78,7 +80,7 @@ export default new Vuex.Store({
       })
         .then(({ data }) => {
           console.log(data)
-          context.commit('setEditProduct', data)
+          context.commit('setUpdateProduct', data)
         })
         .catch(error => {
           console.log(error)
