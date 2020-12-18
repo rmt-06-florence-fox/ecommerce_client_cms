@@ -1,5 +1,9 @@
 # ecommerce_client_cms
+Web app:
+https://web-client-cms-ykp.web.app/
 
+email: admin@mail.com
+pass: 1234
 
 List of available endpoints: 
 * POST /register
