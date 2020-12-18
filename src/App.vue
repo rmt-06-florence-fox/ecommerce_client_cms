@@ -4,18 +4,6 @@
   </div>
 </template>
 
-<script>
-// import axios from 'axios'
-
-export default {
-  methods: {
-    // logout(){
-    //   localStorage.clear()
-    // }
-  }
-}
-</script>
-
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

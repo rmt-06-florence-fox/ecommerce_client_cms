@@ -21,7 +21,7 @@ export default new Vuex.Store({
   actions: {
     fetchData (context) {
       axios({
-        url: 'http://localhost:3000/products',
+        url: ' https://e-commerce-marcella.herokuapp.com/products',
         method: 'get',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -37,7 +37,7 @@ export default new Vuex.Store({
     editData ({ context, state }, payload) {
       const { id } = payload
       return axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: ` https://e-commerce-marcella.herokuapp.com/products/${id}`,
         method: 'put',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -53,7 +53,7 @@ export default new Vuex.Store({
     },
     fetchDataById (context, id) {
       return axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: ` https://e-commerce-marcella.herokuapp.com/products/${id}`,
         method: 'get',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -62,7 +62,7 @@ export default new Vuex.Store({
     },
     deleted ({ context }, id) {
       return axios({
-        url: `http://localhost:3000/products/${id}`,
+        url: ` https://e-commerce-marcella.herokuapp.com/products/${id}`,
         method: 'delete',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -72,7 +72,7 @@ export default new Vuex.Store({
     login (context, payload) {
       console.log(payload, '<data pl')
       return axios({
-        url: 'http://localhost:3000/loginadm',
+        url: ' https://e-commerce-marcella.herokuapp.com/loginadm',
         method: 'post',
         headers: {
           access_token: localStorage.getItem('access_token')
@@ -85,7 +85,7 @@ export default new Vuex.Store({
     },
     createProduct (context, payload) {
       return axios({
-        url: 'http://localhost:3000/products',
+        url: ' https://e-commerce-marcella.herokuapp.com/products',
         method: 'post',
         headers: {
           access_token: localStorage.getItem('access_token')

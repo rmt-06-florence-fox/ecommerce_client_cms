@@ -32,7 +32,7 @@ export default {
       const id = this.product.id
       this.$store.dispatch('deleted', id)
         .then(({ data }) => {
-          console.log('deleted')
+          this.$store.dispatch('fetchData')
         })
         .catch(({ err }) => {
           console.log(err)
