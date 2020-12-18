@@ -11,10 +11,10 @@ export default new Vuex.Store({
     product: {}
   },
   mutations: {
-    fetchData (state, payload) {
+    SET_PRODUCTS (state, payload) {
       state.products = payload
     },
-    editProduct (state, payload) {
+    SET_EDIT_PRODUCT (state, payload) {
       state.product = payload
     }
   },
@@ -34,13 +34,13 @@ export default new Vuex.Store({
         .catch(err => console.log(err))
     },
     // function fetch
-    fetchProduct (context) {
+    fetchProducts (context) {
       axios({
         method: 'GET',
         url: '/products'
       })
         .then((data) => {
-          context.commit('fetchData', data.data)
+          context.commit('SET_PRODUCTS', data.data)
         })
         .catch(err => console.log(err))
     },
@@ -55,7 +55,7 @@ export default new Vuex.Store({
       })
         .then(_ => {
           console.log('successfully deleted')
-          context.dispatch('fetchProduct')
+          context.dispatch('fetchProducts')
         })
         .catch(err => console.log(err))
     },
@@ -71,7 +71,7 @@ export default new Vuex.Store({
       })
         .then((data) => {
           console.log(data, 'masuk pak datanya')
-          context.dispatch('fetchProduct')
+          context.dispatch('fetchProducts')
           router.push('/admin')
         })
         .catch(err => console.log(err))
@@ -87,7 +87,7 @@ export default new Vuex.Store({
       })
         .then((data) => {
           console.log(data.data)
-          context.commit('editProduct', data.data)
+          context.commit('SET_EDIT_PRODUCT', data.data)
         })
         .catch(err => console.log(err))
     },
