@@ -42,7 +42,7 @@
                 </div>
                 <div class="form-group row">
                     <div class="mx-auto mt-3">
-                        <button type="submit" class="btn btn-primary">Add</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                     </div>
                 </div>
             </form>
@@ -90,7 +90,7 @@ export default {
         })
     },
     cekLocalStorage () {
-      this.$router.push('/home')
+      this.$router.push('/')
     }
   },
   created () {

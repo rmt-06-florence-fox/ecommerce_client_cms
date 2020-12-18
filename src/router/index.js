@@ -6,6 +6,7 @@ import FormEdit from '../views/FormEdit.vue'
 import FormAddData from '../views/FormAdd.vue'
 import PageNotFound from '../views/404.vue'
 import Mainpage from '../views/MainPageAdmin.vue'
+import FormCategory from '../views/AddCategory.vue'
 
 Vue.use(VueRouter)
 
@@ -36,6 +37,11 @@ const routes = [
     path: '/edititem/:id',
     name: 'FormEdit',
     component: FormEdit
+  },
+  {
+    path: '/category',
+    name: 'Category',
+    component: FormCategory
   },
   {
     path: '*',

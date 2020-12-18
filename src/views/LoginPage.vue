@@ -50,7 +50,8 @@ export default {
     submitLogin () {
       const payload = {
         email: this.email,
-        password: this.password
+        password: this.password,
+        role: 'admin'
       }
       this.$store.dispatch('login', payload)
       //  ini Programatic
@@ -69,7 +70,6 @@ export default {
             text: 'wrong Email/Password',
             footer: 'Try Again'
           })
-          // console.log('-0-0-0-')
         })
     }
   }

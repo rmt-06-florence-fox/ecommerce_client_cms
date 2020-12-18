@@ -2,8 +2,10 @@
   <div>
     <Header></Header>
     <NavbarAdmin></NavbarAdmin>
-    <button @click="formAddItem" type="button" class="btn btn-info mt-3 mb-2">Add Items</button>
-    <ItemCards v-for='data in dataItems.data' :key="data.id" :data="data"></ItemCards>
+    <button @click="formAddItem" type="button" class="btn btn-info mt-3 mb-2">Add Item</button> ||
+    <button @click="addCategory" type="button" class="btn btn-info mt-3 mb-2">Add Category</button>
+    <ItemCards v-for='data in dataItems.data'
+    :key="data.id" :data="data"></ItemCards>
     <router-view/>
     <Footer></Footer>
   </div>
@@ -33,6 +35,9 @@ export default {
     },
     formAddItem () {
       this.$router.push('/additem')
+    },
+    addCategory () {
+      this.$router.push('/category')
     }
   },
   created () {

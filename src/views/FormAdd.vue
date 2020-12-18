@@ -40,6 +40,17 @@
                         <input v-model="stock" type="number" class="form-control">
                     </div>
                 </div>
+                <div class="mt-4">
+                  <select class="form-select" aria-label="Default select example" v-model='CategoryId'>
+                      <option selected>Open this select menu</option>
+                      <option value="1">Otomotif</option>
+                      <option value="2">Elektronik</option>
+                      <option value="3">Hobi</option>
+                      <option value="4">Fashion</option>
+                      <option value="5">Others</option>
+                      <option value="6">Sport</option>
+                  </select>
+                </div>
                 <div class="form-group row">
                     <div class="mx-auto mt-3">
                         <button type="submit" class="btn btn-primary">Add</button>
@@ -63,7 +74,8 @@ export default {
       name: '',
       image_url: '',
       price: 0,
-      stock: 0
+      stock: 0,
+      CategoryId: ''
     }
   },
   components: {
@@ -77,8 +89,10 @@ export default {
         name: this.name,
         image_url: this.image_url,
         price: +this.price,
-        stock: +this.stock
+        stock: +this.stock,
+        CategorieId: +this.CategoryId
       }
+      console.log(dataObj)
       this.$store.dispatch('addItem', dataObj)
         .then(({ data }) => {
           this.$store.dispatch('fetchData')
