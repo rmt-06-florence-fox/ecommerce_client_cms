@@ -1,11 +1,11 @@
 <template>
 <div>
-  <div class="container">
+  <div class="login">
     <div class="row">
         <div class="col-md-6">
             <div class="card">
                 <form class="box" @submit.prevent="login">
-                    <h1>Login</h1>
+                    <h2> Ecommerce Login</h2>
                     <input  v-model="email" type="text" name="" placeholder="Username">
                     <input v-model="password" type="password" name="" placeholder="Password">
                     <button type="submit" name="" value="Login"> Login </button>

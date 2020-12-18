@@ -5,9 +5,9 @@
         <img class="card-img-top" :src="products.image_url" >
       <div class="card-body">
       <p class="card-text">
-        name : {{products.name}} <br>
-        stock : {{products.stock}} <br>
-        price : {{products.price}} <br>
+        Name : {{products.name}} <br>
+        Stock : {{products.stock}} <br>
+        Price : Rp. {{convertedPrice}} <br>
       </p>
       <button @click.prevent="editProduct(products.id)" type="button" class="btn btn-info">edit</button>
       <button @click.prevent="deleteData" type="button" class="btn btn-danger">Delete</button>
@@ -32,19 +32,28 @@ export default {
   },
   methods: {
     editProduct (id) {
-      this.$router.push(`/edit/${id}`)
+      this.$store.dispatch('getEdit', id)
     },
     deleteData () {
       this.$store.dispatch('deleteData', this.products.id)
+    }
+  },
+  computed: {
+    convertedPrice () {
+      const numberString = this.products.price.toString()
+      const left = numberString.length % 3
+      var price = numberString.substr(0, left)
+      const ribuan = numberString.substr(left).match(/\d{3}/g)
+      if (ribuan) {
+        const separator = left ? '.' : ''
+        price += separator + ribuan.join('.')
+      }
+      return price
     }
   }
 }
 </script>
 
 <style scoped>
-.container {
-  justify-content: flex-start;
-  flex-wrap: wrap;
-  flex-wrap: wrap;
-}
+
 </style>

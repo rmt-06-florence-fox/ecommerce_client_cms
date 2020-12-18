@@ -1,13 +1,13 @@
 <template>
   <div id="nav">
-      <!-- <router-link to="/dashboard">Home</router-link> |
-       <router-link to="/add">Add Product</router-link> | -->
-  <div class="sidebar">
+      <router-link to="/dashboard">Home</router-link> |
+       <router-link to="/add">Add Product</router-link> |
+  <!-- <div class="sidebar">
     <router-link to="/dashboard">Home</router-link>
     <router-link to="/add">Add Product</router-link>
     <a href="#" @click="logout"> Logout </a>
-  </div>
-      <!-- <a href="#" @click="logout"> Logout </a> -->
+  </div> -->
+      <a href="#" @click="logout"> Logout </a>
       <!-- <router-link to="/register">Register</router-link> | -->
       <!-- <router-link to="/about">About</router-link> -->
     </div>
@@ -26,10 +26,6 @@ export default {
 </script>
 
 <style scoped>
-body {
-  margin: 0;
-  font-family: "Lato", sans-serif;
-}
 
 .sidebar {
   margin: 0;
@@ -54,12 +50,6 @@ body {
 .sidebar a:hover:not(.active) {
   background-color: #555;
   color: white;
-}
-
-div.content {
-  margin-left: 200px;
-  padding: 1px 16px;
-  height: 1000px;
 }
 
 @media screen and (max-width: 700px) {

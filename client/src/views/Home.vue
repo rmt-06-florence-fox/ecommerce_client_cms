@@ -1,8 +1,8 @@
 <template>
-<div class="container item">
+<div class="container">
   <!-- {{products}} -->
   <!-- <ul> -->
-  <ProductCard class="col-md-3 mt-4 mr-auto"
+  <ProductCard class="col-md-3 mt-4 ml-10"
     v-for="product in products"
     :key="product.id"
     :products="product"> </ProductCard>
@@ -39,14 +39,4 @@ export default {
 }
 </script>
 <style scoped>
-
-.container {
-  border-left-width: 40px;
-  justify-content: flex-start;
-  align-self: auto;
-  flex-wrap: wrap;
-}
-.item {
-   align-self: auto;
-}
 </style>

@@ -10,11 +10,15 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
-    editproduct: {}
+    editproduct: {},
+    banners: []
   },
   mutations: {
     setProducts (state, data) {
       state.products = data
+    },
+    setBanners (state, data) {
+      state.banners = data
     },
     setEditProduct (state, data) {
       state.editproduct = data
@@ -47,6 +51,19 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           context.commit('setProducts', data)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    },
+    fetchBanners (context) {
+      axios({
+        url: '/banners',
+        method: 'GET'
+      })
+        .then(({ data }) => {
+          console.log(data)
+          context.commit('setBanners', data)
         })
         .catch(err => {
           console.log(err)
@@ -97,23 +114,30 @@ export default new Vuex.Store({
         .then(({ data }) => {
           console.log(data)
           context.commit('setEditProduct', data)
-          router.push(`/edit/${id}`)
+          router.push('/edit/' + id)
         })
         .catch(err => {
           console.log(err)
         })
     },
     updateProduct (context, data) {
+      console.log('dupdate')
       console.log(data)
       axios({
         method: 'PUT',
-        url: '/products/' + data.id,
-        data: data,
+        url: '/products/' + data[0].id,
+        data: {
+          name: data[0].name,
+          image_url: data[0].image_url,
+          stock: data[0].stock,
+          price: data[0].price
+        },
         headers: {
           access_token: localStorage.getItem('access_token')
         }
       })
         .then(data => {
+          console.log(data)
           router.push('/dashboard')
         })
         .catch(err => {

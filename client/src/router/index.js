@@ -6,6 +6,7 @@ import Add from '../views/AddProduct.vue'
 // import Register from '../views/Register.vue'
 import MainPage from '../views/MainPage.vue'
 import Edit from '../views/EditProduct.vue'
+import Banner from '../views/Banner.vue'
 
 Vue.use(VueRouter)
 
@@ -34,6 +35,11 @@ const routes = [
         path: '/edit/:id',
         name: 'Edit',
         component: Edit
+      },
+      {
+        path: '/banners',
+        name: 'Banner',
+        component: Banner
       }
     ]
   },

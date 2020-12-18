@@ -1,136 +1,119 @@
-* {
-	margin: 0;
+*{
 	padding: 0;
+	margin: 0;
+	
+
 }
 
-#app {
-  font-family: 'Nanum Gothic', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  color: #2c3e50;
+body{
+		font-family: 'Poppins', sans-serif;
+		background-color: #f9f7cf;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #FFF;
+
+.container{
+	margin-top: 5px;
+	margin-left: 50px;
+	margin-right: 50px;
+	display: flex;
+	background-color: white;
+	flex-direction: row;
+	min-height: 200px;
+	min-width: 200px;
+	flex-wrap: wrap;
+	justify-content: flex-end;
+	align-items: flex-start;
+}
+.card{
+	padding: 15px;
+	color: black;
+	height: auto;
+
+}
+.nav{
+
+	min-height: 10px;
+	background-color: #f2dcbb;
+	margin-left: 0px;
+	margin-right: 0px;
+	justify-content: flex-end;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
-
-h1 {
-  text-align: center;
-} 
-
-/* Login Form Page */
-/* .login {
-  text-align: center;
-}
-small {
-  color: grey;
-}
-button.login-btn {
-  border-color: grey;
-  border-radius: .50em;
-  box-shadow: 0 6px grey;
-  background-color: #ffda79;
-  color: black;
-  outline: none;
-  width: 100px;
-}
-
-button:active {
-  transform: translateY(5px)
+/* .form-content{
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	text-align: center;
 } */
 
-/* Home Page (Dashboard etc) */
-/* #nav {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-	background-color: #273c75;
+
+
+form{
+	width: auto;
+	justify-content: center;
+	margin-left: auto;
+	margin-right: auto;
 }
 
-ul {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-end;
-  margin-top: 15px;
-  padding: 10px;
-	width: 500px;
-	height: 50px;
+
+
+a:hover{
+	color: #96dbc4;
+}
+.button{
+	display: inline-block
+}
+.p-5{
+	min-width: auto;
+	min-height: auto; 
+	border-radius: 10px;
+	color: #8ab89b;
+	background-color: black;
 }
 
-li {
-  list-style: none;
+
+.btn-log-reg{
+	display: inside;
+	width: 100px;
+	min-height: 30px;
+	border-radius: 5px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #8ab89b, #38d39f, #32be8f);
+	background-size: 10px;
+	font-size: auto;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	text-transform: full-width;
+	margin: auto;
+	cursor: pointer;
+	transition: .5s;
+	display: inline-block
+	
+}
+.btn-log-reg:hover{
+	background-position: right;
 }
 
-a.logout {
-  margin-right: 50px;
-}
+/* .btn-log-reg-logout{
 
-/* Add Product Form Page */
-/* #add-form, #edit-form {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  padding: 20px;
+	width: auto;
+	height: auto;
+	border-radius: 0px;
+	outline: none;
+	border: none;
+	background-image: linear-gradient(to right, #c05555, #d33852, #f2d974);
+	background-size: 200%;
+	font-size: 100%;
+	color: #fff;
+	font-family: 'Poppins', sans-serif;
+	text-transform: full-width;
+	margin: auto;
+	cursor: pointer;
+	transition: .5s;
 }
+.btn-log-reg-logout:hover{
+	background-position: right;
+} */
 
-.add-form, .edit-form {
-  background-color: #fdcb6e;
-  width: 500px;
-  padding: 30px;
-  border-radius: 0.3em;
-  color: #fff;
-}
 
-.add-btn, .edit-btn {
-  margin-left: 160px;
-} */ 
-
-/* Product Item box */
-/* div.product-item {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  width: 1200px;
-  height: 180px;
-  padding: 15px;
-  margin-top: 50px;
-  margin-left: 10%;
-  background-color: #ffda79;
-  border-radius: .35em;
-}
-
-.product-detail {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  background-color: #ffeaa7;
-  height: 100%;
-  width: 990px;
-}
-
-h5 {
-  font-size: 20px;
-}
-
-.buttons {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 70%;
-  width: 10%;
-}
-
-.page-title {
-  font-size: 50px; 
-  margin-top: 30px
-}
-
-#dashboard {
-  margin-bottom: 100px;
-}
