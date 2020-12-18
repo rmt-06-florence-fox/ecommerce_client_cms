@@ -1,12 +1,25 @@
 <template>
-  <div
+  <table
     v-if="products.length"
-    class="row justify-content-md-center">
+    class="table">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Name</th>
+        <th scope="col">Image</th>
+        <th scope="col">Price</th>
+        <th scope="col">Stock</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
       <ProductItem
-      v-for="product in products"
+      v-for="(product, i) in products"
       :key="product.id"
-      :product="product"></ProductItem>
-  </div>
+      :product="product"
+      :i="i+1"></ProductItem>
+    </tbody>
+  </table>
   <div v-else>
     <h1>Data Not Found</h1>
   </div>

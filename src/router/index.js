@@ -4,7 +4,7 @@ import LoginPage from '../views/LoginPage'
 import AddProductPage from '../views/AddProductPage'
 import EditProductPage from '../views/EditProductPage'
 import MainPage from '../views/MainPage'
-import ProductsCard from '../components/ProductsCard'
+import ProductsTabel from '../components/ProductsTabel'
 import NotFound from '../views/NotFound'
 import AddBannerPage from '../views/AddBannerPage'
 import EditBannerPage from '../views/EditBannerPage'
@@ -24,8 +24,8 @@ const routes = [
     children: [
       {
         path: '',
-        name: 'ProductsCard',
-        component: ProductsCard
+        name: 'ProductsTabel',
+        component: ProductsTabel
       },
       {
         path: 'add',
