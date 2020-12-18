@@ -8,7 +8,7 @@ import ProductsTabel from '../components/ProductsTabel'
 import NotFound from '../views/NotFound'
 import AddBannerPage from '../views/AddBannerPage'
 import EditBannerPage from '../views/EditBannerPage'
-import BannersCard from '../components/BannersCard'
+import BannersTabel from '../components/BannersTabel'
 
 Vue.use(VueRouter)
 
@@ -40,8 +40,8 @@ const routes = [
 
       {
         path: 'banners',
-        name: 'BannersCard',
-        component: BannersCard
+        name: 'BannersTabel',
+        component: BannersTabel
       },
       {
         path: 'banners/add',

@@ -1,8 +1,8 @@
 <template>
   <tr>
     <th scope="row">{{ i }}</th>
-    <td>{{ product.name }}</td>
     <td><img :src="product.image_url" :alt="product.name" height="50px"></td>
+    <td>{{ product.name }}</td>
     <td>{{ price }}</td>
     <td>{{ product.stock }}</td>
     <td><button @click="editProduct(product.id)" class="btn btn-secondary mr-2"><i class="fas fa-edit"></i></button>
