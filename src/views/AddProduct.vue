@@ -14,7 +14,7 @@
             <div class="field">
               <label class="label">Image URL</label>
               <div class="control">
-                <input class="input" type="text" placeholder="Link input" v-model= "image_url">
+                <input class="input" type="text" placeholder="Link input. Suggestion: landscape image will better" v-model= "image_url">
               </div>
             </div>
             <div class="field">
