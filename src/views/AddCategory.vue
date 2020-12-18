@@ -14,23 +14,23 @@
 export default {
   name: 'Category',
   data () {
-      return {
-        name: ''
-      }
+    return {
+      name: ''
+    }
   },
   methods: {
-      addCategory () {
-          let objCategory = {
-              name: this.name
-          }
-         this.$store.dispatch('addCategory', objCategory)
-           .then(data => {
-              this.$router.push('/mainpage')
-           })
-           .catch(err => {
-               console.log(err)
-           })
+    addCategory () {
+      const objCategory = {
+        name: this.name
       }
+      this.$store.dispatch('addCategory', objCategory)
+        .then(data => {
+          this.$router.push('/mainpage')
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
   }
 }
 </script>
