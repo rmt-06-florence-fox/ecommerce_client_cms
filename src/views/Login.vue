@@ -35,9 +35,10 @@ export default {
       this.$store.dispatch('login', data)
         .then(({ data }) => {
           localStorage.setItem('access_token', data.access_token)
+          this.$router.push('/home')
         })
         .catch(({ err }) => {
-          console.log(err, '<err')
+          console.log(err)
         })
     }
   },

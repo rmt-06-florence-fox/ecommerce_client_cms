@@ -1,7 +1,7 @@
 <template>
   <div class="container p-3 my-3 bg-dark text-white" id="form">
     <h2> Add Product </h2>
-    <form action="/home">
+    <form @submit.prevent="createProduct">
       <div class="form-group">
       <label for="name"> Name:</label>
       <input type="text" class="form-control" id="name" placeholder="Enter name" name="name" v-model="name">
@@ -24,7 +24,7 @@
       </div>
       <div class="form-group form-check">
       </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
+      <button type="submit" class="btn btn-dark">Submit</button>
     </form>
   </div>
 </template>

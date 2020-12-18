@@ -10,8 +10,8 @@
       <li class="list-group-item">{{product.stock}}</li>
     </ul>
     <div class="card-body">
-      <a @click="changePage" class="card-link">Edit</a>
-      <a @click="deleted" class="card-link">Delete</a>
+      <button @click="changePage" class="btn btn-dark">Edit</button>
+      <button @click="deleted" class="btn btn-dark">Delete</button>
     </div>
   </div>
 </template>
@@ -21,15 +21,22 @@ export default {
   name: 'productCard',
   props: ['product'],
   methods: {
-    edit
-    
-    
-    deleted () {
-      this.$emit('deleted', this.product.id)
-    },
     changePage () {
-      console.log(`/edit/${this.product.id}`)
       this.$router.push(`/edit/${this.product.id}`)
+    },
+    editPage (id) {
+      console.log(id, 'dari home')
+      this.$store.dispatch('editData', id)
+    },
+    deleted () {
+      const id = this.product.id
+      this.$store.dispatch('deleted', id)
+        .then(({ data }) => {
+          console.log('deleted')
+        })
+        .catch(({ err }) => {
+          console.log(err)
+        })
     }
   }
 }
@@ -39,5 +46,8 @@ export default {
   .card {
     color: black;
     display: flexbox;
+  }
+  .btn {
+    margin: 10px;
   }
 </style>

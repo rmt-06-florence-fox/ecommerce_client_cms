@@ -3,7 +3,7 @@
     <div class="container p-3 my-3 bg-dark text-white">
       <h1> Product List </h1>
       <div id="card">
-        <productCard v-for="product in products" :key="product.id" :product="product" @editPage="editPage" @deleted="deleted"/>
+        <productCard v-for="product in products" :key="product.id" :product="product" />
       </div>
     </div>
   </div>
@@ -23,13 +23,6 @@ export default {
   methods: {
     fetchData () {
       this.$store.dispatch('fetchData')
-    },
-    editPage (id) {
-      console.log(id, 'dari home')
-      this.$store.dispatch('editData', id)
-    },
-    deleted (id) {
-      this.$store.dispatch('deleted', id)
     }
   },
   created () {
