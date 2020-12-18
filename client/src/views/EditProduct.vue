@@ -1,6 +1,6 @@
 <template>
 <div>
-  {{editproduct}}
+  <!-- {{editproduct}} -->
   <form @submit.prevent="submit" class="form">
     <div class="form-floating mb-3">
       <input  v-model="editproduct[0].name" type="text" class="form-control" id="name" placeholder="Produk Name" >
