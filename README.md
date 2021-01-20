@@ -1,5 +1,7 @@
 # client
 
+https://mozpedia-cms.web.app/login
+
 ## Project setup
 ```
 npm install
