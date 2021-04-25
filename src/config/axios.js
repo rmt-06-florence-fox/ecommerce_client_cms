@@ -1,7 +1,8 @@
-import axios from 'axios'
+import axios from "axios";
 
 const instance = axios.create({
-  baseURL: 'https://muchsin-store.herokuapp.com'
-})
+  // baseURL: 'https://muchsin-store.herokuapp.com'
+  baseURL: "http://localhost:3000"
+});
 
-export default instance
+export default instance;
